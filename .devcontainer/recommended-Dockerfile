@@ -1,0 +1,21 @@
+FROM ubuntu:rolling
+
+RUN apt-get update  \
+	&& apt-get -y upgrade \
+	&& apt-get install -y --no-install-recommends \
+	apt-utils dialog git iproute2 procps lsb-release \
+	build-essential \
+	g++ \
+	gdb \
+	ninja-build \
+	cmake \
+	libboost-dev libboost-system-dev \
+	valgrind  \
+	clang-format \
+	python3 python3-pip python3-venv \
+	&& apt-get autoremove -y \
+	&& apt-get clean -y
+
+RUN pip3 install --upgrade wheel setuptools
+
+RUN mkdir -p /workspace/tiro_wasm /workspace/build

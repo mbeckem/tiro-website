@@ -1,0 +1,4 @@
+[submodule "tiro"]
+	path = tiro
+	url = https://github.com/mbeckem/tiro.git
+	branch = master
