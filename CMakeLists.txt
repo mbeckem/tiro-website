@@ -25,38 +25,44 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 set(CMAKE_CXX_STANDARD 17)
-SET(CMAKE_EXECUTABLE_SUFFIX ".js")
 
-set(EMSCRIPTEN_COMPILE_FLAGS
-    "-s DISABLE_EXCEPTION_CATCHING=0"
-)
-set(EMSCRIPTEN_LINK_FLAGS "\
-    -s MODULARIZE=1 \
-    -s EXPORT_NAME=TiroWASM \
-    -s ALLOW_MEMORY_GROWTH=1 \
-    -s DISABLE_EXCEPTION_CATCHING=0 \
-    -s STRICT_JS=1 \
-    -s EXPORT_ES6=1 \
-    --closure 1 \
-")
+if (EMSCRIPTEN)
+    SET(CMAKE_EXECUTABLE_SUFFIX ".js")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EMSCRIPTEN_COMPILE_FLAGS}")
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EMSCRIPTEN_LINK_FLAGS}")
+    set(EMSCRIPTEN_COMPILE_FLAGS
+        "-s DISABLE_EXCEPTION_CATCHING=1 -s STRICT=1"
+    )
+    set(EMSCRIPTEN_LINK_FLAGS "\
+        -s MODULARIZE=1 \
+        -s EXPORT_NAME=Tiro \
+        -s ALLOW_MEMORY_GROWTH=1 \
+        -s DISABLE_EXCEPTION_CATCHING=1 \
+        -s STRICT=1 \
+        -s STRICT_JS=1 \
+        -s EXPORT_ES6=1 \
+        --closure 1 \
+        --no-entry \
+    ")
+    add_compile_options(-fno-rtti)
 
-# Required by tiro right now
-add_library(custom_boost INTERFACE)
-target_include_directories(custom_boost INTERFACE "${TIRO_WASM_BOOST}")
-add_library(Boost::boost ALIAS custom_boost)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EMSCRIPTEN_COMPILE_FLAGS}")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EMSCRIPTEN_LINK_FLAGS}")
 
-add_library(custom_threads INTERFACE)
-add_library(Threads::Threads ALIAS custom_threads)
+    # Required by tiro right now
+    add_library(custom_boost INTERFACE)
+    target_include_directories(custom_boost INTERFACE "${TIRO_WASM_BOOST}")
+    add_library(Boost::boost ALIAS custom_boost)
 
-set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE)
-set(TIRO_WARNINGS ON CACHE BOOL "-- Override --" FORCE)
-set(TIRO_WERROR OFF CACHE BOOL "-- Override --" FORCE)
-set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE) # emscripten produces errors (multiple cpp files with the same name?)
-set(TIRO_SKIP_BOOST ON CACHE BOOL "-- Override --" FORCE) 
-set(TIRO_SKIP_THREADS ON CACHE BOOL "-- Override --" FORCE)
+    add_library(custom_threads INTERFACE)
+    add_library(Threads::Threads ALIAS custom_threads)
+
+    set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE)
+    set(TIRO_WARNINGS ON CACHE BOOL "-- Override --" FORCE)
+    set(TIRO_WERROR OFF CACHE BOOL "-- Override --" FORCE)
+    set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE) # emscripten produces errors (multiple cpp files with the same name?)
+    set(TIRO_SKIP_BOOST ON CACHE BOOL "-- Override --" FORCE) 
+    set(TIRO_SKIP_THREADS ON CACHE BOOL "-- Override --" FORCE)
+endif()
 add_subdirectory(tiro EXCLUDE_FROM_ALL)
 
 add_subdirectory(src)
