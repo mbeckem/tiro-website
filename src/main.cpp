@@ -170,7 +170,7 @@ Application::Result Application::compile(const std::string& source) {
             output_message += std::to_string(column);
             output_message += ": ";
             output_message += message;
-            result.messages.push_back(std::move(message));
+            result.messages.push_back(std::move(output_message));
         } catch (...) {
         }
     };
