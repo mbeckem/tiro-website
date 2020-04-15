@@ -8,13 +8,6 @@
 #include <memory>
 #include <string>
 
-#ifdef __EMSCRIPTEN__
-#    include <emscripten.h>
-#    define EXPORT_SYMBOL EMSCRIPTEN_KEEPALIVE
-#else
-#    define EXPORT_SYMBOL
-#endif
-
 using json = nlohmann::json;
 
 namespace {
@@ -252,19 +245,29 @@ Application::Result Application::compile(const std::string& source) {
     return result;
 }
 
-EXPORT_SYMBOL std::string tiro_run(const std::string& args) {
+static std::string tiro_compile(const std::string& args) {
     Application app;
     return app.run(args);
 }
 
-#define TEST_RUN
+// #define TEST_RUN
 
 #if defined(TEST_RUN)
 
 #    include <iostream>
 
 EXPORT_SYMBOL int main() {
-    std::cout << tiro_run("{\"source\": \"func f() {}\"}") << std::endl;
+    std::cout << tiro_compile("{\"source\": \"func f() {}\"}") << std::endl;
+}
+
+#endif
+
+#ifdef __EMSCRIPTEN__
+#    include <emscripten.h>
+#    include <emscripten/bind.h>
+
+EMSCRIPTEN_BINDINGS(tiro) {
+    emscripten::function("tiro_compile", &tiro_compile);
 }
 
 #endif

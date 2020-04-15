@@ -30,7 +30,7 @@ if (EMSCRIPTEN)
     SET(CMAKE_EXECUTABLE_SUFFIX ".js")
 
     set(EMSCRIPTEN_COMPILE_FLAGS
-        "-s DISABLE_EXCEPTION_CATCHING=1 -s STRICT=1"
+        "--bind -s DISABLE_EXCEPTION_CATCHING=1 -s STRICT=1"
     )
     set(EMSCRIPTEN_LINK_FLAGS "\
         -s MODULARIZE=1 \
@@ -39,11 +39,11 @@ if (EMSCRIPTEN)
         -s DISABLE_EXCEPTION_CATCHING=1 \
         -s STRICT=1 \
         -s STRICT_JS=1 \
-        -s EXPORT_ES6=1 \
         --closure 1 \
         --no-entry \
+        --bind \
     ")
-    add_compile_options(-fno-rtti)
+    # add_compile_options(-fno-rtti) cannot use with embind right now
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EMSCRIPTEN_COMPILE_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EMSCRIPTEN_LINK_FLAGS}")
