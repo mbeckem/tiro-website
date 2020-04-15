@@ -210,6 +210,16 @@ Application::Result Application::compile(const std::string& source) {
 
     if (auto err = tiro_compiler_run(compiler); err != TIRO_OK) {
         report("Failed to compile source code", err);
+
+        // Can often still produce a partial AST.
+        {
+            OutputStr ast;
+            if (auto err = tiro_compiler_dump_ast(compiler, ast);
+                err == TIRO_OK) {
+                result.ast = ast.to_string();
+            }
+        }
+
         return result;
     }
 
