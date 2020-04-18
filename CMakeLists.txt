@@ -30,13 +30,13 @@ if (EMSCRIPTEN)
     SET(CMAKE_EXECUTABLE_SUFFIX ".js")
 
     set(EMSCRIPTEN_COMPILE_FLAGS
-        "--bind -s DISABLE_EXCEPTION_CATCHING=1 -s STRICT=1"
+        "--bind -s DISABLE_EXCEPTION_CATCHING=0 -s STRICT=1"
     )
     set(EMSCRIPTEN_LINK_FLAGS "\
         -s MODULARIZE=1 \
         -s EXPORT_NAME=Tiro \
         -s ALLOW_MEMORY_GROWTH=1 \
-        -s DISABLE_EXCEPTION_CATCHING=1 \
+        -s DISABLE_EXCEPTION_CATCHING=0 \
         -s STRICT=1 \
         -s STRICT_JS=1 \
         -s ENVIRONMENT=web \
