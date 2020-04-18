@@ -39,6 +39,7 @@ if (EMSCRIPTEN)
         -s DISABLE_EXCEPTION_CATCHING=1 \
         -s STRICT=1 \
         -s STRICT_JS=1 \
+        -s ENVIRONMENT=web \
         --closure 1 \
         --no-entry \
         --bind \
