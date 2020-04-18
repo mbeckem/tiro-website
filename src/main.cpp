@@ -302,7 +302,7 @@ TiroRuntime::compile_impl(const std::string& source) {
         message += context;
         message += ": ";
         message += tiro_error_message(error);
-        message += "(";
+        message += " (";
         message += tiro_error_name(error);
         message += ")";
 
@@ -398,7 +398,7 @@ TiroRuntime::run_impl(const std::string& function) {
         message += context;
         message += ": ";
         message += tiro_error_message(error);
-        message += "(";
+        message += " (";
         message += tiro_error_name(error);
         message += ")";
 
