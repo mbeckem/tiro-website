@@ -1,5 +1,8 @@
 FROM ubuntu:rolling
 
+ARG TZ=UTC
+ARG DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update  \
 	&& apt-get -y upgrade \
 	&& apt-get install -y --no-install-recommends \
@@ -17,11 +20,11 @@ RUN apt-get update  \
 	&& apt-get autoremove -y \
 	&& apt-get clean -y
 
+RUN mkdir -p /workspace/tiro_wasm /workspace/build
+
 RUN cd  /workspace\
 	&& curl -SL "https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.bz2" -o boost.tar.bz2 \
 	&& tar -xf boost.tar.bz2 \
 	&& rm -f boost.tar.bz2
 
 RUN pip3 install --upgrade wheel setuptools
-
-RUN mkdir -p /workspace/tiro_wasm /workspace/build
