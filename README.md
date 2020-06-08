@@ -25,3 +25,12 @@ The following snippet assumes that Emscripten's build tools are on the PATH.
     $ emmake make tiro_wasm -j $(nproc)
 
 Output files will be placed into `build/bin`.
+
+## Alternative: use docker image to build the WebAssembly output:
+
+From the project root directory, execute:
+
+    $ ./docker-build/build-image.sh             # Creates image called tiro-wasm-build
+    $ ./docker-build/compile.sh                 # Outputs build into the build-wasm folder
+
+The directory `./build-wasm/bin` will contain the compiled javascript and webassembly files.
