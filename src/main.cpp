@@ -168,7 +168,7 @@ private:
  */
 class TiroRuntime {
 public:
-    TiroRuntime() = default;
+    TiroRuntime();
 
     /**
      * Initializes the program with the given options.
@@ -230,6 +230,8 @@ Module OutputModule::take() {
     assert(module_ && "Dereferencing invalid module.");
     return Module(std::exchange(module_, nullptr));
 }
+
+TiroRuntime::TiroRuntime() {}
 
 std::string TiroRuntime::compile(const std::string& o) {
     json retval = json::object();
@@ -453,7 +455,7 @@ int main() {
     json run_options = json::object();
     run_options["function"] = "f";
 
-    Runtime program;
+    TiroRuntime program;
 
     json compile_result = json::parse(program.compile(compile_options.dump()));
     std::cout << compile_result.dump(4) << std::endl;
