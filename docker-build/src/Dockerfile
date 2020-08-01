@@ -25,11 +25,6 @@ RUN addgroup --gid $GROUP_ID user \
 	&& chown -R user:user /workspace 
 USER user
 
-RUN cd  /workspace \
-	&& curl -SL "https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.bz2" -o boost.tar.bz2 \
-	&& tar -xf boost.tar.bz2 \
-	&& rm -f boost.tar.bz2
-
 RUN cd /workspace \
 	&& git clone https://github.com/emscripten-core/emsdk.git \
 	&& cd emsdk \

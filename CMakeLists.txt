@@ -9,9 +9,6 @@ endif()
 
 project(tiro_wasm VERSION 0.1.0 LANGUAGES CXX)
 
-# Needed because emscripten will not (can not?) use the system boost
-set(TIRO_WASM_BOOST "" CACHE STRING "Boost project root folder.")
-
 # These options should only be enabled during development!
 option(TIRO_WASM_WARNINGS "Build with pedantic warnings." OFF)
 option(TIRO_WASM_WERROR "Enable -Werror (halt compilation on warnings)." OFF)
@@ -48,11 +45,6 @@ if (EMSCRIPTEN)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EMSCRIPTEN_COMPILE_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EMSCRIPTEN_LINK_FLAGS}")
-
-    # Required by tiro right now
-    add_library(custom_boost INTERFACE)
-    target_include_directories(custom_boost INTERFACE "${TIRO_WASM_BOOST}")
-    add_library(Boost::boost ALIAS custom_boost)
 
     add_library(custom_threads INTERFACE)
     add_library(Threads::Threads ALIAS custom_threads)
