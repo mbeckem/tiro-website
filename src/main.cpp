@@ -404,7 +404,12 @@ TiroRuntime::run_impl(const std::string& function) {
         message += tiro_error_name(error);
         message += ")";
 
-        // TODO: Better errors (tiro_error has more fields).
+        std::string_view details = tiro_error_details(error);
+        if (!details.empty()) {
+            message += "\n";
+            message += details;
+        }
+
         result.error = std::move(message);
     };
 
