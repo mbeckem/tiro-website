@@ -1,166 +1,19 @@
-#include <cstdio>
-
 #include "nlohmann/json.hpp"
-#include "tiro/api.h"
+#include "tiropp/api.hpp"
 
 #include <cassert>
+#include <cstdio>
 #include <cstdlib>
+#include <exception>
 #include <memory>
+#include <sstream>
+#include <stdexcept>
 #include <string>
 #include <utility>
 
 using json = nlohmann::json;
 
 namespace {
-
-class Module;
-class Compiler;
-class VM;
-
-class OutputStr final {
-public:
-    OutputStr() = default;
-    ~OutputStr() { reset(); }
-
-    OutputStr(const OutputStr&) = delete;
-    OutputStr& operator=(const OutputStr&) = delete;
-
-    std::string_view view() const {
-        return str_ ? std::string_view(str_) : std::string_view();
-    }
-
-    std::string str() const { return str_ ? std::string(str_) : std::string(); }
-
-    void reset() {
-        if (str_) {
-            std::free(str_);
-            str_ = nullptr;
-        }
-    }
-
-    char** out() {
-        reset();
-        return &str_;
-    }
-
-private:
-    char* str_ = nullptr;
-};
-
-class OutputError final {
-public:
-    OutputError() = default;
-    ~OutputError() { reset(); }
-
-    OutputError(const OutputError&) = delete;
-    const OutputError& operator=(const OutputError&) = delete;
-
-    const tiro_error* get() const { return error_; }
-
-    void reset() {
-        if (error_) {
-            tiro_error_free(error_);
-            error_ = nullptr;
-        }
-    }
-
-    tiro_error** out() {
-        reset();
-        return &error_;
-    }
-
-private:
-    tiro_error* error_ = nullptr;
-};
-
-class OutputModule final {
-public:
-    OutputModule() = default;
-    ~OutputModule() { reset(); }
-
-    OutputModule(const OutputModule&) = delete;
-    const OutputModule& operator=(const OutputModule&) = delete;
-
-    Module take();
-
-    void reset() {
-        if (module_) {
-            tiro_module_free(module_);
-            module_ = nullptr;
-        }
-    }
-
-    tiro_module** out() {
-        reset();
-        return &module_;
-    }
-
-private:
-    tiro_module* module_ = nullptr;
-};
-
-class VM final {
-public:
-    VM() = default;
-
-    explicit VM(const tiro_vm_settings& settings)
-        : vm_(tiro_vm_new(&settings)) {
-        if (!vm_)
-            throw std::runtime_error("Failed to initialize tiro vm.");
-    }
-
-    explicit operator bool() const { return vm_ != nullptr; }
-
-    operator tiro_vm*() { return vm_.get(); }
-
-private:
-    struct Deleter {
-        void operator()(tiro_vm* ctx) { tiro_vm_free(ctx); }
-    };
-
-    std::unique_ptr<tiro_vm, Deleter> vm_;
-};
-
-class Compiler final {
-public:
-    Compiler() = default;
-
-    explicit Compiler(const tiro_compiler_settings& settings)
-        : comp_(tiro_compiler_new(&settings)) {
-        if (!comp_)
-            throw std::runtime_error("Failed to initialize tiro compiler.");
-    }
-
-    explicit operator bool() const { return comp_ != nullptr; }
-
-    operator tiro_compiler*() { return comp_.get(); }
-
-private:
-    struct Deleter {
-        void operator()(tiro_compiler* comp) { tiro_compiler_free(comp); }
-    };
-
-    std::unique_ptr<tiro_compiler, Deleter> comp_;
-};
-
-class Module final {
-public:
-    Module() = default;
-
-    explicit Module(tiro_module* module)
-        : module_(module) {}
-
-    explicit operator bool() const { return module_ != nullptr; }
-
-    operator tiro_module*() { return module_.get(); }
-
-private:
-    struct Deleter {
-        void operator()(tiro_module* module) { tiro_module_free(module); }
-    };
-
-    std::unique_ptr<tiro_module, Deleter> module_;
-};
 
 /**
  * Exposed to javascript. The caller is expected to call compile()
@@ -169,6 +22,9 @@ private:
 class TiroRuntime {
 public:
     TiroRuntime();
+
+    TiroRuntime(const TiroRuntime&) = delete;
+    TiroRuntime& operator=(const TiroRuntime&) = delete;
 
     /**
      * Initializes the program with the given options.
@@ -204,12 +60,12 @@ private:
     CompilationResult compile_impl(const std::string& source);
     ExecutionResult run_impl(const std::string& function);
 
-    void reset() { module_ = Module(); }
+    void reset() { module_.reset(); }
 
 private:
     // Compiled artifact, ready to run. Only present if compilation
     // was successful.
-    Module module_;
+    std::optional<tiro::compiled_module> module_;
 };
 
 } // namespace
@@ -224,11 +80,6 @@ static tiro_compiler_settings default_compiler_settings() {
     tiro_compiler_settings settings;
     tiro_compiler_settings_init(&settings);
     return settings;
-}
-
-Module OutputModule::take() {
-    assert(module_ && "Dereferencing invalid module.");
-    return Module(std::exchange(module_, nullptr));
 }
 
 TiroRuntime::TiroRuntime() {}
@@ -280,106 +131,71 @@ TiroRuntime::compile_impl(const std::string& source) {
 
     CompilationResult result;
 
-    auto message_callback = [](tiro_severity sev, uint32_t line,
-                                uint32_t column, const char* message,
-                                void* userdata) {
-        try {
-            auto& result = *static_cast<CompilationResult*>(userdata);
+    std::exception_ptr callback_error{};
 
-            std::string output_message;
-            output_message += tiro_severity_str(sev);
-            output_message += " ";
-            output_message += std::to_string(line);
-            output_message += ":";
-            output_message += std::to_string(column);
-            output_message += ": ";
-            output_message += message;
-            result.messages.push_back(std::move(output_message));
+    tiro::compiler_settings compiler_settings;
+    compiler_settings.enable_dump_ast = true;
+    compiler_settings.enable_dump_bytecode = true;
+    compiler_settings.enable_dump_ir = true;
+    compiler_settings.message_callback = [&](tiro::severity sev, uint32_t line,
+                                             uint32_t column,
+                                             const char* message) {
+        if (callback_error)
+            return;
+
+        try {
+            std::ostringstream ss;
+            ss << tiro::to_string(sev) << " " << line << ":" << column << ": "
+               << message;
+            result.messages.push_back(ss.str());
+        } catch (...) {
+            callback_error = std::current_exception();
+        }
+    };
+
+    auto report = [&](std::string_view context, const tiro::error& error) {
+        std::ostringstream ss;
+        ss << context << ": " << error.message();
+        if (std::string_view details = error.details(); !details.empty()) {
+            ss << "\n" << details;
+        }
+
+        result.messages.push_back(ss.str());
+    };
+
+    tiro::compiler compiler(compiler_settings);
+    try {
+        compiler.add_file("sandbox", source.c_str());
+        compiler.run();
+
+        if (callback_error)
+            std::rethrow_exception(callback_error);
+    } catch (const tiro::error& err) {
+        report("Failed to compile source file", err);
+
+        // Attempt to get a partial AST.
+        try {
+            result.ast = compiler.dump_ast();
         } catch (...) {
         }
-    };
 
-    auto report = [&](std::string_view context, const tiro_error* error) {
-        std::string message;
-        message += context;
-        message += ": ";
-        message += tiro_error_message(error);
-        message += " (";
-        message += tiro_error_name(error);
-        message += ")";
-
-        // TODO: Better errors (tiro_error has more fields).
-        result.messages.push_back(std::move(message));
-    };
-
-    tiro_compiler_settings compiler_settings = default_compiler_settings();
-    compiler_settings.enable_dump_ast = true;
-    compiler_settings.enable_dump_ir = true;
-    compiler_settings.enable_dump_bytecode = true;
-    compiler_settings.message_callback = message_callback;
-    compiler_settings.message_callback_data = &result;
-
-    Compiler compiler(compiler_settings);
-    OutputError error;
-
-    if (tiro_compiler_add_file(
-            compiler, "playground", source.c_str(), error.out())
-        != TIRO_OK) {
-        report("Failed to add file to compiler", error.get());
         return result;
     }
 
-    if (tiro_compiler_run(compiler, error.out()) != TIRO_OK) {
-        report("Failed to compile source code", error.get());
-
-        // Can often still produce a partial AST.
-        {
-            OutputStr ast;
-            if (tiro_compiler_dump_ast(compiler, ast.out(), nullptr)
-                == TIRO_OK) {
-                result.ast = ast.str();
-            }
-        }
+    try {
+        result.ast = compiler.dump_ast();
+        result.ir = compiler.dump_ir();
+        result.bytecode = compiler.dump_bytecode();
+    } catch (const tiro::error& err) {
+        report("Failed to dump compilation results", err);
         return result;
     }
 
-    {
-        OutputStr ast;
-        if (tiro_compiler_dump_ast(compiler, ast.out(), error.out())
-            != TIRO_OK) {
-            report("Failed to dump ast", error.get());
-            return result;
-        }
-        result.ast = ast.str();
-    }
-
-    {
-        OutputStr ir;
-        if (tiro_compiler_dump_ir(compiler, ir.out(), error.out()) != TIRO_OK) {
-            report("Failed to dump ir", error.get());
-            return result;
-        }
-        result.ir = ir.str();
-    }
-
-    {
-        OutputStr bytecode;
-        if (tiro_compiler_dump_bytecode(compiler, bytecode.out(), error.out())
-            != TIRO_OK) {
-            report("Failed to dump bytecode", error.get());
-            return result;
-        }
-        result.bytecode = bytecode.str();
-    }
-
-    {
-        OutputModule module;
-        if (tiro_compiler_take_module(compiler, module.out(), error.out())
-            != TIRO_OK) {
-            report("Failed to retrieve compiled module", error.get());
-            return result;
-        }
-        module_ = module.take();
+    try {
+        module_ = compiler.take_module();
+    } catch (const tiro::error& err) {
+        report("Failed to retrieve the compiled module", err);
+        return result;
     }
 
     result.success = true;
@@ -395,46 +211,54 @@ TiroRuntime::run_impl(const std::string& function) {
         return result;
     }
 
-    auto report = [&](std::string_view context, const tiro_error* error) {
-        std::string message;
-        message += context;
-        message += ": ";
-        message += tiro_error_message(error);
-        message += " (";
-        message += tiro_error_name(error);
-        message += ")";
-
-        std::string_view details = tiro_error_details(error);
-        if (!details.empty()) {
-            message += "\n";
-            message += details;
+    auto report = [&](std::string_view context, const tiro::error& error) {
+        std::ostringstream ss;
+        ss << context << ": " << error.message();
+        if (std::string_view details = error.details(); !details.empty()) {
+            ss << "\n" << details;
         }
 
-        result.error = std::move(message);
+        result.error = ss.str();
     };
 
-    OutputError error;
+    tiro::vm vm;
 
-    VM vm(default_vm_settings());
-    if (tiro_vm_load_std(vm, error.out()) != TIRO_OK) {
-        report("Failed to load default modules", error.get());
+    try {
+        vm.load_std();
+    } catch (const tiro::error& err) {
+        report("Failed to load default modules", err);
         return result;
     }
 
-    if (tiro_vm_load(vm, module_, error.out()) != TIRO_OK) {
-        report("Failed to load compiled module", error.get());
+    try {
+        vm.load(*module_);
+    } catch (const tiro::error& err) {
+        report("Failed to load compiled module", err);
         return result;
     }
 
-    OutputStr return_value;
-    if (tiro_vm_run(
-            vm, "playground", function.c_str(), return_value.out(), error.out())
-        != TIRO_OK) {
-        report("Failed to execute function", error.get());
+    try {
+        tiro::function func = tiro::get_export(vm, "sandbox", function.c_str())
+                                  .as<tiro::function>();
+        tiro::coroutine coro = tiro::make_coroutine(vm, func);
+        coro.start();
+
+        while (vm.has_ready())
+            vm.run_ready();
+
+        if (!coro.completed()) {
+            result.error =
+                "Coroutine did not complete (async operations not yet support "
+                "in sandbox).";
+            return result;
+        }
+
+        result.value = coro.result().to_string().value();
+    } catch (const tiro::error& err) {
+        report("Failed to execute function", err);
         return result;
     }
 
-    result.value = return_value.str();
     result.success = true;
     return result;
 }
@@ -448,7 +272,7 @@ int main() {
     const std::string_view source = R"(
         import std;
 
-        func f() {
+        export func f() {
             std.print("Hello World!");
             return "Hello from tiro!";
         }
