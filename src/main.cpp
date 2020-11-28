@@ -27,6 +27,11 @@ public:
     TiroRuntime& operator=(const TiroRuntime&) = delete;
 
     /**
+     * Returns version information as a simple json encoded string.
+     */
+    std::string info();
+
+    /**
      * Initializes the program with the given options.
      * `options` must be in JSON format and must contain the program's `source` string.
      * The result of the compilation is returned as json as well.
@@ -83,6 +88,16 @@ static tiro_compiler_settings default_compiler_settings() {
 }
 
 TiroRuntime::TiroRuntime() {}
+
+std::string TiroRuntime::info() {
+    const auto version = tiro::runtime_version();
+    json info = json::object();
+    info["full_version"] = version.full_version_string;
+    info["version"] = version.version_string;
+    info["version_number"] = version.version_number;
+    info["source_id"] = version.source_id;
+    return info.dump();
+}
 
 std::string TiroRuntime::compile(const std::string& o) {
     json retval = json::object();
@@ -286,6 +301,8 @@ int main() {
 
     TiroRuntime program;
 
+    std::cout << program.info() << std::endl;
+
     json compile_result = json::parse(program.compile(compile_options.dump()));
     std::cout << compile_result.dump(4) << std::endl;
 
@@ -301,6 +318,7 @@ int main() {
 EMSCRIPTEN_BINDINGS(tiro) {
     emscripten::class_<TiroRuntime>("TiroRuntime")
         .constructor()
+        .function("info", &TiroRuntime::info)
         .function("compile", &TiroRuntime::compile)
         .function("run", &TiroRuntime::run);
 }
