@@ -6,8 +6,9 @@ ARG GROUP_ID
 
 ARG TZ=UTC
 ARG DEBIAN_FRONTEND=noninteractive
+ARG EMSCRIPTEN_VERSION=2.0.9
 
-RUN apt-get update  \
+RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 	git \
 	curl \
@@ -17,6 +18,8 @@ RUN apt-get update  \
 	default-jre \
 	&& apt-get autoremove -y \
 	&& apt-get clean -y
+
+RUN pip3 install --upgrade wheel setuptools
 
 # Make sure 'user' exists in the container. This user maps to the user on the host machine.
 RUN addgroup --gid $GROUP_ID user \
@@ -28,11 +31,10 @@ USER user
 RUN cd /workspace \
 	&& git clone https://github.com/emscripten-core/emsdk.git \
 	&& cd emsdk \
-	&& ./emsdk install latest \
-	&& ./emsdk activate latest \
+	&& ./emsdk install $EMSCRIPTEN_VERSION \
+	&& ./emsdk activate $EMSCRIPTEN_VERSION \
 	&& echo "source /workspace/emsdk/emsdk_env.sh" >> ~/.bashrc
 
-RUN pip3 install --upgrade wheel setuptools
 
 COPY ./docker-build/src/build.sh /workspace/build.sh
 
