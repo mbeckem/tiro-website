@@ -6,7 +6,7 @@ ARG GROUP_ID
 
 ARG TZ=UTC
 ARG DEBIAN_FRONTEND=noninteractive
-ARG EMSCRIPTEN_VERSION=2.0.9
+ARG EMSCRIPTEN_VERSION=latest
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -25,7 +25,7 @@ RUN pip3 install --upgrade wheel setuptools
 RUN addgroup --gid $GROUP_ID user \
 	&& adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user \
 	&& mkdir /workspace \
-	&& chown -R user:user /workspace 
+	&& chown -R user:user /workspace
 USER user
 
 RUN cd /workspace \
