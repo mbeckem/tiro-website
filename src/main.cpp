@@ -50,6 +50,7 @@ public:
 private:
     struct CompilationResult {
         bool success = false;
+        std::string cst;
         std::string ast;
         std::string ir;
         std::string bytecode;
@@ -112,6 +113,7 @@ std::string TiroRuntime::compile(const std::string& o) {
         }
 
         retval["success"] = compiled.success;
+        retval["cst"] = std::move(compiled.cst);
         retval["ast"] = std::move(compiled.ast);
         retval["ir"] = std::move(compiled.ir);
         retval["bytecode"] = std::move(compiled.bytecode);
@@ -149,6 +151,7 @@ TiroRuntime::compile_impl(const std::string& source) {
     std::exception_ptr callback_error{};
 
     tiro::compiler_settings compiler_settings;
+    compiler_settings.enable_dump_cst = true;
     compiler_settings.enable_dump_ast = true;
     compiler_settings.enable_dump_bytecode = true;
     compiler_settings.enable_dump_ir = true;
@@ -198,6 +201,7 @@ TiroRuntime::compile_impl(const std::string& source) {
     }
 
     try {
+        result.cst = compiler.dump_cst();
         result.ast = compiler.dump_ast();
         result.ir = compiler.dump_ir();
         result.bytecode = compiler.dump_bytecode();
@@ -263,8 +267,8 @@ TiroRuntime::run_impl(const std::string& function) {
 
         if (!coro.completed()) {
             result.error =
-                "Coroutine did not complete (async operations not yet support "
-                "in sandbox).";
+                "Coroutine did not complete (async operations not yet "
+                "supported in the sandbox).";
             return result;
         }
 
@@ -278,7 +282,7 @@ TiroRuntime::run_impl(const std::string& function) {
     return result;
 }
 
-// #define TEST_RUN
+//#define TEST_RUN
 #if defined(TEST_RUN)
 
 #    include <iostream>
