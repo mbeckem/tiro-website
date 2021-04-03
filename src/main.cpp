@@ -272,14 +272,19 @@ TiroRuntime::run_impl(const std::string& function) {
             return result;
         }
 
-        result.value = coro.result().to_string().value();
+        tiro::result ret = coro.result();
+        if (ret.is_success()) {
+            result.value = ret.value().to_string().value();
+            result.success = true;
+        } else {
+            result.error = ret.reason().to_string().value();
+            result.success = false;
+        }
+        return result;
     } catch (const tiro::error& err) {
         report("Failed to execute function", err);
         return result;
     }
-
-    result.success = true;
-    return result;
 }
 
 //#define TEST_RUN
