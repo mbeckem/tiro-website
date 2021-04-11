@@ -1,0 +1,99 @@
+---
+title: "Getting started with libtiro"
+slug: "libtiro/getting-started"
+---
+
+The following instructions assume a reasonably up-to-date Linux or Unix system.
+
+## Building from source
+
+As the firt step, use git to clone the repository:
+
+```bash
+$ git clone https://github.com/mbeckem/tiro.git
+```
+
+### Requirements
+
+The following tools must be installed on your system to build tiro:
+
+- A C++17 compiler. The following compilers are tested regularly:
+
+  - gcc 8, 9 (Linux )
+  - clang 9, 10 (Linux)
+  - xcode 11 (OSX)
+
+  MSVC is currently not supported (minor adjustments are necessary to make tiro compile). clang-cl should work.
+
+- CMake >= 3.13
+
+No other external tools or libraries are needed.
+Library dependencies needed by tiro (listed [here](https://github.com/mbeckem/tiro#dependencies)) will be fetched automatically during the build.
+
+### Building and installing
+
+Create a build directory, configure cmake and then run your build system.
+
+The following example performs a _system wide_ installation of tiro and assumes root privileges.  
+You can chose a custom location by specifying `-DCMAKE_INSTALL_PREFIX=/your/install/prefix`.
+
+```bash
+$ mkdir build && cd build
+$ cmake -DCMAKE_BUILD_TYPE=Release -DTIRO_LTO=1 ..
+$ make -j8
+$ make install
+```
+
+The following cmake variables can be useful to customize the build process:
+
+| CMake Variable            | Description                                                                                                                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TIRO_LTO = ON \| OFF      | Optional (off by default). Attempts to enable link time optimization, if supported by the compiler. Results in smaller and more optimized output and is recommended in release builds. |
+| TIRO_WARNINGS = ON \| OFF | Optional (off by default). Enables pedantic warnings, mainly used during development.                                                                                                  |
+| TIRO_TESTS= ON \| OFF     | Optional (off by default). Also build test executables when enabled (placed into `build/bin`).                                                                                         |
+
+After the build has completed, the compiled output can be found in your install prefix:
+
+```plain
+<install prefix>
+|-- include
+|   |-- tiro        # C headers for libtiro.so
+|   `-- tiropp      # C++ headers for libtiro.so
+`-- lib
+    |-- cmake       # CMake support scripts
+    `-- libtiro.so  # tiro as a shared library
+```
+
+### Create a simple test program
+
+Create a simple program that links against libtiro and prints its current version:
+
+<span className="caption">Example: hello.c</span>
+
+```c
+#include <tiro/version.h>
+
+#include <stdio.h>
+
+int main() {
+    printf("Hello from %s\n", tiro_full_version());
+}
+```
+
+Now compile and run your application. Make sure that `libtiro.so` and `tiro/version.h` can be found by your compiler.
+
+```
+$ gcc hello.c -o hello -ltiro
+$ ./hello
+Hello from tiro 0.1.0-dev (git:ae107e2bc05173d8dfa49de21094252271de133a)
+```
+
+### Next steps
+
+More complex examples are maintained in the [Github repository](https://github.com/mbeckem/tiro/tree/master/examples).
+
+The [C++ embedding example](https://github.com/mbeckem/tiro/tree/master/examples/embed_cpp) demonstrates how to use the C++ API in your application.
+
+### Further documentation
+
+The full build system reference is maintained in the tiro source repository: [Reference](https://github.com/mbeckem/tiro/blob/master/docs/building.md).

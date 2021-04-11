@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    &.fullHeight {
+        height: 100%;
+    }
+}
+
+.header {
+    flex: 0 0 auto;
+    padding-bottom: 2px;
+}
+
+.content {
+    flex: 1 1 auto;
+}
+
+.nav {
+    font-size: 16px;
+
+    .title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    a.pageLink {
+        display: flex;
+        align-items: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+
+        &,
+        &:active,
+        &:visited,
+        &:focus,
+        &:hover {
+            outline: none;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        &:hover {
+            filter: brightness(85%);
+        }
+
+        .icon {
+            width: 1em;
+            height: 1em;
+            margin-right: 4px;
+
+            fill: currentColor;
+        }
+    }
+}

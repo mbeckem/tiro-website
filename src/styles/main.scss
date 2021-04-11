@@ -1,0 +1,21 @@
+@use "reset.scss";
+@use "~@blueprintjs/core/lib/scss/variables";
+@use "~@blueprintjs/core/lib/css/blueprint";
+
+html,
+body,
+#__next {
+    height: 100%;
+}
+
+.gutter {
+    background-color: #eee;
+
+    &.gutter-horizontal {
+        cursor: ew-resize;
+    }
+
+    &.gutter-vertical {
+        cursor: ns-resize;
+    }
+}
