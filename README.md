@@ -1,5 +1,7 @@
 # tiro-website
 
+Live at: https://mbeckem.github.io/tiro-website/
+
 ## Development setup
 
 - Run `yarn install`
@@ -28,3 +30,8 @@
 
   NOTE: At this time, doxybook2 does not support relative links in its generated output.
   Keep the baseUrl in apidocs/.doxybook/config.json in sync with the base url of the api documentation.
+
+## Deploying the site
+
+- Once (for setup): run `npm run init-site`
+- To deploy, run `npm run deploy`
