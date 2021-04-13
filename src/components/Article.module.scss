@@ -15,4 +15,20 @@
             margin-top: 0px;
         }
     }
+
+    // Code block with caption
+    // Fixes weird padding changes during page load.
+    :global span.caption {
+        margin-top: 1.25em;
+
+        > div.prism-code {
+            margin-top: 0px;
+        }
+    }
+
+    // Code block without caption
+    // Fixes weird padding changes during page load.
+    :global div > pre.prism-code {
+        margin-top: 1.25em;
+    }
 }
