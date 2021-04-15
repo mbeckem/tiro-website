@@ -26,7 +26,11 @@ export default function DocsPage(): JSX.Element {
                                     Grammar
                                 </ExternalLink>
                             </li>
-                            <li>The Standard Library</li>
+                            <li>
+                                <Link href={routes.Lang.standardLibrary()}>
+                                    <a>The Standard Library</a>
+                                </Link>
+                            </li>
                         </ul>
                     </section>
                     <section>

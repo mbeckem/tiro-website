@@ -3,6 +3,8 @@ title: "Getting started with libtiro"
 slug: "libtiro/getting-started"
 ---
 
+# Getting started with libtiro
+
 The following instructions assume a reasonably up-to-date Linux or Unix system.
 
 ## Building from source
@@ -50,7 +52,7 @@ The following cmake variables can be useful to customize the build process:
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TIRO_LTO = ON \| OFF      | Optional (off by default). Attempts to enable link time optimization, if supported by the compiler. Results in smaller and more optimized output and is recommended in release builds. |
 | TIRO_WARNINGS = ON \| OFF | Optional (off by default). Enables pedantic warnings, mainly used during development.                                                                                                  |
-| TIRO_TESTS= ON \| OFF     | Optional (off by default). Also build test executables when enabled (placed into `build/bin`).                                                                                         |
+| TIRO_TESTS = ON \| OFF    | Optional (off by default). Also build test executables when enabled (placed into `build/bin`).                                                                                         |
 
 After the build has completed, the compiled output can be found in your install prefix:
 

@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { MdxRemote } from "next-mdx-remote/types";
 import mdxRemoteHydrate from "next-mdx-remote/hydrate";
 import slug from "remark-slug";
+import link from "rehype-autolink-headings";
 
 import { AutoLink } from "@components/AutoLink";
 import { CodeBlock } from "@components/CodeBlock";
@@ -25,12 +26,24 @@ export function hydrate(compiledMdx: CompiledMdx): ReactNode {
 export async function renderMdx(mdxSource: string): Promise<CompiledMdx> {
     ensureServer();
 
+    const autolinkOptions: link.Options = {
+        behavior: "prepend",
+        properties: {
+            className: "anchor-link"
+        },
+        content: {
+            type: "text",
+            value: "#"
+        }
+    };
+
     // Fixes very large client bundles (tree shaking)
     const renderToString = (await import("next-mdx-remote/render-to-string")).default;
     return renderToString(mdxSource, {
         components,
         mdxOptions: {
-            remarkPlugins: [slug]
+            remarkPlugins: [slug],
+            rehypePlugins: [[link, autolinkOptions as any]]
         }
     });
 }

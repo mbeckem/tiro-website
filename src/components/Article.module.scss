@@ -6,24 +6,40 @@
         margin-bottom: 1em;
     }
 
-    :global .caption {
-        display: block;
-        text-align: center;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        position: relative;
 
-        & + *,
-        & + * *:first-child {
-            margin-top: 0px;
+        > :global(a.anchor-link) {
+            position: absolute;
+            left: 0px;
+            transform: translateX(-100%);
+            padding-right: 4px;
+
+            opacity: 0;
+
+            text-decoration: none;
+
+            &:hover {
+                opacity: 0.6;
+            }
         }
     }
 
-    // Code block with caption
-    // Fixes weird padding changes during page load.
-    :global span.caption {
-        margin-top: 1.25em;
+    // Less margins in nested lists
+    li li p {
+        margin: 0px;
+    }
 
-        > div.prism-code {
-            margin-top: 0px;
-        }
+    // Caption above code blocks
+    :global .caption {
+        display: block;
+        text-align: center;
+        margin-bottom: -1em;
     }
 
     // Code block without caption

@@ -12,7 +12,10 @@ interface AutoLinkProps {
  */
 export const AutoLink: React.FC<AutoLinkProps> = (props) => {
     const href = props.href;
-    if (/^(\/|\.\.?\/|#)/.test(href)) {
+    if (/^#/.test(href)) {
+        return <a {...props} />;
+    }
+    if (/^($|\/|\.\.?\/)/.test(href)) {
         const otherProps: any = Object.assign({}, props);
         delete otherProps.href;
 

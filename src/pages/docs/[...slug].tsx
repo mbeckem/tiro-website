@@ -20,10 +20,7 @@ export default function ArticlePage({ frontMatter, mdx }: ArticleProps): JSX.Ele
         <Layout>
             <SEO title={frontMatter.title} />
             <Container>
-                <ArticleComponent>
-                    <h1>{frontMatter.title}</h1>
-                    {content}
-                </ArticleComponent>
+                <ArticleComponent>{content}</ArticleComponent>
             </Container>
         </Layout>
     );

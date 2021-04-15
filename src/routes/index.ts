@@ -35,6 +35,10 @@ export function docsArticle(id: string): string {
     return `/docs/${id}`;
 }
 
+export const Lang = {
+    standardLibrary: () => docsArticle("stdlib")
+} as const;
+
 export const LibTiro = {
     gettingStarted: () => docsArticle("libtiro/getting-started"),
     embeddersGuide: () => docsArticle("libtiro/embedders-guide")
