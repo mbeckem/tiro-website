@@ -35,13 +35,13 @@ public:
      * Initializes the program with the given options.
      * `options` must be in JSON format and must contain the program's `source` string.
      * The result of the compilation is returned as json as well.
-     * 
+     *
      * Note that compiling clears the previous compilation results.
      */
     std::string compile(const std::string& options);
 
     /**
-     * Runs the previously compiled program with the given options. 
+     * Runs the previously compiled program with the given options.
      * `options` must be in JSON format and must contain `function` (the function name to call).
      * The function's return value will be returned as JSON as well.
      */
@@ -191,12 +191,15 @@ TiroRuntime::compile_impl(const std::string& source) {
     } catch (const tiro::error& err) {
         report("Failed to compile source file", err);
 
-        // Attempt to get a partial AST.
+        // Attempt to get a partial CST & AST.
+        try {
+            result.cst = compiler.dump_cst();
+        } catch (...) {
+        }
         try {
             result.ast = compiler.dump_ast();
         } catch (...) {
         }
-
         return result;
     }
 
@@ -287,7 +290,7 @@ TiroRuntime::run_impl(const std::string& function) {
     }
 }
 
-//#define TEST_RUN
+// #define TEST_RUN
 #if defined(TEST_RUN)
 
 #    include <iostream>
