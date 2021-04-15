@@ -11,7 +11,7 @@
         "prettier": "prettier \"./**/*.{js,jsx,ts,tsx,html,md,mdx,json}\" --write",
         "lint": "eslint \"src\" --ext js,jsx,ts,tsx",
         "init-site": "git worktree add site site",
-        "deploy:clean": "rimraf site/*",
+        "deploy:clean": "rimraf \"site/*\"",
         "deploy:build": "npm-run-all clean export",
         "deploy:copy": "cp -r out/* site/",
         "deploy:push": "cd site && git add -A && git commit --allow-empty -m \"Deploy site\" && git push --force",
