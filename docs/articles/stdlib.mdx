@@ -9,100 +9,177 @@ Basic types and functions provided by the runtime: `import std;`
 
 ## Contents
 
-- Basic types and functions
+- [Basic types and functions](#basic-types-and-functions)
 
-  - [Boolean](#boolean)
-  - [Float](#float)
-  - [Function](#function)
-  - [Integer](#integer)
-  - [Module](#module)
-  - [NativeObject](#nativeobject)
-  - [NativePointer](#nativepointer)
-  - [Null](#null)
-  - [String](#string)
+  - [type Boolean](#type-boolean)
+  - [type Integer](#type-integer)
+  - [type Float](#type-float)
+  - [type Null](#type-null)
+  - [type String](#type-string)
+  - [type Symbol](#type-symbol)
+  - [type Function](#type-function)
+  - [type Module](#type-module)
+  - [type NativeObject](#type-nativeobject)
+  - [type NativePointer](#type-nativepointer)
+  - [type Type](#type-type)
+  - [func type_of](#func-type_of)
 
-    - [StringBuilder](#stringbuilder)
-    - [StringSlice](#stringslice)
+- [Containers](#containers)
 
-  - [Symbol](#symbol)
-  - [Type](#type)
-    - type_of
+  - [type Tuple](#type-tuple)
+  - [type Record](#type-record)
+  - [type Array](#type-array)
+  - [type Buffer](#type-buffer)
+  - [type Map](#type-map)
+  - [type Set](#type-set)
 
-- Input and output
+- [Strings](#strings)
 
-  - print
-  - loop_timestamp
+  - [type StringSlice](#type-stringslice)
+  - [type StringBuilder](#type-stringbuilder)
+  - [func new_string_builder](#func-new_string_builder)
 
-- Containers
+- [Input and Output](#input-and-output)
 
-  - [Array](#array)
-  - [Buffer](#buffer)
-  - [Map](#map)
-  - [Record](#record)
-  - [Set](#set)
-  - [Tuple](#tuple)
+  - [func print](#func-print)
+  - [func loop_timestamp](#func-loop_timestamp)
 
-- Coroutines
+- [Coroutines](#coroutines)
 
-  - [Coroutine](#coroutine)
-  - [CoroutineToken](#coroutinetoken)
-  - launch
-  - current_coroutine
-  - coroutine_token
-  - yield_coroutine
+  - [type Coroutine](#type-coroutine)
+  - [type CoroutineToken](#type-coroutinetoken)
+  - [func launch](#func-launch)
+  - [func current_coroutine](#func-current_coroutine)
+  - [func coroutine_token](#func-coroutine_token)
+  - [func yield_coroutine](#func-yield_coroutine)
 
-- Error handling
+- [Error handling](#error-handling)
 
-  - [Result](#result)
-  - success
-  - failure
-  - panic
-  - catch_panic
+  - [type Result](#type-result)
+  - [func success](#func-success)
+  - [func failure](#func-failure)
+  - [func panic](#func-panic)
+  - [func catch_panic](#func-catch_panic)
 
-## Array
+## Basic types and functions
 
-## Boolean
+### type Boolean
 
-## Buffer
+The type of `true` and `false`.
 
-## Coroutine
+### type Integer
 
-## CoroutineToken
+The type of integer expressions such as `7` or `0x1F`.
 
-## Float
+### type Float
 
-## Function
+Type type of floating point expressions such as `1.25`.
 
-## Map
+### type Null
 
-### MapKeyView
+The type of the constant `null`.
 
-### MapValueView
+### type String
 
-## Integer
+The type of all string expressions.
+Strings are immutable.
 
-## Module
+TODO: Unicode strings
+TODO: Internal representation is guaranteed to be UTF-8
 
-## NativeObject
+### type Symbol
 
-## NativePointer
+The type of symbol literals, e.g. `#answer`.
 
-## Null
+### type Function
 
-## Record
+The type of all functions.
 
-## Result
+### type Module
 
-## Set
+The type of all modules:
 
-## String
+```
+import std;
+// std.type_of(std) == std.Module
+```
 
-## StringBuilder
+### type NativeObject
 
-## StringSlice
+The type of native objects that have been exposed to tiro.
+The tiro runtime manages the lifetime (and the storage) of these objects, which usually includes invoking a native finalizer when the object is collected.
 
-## Symbol
+### type NativePointer
 
-## Tuple
+The type of a native pointer that has been exposed to tiro.
+The tiro runtime does _not_ manage these objects in any way, which makes them very cheap to use.
 
-## Type
+### type Type
+
+The type of all types. In other words, `std.type_of(value)` will always return an instance of this type for any kind of value.
+
+### func type_of
+
+```
+func type_of(v: value);
+```
+
+Returns the type of `v`. For example:
+
+```
+assert(std.type_of(true) == std.Boolean);
+```
+
+## Containers
+
+### type Tuple
+
+### type Record
+
+### type Array
+
+### type Buffer
+
+### type Map
+
+### type Set
+
+## Strings
+
+### type StringSlice
+
+### type StringBuilder
+
+### func new_string_builder
+
+## Input and Output
+
+### func print
+
+### func loop_timestamp
+
+## Coroutines
+
+### type Coroutine
+
+### type CoroutineToken
+
+### func launch
+
+### func current_coroutine
+
+### func coroutine_token
+
+### func yield_coroutine
+
+## Error handling
+
+### type Result
+
+### func success
+
+### func failure
+
+### func panic
+
+### func catch_panic

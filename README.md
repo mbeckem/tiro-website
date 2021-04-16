@@ -6,7 +6,7 @@ Live at: https://mbeckem.github.io/tiro-website/
 
 - Run `yarn install`
 - Run `yarn dev` to start the development server
-- Visit http://localhost:3000/tiro_playground
+- Visit http://localhost:3000/tiro-website
 
 ## Building static html
 
