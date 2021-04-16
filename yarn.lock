@@ -1462,7 +1462,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.8.4":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.8.4":
   version: 7.13.10
   resolution: "@babel/runtime@npm:7.13.10"
   dependencies:
@@ -1984,7 +1984,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^17.0.3":
+"@types/react-inspector@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "@types/react-inspector@npm:4.0.1"
+  dependencies:
+    "@types/react": "*"
+    csstype: ^3.0.2
+  checksum: 04c7c93a37350e358d9a76e885bf29def78035743dc8d0645c0c7a31b7f6ae1d95e340b0113a5fd984095c83534e9b3ce9112bf3c14502fddaee3403add63980
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:*, @types/react@npm:^17.0.3":
   version: 17.0.3
   resolution: "@types/react@npm:17.0.3"
   dependencies:
@@ -5542,6 +5552,16 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"is-dom@npm:^1.0.0":
+  version: 1.1.0
+  resolution: "is-dom@npm:1.1.0"
+  dependencies:
+    is-object: ^1.0.1
+    is-window: ^1.0.2
+  checksum: f2662466f74e032fd3af4b6915a9eb8b1a10d72fb753a7ea8a0336879a6ffdd078b597773878633756d995ba7d6be85f5af665213932d6747d05bc694410d4ab
+  languageName: node
+  linkType: hard
+
 "is-extendable@npm:^0.1.0, is-extendable@npm:^0.1.1":
   version: 0.1.1
   resolution: "is-extendable@npm:0.1.1"
@@ -5674,6 +5694,13 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"is-object@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "is-object@npm:1.0.2"
+  checksum: dd87744edde5c9664e7ae133e965454bf684d6adeea4746fb03cf7f6a3206f39ac59f9e14e4eeffc72f6fcef7800671780632e62a8419825f1d7f873292825a4
+  languageName: node
+  linkType: hard
+
 "is-plain-obj@npm:^2.0.0":
   version: 2.1.0
   resolution: "is-plain-obj@npm:2.1.0"
@@ -5740,6 +5767,13 @@ fsevents@~2.3.1:
   version: 1.0.4
   resolution: "is-whitespace-character@npm:1.0.4"
   checksum: fd6dbced044036b5c46213399b6f8825ca664a42278cfbeede1970ab3511a1b5ed64ee63b5a7b25afa094762fe778223b530e956dd28f894ceb4c10516fc7b27
+  languageName: node
+  linkType: hard
+
+"is-window@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "is-window@npm:1.0.2"
+  checksum: 37aec6fc04564948bf71ff63a95912675d04bf95dcbbdfc4322e03c3a6f12b2b9d398405be8aff7a9ac5bcd0ab18ea637ef375d3d880efc81cf2d4d496933543
   languageName: node
   linkType: hard
 
@@ -7443,7 +7477,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.7.2, prop-types@npm:^15.5.7, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:15.7.2, prop-types@npm:^15.0.0, prop-types@npm:^15.5.7, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -7628,6 +7662,19 @@ fsevents@~2.3.1:
   peerDependencies:
     react: 17.0.2
   checksum: 960a74ff6670766846a73097a599115963df1574833c59ca0c2fd909758ebe7a6214cd14f5e6aa63ce846d8f39fde7f3b80474ccfcfadc45dd7f3246364718c6
+  languageName: node
+  linkType: hard
+
+"react-inspector@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "react-inspector@npm:5.1.1"
+  dependencies:
+    "@babel/runtime": ^7.0.0
+    is-dom: ^1.0.0
+    prop-types: ^15.0.0
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0
+  checksum: f1bbbc9d2b0da761173231aeae99a1e88acbc46f3e4bc2f08bdafd555ea865fc7ffcfeaf76e4be961d1dae549fcd43452e54e3b76051cd7d215d414420b71ab8
   languageName: node
   linkType: hard
 
@@ -9075,6 +9122,7 @@ resolve@^2.0.0-next.3:
     "@svgr/webpack": ^5.5.0
     "@types/node": ^14.14.37
     "@types/react": ^17.0.3
+    "@types/react-inspector": ^4.0.1
     "@typescript-eslint/eslint-plugin": ^4.20.0
     "@typescript-eslint/parser": ^4.20.0
     ace-builds: ^1.4.12
@@ -9094,6 +9142,7 @@ resolve@^2.0.0-next.3:
     react: 17.0.2
     react-ace: ^9.4.0
     react-dom: 17.0.2
+    react-inspector: ^5.1.1
     react-resize-detector: ^6.6.4
     react-split: ^2.0.9
     rehype-autolink-headings: ^5.0.1

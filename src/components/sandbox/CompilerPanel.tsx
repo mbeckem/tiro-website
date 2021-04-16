@@ -1,5 +1,6 @@
 import React, { memo, ReactNode } from "react";
-import { Tabs, Tab, UL } from "@blueprintjs/core";
+import { Tabs, Tab, UL, Classes } from "@blueprintjs/core";
+import { ObjectInspector, chromeLight, InspectorThemeDefinition } from "react-inspector";
 
 import { CompilationResult } from "@src/runtime";
 import { defined } from "@src/utils";
@@ -12,7 +13,7 @@ export interface CompilerPanelProps {
 }
 
 export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelProps): JSX.Element {
-    const { result, version } = props;
+    const { result } = props;
     const tabs = [
         {
             id: "status",
@@ -22,12 +23,12 @@ export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelPro
         {
             id: "cst",
             title: "CST",
-            content: preformatted("Concrete Syntax Tree", result?.cst.trim())
+            content: jsonTree(result?.cst.trim())
         },
         {
             id: "ast",
             title: "AST",
-            content: preformatted("Abstract Syntax Tree", result?.ast.trim())
+            content: jsonTree(result?.ast.trim())
         },
         {
             id: "ir",
@@ -38,16 +39,16 @@ export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelPro
             id: "bytecode",
             title: "Bytecode",
             content: preformatted("Compiled bytecode", result?.bytecode.trim())
-        },
-        {
-            id: "version",
-            title: "Version",
-            content: versionContent(version)
         }
     ] as const;
 
     return (
-        <Tabs className={styles.tabsContainer} id="CompilerPanel" defaultSelectedTabId={tabs[0].id}>
+        <Tabs
+            className={styles.tabsContainer}
+            id="CompilerPanel"
+            defaultSelectedTabId={tabs[0].id}
+            renderActiveTabPanelOnly={true}
+        >
             {tabs.map((props) => makeTab(props.id, props.title, props.content))}
         </Tabs>
     );
@@ -80,10 +81,11 @@ function statusContent(props: CompilerPanelProps): JSX.Element {
         return <li key={index}>{message}</li>;
     });
     return (
-        <>
-            <div>{statusMessage(props)}</div>
+        <div className={Classes.UI_TEXT}>
+            <p>{props.version}</p>
+            <p>{statusMessage(props)}</p>
             <UL>{messageItems}</UL>
-        </>
+        </div>
     );
 }
 
@@ -98,8 +100,20 @@ function preformatted(title: string, content: string | undefined): JSX.Element {
     );
 }
 
-function versionContent(version: string): JSX.Element {
-    return <p>{version}</p>;
+const jsonTheme: InspectorThemeDefinition = {
+    ...chromeLight,
+    BASE_FONT_SIZE: "inherit",
+    ARROW_FONT_SIZE: "inherit",
+    TREENODE_FONT_SIZE: "inherit"
+};
+
+function jsonTree(content: string | undefined): JSX.Element {
+    const json = content ? JSON.parse(content) : undefined;
+    return (
+        <div className={Classes.UI_TEXT}>
+            <ObjectInspector name="tree" data={json} expandLevel={20} theme={jsonTheme} />
+        </div>
+    );
 }
 
 function makeTab(id: string, title: string, content: JSX.Element | undefined): JSX.Element {
