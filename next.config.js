@@ -1,8 +1,9 @@
-const path = require("path");
+const createNextPluginPreval = require("next-plugin-preval/config");
+const withNextPluginPreval = createNextPluginPreval();
 
 const basePath = "/tiro-website";
 
-module.exports = {
+module.exports = withNextPluginPreval({
     basePath: basePath,
 
     reactStrictMode: true,
@@ -38,4 +39,4 @@ module.exports = {
         );
         return config;
     }
-};
+});
