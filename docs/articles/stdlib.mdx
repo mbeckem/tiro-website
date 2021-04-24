@@ -468,6 +468,16 @@ They are generated when code panics, for example by calling [panic()](#func-pani
 It is often preferable to use the less intrusive [Result](#type-result) type instead.
 Panicking should be reserved for signaling critical error conditions such as programming errors.
 
+TODO: Other properties (stack trace, user data, secondary exceptions)
+
+#### func Exception.message
+
+```
+func Exception.message(): String;
+```
+
+Returns the exception's error message.
+
 ### func panic
 
 ```
