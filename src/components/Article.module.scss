@@ -1,4 +1,7 @@
 .article {
+    padding-left: 24px;
+    padding-right: 24px;
+
     margin-bottom: 2em;
 
     table {
@@ -28,6 +31,10 @@
                 opacity: 0.6;
             }
         }
+
+        &:hover > :global(a.anchor-link) {
+            opacity: 0.6;
+        }
     }
 
     // Less margins in nested lists
@@ -42,8 +49,6 @@
         margin-bottom: -1em;
     }
 
-    // Code block without caption
-    // Fixes weird padding changes during page load.
     :global div > pre.prism-code {
         margin-top: 1.25em;
     }
