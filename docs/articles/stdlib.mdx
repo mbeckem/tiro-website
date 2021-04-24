@@ -62,6 +62,7 @@ import std;
   - [type Result](#type-result)
   - [func success](#func-success)
   - [func failure](#func-failure)
+  - [type Exception](#type-exception)
   - [func panic](#func-panic)
   - [func catch_panic](#func-catch_panic)
 
@@ -178,8 +179,6 @@ Removes all items from the array.
 
 ### type Buffer
 
-The type of all buffers.
-
 Buffers reference a raw region of memory, i.e. a blog of bytes.
 They are especially useful when doing I/O or when manipulating large amounts of data.
 
@@ -194,8 +193,6 @@ func Buffer.size(): Integer;
 Returns the number of items in the buffer.
 
 ### type Map
-
-The type of all maps.
 
 A map is a container that associates _keys_ with _values_.
 The key-value associations can be manipulated at will.
@@ -286,10 +283,8 @@ TODO: Return true/false?
 
 ### type Set
 
-The type of all sets.
-
 A set is a container that stores unique items.
-Items can be inserted or removed at will, and their existance can be tested efficiently.
+Items can be inserted or removed at will, and their existence can be tested efficiently.
 
 Like maps, they are implemented as [hash tables](https://en.wikipedia.org/wiki/Hash_table).
 
@@ -374,14 +369,150 @@ TODO: Return true/false?
 
 ### type Result
 
+A result represents the result of an operation that may fail.
+The result type is the basic primitive type used in tiro's error handling facilities.
+
+Results may be in one of two states:
+
+- _Success_. Calling `result.value()` returns the result of the operation.
+
+- _Failure_. Calling `result.reason()` returns a value explaining why the operation failed.
+
+Results are constructed by calling the [success()](#func-success) and [failure()](#func-failure) functions.
+
+Example:
+
+```
+import std;
+
+export func main() {
+    const result1 = operation(5);
+    std.print(result1.type(), result1.value()); // #success 10
+
+    const result2 = operation(-5);
+    std.print(result2.type(), result2.reason()); // #failure value too small!
+}
+
+func operation(n) {
+     if (n < 0) {
+        return std.failure("value too small!");
+    } else {
+        return std.success(n * 2);
+    }
+}
+```
+
+#### func Result.type
+
+```
+func Result.type(): Symbol;
+```
+
+Returns either `#success` or `#failure`, depending on the result's state.
+
+#### func Result.is_success
+
+```
+func Result.is_success(): Boolean;
+```
+
+Returns `true` if the result represents success, `false` otherwise.
+
+#### func Result.is_failure
+
+```
+func Result.is_failure(): Boolean;
+```
+
+Returns `true` if the result represents failure, `false` otherwise.
+
+#### func Result.value
+
+```
+func Result.value(): Value;
+```
+
+Returns the result's value.
+Requires that the result represents success.
+
+#### func Result.reason
+
+```
+func Result.reason(): Value;
+```
+
+Returns the result's reason.
+Requires that the result represents failure.
+
 ### func success
+
+```
+func success(value: Value): Result;
+```
+
+Returns a new successful [Result](#type-result) that holds the given `value`.
 
 ### func failure
 
+```
+func failure(reason: value): Reason;
+```
+
+Returns a new failure [Result](#type-result) that holds the given `reason`.
+
+### type Exception
+
+Exceptions represent unexpected (and often fatal) errors encountered during program execution.
+They are generated when code panics, for example by calling [panic()](#func-panic).
+
+It is often preferable to use the less intrusive [Result](#type-result) type instead.
+Panicking should be reserved for signaling critical error conditions such as programming errors.
+
 ### func panic
+
+```
+func panic(message: String);
+```
+
+Immediately aborts execution of the current function with an error explained by `message`.
+From within the `panic` function, a new [Exception](#type-exception) is constructed with the given `message` and [function unwinding](https://en.wikipedia.org/wiki/Call_stack#Unwinding) is started.
+Unwinding can be stopped by using the [catch_panic](#func-catch_panic) function.
+
+This function is designed to report _unexpected_ errors such as programming errors.
+Use the [Result](#type-result) type instead if errors can be expected, e.g. to report missing files.
 
 ### func catch_panic
 
 ```
-func catch_panic(func: Function);
+func catch_panic(func: Function): Result;
+```
+
+Invokes `func()` and stops propagation of any non-fatal panic thrown by `func` or its callees.
+After execution of `func()` completes (either through panic or through normal return), a [Result](#type-result) is returned:
+
+- If `func` returned normally, its return value is wrapped into a success result and returned.
+- If a panic was caught, a failure result is returned. The result's `reason` is set to the caught value.
+
+Example:
+
+```
+import std;
+
+export func main() {
+    const result = std.catch_panic(may_fail);
+    if (result.is_success()) {
+        std.print("success:", result.value());
+    } else {
+        std.print("failure:", result.reason().message());
+    }
+}
+
+func may_fail() {
+    // Replace `false` with `true` to return normally
+    if (false) {
+        return 42;
+    } else {
+        std.panic("help!");
+    }
+}
 ```
