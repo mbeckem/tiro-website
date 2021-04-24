@@ -13,7 +13,7 @@
         "init-site": "git worktree add site site",
         "deploy:clean": "rimraf \"site/*\"",
         "deploy:build": "npm-run-all clean export",
-        "deploy:copy": "rimraf -rf \"site/*\" && cp -r out/* site/",
+        "deploy:copy": "cp -r out/* site/",
         "deploy:push": "cd site && git add -A && git commit --allow-empty -m \"Deploy site\" && git push --force",
         "deploy": "npm-run-all deploy:clean deploy:build deploy:copy deploy:push"
     },
