@@ -9,10 +9,6 @@ export interface SEOProps {
     title: string | string[];
 }
 
-function join(titleComponents: string[]) {
-    return titleComponents.join(" | ");
-}
-
 export const SEO = memo(function SEO({ title, description = "", meta = [] }: SEOProps) {
     const titleArray = Array.isArray(title) ? title : [title];
     const titleString = join(titleArray);
@@ -34,3 +30,7 @@ export const SEO = memo(function SEO({ title, description = "", meta = [] }: SEO
         </Head>
     );
 });
+
+function join(titleComponents: string[]) {
+    return titleComponents.join(" | ");
+}

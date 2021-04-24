@@ -5,7 +5,11 @@ slug: "/stdlib"
 
 # The standard library
 
-Basic types and functions provided by the runtime: `import std;`
+Basic types and functions provided by the runtime.
+
+```
+import std;
+```
 
 ## Contents
 
@@ -121,7 +125,7 @@ The type of all types. In other words, `std.type_of(value)` will always return a
 ### func type_of
 
 ```
-func type_of(v: value);
+func type_of(v: Value);
 ```
 
 Returns the type of `v`. For example:
@@ -134,15 +138,209 @@ assert(std.type_of(true) == std.Boolean);
 
 ### type Tuple
 
+The type of all tuples, e.g. `()`, `(1,)` or `(1, 2)`.
+
 ### type Record
+
+The type of all records, e.g. `(:)` or `(foo: "bar")`.
 
 ### type Array
 
+The type of all arrays, e.g. `[]` and `[a, b, c]`.
+
+An array is a dynamic sequence of items that can grow or shrink as needed.
+Existing items can be read or written using the indexing operator, e.g. `const first = array[0]` or `array[0] = "first"`.
+The sequence of items can be manipulated using the methods below.
+
+#### func Array.size
+
+```
+func Array.size(): Integer;
+```
+
+Returns the number of items in the array.
+
+#### func Array.append
+
+```
+func Array.append(v: Value);
+```
+
+Appends `v` to the array.
+
+#### func Array.clear
+
+```
+func Array.clear()
+```
+
+Removes all items from the array.
+
 ### type Buffer
+
+The type of all buffers.
+
+Buffers reference a raw region of memory, i.e. a blog of bytes.
+They are especially useful when doing I/O or when manipulating large amounts of data.
+
+TODO: usage
+
+#### func Buffer.size
+
+```
+func Buffer.size(): Integer;
+```
+
+Returns the number of items in the buffer.
 
 ### type Map
 
+The type of all maps.
+
+A map is a container that associates _keys_ with _values_.
+The key-value associations can be manipulated at will.
+Given a key, a map allows for efficient lookup (and update) of the associated value.
+
+Maps are implemented as [hash tables](https://en.wikipedia.org/wiki/Hash_table).
+
+#### Insertion order {#map-insertion-order}
+
+Contrary to most other hash table implementations, tiro's map preserves the insertion order of its mappings.
+When iterating a map, keys and values are visited in the order in which they were inserted:
+
+- A new key-value mapping (i.e. a key that was not already in the map) is always inserted at the end.
+- Updating an existing key-value mapping (i.e. key already exists in the map) does not change its order in the map.
+- Removing a key-value mapping preserves the order of all remaining mappings.
+
+Example:
+
+```
+import std;
+
+const m = map{};
+m[1] = "one";
+m[2] = "two";
+m[3] = "three";
+
+// Guaranteed output:
+// 1 one
+// 2 two
+// 3 three
+for (key, value) in m {
+    std.print(key, value);
+}
+```
+
+#### func Map.size
+
+```
+func Map.size(): Integer;
+```
+
+Returns the number of key-value mappings in the map.
+
+#### func Map.contains
+
+```
+func Map.contains(key: Value): Boolean;
+```
+
+Returns `true` if there is a value associated with `key`, `false` otherwise.
+
+#### func Map.keys
+
+```
+func Map.keys(): Iterable;
+```
+
+Returns an iterable view over the keys within the map.
+The iteration order is the same as the map's order.
+
+#### func Map.values
+
+```
+func Map.values(): Iterable;
+```
+
+Returns an iterable view over the values within the map.
+The iteration order is the same as the map's order.
+
+#### func Map.clear
+
+```
+func Map.clear();
+```
+
+Removes all key-value mappings from the map.
+
+#### func Map.remove
+
+```
+func Map.remove(key: Value);
+```
+
+Removes the key-value mapping for `key`.
+Does nothing if there is no such mapping.
+
+TODO: Return true/false?
+
 ### type Set
+
+The type of all sets.
+
+A set is a container that stores unique items.
+Items can be inserted or removed at will, and their existance can be tested efficiently.
+
+Like maps, they are implemented as [hash tables](https://en.wikipedia.org/wiki/Hash_table).
+
+#### Insertion order {#set-insertion-order}
+
+When iterating a set, its items are visited in the order they were inserted in.
+See also [map insertion order](#map-insertion-order).
+
+#### func Set.size
+
+```
+func Set.size(): Integer;
+```
+
+Returns the number of items in the set.
+
+#### func Set.contains
+
+```
+func Set.contains(item: Value): Boolean;
+```
+
+Returns `true` if the set contains `item`, `false` otherwise.
+
+#### func Set.clear
+
+```
+func Set.clear();
+```
+
+Removes all items from the set.
+
+#### func Set.insert
+
+```
+func Set.insert(item: Value): Boolean;
+```
+
+Inserts `item` into the set.
+Returns `true` if item has been inserted, `false` if it already existed.
+
+#### func Set.remove
+
+```
+func Map.remove(item: Value);
+```
+
+Removes `item` from the set.
+Does nothing if `item` does not exist in the set.
+
+TODO: Return true/false?
 
 ## Strings
 
@@ -183,3 +381,7 @@ assert(std.type_of(true) == std.Boolean);
 ### func panic
 
 ### func catch_panic
+
+```
+func catch_panic(func: Function);
+```
