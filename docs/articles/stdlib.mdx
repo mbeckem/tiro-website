@@ -216,17 +216,19 @@ When iterating a map, keys and values are visited in the order in which they wer
 ```
 import std;
 
-const m = map{};
-m[1] = "one";
-m[2] = "two";
-m[3] = "three";
+export func main() {
+    const m = map{};
+    m[1] = "one";
+    m[2] = "two";
+    m[3] = "three";
 
-// Guaranteed output:
-// 1 one
-// 2 two
-// 3 three
-for (key, value) in m {
-    std.print(key, value);
+    // Guaranteed output:
+    // 1 one
+    // 2 two
+    // 3 three
+    for (key, value) in m {
+        std.print(key, value);
+    }
 }
 ```
 
@@ -404,7 +406,7 @@ func dispatch();
 ```
 
 Dispatches to other ready coroutines.
-The current coroutine will resume execution after all other ready coroutines had to opportunity to run.
+The current coroutine will resume execution after all other ready coroutines had the opportunity to run.
 
 ### func coroutine_token
 
@@ -413,7 +415,7 @@ func coroutine_token(): CoroutineToken;
 ```
 
 Returns a [CoroutineToken](#type-coroutinetoken) instance suitable for resuming the current coroutine.
-Coroutine tokens are invalidated after they have been used to resume their coroutine once.
+Coroutine tokens are invalidated after the coroutine has been resumed again.
 See [yield_coroutine()](#func-yield_coroutine) for an example.
 
 WARNING: This is a low level API designed to control the execution of a coroutine manually.
@@ -461,20 +463,20 @@ func createMutex() {
         lock: func() {
             if locked {
                 if waiter != null {
-                    std.panic("Cannot support more than one waiter.");
+                    std.panic("Cannot support more than one waiter");
                 }
                 // Wait until the other coroutine unlocks.
                 waiter = std.coroutine_token();
                 std.yield_coroutine();
             }
-            // At this point, either the lock wasn't locked from the start
+            // At this point, either the mutex wasn't initially locked
             // or yield_coroutine() returned, i.e. the other coroutine unlocked.
             assert(!locked);
             locked = true;
         },
         unlock: func() {
             if !locked {
-                std.panic("Mutex was not locked!");
+                std.panic("Mutex was not locked");
             }
             locked = false;
             if waiter {
