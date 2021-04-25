@@ -52,8 +52,9 @@ import std;
 
   - [type Coroutine](#type-coroutine)
   - [type CoroutineToken](#type-coroutinetoken)
-  - [func launch](#func-launch)
   - [func current_coroutine](#func-current_coroutine)
+  - [func launch](#func-launch)
+  - [func dispatch](#func-dispatch)
   - [func coroutine_token](#func-coroutine_token)
   - [func yield_coroutine](#func-yield_coroutine)
 
@@ -90,6 +91,7 @@ The type of all string expressions.
 Strings are immutable.
 
 TODO: Unicode strings
+
 TODO: Internal representation is guaranteed to be UTF-8
 
 ### type Symbol
@@ -126,7 +128,7 @@ The type of all types. In other words, `std.type_of(value)` will always return a
 ### func type_of
 
 ```
-func type_of(v: Value);
+func type_of(v: Value): Type;
 ```
 
 Returns the type of `v`. For example:
@@ -209,7 +211,7 @@ When iterating a map, keys and values are visited in the order in which they wer
 - Updating an existing key-value mapping (i.e. key already exists in the map) does not change its order in the map.
 - Removing a key-value mapping preserves the order of all remaining mappings.
 
-Example:
+<span className="caption">Example: iterating over a map</span>
 
 ```
 import std;
@@ -349,21 +351,142 @@ TODO: Return true/false?
 
 ### func print
 
+```
+func print(values...: Value...);
+```
+
+Prints the given values followed by a new line.
+
 ### func loop_timestamp
+
+```
+func loop_timestamp(): Integer;
+```
+
+Returns the current loop timestamp.
+The loop timestamp is refreshed on every iteration of the runtime's main loop.
+A single iteration involves calling all ready coroutines and continues until all coroutines are either done or waiting for the completion of an asynchronous function.
+
+Within the same iteration, `loop_timestamp()` will always return the same value.
 
 ## Coroutines
 
 ### type Coroutine
 
-### type CoroutineToken
+Coroutines represents threads of execution within a single operating system thread.
+Coroutines are created through the native API or by calling `std.launch()`.
 
-### func launch
+### type CoroutineToken
 
 ### func current_coroutine
 
+```
+func current_coroutine(): Coroutine;
+```
+
+Returns the current [Coroutine](#type-coroutine) instance, i.e. the coroutine from which `current_coroutine()` was called.
+
+### func launch
+
+```
+func launch(fn: Function, args...: Value...): Coroutine;
+```
+
+Executes `fn(args...)` from within a new coroutine.
+The coroutine instance is returned by this function.
+
+TODO: Should we return a future instead?
+
+### func dispatch
+
+```
+func dispatch();
+```
+
+Dispatches to other ready coroutines.
+The current coroutine will resume execution after all other ready coroutines had to opportunity to run.
+
 ### func coroutine_token
 
+```
+func coroutine_token(): CoroutineToken;
+```
+
+Returns a [CoroutineToken](#type-coroutinetoken) instance suitable for resuming the current coroutine.
+Coroutine tokens are invalidated after they have been used to resume their coroutine once.
+See [yield_coroutine()](#func-yield_coroutine) for an example.
+
+WARNING: This is a low level API designed to control the execution of a coroutine manually.
+It should only be used to create new asynchronous abstractions.
+
 ### func yield_coroutine
+
+```
+func yield_coroutine();
+```
+
+Immediately pauses execution of the current coroutine.
+Execution will only continue once the coroutine has been resumed via a [CoroutineToken](#type-coroutinetoken) previously obtained from [coroutine_token()](#func-coroutine_token).
+
+WARNING: This is a low level API designed to control the execution of a coroutine manually.
+It should only be used to create new asynchronous abstractions.
+
+<span className="caption">Example: a simple Mutex</span>
+
+```
+import std;
+
+export func main() {
+    const mutex = createMutex();
+    const task = func(id) {
+        for var i = 0; i < 3; i += 1 {
+            mutex.lock();
+            std.print("Hello from ${id}");
+            std.dispatch(); // Other coroutine can observe a locked mutex
+            mutex.unlock();
+        }
+    };
+
+    std.launch(task, "1");
+    std.launch(task, "2");
+}
+
+// Creates a simplistic mutex that only supports two coroutines.
+func createMutex() {
+    // Coroutine token if another coroutine is already waiting.
+    var waiter = null;
+    var locked = false;
+
+    return (
+        lock: func() {
+            if locked {
+                if waiter != null {
+                    std.panic("Cannot support more than one waiter.");
+                }
+                // Wait until the other coroutine unlocks.
+                waiter = std.coroutine_token();
+                std.yield_coroutine();
+            }
+            // At this point, either the lock wasn't locked from the start
+            // or yield_coroutine() returned, i.e. the other coroutine unlocked.
+            assert(!locked);
+            locked = true;
+        },
+        unlock: func() {
+            if !locked {
+                std.panic("Mutex was not locked!");
+            }
+            locked = false;
+            if waiter {
+                waiter.resume();
+                waiter = null;
+            }
+            // Give other coroutines the opportunity to run
+            std.dispatch();
+        }
+    );
+}
+```
 
 ## Error handling
 
@@ -380,7 +503,7 @@ Results may be in one of two states:
 
 Results are constructed by calling the [success()](#func-success) and [failure()](#func-failure) functions.
 
-Example:
+<span className="caption">Example: simple error handling</span>
 
 ```
 import std;
@@ -455,7 +578,7 @@ Returns a new successful [Result](#type-result) that holds the given `value`.
 ### func failure
 
 ```
-func failure(reason: value): Reason;
+func failure(reason: value): Result;
 ```
 
 Returns a new failure [Result](#type-result) that holds the given `reason`.
@@ -485,7 +608,7 @@ func panic(message: String);
 ```
 
 Immediately aborts execution of the current function with an error explained by `message`.
-From within the `panic` function, a new [Exception](#type-exception) is constructed with the given `message` and [function unwinding](https://en.wikipedia.org/wiki/Call_stack#Unwinding) is started.
+From within the `panic` function, a new [Exception](#type-exception) is constructed with the given `message` and [stack unwinding](https://en.wikipedia.org/wiki/Call_stack#Unwinding) is started.
 Unwinding can be stopped by using the [catch_panic](#func-catch_panic) function.
 
 This function is designed to report _unexpected_ errors such as programming errors.
@@ -494,16 +617,16 @@ Use the [Result](#type-result) type instead if errors can be expected, e.g. to r
 ### func catch_panic
 
 ```
-func catch_panic(func: Function): Result;
+func catch_panic(fn: Function): Result;
 ```
 
-Invokes `func()` and stops propagation of any non-fatal panic thrown by `func` or its callees.
-After execution of `func()` completes (either through panic or through normal return), a [Result](#type-result) is returned:
+Invokes `fn()` and stops propagation of any non-fatal panic thrown by `fn` or its callees.
+After execution of `fn()` completes (either through panic or through normal return), a [Result](#type-result) is returned:
 
-- If `func` returned normally, its return value is wrapped into a success result and returned.
+- If `fn` returned normally, its return value is wrapped into a success result and returned.
 - If a panic was caught, a failure result is returned. The result's `reason` is set to the caught value.
 
-Example:
+<span className="caption">Example: catching a panic from a function</span>
 
 ```
 import std;
