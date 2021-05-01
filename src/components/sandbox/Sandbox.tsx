@@ -9,6 +9,7 @@ import { OutputPanelProps } from "./OutputPanel";
 
 export interface SandboxProps {
     initialSource?: string;
+    onReadyChanged(ready: boolean): void;
 }
 
 interface SandboxState {
@@ -19,7 +20,7 @@ interface SandboxState {
     executions: List<ExecutionResult>;
 }
 
-export class Sandbox extends PureComponent<{}, SandboxState> {
+export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
     private _runtime?: Runtime;
 
     constructor(props: Readonly<SandboxProps>) {
@@ -42,9 +43,12 @@ export class Sandbox extends PureComponent<{}, SandboxState> {
             console.error("Failed to create runtime instance", e);
             return;
         }
+
+        this.props.onReadyChanged(true);
     }
 
     componentWillUnmount(): void {
+        this.props.onReadyChanged(false);
         this._runtime?.destroy();
         this._runtime = undefined;
     }

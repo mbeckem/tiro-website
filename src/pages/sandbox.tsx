@@ -1,8 +1,9 @@
-import React, { lazy, Suspense } from "react";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import { Classes } from "@blueprintjs/core";
 
 import { Layout } from "@components/Layout";
 import { SEO } from "@components/SEO";
-import { Classes } from "@blueprintjs/core";
 
 const INITIAL_SOURCE = `
 import std;
@@ -13,26 +14,24 @@ export func main() {
 }
 `.trimStart();
 
-const LazySandbox: any = lazy(async () => {
-    return {
-        // React.lazy needs us to return a "default" export.
-        default: (await import("@components/sandbox")).Sandbox
-    };
+const LazySandbox = dynamic(async () => (await import("@components/sandbox")).Sandbox, {
+    ssr: false
 });
 
 export default function SandboxPage(): JSX.Element {
-    const isClient = typeof window !== "undefined";
+    const [isReady, setReady] = useState(false);
 
-    const content = isClient ? (
-        <Suspense fallback={Loader()}>
-            <LazySandbox initialSource={INITIAL_SOURCE} />
-        </Suspense>
-    ) : null;
-
+    const sandbox = (
+        <div style={{ width: "100%", height: "100%", display: isReady ? "block" : "none" }}>
+            <LazySandbox initialSource={INITIAL_SOURCE} onReadyChanged={setReady} />
+        </div>
+    );
+    const loader = isReady ? null : Loader();
     return (
         <Layout fullHeight>
             <SEO title="Sandbox" />
-            {content}
+            {sandbox}
+            {loader}
         </Layout>
     );
 }

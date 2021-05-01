@@ -23,7 +23,7 @@ module.exports = {
         ecmaVersion: 2018,
         sourceType: "module"
     },
-    plugins: ["react", "@typescript-eslint", "prettier"],
+    plugins: ["react", "react-hooks", "@typescript-eslint", "prettier"],
     settings: {
         react: {
             version: "detect"
@@ -46,6 +46,8 @@ module.exports = {
         ],
         "@typescript-eslint/ban-types": "off",
         "react/prop-types": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
     }
 };
