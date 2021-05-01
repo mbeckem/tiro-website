@@ -144,7 +144,7 @@ const JsonTree: React.FC<JsonTreeProps> = (props: JsonTreeProps): JSX.Element =>
     } else {
         switch (renderType) {
             case "plain":
-                displayContent = <pre>{content}</pre>;
+                displayContent = <pre className={styles.plainJson}>{content}</pre>;
                 break;
             case "tree":
                 displayContent = <ObjectInspector name="tree" data={json} expandLevel={20} theme={jsonTheme} />;
