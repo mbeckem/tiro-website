@@ -1,6 +1,7 @@
-import React, { memo, ReactNode } from "react";
+import React, { memo, ReactNode, useMemo, useState } from "react";
 import { Tabs, Tab, UL, Classes } from "@blueprintjs/core";
 import { ObjectInspector, chromeLight, InspectorThemeDefinition } from "react-inspector";
+import classNames from "classnames";
 
 import { CompilationResult } from "@src/runtime";
 import { defined } from "@src/utils";
@@ -23,12 +24,12 @@ export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelPro
         {
             id: "cst",
             title: "CST",
-            content: jsonTree(result?.cst.trim())
+            content: <JsonTree content={result?.cst.trim()} />
         },
         {
             id: "ast",
             title: "AST",
-            content: jsonTree(result?.ast.trim())
+            content: <JsonTree content={result?.ast.trim()} />
         },
         {
             id: "ir",
@@ -107,14 +108,59 @@ const jsonTheme: InspectorThemeDefinition = {
     TREENODE_FONT_SIZE: "inherit"
 };
 
-function jsonTree(content: string | undefined): JSX.Element {
-    const json = content ? JSON.parse(content) : undefined;
+interface JsonTreeProps {
+    content?: string;
+}
+
+const JsonTree: React.FC<JsonTreeProps> = (props: JsonTreeProps): JSX.Element => {
+    type RenderType = "tree" | "plain";
+
+    const content = props.content;
+    const [json, error] = useMemo((): [string | undefined, boolean] => {
+        try {
+            return [content ? JSON.parse(content) : undefined, false];
+        } catch (e) {
+            return [undefined, true];
+        }
+    }, [content]);
+
+    const [renderType, setRenderType] = useState<RenderType>("tree");
+    function renderTypeButton(type: RenderType, label: string) {
+        return (
+            <span
+                className={classNames(styles.renderTypeSwitch, type === renderType && styles.active)}
+                onClick={() => setRenderType(type)}
+            >
+                {label}
+            </span>
+        );
+    }
+
+    let displayContent;
+    if (error) {
+        displayContent = <p>Invalid JSON</p>;
+    } else if (!json) {
+        displayContent = "";
+    } else {
+        switch (renderType) {
+            case "plain":
+                displayContent = <pre>{content}</pre>;
+                break;
+            case "tree":
+                displayContent = <ObjectInspector name="tree" data={json} expandLevel={20} theme={jsonTheme} />;
+                break;
+        }
+    }
+
     return (
         <div className={Classes.UI_TEXT}>
-            <ObjectInspector name="tree" data={json} expandLevel={20} theme={jsonTheme} />
+            <div style={{ float: "right" }}>
+                {renderTypeButton("plain", "Plain")} | {renderTypeButton("tree", "Formatted")}
+            </div>
+            {displayContent}
         </div>
     );
-}
+};
 
 function makeTab(id: string, title: string, content: JSX.Element | undefined): JSX.Element {
     return (

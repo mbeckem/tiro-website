@@ -53,9 +53,6 @@ const Nav = function Nav(props: { siteTitle: string }) {
                 <Link href={routes.sandbox()}>
                     <a className={styles.pageLink}>Sandbox</a>
                 </Link>
-                <Link href={routes.about()}>
-                    <a className={styles.pageLink}>About</a>
-                </Link>
             </Navbar.Group>
             <Navbar.Group align="right">
                 <ExternalLink className={styles.pageLink} showIcon={false} href="https://github.com/mbeckem/tiro">
