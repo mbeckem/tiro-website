@@ -17,10 +17,13 @@ export default function DocsPage(): JSX.Element {
                 <Article>
                     <h1>Documentation</h1>
                     <section>
-                        <h2>The Tiro Language</h2>
+                        <h2>The tiro language</h2>
                         Documentation for the language itself.
                         <ul>
                             <li>Introduction</li>
+                            <li>
+                                <Link href={routes.Lang.reference()}>Language reference</Link>
+                            </li>
                             <li>
                                 <ExternalLink href="https://github.com/mbeckem/tiro/blob/master/docs/grammar.md">
                                     Grammar
@@ -28,7 +31,7 @@ export default function DocsPage(): JSX.Element {
                             </li>
                             <li>
                                 <Link href={routes.Lang.standardLibrary()}>
-                                    <a>The Standard Library</a>
+                                    <a>The standard library</a>
                                 </Link>
                             </li>
                         </ul>
@@ -49,16 +52,16 @@ export default function DocsPage(): JSX.Element {
                             </li>
                             <li>
                                 <Link href={routes.LibTiro.embeddersGuide()}>
-                                    <a>Embedder&apos;s Guide</a>
+                                    <a>Embedder&apos;s guide</a>
                                 </Link>
                             </li>
                             <li>
                                 <Link href={routes.apidocsIndex()}>
-                                    <a>API Reference</a>
+                                    <a>API reference</a>
                                 </Link>
                             </li>
                             <li>
-                                <ExternalLink href="https://github.com/mbeckem/tiro">Github Project</ExternalLink>
+                                <ExternalLink href="https://github.com/mbeckem/tiro">Github project</ExternalLink>
                             </li>
                         </ul>
                     </section>

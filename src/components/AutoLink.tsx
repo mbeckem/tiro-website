@@ -3,7 +3,7 @@ import React from "react";
 import { ExternalLink } from "./ExternalLink";
 
 interface AutoLinkProps {
-    href: string;
+    href?: string;
     className?: string;
 }
 
@@ -12,7 +12,7 @@ interface AutoLinkProps {
  */
 export const AutoLink: React.FC<AutoLinkProps> = (props) => {
     const href = props.href;
-    if (/^#/.test(href)) {
+    if (!href || /^#/.test(href)) {
         return <a {...props} />;
     }
     if (/^($|\/|\.\.?\/)/.test(href)) {
@@ -26,5 +26,5 @@ export const AutoLink: React.FC<AutoLinkProps> = (props) => {
         );
     }
 
-    return <ExternalLink {...props} />;
+    return <ExternalLink {...(props as any)} />;
 };

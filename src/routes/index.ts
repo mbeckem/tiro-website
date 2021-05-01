@@ -36,6 +36,7 @@ export function docsArticle(id: string): string {
 }
 
 export const Lang = {
+    reference: () => docsArticle("reference"),
     standardLibrary: () => docsArticle("stdlib")
 } as const;
 

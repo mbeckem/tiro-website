@@ -19,7 +19,6 @@ import std;
   - [type Integer](#type-integer)
   - [type Float](#type-float)
   - [type Null](#type-null)
-  - [type String](#type-string)
   - [type Symbol](#type-symbol)
   - [type Function](#type-function)
   - [type Module](#type-module)
@@ -39,11 +38,12 @@ import std;
 
 - [Strings](#strings)
 
+  - [type String](#type-string)
   - [type StringSlice](#type-stringslice)
   - [type StringBuilder](#type-stringbuilder)
   - [func new_string_builder](#func-new_string_builder)
 
-- [Input and Output](#input-and-output)
+- [Input and output](#input-and-output)
 
   - [func print](#func-print)
   - [func loop_timestamp](#func-loop_timestamp)
@@ -84,15 +84,6 @@ Type type of floating point expressions such as `1.25`.
 ### type Null
 
 The type of the constant `null`.
-
-### type String
-
-The type of all string expressions.
-Strings are immutable.
-
-TODO: Unicode strings
-
-TODO: Internal representation is guaranteed to be UTF-8
 
 ### type Symbol
 
@@ -343,13 +334,22 @@ TODO: Return true/false?
 
 ## Strings
 
+### type String
+
+The type of all string expressions.
+Strings are immutable.
+
+TODO: Unicode strings
+
+TODO: Internal representation is guaranteed to be UTF-8
+
 ### type StringSlice
 
 ### type StringBuilder
 
 ### func new_string_builder
 
-## Input and Output
+## Input and output
 
 ### func print
 
@@ -366,6 +366,10 @@ func loop_timestamp(): Integer;
 ```
 
 Returns the current loop timestamp.
+
+The returned value is the number of _milliseconds_ since some arbitrary starting point - usually the start of the program - until the start of the current main loop iteration.
+The value is guaranteed to be _monotonic_, i.e. it will never decrease.
+
 The loop timestamp is refreshed on every iteration of the runtime's main loop.
 A single iteration involves calling all ready coroutines and continues until all coroutines are either done or waiting for the completion of an asynchronous function.
 
@@ -373,10 +377,32 @@ Within the same iteration, `loop_timestamp()` will always return the same value.
 
 ## Coroutines
 
+Tiro's coroutines implement [cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking) within a shared operating system thread.
+This means that a coroutine will continue running until it gives up control voluntarily.
+It will never be preempted by a scheduler behind the scenes.
+
+In order to give up control (also called _yielding_), a coroutine can perform one of the following actions:
+
+- Call an asynchronous function.
+  Asynchronous functions usually yield behind the scenes automatically, transparent to the caller.
+  They can be implemented in native code or by using the the [yield_coroutine()](#func-yield_coroutine) function (like the function `lock()` in the [mutex example](#mutex-example)).
+
+  While an asynchronous function waits for its completion, other coroutines can execute on the shared operating system thread.
+
+- Call [dispatch()](#func-dispatch).
+  Other coroutines that are ready to execute will have the chance to run.
+  The current coroutine will resume execution once those coroutines have yielded.
+
+  It can be useful to invoke `dispatch()` in potentially long loops to avoid blocking the system for too long.
+
+- Call [yield_coroutine()](#func-yield_coroutine).
+  This will stop the coroutine until it has been manually resumed by another coroutine.
+  Care must be taken when using this primitive function!
+
 ### type Coroutine
 
-Coroutines represents threads of execution within a single operating system thread.
-Coroutines are created through the native API or by calling `std.launch()`.
+Coroutines represent lightweight threads of execution within a single operating system thread.
+They are created through the native API or by calling `std.launch()`.
 
 ### type CoroutineToken
 
@@ -433,6 +459,7 @@ Execution will only continue once the coroutine has been resumed via a [Coroutin
 WARNING: This is a low level API designed to control the execution of a coroutine manually.
 It should only be used to create new asynchronous abstractions.
 
+<a id="mutex-example" />
 <span className="caption">Example: a simple Mutex</span>
 
 ```
