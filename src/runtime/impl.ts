@@ -1,20 +1,29 @@
-import loadTiroWasmModule, { TiroWasmModule, TiroWasmRuntime } from "@lib/tiro";
+import loadTiroWasmModule, { TiroWasmModule, Runtime as WasmRuntime, Program as WasmProgram } from "@lib/tiro";
 import nativeTiroWasmURL from "@lib/tiro.wasm";
-import { CompilationResult, ExecutionResult, Runtime, RuntimeInfo } from "./interfaces";
+import {
+    CompileOptions,
+    CompileResult,
+    ExecuteOptions,
+    ExecuteResult,
+    Program,
+    Runtime,
+    RuntimeInfo
+} from "./interfaces";
 
 export async function createRuntime(): Promise<Runtime> {
     if (typeof window === "undefined") {
         throw new Error("Cannot compile server side.");
     }
 
-    const { TiroRuntime } = await loadTiro();
-    const runtime = new TiroRuntime();
+    const { Runtime: WasmRuntime } = await loadTiro();
+    const runtime = new WasmRuntime();
     return new RuntimeImpl(runtime);
 }
 
 class RuntimeImpl implements Runtime {
-    private _nativeRuntime: TiroWasmRuntime | undefined;
-    constructor(nativeRuntime: TiroWasmRuntime) {
+    private _nativeRuntime: WasmRuntime | undefined;
+
+    constructor(nativeRuntime: WasmRuntime) {
         this._nativeRuntime = nativeRuntime;
     }
 
@@ -27,37 +36,67 @@ class RuntimeImpl implements Runtime {
 
     info(): RuntimeInfo {
         const rt = this.getRuntime();
-
-        const info = JSON.parse(rt.info());
-        return info as RuntimeInfo;
+        return rt.info();
     }
 
-    compile(source: string): CompilationResult {
+    compile(options: CompileOptions): CompileResult {
         const rt = this.getRuntime();
 
         const start = window.performance.now();
-        const input = JSON.stringify({ source });
-        const output = JSON.parse(rt.compile(input));
-        output.elapsedMillis = window.performance.now() - start;
-        return output as CompilationResult;
+        const result = rt.compile(options);
+        if (result.error) {
+            result?.program?.delete();
+            throw new Error(result.error);
+        }
+
+        const program = result.program ? new ProgramImpl(result.program) : undefined;
+        return {
+            ...result,
+            program,
+            elapsedMillis: window.performance.now() - start
+        };
     }
 
-    run(functionName: string): ExecutionResult {
-        const rt = this.getRuntime();
-
-        const start = window.performance.now();
-        const input = JSON.stringify({ function: functionName });
-        const output = JSON.parse(rt.run(input));
-        output.elapsedMillis = window.performance.now() - start;
-        return output as ExecutionResult;
-    }
-
-    private getRuntime(): TiroWasmRuntime {
+    private getRuntime(): WasmRuntime {
         const rt = this._nativeRuntime;
         if (!rt) {
             throw new Error("tiro runtime was already destroyed.");
         }
         return rt;
+    }
+}
+
+class ProgramImpl implements Program {
+    private _nativeProgram: WasmProgram | undefined;
+
+    constructor(nativeProgram: WasmProgram) {
+        this._nativeProgram = nativeProgram;
+    }
+
+    destroy(): void {
+        if (this._nativeProgram) {
+            this._nativeProgram.delete();
+            this._nativeProgram = undefined;
+        }
+    }
+
+    execute(options: ExecuteOptions): ExecuteResult {
+        const rt = this.getProgram();
+
+        const start = window.performance.now();
+        const result = rt.execute(options);
+        return {
+            ...result,
+            elapsedMillis: window.performance.now() - start
+        };
+    }
+
+    private getProgram(): WasmProgram {
+        const p = this._nativeProgram;
+        if (!p) {
+            throw new Error("tiro program was already destroyed.");
+        }
+        return p;
     }
 }
 

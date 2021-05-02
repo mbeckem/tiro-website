@@ -2,11 +2,11 @@ import React, { memo, useRef, useEffect } from "react";
 import { Button, ButtonGroup } from "@blueprintjs/core";
 import { List } from "immutable";
 
-import { ExecutionResult } from "@src/runtime";
+import { ExecuteResult } from "@src/runtime";
 import styles from "./OutputPanel.module.scss";
 
 export interface OutputPanelProps {
-    results: List<ExecutionResult>;
+    results: List<ExecuteResult>;
 
     runEnabled: boolean;
     onRunClick: () => void;
@@ -33,7 +33,7 @@ export const OutputPanel = memo(function OutputPanel(props: OutputPanelProps) {
     );
 });
 
-const Result = memo(function Result(props: { result: ExecutionResult }): JSX.Element {
+const Result = memo(function Result(props: { result: ExecuteResult }): JSX.Element {
     const { result } = props;
     const elapsed = `${result.elapsedMillis.toFixed(2)} ms`;
 
@@ -51,11 +51,11 @@ const Result = memo(function Result(props: { result: ExecutionResult }): JSX.Ele
     );
 });
 
-const ResultList = memo(function ResultList(props: { results: List<ExecutionResult> }): JSX.Element {
-    const bottomDiv = useRef<any>(undefined);
+const ResultList = memo(function ResultList(props: { results: List<ExecuteResult> }): JSX.Element {
+    const bottomDiv = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        bottomDiv.current?.scrollIntoView({ behaviour: "smooth" });
+        bottomDiv.current?.scrollIntoView({ behavior: "smooth" });
     });
 
     return (

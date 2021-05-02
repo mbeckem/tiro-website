@@ -1,56 +1,27 @@
-export interface RuntimeInfo {
-    full_version: string;
-}
+import * as wasm from "@lib/tiro";
 
-export interface ExecutionResult {
-    // True if the execution was successful.
-    success: boolean;
+export type RuntimeInfo = wasm.RuntimeInfo;
 
-    // Error message (if success is false).
-    error: string;
+export type CompileOptions = wasm.CompileOptions;
 
-    // Return value as a string.
-    value: string;
-
-    // Time taken for execution.
+export type CompileResult = Omit<wasm.CompileResult, "error" | "program"> & {
+    program?: Program; // Must be destroyed
     elapsedMillis: number;
-}
+};
 
-export interface CompilationResult {
-    // True if the compilation was successful.
-    success: boolean;
+export type ExecuteOptions = wasm.ExecuteOptions;
 
-    // String representation of the concrete syntax tree.
-    cst: string;
+export type ExecuteResult = wasm.ExecuteResult & { elapsedMillis: number };
 
-    // String representation of the abstract syntax tree.
-    ast: string;
+export interface Program {
+    destroy(): void;
 
-    // String representation of the SSA IR.
-    ir: string;
-
-    // String representation of the final bytecode module.
-    bytecode: string;
-
-    // Compiler errors or warnings.
-    messages: string[];
-
-    // Time taken for compilation.
-    elapsedMillis: number;
+    execute(options: ExecuteOptions): ExecuteResult;
 }
 
 export interface Runtime {
-    // Must be called to avoid memory leaks.
     destroy(): void;
 
-    // Returns information about the runtime, e.g. its version.
     info(): RuntimeInfo;
-
-    // Compiles the given soure code. On success, the compiled
-    // module is remembered internally and can be executed using run().
-    compile(source: string): CompilationResult;
-
-    // Invokes the given function (with 0 arguments) in the previously
-    // compiled module.
-    run(functionName: string): ExecutionResult;
+    compile(options: CompileOptions): CompileResult;
 }

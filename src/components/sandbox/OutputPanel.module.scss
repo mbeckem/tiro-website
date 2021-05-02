@@ -14,7 +14,9 @@
     flex-direction: column;
     overflow: auto;
 
-    padding: 0.5em;
+    > :last-child {
+        padding-bottom: 1em;
+    }
 }
 
 .result {

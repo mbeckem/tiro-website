@@ -1,2 +1,2 @@
-export type { CompilationResult, ExecutionResult, Runtime } from "./interfaces";
+export * from "./interfaces";
 export { createRuntime } from "./impl";

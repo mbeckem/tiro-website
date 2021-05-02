@@ -1,7 +1,7 @@
 import React, { Component, PureComponent } from "react";
 import { List } from "immutable";
 
-import { CompilationResult, Runtime, createRuntime, ExecutionResult } from "@src/runtime";
+import { CompileResult, Runtime, createRuntime, ExecuteResult, Program } from "@src/runtime";
 import { defined } from "@src/utils";
 import { SandboxUI } from "./SandboxUI";
 import { CompilerPanelProps } from "./CompilerPanel";
@@ -16,12 +16,13 @@ interface SandboxState {
     compiling: boolean;
     currentSource: string;
     version: string;
-    compiled?: CompilationResult;
-    executions: List<ExecutionResult>;
+    compiled?: CompileResult;
+    executions: List<ExecuteResult>;
 }
 
 export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
     private _runtime?: Runtime;
+    private _program?: Program;
 
     constructor(props: Readonly<SandboxProps>) {
         super(props);
@@ -49,6 +50,8 @@ export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
 
     componentWillUnmount(): void {
         this.props.onReadyChanged(false);
+        this._program?.destroy();
+        this._program = undefined;
         this._runtime?.destroy();
         this._runtime = undefined;
     }
@@ -59,11 +62,19 @@ export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
         // TODO: Async compilation api (Web worker?)
         try {
             await asyncSetState(this, { compiling: true });
-            const result = runtime.compile(source);
+            const result = runtime.compile({
+                filename: "sandbox",
+                source: source,
+                enable_cst: true,
+                enable_ast: true,
+                enable_ir: true,
+                enable_bytecode: true
+            });
             this.setState({
                 compiling: false,
                 compiled: result
             });
+            this.replaceProgram(result.program);
         } catch (e) {
             // TODO: Error state in UI
             console.error("Compilation failed", e);
@@ -102,9 +113,11 @@ export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
     };
 
     private _handleRunClick = (): void => {
-        const runtime = defined(this._runtime, "runtime");
+        const program = defined(this._program, "program");
         try {
-            const exec = runtime.run("main");
+            const exec = program.execute({
+                function: "main"
+            });
             this.setState((state) => {
                 return { executions: state.executions.push(exec) };
             });
@@ -120,6 +133,11 @@ export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
             executions: List()
         });
     };
+
+    private replaceProgram(program?: Program): void {
+        this._program?.destroy();
+        this._program = program;
+    }
 }
 
 function asyncSetState<T extends Component, S>(comp: T, newState: S): Promise<void> {

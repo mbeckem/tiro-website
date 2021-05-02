@@ -3,13 +3,13 @@ import { Tabs, Tab, UL, Classes } from "@blueprintjs/core";
 import { ObjectInspector, chromeLight, InspectorThemeDefinition } from "react-inspector";
 import classNames from "classnames";
 
-import { CompilationResult } from "@src/runtime";
+import { CompileResult } from "@src/runtime";
 import { defined } from "@src/utils";
 import styles from "./CompilerPanel.module.scss";
 
 export interface CompilerPanelProps {
     state: "not-compiled" | "compiling" | "compiled";
-    result?: CompilationResult;
+    result?: CompileResult;
     version: string;
 }
 
@@ -24,22 +24,22 @@ export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelPro
         {
             id: "cst",
             title: "CST",
-            content: <JsonTree content={result?.cst.trim()} />
+            content: <JsonTree content={result?.cst?.trim()} />
         },
         {
             id: "ast",
             title: "AST",
-            content: <JsonTree content={result?.ast.trim()} />
+            content: <JsonTree content={result?.ast?.trim()} />
         },
         {
             id: "ir",
             title: "IR",
-            content: preformatted("Intermediate Representation", result?.ir.trim())
+            content: preformatted("Intermediate Representation", result?.ir?.trim())
         },
         {
             id: "bytecode",
             title: "Bytecode",
-            content: preformatted("Compiled bytecode", result?.bytecode.trim())
+            content: preformatted("Compiled bytecode", result?.bytecode?.trim())
         }
     ] as const;
 
