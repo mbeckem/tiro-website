@@ -38,9 +38,9 @@ if (EMSCRIPTEN)
         --bind \
     ")
 
-    # disable rtti
-    add_compile_definitions(EMSCRIPTEN_HAS_UNBOUND_TYPE_NAMES=0)
-    add_compile_options(-fno-rtti)
+    # cannot disable rtti currently because of embind
+    # add_compile_definitions(EMSCRIPTEN_HAS_UNBOUND_TYPE_NAMES=0)
+    # add_compile_options(-fno-rtti)
 
     # manually enable lto since emscripten always uses clang.
     # note that thin lto does not work at the moment because emscripten's clang version
