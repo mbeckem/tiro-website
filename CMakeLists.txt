@@ -9,10 +9,6 @@ endif()
 
 project(tiro_wasm VERSION 0.1.0 LANGUAGES CXX)
 
-# These options should only be enabled during development!
-option(TIRO_WASM_WARNINGS "Build with pedantic warnings." OFF)
-option(TIRO_WASM_WERROR "Enable -Werror (halt compilation on warnings)." OFF)
-
 # Output all targets to well known directories.
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -41,7 +37,17 @@ if (EMSCRIPTEN)
         --no-entry \
         --bind \
     ")
-    # add_compile_options(-fno-rtti) cannot use with embind right now
+
+    # disable rtti
+    add_compile_definitions(EMSCRIPTEN_HAS_UNBOUND_TYPE_NAMES=0)
+    add_compile_options(-fno-rtti)
+
+    # manually enable lto since emscripten always uses clang.
+    # note that thin lto does not work at the moment because emscripten's clang version
+    # cannot handle multiple object files with the same basename but different paths
+    # https://github.com/emscripten-core/emscripten/issues/12763
+    add_compile_options(-flto)
+    add_link_options(-flto)
 
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EMSCRIPTEN_COMPILE_FLAGS}")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EMSCRIPTEN_LINK_FLAGS}")
@@ -49,14 +55,13 @@ if (EMSCRIPTEN)
     add_library(custom_threads INTERFACE)
     add_library(Threads::Threads ALIAS custom_threads)
 
-    set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE)
     set(TIRO_WARNINGS ON CACHE BOOL "-- Override --" FORCE)
     set(TIRO_WERROR OFF CACHE BOOL "-- Override --" FORCE)
-    set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE) # emscripten produces errors (multiple cpp files with the same name?)
+    set(TIRO_LTO OFF CACHE BOOL "-- Override --" FORCE)
     set(TIRO_SKIP_THREADS ON CACHE BOOL "-- Override --" FORCE)
     set(TIRO_SKIP_SHARED ON CACHE BOOL "-- Override --" FORCE)
     set(TIRO_SKIP_INSTALL ON CACHE BOOL "-- Override --" FORCE)
 endif()
-add_subdirectory(tiro EXCLUDE_FROM_ALL)
 
+add_subdirectory(tiro EXCLUDE_FROM_ALL)
 add_subdirectory(src)
