@@ -1,4 +1,7 @@
-add_executable(tiro_wasm main.cpp)
+add_executable(tiro_wasm
+    wasm_bindings.cpp
+    runtime.hpp
+    runtime.cpp
+)
 set_target_properties(tiro_wasm PROPERTIES OUTPUT_NAME "tiro")
 target_link_libraries(tiro_wasm PRIVATE tiro::tiropp)
-target_include_directories(tiro_wasm PRIVATE "${PROJECT_SOURCE_DIR}/deps")

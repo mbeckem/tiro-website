@@ -21,7 +21,7 @@ Don't forget to checkout submodules:
 The following snippet assumes that Emscripten's build tools are on the PATH.
 
     $ mkdir build && cd build
-    $ emcmake cmake .. -DCMAKE_BUILD_TYPE=Release -DTIRO_WASM_BOOST=PATH_TO_BOOST_FOLDER
+    $ emcmake cmake .. -DCMAKE_BUILD_TYPE=Release
     $ emmake make tiro_wasm -j $(nproc)
 
 Output files will be placed into `build/bin`.
