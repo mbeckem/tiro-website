@@ -19,12 +19,12 @@ RUN apt-get update  \
     && pip3 install --upgrade wheel setuptools \
     && mkdir -p /workspace/tiro_wasm /workspace/build
 
+RUN useradd -ms /bin/bash user && chown -R user:user /workspace
+USER user
+
 RUN cd /workspace \
     && git clone https://github.com/emscripten-core/emsdk.git \
     && cd emsdk \
     && ./emsdk install latest \
     && ./emsdk activate latest \
     && echo "source /workspace/emsdk/emsdk_env.sh" >> ~/.bashrc
-
-RUN pip3 install --upgrade wheel setuptools
-
