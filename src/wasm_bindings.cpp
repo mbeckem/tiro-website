@@ -19,6 +19,16 @@ public:
     emscripten::val execute(const emscripten::val& options) {
         runtime::ExecuteOptions opts;
         opts.function = options["function"].as<std::string>();
+        {
+            auto print_stdout = options["printStdout"];
+            if (!print_stdout.isUndefined()) {
+                opts.print_stdout = [print_stdout](std::string_view message) {
+                    // Copy is needed because emscripten currently does not understand string views
+                    print_stdout(emscripten::val(std::string(message)));
+                };
+            }
+        }
+
         auto res = p_.execute(opts);
 
         emscripten::val result = emscripten::val::object();
@@ -51,10 +61,10 @@ public:
         runtime::CompileOptions opts;
         opts.filename = options["filename"].as<std::string>();
         opts.source = options["source"].as<std::string>();
-        opts.enable_cst = or_default(options["enable_cst"], false);
-        opts.enable_ast = or_default(options["enable_ast"], false);
-        opts.enable_ir = or_default(options["enable_ir"], false);
-        opts.enable_bytecode = or_default(options["enable_bytecode"], false);
+        opts.enable_cst = or_default(options["enableCst"], false);
+        opts.enable_ast = or_default(options["enableAst"], false);
+        opts.enable_ir = or_default(options["enableIr"], false);
+        opts.enable_bytecode = or_default(options["enableBytecode"], false);
         auto res = rt_.compile(opts);
 
         emscripten::val result = emscripten::val::object();

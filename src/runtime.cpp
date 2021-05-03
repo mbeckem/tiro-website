@@ -144,7 +144,12 @@ ExecuteResult Program::execute_impl(const ExecuteOptions& options) {
         result.error = ss.str();
     };
 
-    tiro::vm vm;
+    tiro::vm_settings settings;
+    if (options.print_stdout) {
+        settings.print_stdout = options.print_stdout;
+    }
+
+    tiro::vm vm(settings);
     try {
         vm.load_std();
     } catch (const tiro::error& err) {

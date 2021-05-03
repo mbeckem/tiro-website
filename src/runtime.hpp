@@ -3,6 +3,7 @@
 
 #include "tiropp/api.hpp"
 
+#include <functional>
 #include <optional>
 #include <string>
 #include <vector>
@@ -83,6 +84,7 @@ struct CompileResult {
 
 struct ExecuteOptions {
     std::string function; // Function name to invoke
+    std::function<void(std::string_view)> print_stdout; // Optional stdout
 };
 
 struct ExecuteResult {

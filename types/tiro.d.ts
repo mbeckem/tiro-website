@@ -22,16 +22,16 @@ export interface CompileOptions {
     source: string;
 
     /** Enable output of the concrete syntax tree */
-    enable_cst?: boolean;
+    enableCst?: boolean;
 
     /** Enable output of the abstract syntax tree */
-    enable_ast?: boolean;
+    enableAst?: boolean;
 
     /** Enable output of the compiler's ssa intermediate representation */
-    enable_ir?: boolean;
+    enableIr?: boolean;
 
     /** Enable output of the disassembled bytecode */
-    enable_bytecode?: boolean;
+    enableBytecode?: boolean;
 }
 
 /**
@@ -73,6 +73,14 @@ export interface CompileResult {
 export interface ExecuteOptions {
     /** Function name to invoke (must be exported by the module) */
     function: string;
+
+    /**
+     * Standard output stream used when the program prints something.
+     * Defaults to the browser console.
+     * 
+     * NOTE: messages contain their own line separators.
+     */
+    printStdout?(message: string);
 }
 
 /**
