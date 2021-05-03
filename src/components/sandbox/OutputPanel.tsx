@@ -2,11 +2,11 @@ import React, { memo, useRef, useEffect } from "react";
 import { Button, ButtonGroup } from "@blueprintjs/core";
 import { List } from "immutable";
 
-import { ExecuteResult } from "@src/runtime";
+import { Execution } from "./Sandbox";
 import styles from "./OutputPanel.module.scss";
 
 export interface OutputPanelProps {
-    results: List<ExecuteResult>;
+    results: List<Execution>;
 
     runEnabled: boolean;
     onRunClick: () => void;
@@ -33,25 +33,7 @@ export const OutputPanel = memo(function OutputPanel(props: OutputPanelProps) {
     );
 });
 
-const Result = memo(function Result(props: { result: ExecuteResult }): JSX.Element {
-    const { result } = props;
-    const elapsed = `${result.elapsedMillis.toFixed(2)} ms`;
-
-    const title = result.success
-        ? `Function returned ${result.value} (after ${elapsed}).`
-        : `Execution failed (after ${elapsed}).`;
-
-    const error = result.success ? undefined : <div className={styles.error}>{result.error || "Unknown error"}</div>;
-
-    return (
-        <div className={styles.result}>
-            <div className={styles.title}>{title}</div>
-            {error}
-        </div>
-    );
-});
-
-const ResultList = memo(function ResultList(props: { results: List<ExecuteResult> }): JSX.Element {
+const ResultList = memo(function ResultList(props: { results: List<Execution> }): JSX.Element {
     const bottomDiv = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -61,9 +43,31 @@ const ResultList = memo(function ResultList(props: { results: List<ExecuteResult
     return (
         <div className={styles.results}>
             {props.results.map((result, index) => (
-                <Result key={index} result={result} />
+                <Result key={index} execution={result} />
             ))}
             <div ref={bottomDiv} />
+        </div>
+    );
+});
+
+const Result = memo(function Result(props: { execution: Execution }): JSX.Element {
+    const { result, output } = props.execution;
+    const elapsed = `${result.elapsedMillis.toFixed(2)} ms`;
+
+    const message = result.success
+        ? `Function returned ${result.value} (after ${elapsed}).`
+        : `Execution failed (after ${elapsed}).`;
+    const error = result.success ? undefined : <div className={styles.error}>{result.error || "Unknown error"}</div>;
+    const stdout = output.map((line, i) => (
+        <div key={i} className={styles.line}>
+            {line.trim()}
+        </div>
+    ));
+    return (
+        <div className={styles.result}>
+            <div className={styles.log}>{stdout}</div>
+            <div className={styles.title}>{message}</div>
+            {error}
         </div>
     );
 });

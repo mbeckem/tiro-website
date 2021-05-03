@@ -38,3 +38,12 @@
 .error {
     color: red;
 }
+
+.log > .line {
+    font-family: monospace;
+    margin-bottom: 5px;
+
+    &:before {
+        content: "> ";
+    }
+}

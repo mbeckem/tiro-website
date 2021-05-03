@@ -12,12 +12,17 @@ export interface SandboxProps {
     onReadyChanged(ready: boolean): void;
 }
 
+export interface Execution {
+    output: string[];
+    result: ExecuteResult;
+}
+
 interface SandboxState {
     compiling: boolean;
     currentSource: string;
     version: string;
     compiled?: CompileResult;
-    executions: List<ExecuteResult>;
+    executions: List<Execution>;
 }
 
 export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
@@ -65,10 +70,10 @@ export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
             const result = runtime.compile({
                 filename: "sandbox",
                 source: source,
-                enable_cst: true,
-                enable_ast: true,
-                enable_ir: true,
-                enable_bytecode: true
+                enableCst: true,
+                enableAst: true,
+                enableIr: true,
+                enableBytecode: true
             });
             this.setState({
                 compiling: false,
@@ -115,13 +120,25 @@ export class Sandbox extends PureComponent<SandboxProps, SandboxState> {
     private _handleRunClick = (): void => {
         const program = defined(this._program, "program");
         try {
-            const exec = program.execute({
-                function: "main"
+            const output: string[] = [];
+            const result = program.execute({
+                function: "main",
+                printStdout(message) {
+                    console.debug(message);
+                    output.push(message);
+                }
             });
+            console.debug("Execution result:", result);
+
             this.setState((state) => {
-                return { executions: state.executions.push(exec) };
+                const outputLines = output.length ? output.join("").trim().split(/\r?\n/) : [];
+                return {
+                    executions: state.executions.push({
+                        result,
+                        output: outputLines
+                    })
+                };
             });
-            console.debug("Execution result:", exec);
         } catch (e) {
             // TODO: Error state in UI
             console.error("Execution failed", e);
