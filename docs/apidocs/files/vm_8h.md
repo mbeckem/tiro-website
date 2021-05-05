@@ -1,11 +1,12 @@
 ---
 title: tiro/vm.h
+summary: Functions and type definitions for working with the tiro virtual machine. 
 
 ---
 
 # tiro/vm.h
 
-## Classes
+Functions and type definitions for working with the tiro virtual machine. ## Classes
 
 |                | Name           |
 | -------------- | -------------- |
@@ -253,4 +254,4 @@ Note: remaining globals are automatically freed when a vm is freed.
 
 -------------------------------
 
-Updated on 11 April 2021 at 12:05:10 CEST
+Updated on  5 May 2021 at 11:21:35 CEST

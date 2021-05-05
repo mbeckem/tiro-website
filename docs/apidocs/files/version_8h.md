@@ -1,11 +1,12 @@
 ---
 title: tiro/version.h
+summary: Contains version information both at compile time and runtime. 
 
 ---
 
 # tiro/version.h
 
-## Functions
+Contains version information both at compile time and runtime. ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
@@ -94,7 +95,7 @@ The library's version string as a build-time constant.
 ### define TIRO_SOURCE_ID
 
 ```cpp
-#define TIRO_SOURCE_ID "git:24076d574d48c8cb84da5db8746c500e248e6df4"
+#define TIRO_SOURCE_ID "git:66215e3f3a44268eb33f9d35137340d372171882-dirty"
 ```
 
 The full source id (from version control) as a build-time constant. 
@@ -120,7 +121,7 @@ Note that the individual version number parts must be smaller than 1000.
 ### define TIRO_FULL_VERSION
 
 ```cpp
-#define TIRO_FULL_VERSION "tiro 0.1.0-dev (git:24076d574d48c8cb84da5db8746c500e248e6df4)"
+#define TIRO_FULL_VERSION "tiro 0.1.0-dev (git:66215e3f3a44268eb33f9d35137340d372171882-dirty)"
 ```
 
 The full version string as a build-time constant. 
@@ -129,4 +130,4 @@ The full version string as a build-time constant.
 
 -------------------------------
 
-Updated on 11 April 2021 at 12:05:10 CEST
+Updated on  5 May 2021 at 11:21:35 CEST

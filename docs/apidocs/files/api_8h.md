@@ -1,9 +1,18 @@
 ---
 title: tiro/api.h
+summary: Convenience header that imports all other headers of the tiro api. 
 
 ---
 
 # tiro/api.h
+
+Convenience header that imports all other headers of the tiro api.  [More...](#detailed-description)
+
+## Detailed Description
+
+Convenience header that imports all other headers of the tiro api. 
+
+Prefer to import single headers from other header files for better performance when compiling. 
 
 
 
@@ -12,4 +21,4 @@ title: tiro/api.h
 
 -------------------------------
 
-Updated on 11 April 2021 at 12:05:10 CEST
+Updated on  5 May 2021 at 11:21:35 CEST

@@ -1,11 +1,12 @@
 ---
 title: tiro/objects.h
+summary: Functions and type definitions for working with objects of the tiro virtual machine. 
 
 ---
 
 # tiro/objects.h
 
-## Classes
+Functions and type definitions for working with objects of the tiro virtual machine. ## Classes
 
 |                | Name           |
 | -------------- | -------------- |
@@ -1230,4 +1231,4 @@ Returns `TIRO_ERROR_BAD_TYPE` if the value is not an array.
 
 -------------------------------
 
-Updated on 11 April 2021 at 12:05:10 CEST
+Updated on  5 May 2021 at 11:21:35 CEST

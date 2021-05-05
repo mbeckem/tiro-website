@@ -1,9 +1,12 @@
 ---
 title: tiro/def.h
+summary: Contains basic type and macro definitions. 
 
 ---
 
 # tiro/def.h
+
+Contains basic type and macro definitions.  [More...](#detailed-description)
 
 ## Types
 
@@ -23,6 +26,12 @@ title: tiro/def.h
 | -------------- | -------------- |
 |  | **[TIRO_WARN_UNUSED](/docs/api/files/def_8h#define-tiro_warn_unused)**  |
 |  | **[TIRO_API](/docs/api/files/def_8h#define-tiro_api)**  |
+
+## Detailed Description
+
+Contains basic type and macro definitions. 
+
+This file is included by all other api headers. 
 
 ## Types Documentation
 
@@ -98,4 +107,4 @@ typedef struct tiro_async_frame* tiro_async_frame_t;
 
 -------------------------------
 
-Updated on 11 April 2021 at 12:05:10 CEST
+Updated on  5 May 2021 at 11:21:35 CEST
