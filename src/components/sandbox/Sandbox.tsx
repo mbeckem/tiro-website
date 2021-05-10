@@ -11,7 +11,8 @@ import { useForceRerender } from "../useForceRerender";
 export interface SandboxProps {
     initialSource?: string;
 
-    onReadyChanged(ready: boolean): void;
+    onReadyChanged?(ready: boolean): void;
+    onSourceChanged?(source: string): void;
 }
 
 export interface Execution {
@@ -20,29 +21,40 @@ export interface Execution {
 }
 
 export const Sandbox: React.FC<SandboxProps> = (props) => {
-    const { initialSource, onReadyChanged } = props;
+    const { initialSource, onReadyChanged, onSourceChanged } = props;
 
     // Runtime initialization
     const runtime = useRuntime();
     const [ready, setReady] = useState(false);
-    useEffect(() => {
-        if (runtime.state === "loaded" && !ready) {
-            setReady(true);
-            onReadyChanged(true);
-        }
-    }, [runtime, onReadyChanged, ready]);
-
-    // Editor properties
-    const [source, setSource] = useState(initialSource ?? "");
-    const [executions, setExecutions] = useState(List<Execution>());
-    const [compiling, setCompiling] = useState(false);
-    const [compileResult, setCompileResult] = useState<CompileResult>();
     const version = useMemo(() => {
         if (runtime.state === "loaded") {
             return runtime.data.info().full_version;
         }
         return "N/A";
     }, [runtime]);
+    useEffect(() => {
+        if (runtime.state === "loaded" && !ready) {
+            setReady(true);
+            onReadyChanged?.(true);
+        }
+    }, [runtime, onReadyChanged, ready]);
+
+    // Editor properties
+    const [source, setSource] = useState(initialSource ?? "");
+    useEffect(() => setSource(initialSource ?? ""), [initialSource]);
+    const editorSourceChanged = useCallback(
+        (newSource: string) => {
+            setSource(newSource);
+            onSourceChanged?.(newSource);
+        },
+        [setSource, onSourceChanged]
+    );
+
+    // Executions
+    const [compiling, setCompiling] = useState(false);
+    const [compileResult, setCompileResult] = useState<CompileResult>();
+    const [executions, setExecutions] = useState(List<Execution>());
+
     const rerender = useForceRerender();
 
     // Program compilation
@@ -124,5 +136,12 @@ export const Sandbox: React.FC<SandboxProps> = (props) => {
         onClearClick: clear
     };
 
-    return <SandboxUI initialSource={source} onSourceChanged={setSource} compilation={compilation} output={output} />;
+    return (
+        <SandboxUI
+            initialSource={source}
+            onSourceChanged={editorSourceChanged}
+            compilation={compilation}
+            output={output}
+        />
+    );
 };
