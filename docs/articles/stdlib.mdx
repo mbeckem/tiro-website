@@ -43,6 +43,25 @@ import std;
   - [type StringBuilder](#type-stringbuilder)
   - [func new_string_builder](#func-new_string_builder)
 
+- [Floating point math](#floating-point-math)
+
+  - [const PI](#const-pi)
+  - [const TAU](#const-tau)
+  - [const E](#const-e)
+  - [func abs](#func-abs)
+  - [func pow](#func-pow)
+  - [func log](#func-log)
+  - [func sqrt](#func-sqrt)
+  - [func round](#func-round)
+  - [func ceil](#func-ceil)
+  - [func floor](#func-floor)
+  - [func sin](#func-sin)
+  - [func cos](#func-cos)
+  - [func tan](#func-tan)
+  - [func asin](#func-asin)
+  - [func acos](#func-acos)
+  - [func atan](#func-atan)
+
 - [Input and output](#input-and-output)
 
   - [func print](#func-print)
@@ -348,6 +367,152 @@ TODO: Internal representation is guaranteed to be UTF-8
 ### type StringBuilder
 
 ### func new_string_builder
+
+## Floating point math
+
+Basic constants and functions for math operations on floating point numbers (`type Float`).
+
+All functions return floating point values on success.
+Input arguments may also be integers, these are then converted to floats internally.
+
+### const PI
+
+```
+const PI: Float;
+```
+
+The approximate value of the circle constant Pi.
+
+### const TAU
+
+```
+const TAU: Float;
+```
+
+The approximate value of the circle constant Tau (2𝜋).
+
+### const E
+
+```
+const E: Float;
+```
+
+The approximate value of Euler's constant _e_.
+
+### const INFINITY
+
+```
+const INFINITY: Float;
+```
+
+The floating point value of positive infinity.
+
+### func abs
+
+```
+func abs(x: Float | Integer): Float;
+```
+
+Returns the absolute value of `x`, i.e. `|x|`.
+
+### func pow
+
+```
+func pow(a: Float | Integer, b: Float | Integer): Float;
+```
+
+Returns `a` raised to the power `b`.
+
+### func log
+
+```
+func log(x: Float | Integer): Float;
+```
+
+Returns the natural logarithm (base _e_) of `x`.
+
+### func sqrt
+
+```
+func sqrt(x: Float | Integer): Float;
+```
+
+Returns the square root of `x`.
+
+### func round
+
+```
+func round(x: Float | Integer): Float;
+```
+
+Returns the nearest integral value to `x`.
+
+### func ceil
+
+```
+func ceil(x: Float | Integer): Float;
+```
+
+Returns the smallest integral floating point value that is greater than or equal to `x`.
+
+### func floor
+
+```
+func floor(x: Float | Integer): Float;
+```
+
+Returns the largest integral floating point value that is less than or equal to `x`.
+
+### func sin
+
+```
+func sin(x: Float | Integer): Float;
+```
+
+Returns the sine of `x`.
+`x` must be an angle in radians.
+
+### func cos
+
+```
+func cos(x: Float | Integer): Float;
+```
+
+Returns the cosine of `x`.
+`x` must be an angle in radians.
+
+### func tan
+
+```
+func tan(x: Float | Integer): Float;
+```
+
+Returns the tangent of `x`.
+`x` must be an angle in radians.
+
+### func asin
+
+```
+func asin(x: Float | Integer): Float;
+```
+
+Returns the inverse sine of `x` in radians.
+
+### func acos
+
+```
+func acos(x: Float | Integer): Float;
+```
+
+Returns the inverse cosine of `x` in radians.
+
+### func atan
+
+```
+func atan(x: Float | Integer): Float;
+```
+
+Returns the inverse tangent of `x` in radians.
 
 ## Input and output
 
