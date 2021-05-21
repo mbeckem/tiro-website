@@ -65,6 +65,7 @@ import std;
 - [Input and output](#input-and-output)
 
   - [func print](#func-print)
+  - [func debug_repr](#func-debug_repr)
   - [func loop_timestamp](#func-loop_timestamp)
 
 - [Coroutines](#coroutines)
@@ -523,6 +524,14 @@ func print(values...: Value...);
 ```
 
 Prints the given values followed by a new line.
+
+### func debug_repr
+
+```
+func debug_repr(value: Value): String;
+```
+
+Returns a debug representation of the given value as a string.
 
 ### func loop_timestamp
 
