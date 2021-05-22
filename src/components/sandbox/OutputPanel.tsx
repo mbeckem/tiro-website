@@ -60,7 +60,7 @@ const Result = memo(function Result(props: { execution: Execution }): JSX.Elemen
     const error = result.success ? undefined : <div className={styles.error}>{result.error || "Unknown error"}</div>;
     const stdout = output.map((line, i) => (
         <div key={i} className={styles.line}>
-            {line.trim()}
+            {line}
         </div>
     ));
     return (
