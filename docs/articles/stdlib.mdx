@@ -528,10 +528,11 @@ Prints the given values followed by a new line.
 ### func debug_repr
 
 ```
-func debug_repr(value: Value): String;
+func debug_repr(value: Value, pretty = false: Boolean): String;
 ```
 
 Returns a debug representation of the given value as a string.
+When the optional `pretty` parameter is true, then the value will be pretty printed.
 
 ### func loop_timestamp
 
