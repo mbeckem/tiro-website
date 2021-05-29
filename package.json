@@ -16,7 +16,8 @@
         "deploy:build": "npm-run-all clean export",
         "deploy:copy": "cp -r out/* site/",
         "deploy:push": "cd site && git add -A && git commit --allow-empty -m \"Deploy site\" && git push --force",
-        "deploy": "npm-run-all deploy:clean deploy:build deploy:copy deploy:push"
+        "deploy": "npm-run-all deploy:clean deploy:build deploy:copy deploy:push",
+        "update-monaco-assets": "rimraf public/monaco && mkdir -p public/monaco && cp -r node_modules/monaco-editor/min/* public/monaco/"
     },
     "devDependencies": {
         "@blueprintjs/core": "^3.42.0",

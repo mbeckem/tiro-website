@@ -1,6 +1,13 @@
 import React, { PureComponent } from "react";
-import MonacoEditor from "@monaco-editor/react";
+import MonacoEditor, { loader } from "@monaco-editor/react";
 import * as monaco from "monaco-editor";
+import { withBasePath } from "@src/routes";
+
+loader.config({
+    paths: {
+        vs: withBasePath("monaco/vs")
+    }
+});
 
 export interface EditorProps {
     initialSource: string;
