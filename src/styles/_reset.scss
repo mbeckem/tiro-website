@@ -105,9 +105,11 @@ button::-moz-focus-inner {
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
     * {
+        /* Note: Conflicts with command palette in monaco (F1 key)
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+        transition-duration: 0ms !important;
+        */
         scroll-behavior: auto !important;
     }
 }
