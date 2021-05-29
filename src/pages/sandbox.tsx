@@ -52,7 +52,7 @@ export default function SandboxPage(): JSX.Element {
         <div style={{ width: "100%", height: "100%", visibility: displaySandbox ? "visible" : "hidden" }}>
             <LazySandbox
                 initialSource={sandboxState.source}
-                onReadyChanged={setReady}
+                onReady={() => setReady(true)}
                 onSourceChanged={onSourceChanged}
             />
         </div>

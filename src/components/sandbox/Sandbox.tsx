@@ -7,11 +7,12 @@ import { CompilerPanelProps } from "./CompilerPanel";
 import { OutputPanelProps } from "./OutputPanel";
 import { useRuntime } from "./useRuntime";
 import { useForceRerender } from "../useForceRerender";
+import { useOnce } from "../useOnce";
 
 export interface SandboxProps {
     initialSource?: string;
 
-    onReadyChanged?(ready: boolean): void;
+    onReady(): void;
     onSourceChanged?(source: string): void;
 }
 
@@ -21,25 +22,19 @@ export interface Execution {
 }
 
 export const Sandbox: React.FC<SandboxProps> = (props) => {
-    const { initialSource, onReadyChanged, onSourceChanged } = props;
+    const { initialSource, onReady, onSourceChanged } = props;
 
     // Runtime initialization
     const runtime = useRuntime();
-    const [ready, setReady] = useState(false);
     const version = useMemo(() => {
         if (runtime.state === "loaded") {
             return runtime.data.info().full_version;
         }
         return "N/A";
     }, [runtime]);
-    useEffect(() => {
-        if (runtime.state === "loaded" && !ready) {
-            setReady(true);
-            onReadyChanged?.(true);
-        }
-    }, [runtime, onReadyChanged, ready]);
 
     // Editor properties
+    const [uiReady, setUiReady] = useState(false);
     const [source, setSource] = useState(initialSource ?? "");
     useEffect(() => setSource(initialSource ?? ""), [initialSource]);
     const editorSourceChanged = useCallback(
@@ -136,10 +131,18 @@ export const Sandbox: React.FC<SandboxProps> = (props) => {
         onClearClick: clear
     };
 
+    const reportReady = useOnce(onReady);
+    useEffect(() => {
+        if (runtime.state === "loaded" && uiReady) {
+            reportReady();
+        }
+    }, [runtime, uiReady, reportReady]);
+
     return (
         <SandboxUI
             initialSource={source}
             onSourceChanged={editorSourceChanged}
+            onReady={() => setUiReady(true)}
             compilation={compilation}
             output={output}
         />

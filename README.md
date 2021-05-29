@@ -8,6 +8,12 @@ Live at: https://mbeckem.github.io/tiro-website/
 - Run `yarn dev` to start the development server
 - Visit http://localhost:3000/tiro-website
 
+## Local production server
+
+```sh
+$ yarn build && yarn start
+```
+
 ## Building static html
 
 - Run `yarn export`

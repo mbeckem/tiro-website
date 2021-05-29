@@ -1,34 +1,18 @@
-import React, { PureComponent, createRef } from "react";
-import ReactResizeDetector from "react-resize-detector";
-
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/theme-solarized_light";
-import "ace-builds/src-noconflict/mode-plain_text";
-import "ace-builds/src-noconflict/ext-language_tools";
-
-import styles from "./Editor.module.scss";
+import React, { PureComponent } from "react";
+import MonacoEditor from "@monaco-editor/react";
+import * as monaco from "monaco-editor";
 
 export interface EditorProps {
     initialSource: string;
     onChange: (newSource: string) => void;
+    onMount?: () => void;
 }
 
 export class Editor extends PureComponent<EditorProps> {
-    private _parentDiv = createRef<HTMLDivElement>();
-    private _aceInstance = createRef<AceEditor>();
-
-    private _editorSettings = {
-        mode: "plain_text",
-        theme: "solarized_light",
-        fontSize: "16px",
-        showPrintMargin: false,
-        debounceChangePeriod: 200,
-        enableBasicAutocompletion: true,
-        enableSnippets: false,
-        setOptions: {
-            showLineNumbers: true,
-            tabSize: 4
-        }
+    private _options: monaco.editor.IStandaloneEditorConstructionOptions = {
+        cursorBlinking: "solid",
+        tabSize: 4,
+        insertSpaces: true
     };
 
     constructor(props: EditorProps) {
@@ -36,28 +20,28 @@ export class Editor extends PureComponent<EditorProps> {
     }
 
     render(): JSX.Element {
-        const { initialSource, onChange } = this.props;
+        const { initialSource } = this.props;
 
         return (
-            <ReactResizeDetector handleHeight handleWidth onResize={this._onResize} targetRef={this._parentDiv}>
-                <div className={styles.editorContainer} ref={this._parentDiv}>
-                    <AceEditor
-                        name="tiro-editor" // TODO Must be unique
-                        ref={this._aceInstance}
-                        className={styles.editor}
-                        onChange={onChange}
-                        height="100%"
-                        width="100%"
-                        value={initialSource}
-                        {...this._editorSettings}
-                    />
-                </div>
-            </ReactResizeDetector>
+            <MonacoEditor
+                defaultValue={initialSource}
+                language="plain"
+                theme="light"
+                options={this._options}
+                onChange={this._onChange}
+                onMount={this._onMount}
+            />
         );
     }
 
-    private _onResize = (): void => {
-        const ace: any = this._aceInstance.current;
-        ace?.editor.resize();
+    private _onMount = (editor: monaco.editor.IStandaloneCodeEditor): void => {
+        const endPosition = editor.getModel()?.getFullModelRange().getEndPosition() ?? { lineNumber: 1, column: 1 };
+        editor.setPosition(endPosition);
+        editor.focus();
+        this.props.onMount?.();
+    };
+
+    private _onChange = (source: string | undefined) => {
+        this.props.onChange(source ?? "");
     };
 }

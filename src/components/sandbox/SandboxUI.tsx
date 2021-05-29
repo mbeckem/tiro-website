@@ -9,6 +9,7 @@ import styles from "./SandboxUI.module.scss";
 export interface SandboxUIProps {
     initialSource?: string;
     onSourceChanged: (source: string) => void;
+    onReady?: () => void;
 
     compilation: CompilerPanelProps;
     output: OutputPanelProps;
@@ -17,10 +18,11 @@ export interface SandboxUIProps {
 export const SandboxUI = memo(function SandboxUI({
     initialSource,
     onSourceChanged,
+    onReady,
     compilation,
     output
 }: SandboxUIProps): JSX.Element {
-    const editorPanel = <Editor initialSource={initialSource ?? ""} onChange={onSourceChanged} />;
+    const editorPanel = <Editor initialSource={initialSource ?? ""} onChange={onSourceChanged} onMount={onReady} />;
     const compilerPanel = <CompilerPanel {...compilation} />;
     const runtimePanel = <OutputPanel {...output} />;
 
