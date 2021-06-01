@@ -6,21 +6,23 @@ import { SEO } from "@src/components/SEO";
 import { getArticleSlugs, getArticle, Article } from "@src/docs/articles";
 import { Container } from "@src/components/Container";
 import { Article as ArticleComponent } from "@src/components/Article";
-import { CompiledMdx, hydrate, renderMdx } from "@src/docs/mdx-support";
+import { SerializedMDX, serializeMDX } from "@src/docs/serialize-mdx";
+import { MDXRenderer } from "@src/components/MDXRenderer";
 
 export interface ArticleProps {
     slug: string;
     frontMatter: Article["frontMatter"];
-    mdx: CompiledMdx;
+    mdx: SerializedMDX;
 }
 
 export default function ArticlePage({ frontMatter, mdx }: ArticleProps): JSX.Element {
-    const content = hydrate(mdx);
     return (
         <Layout>
             <SEO title={frontMatter.title} />
             <Container>
-                <ArticleComponent>{content}</ArticleComponent>
+                <ArticleComponent>
+                    <MDXRenderer mdx={mdx} />
+                </ArticleComponent>
             </Container>
         </Layout>
     );
@@ -31,12 +33,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     const slug = slugArray.join("/");
     const article = await getArticle(slug);
-    const compiledMdxSource = await renderMdx(article.content);
+    const mdx = await serializeMDX(article.content);
     return {
         props: {
             slug: slug,
             frontMatter: article.frontMatter,
-            mdx: compiledMdxSource
+            mdx: mdx
         }
     };
 };

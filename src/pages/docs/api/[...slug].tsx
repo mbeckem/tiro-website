@@ -6,21 +6,20 @@ import { Layout } from "@src/components/Layout";
 import { SEO } from "@src/components/SEO";
 import { Container } from "@src/components/Container";
 import { Article as ArticleComponent } from "@src/components/Article";
-import { CompiledMdx, hydrate, renderMdx } from "@src/docs/mdx-support";
+import { serializeMDX, SerializedMDX } from "@src/docs/serialize-mdx";
 import { ApiDocsPage, getApiDocsPage, getApidocsSlugs } from "@src/docs/apidocs";
 
 import styles from "./api.module.scss";
 import { apidocsFile } from "@src/routes";
+import { MDXRenderer } from "@src/components/MDXRenderer";
 
 export interface ApiProps {
     slug: string;
     frontMatter: ApiDocsPage["frontMatter"];
-    mdx: CompiledMdx;
+    mdx: SerializedMDX;
 }
 
 export default function ApiPage({ frontMatter, mdx }: ApiProps): JSX.Element {
-    const content = hydrate(mdx);
-
     const sites = [
         ["Files", "index_files"],
         ["Examples", "index_examples"],
@@ -44,7 +43,7 @@ export default function ApiPage({ frontMatter, mdx }: ApiProps): JSX.Element {
                             ))}
                         </ul>
                     </div>
-                    {content}
+                    <MDXRenderer mdx={mdx} />
                 </ArticleComponent>
             </Container>
         </Layout>
@@ -56,12 +55,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     const slug = slugArray.join("/");
     const page = await getApiDocsPage(slug);
-    const compiledMdxSource = await renderMdx(page.content);
+    const mdx = await serializeMDX(page.content);
     return {
         props: {
             slug: slug,
             frontMatter: page.frontMatter,
-            mdx: compiledMdxSource
+            mdx: mdx
         }
     };
 };
