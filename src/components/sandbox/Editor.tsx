@@ -1,13 +1,9 @@
-import React, { PureComponent } from "react";
-import MonacoEditor, { loader } from "@monaco-editor/react";
-import * as monaco from "monaco-editor";
+import React, { FC, ReactElement, useCallback } from "react";
+import type * as monaco from "monaco-editor";
+import MonacoEditor, { loader, Monaco } from "@monaco-editor/react";
 import { withBasePath } from "@src/routes";
-
-loader.config({
-    paths: {
-        vs: withBasePath("monaco/vs")
-    }
-});
+import { useAsync } from "../useAsync";
+import { setupLanguage } from "./tiro-language";
 
 export interface EditorProps {
     initialSource: string;
@@ -15,40 +11,69 @@ export interface EditorProps {
     onMount?: () => void;
 }
 
-export class Editor extends PureComponent<EditorProps> {
-    private _options: monaco.editor.IStandaloneEditorConstructionOptions = {
-        cursorBlinking: "solid",
-        tabSize: 4,
-        insertSpaces: true
-    };
+loader.config({
+    paths: {
+        vs: withBasePath("monaco/vs")
+    }
+});
 
-    constructor(props: EditorProps) {
-        super(props);
+let INIT_PROMISE: Promise<Monaco> | undefined;
+
+const DEFAULT_OPTIONS: monaco.editor.IStandaloneEditorConstructionOptions = {
+    "cursorBlinking": "solid",
+    "tabSize": 4,
+    "insertSpaces": true,
+    "semanticHighlighting.enabled": true
+};
+
+export const Editor: FC<EditorProps> = (props: EditorProps): ReactElement | null => {
+    const { initialSource, onChange, onMount } = props;
+    const asyncMonaco = useAsync(loadMonaco);
+    const onMountCallback = useCallback(
+        (editor: monaco.editor.IStandaloneCodeEditor) => {
+            const endPosition = editor.getModel()?.getFullModelRange().getEndPosition() ?? { lineNumber: 1, column: 1 };
+            editor.setPosition(endPosition);
+            editor.focus();
+            onMount?.();
+        },
+        [onMount]
+    );
+    const onChangeCallback = useCallback(
+        (source: string | undefined) => {
+            onChange(source ?? "");
+        },
+        [onChange]
+    );
+
+    if (asyncMonaco.state === "loading") {
+        return null;
+    }
+    if (asyncMonaco.state === "error") {
+        return <p>Failed to load monaco editor: {String(asyncMonaco.error)}</p>;
     }
 
-    render(): JSX.Element {
-        const { initialSource } = this.props;
+    return (
+        <MonacoEditor
+            defaultValue={initialSource}
+            language="tiro"
+            theme="light"
+            options={DEFAULT_OPTIONS}
+            onChange={onChangeCallback}
+            onMount={onMountCallback}
+        />
+    );
+};
 
-        return (
-            <MonacoEditor
-                defaultValue={initialSource}
-                language="plain"
-                theme="light"
-                options={this._options}
-                onChange={this._onChange}
-                onMount={this._onMount}
-            />
-        );
+function loadMonaco(): Promise<Monaco> {
+    if (INIT_PROMISE) {
+        return INIT_PROMISE;
     }
 
-    private _onMount = (editor: monaco.editor.IStandaloneCodeEditor): void => {
-        const endPosition = editor.getModel()?.getFullModelRange().getEndPosition() ?? { lineNumber: 1, column: 1 };
-        editor.setPosition(endPosition);
-        editor.focus();
-        this.props.onMount?.();
-    };
+    async function init() {
+        const monaco = await loader.init();
+        setupLanguage(monaco);
+        return monaco;
+    }
 
-    private _onChange = (source: string | undefined) => {
-        this.props.onChange(source ?? "");
-    };
+    return (INIT_PROMISE = init());
 }

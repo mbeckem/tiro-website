@@ -21,11 +21,18 @@ export interface AsyncFailed {
 export type AsyncResult<D> = AsyncLoading | AsyncLoaded<D> | AsyncFailed;
 
 export function useAsync<D>(construct: Constructor<D>, destruct?: Destructor<D>): AsyncResult<D> {
-    const internal = useRef(new InternalState<D>(construct, destruct));
+    const internal = useRef<InternalState<D> | null>(null);
     const [result, setResult] = useState<AsyncResult<D>>({ state: "loading" });
 
+    function getInternal() {
+        if (internal.current === null) {
+            internal.current = new InternalState<D>(construct, destruct);
+        }
+        return internal.current;
+    }
+
     useEffect(() => {
-        const state = internal.current;
+        const state = getInternal();
         state
             .init()
             .then(() => {
@@ -51,6 +58,7 @@ export function useAsync<D>(construct: Constructor<D>, destruct?: Destructor<D>)
                 });
             });
         return () => state.destroy();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return result;
 }
@@ -82,21 +90,24 @@ class InternalState<D> {
     }
 
     async init() {
-        if (this._loadState !== "not-loaded") {
+        if (this._loadState !== "not-loaded" && this._loadState !== "destroyed") {
             throw new Error("Data already started to load");
         }
         this._loadState = "loading";
 
+        let ok: boolean;
         let data: D | undefined;
         let error: Error | undefined;
         try {
             data = await this._construct();
+            ok = true;
         } catch (e) {
             error = e;
+            ok = false;
         }
 
-        if (data) {
-            this.setData(data);
+        if (ok) {
+            this.setData(data!);
         } else {
             this.setError(error ?? new Error("Unknown error"));
         }
