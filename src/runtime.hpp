@@ -28,6 +28,8 @@ public:
 
     CompileResult compile(const CompileOptions& options);
 
+    std::string parse(const std::string& str);
+
 private:
     CompileResult compile_impl(const CompileOptions& options);
 };
