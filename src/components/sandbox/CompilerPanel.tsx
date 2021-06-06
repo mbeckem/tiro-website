@@ -1,4 +1,4 @@
-import React, { memo, ReactNode, useMemo, useState } from "react";
+import React, { memo, ReactNode, useMemo, useRef, useState } from "react";
 import { Tabs, Tab, UL, Classes } from "@blueprintjs/core";
 import { ObjectInspector, chromeLight, InspectorThemeDefinition } from "react-inspector";
 import classNames from "classnames";
@@ -14,7 +14,12 @@ export interface CompilerPanelProps {
 }
 
 export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelProps): JSX.Element {
-    const { result } = props;
+    const currentResult = useRef<CompileResult | undefined>();
+    if (props.result) {
+        currentResult.current = props.result;
+    }
+
+    const result = currentResult.current;
     const tabs = [
         {
             id: "status",
