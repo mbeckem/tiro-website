@@ -24,7 +24,7 @@ export const CompilerPanel = memo(function CompilerPanel(props: CompilerPanelPro
         {
             id: "cst",
             title: "CST",
-            content: <JsonTree content={result?.cst?.trim()} />
+            content: preformatted("Concrete Syntax Tree", result?.cst?.trim())
         },
         {
             id: "ast",

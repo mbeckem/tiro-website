@@ -77,7 +77,7 @@ export interface ExecuteOptions {
     /**
      * Standard output stream used when the program prints something.
      * Defaults to the browser console.
-     * 
+     *
      * NOTE: messages contain their own line separators.
      */
     printStdout?(message: string);
