@@ -90,8 +90,6 @@ public:
         return result;
     }
 
-    std::string parse(const std::string& source) { return rt_.parse(source); }
-
 private:
     runtime::Runtime rt_;
 };
@@ -102,8 +100,7 @@ EMSCRIPTEN_BINDINGS(tiro) {
     emscripten::class_<WasmRuntime>("Runtime") //
         .constructor()
         .function("info", &WasmRuntime::info)
-        .function("compile", &WasmRuntime::compile)
-        .function("parse", &WasmRuntime::parse);
+        .function("compile", &WasmRuntime::compile);
 
     emscripten::class_<WasmProgram>("Program") //
         .function("execute", &WasmProgram::execute);

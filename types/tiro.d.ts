@@ -116,13 +116,6 @@ export interface Runtime {
     /** Returns version information. */
     info(): RuntimeInfo;
 
-    /**
-     * Parses the given source string and returns the concrete syntax tree (CST) as a json document.
-     *
-     * NOTE: Experimental prototype API!
-     */
-    parse(source: string): string;
-
     /** Compiles a source file and returns a program on success. */
     compile(options: CompileOptions): CompileResult;
 }

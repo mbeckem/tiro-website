@@ -37,16 +37,6 @@ CompileResult Runtime::compile(const CompileOptions& options) {
     }
 }
 
-std::string Runtime::parse(const std::string& source) {
-    struct Holder {
-        char* string = nullptr;
-        ~Holder() { std::free(string); }
-    } holder;
-
-    tiro_parse_syntax(source.c_str(), &holder.string, tiro::error_adapter());
-    return std::string(holder.string ? holder.string : "");
-}
-
 CompileResult Runtime::compile_impl(const CompileOptions& options) {
     CompileResult result;
 
