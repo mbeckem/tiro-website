@@ -6,8 +6,8 @@ import { SandboxUI } from "./SandboxUI";
 import { CompilerPanelProps } from "./CompilerPanel";
 import { OutputPanelProps } from "./OutputPanel";
 import { useRuntime } from "./useRuntime";
-import { useForceRerender } from "../useForceRerender";
-import { useOnce } from "../useOnce";
+import { useForceRerender } from "@src/hooks/useForceRerender";
+import { useOnce } from "@src/hooks/useOnce";
 
 export interface SandboxProps {
     initialSource?: string;
