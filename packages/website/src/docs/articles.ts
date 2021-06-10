@@ -20,5 +20,5 @@ export async function getArticle(slug: string): Promise<Article> {
         throw new Error(`Article ${slug} has no title`);
     }
 
-    return (item as unknown) as Article;
+    return item as unknown as Article;
 }

@@ -10,11 +10,15 @@ Live at: https://mbeckem.github.io/tiro-website/
 
 ## Local production server
 
+Inside packages/website:
+
 ```sh
 $ yarn build && yarn start
 ```
 
 ## Building static html
+
+Inside packages/website:
 
 - Run `yarn export`
 
@@ -29,6 +33,8 @@ $ yarn build && yarn start
   ```
 
 - Run doxybook to generate the markdown documentation, e.g.
+
+  Inside packages/website:
 
   ```sh
   $ doxybook2 -c docs/apidocs/.doxybook/config.json --input ~/projects/tiro/build/docs/api/xml --output docs/apidocs/

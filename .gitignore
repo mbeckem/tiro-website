@@ -23,13 +23,12 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
-/build
 /site
+
+# next.js
+/packages/website/.next/
+/packages/website/out/
 
 # misc
 .DS_Store

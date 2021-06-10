@@ -1,7 +1,8 @@
-.next
-/out/
-/lib/
 /site/
-/docs/apidocs/
+/packages/website/.next/
+/packages/website/out/
+/packages/website/lib/
+/packages/website/docs/apidocs/
+/packages/website/public/
 /node_modules/
 /package-lock.json

@@ -124,8 +124,6 @@ export interface TiroWasmModule extends EmscriptenModule {
     Runtime: new () => Runtime;
 }
 
-declare function loadTiroWasmModule(
-    options: Partial<EmscriptenModule>
-): Promise<TiroWasmModule>;
+declare function loadTiroWasmModule(options: Partial<EmscriptenModule>): Promise<TiroWasmModule>;
 
 export default loadTiroWasmModule;
