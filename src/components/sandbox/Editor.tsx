@@ -4,6 +4,7 @@ import MonacoEditor, { loader, Monaco } from "@monaco-editor/react";
 import { withBasePath } from "@src/routes";
 import { useAsync } from "@src/hooks/useAsync";
 import { setupLanguage } from "./tiro-language";
+import { useDebounce } from "@src/hooks/useDebounce";
 
 export interface EditorProps {
     initialSource: string;
@@ -38,11 +39,14 @@ export const Editor: FC<EditorProps> = (props: EditorProps): ReactElement | null
         },
         [onMount]
     );
-    const onChangeCallback = useCallback(
-        (source: string | undefined) => {
-            onChange(source ?? "");
-        },
-        [onChange]
+    const onChangeCallback = useDebounce(
+        useCallback(
+            (source: string | undefined) => {
+                onChange(source ?? "");
+            },
+            [onChange]
+        ),
+        100
     );
 
     if (asyncMonaco.state === "loading") {
