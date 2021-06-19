@@ -1,4 +1,4 @@
-# TiroWASM
+# wasm_sandbox
 
 This repository contains build scripts and glue code to access Tiro from WebAssembly.
 
@@ -6,17 +6,13 @@ This repository contains build scripts and glue code to access Tiro from WebAsse
 
 You will need a recent installation of [Emscripten](https://emscripten.org/).
 
-In addition, you will need a installation of [Boost](https://boost.org) that is not in the system's
-default paths.  
-Downloading a recent version from the website and extracting it to some local directory is enough.
-
 ## Project setup
 
 Don't forget to checkout submodules:
 
     $ git submodule update --init --recursive
 
-## Build
+## Manual Build
 
 The following snippet assumes that Emscripten's build tools are on the PATH.
 
