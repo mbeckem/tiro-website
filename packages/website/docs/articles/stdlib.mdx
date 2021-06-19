@@ -42,6 +42,7 @@ import std;
   - [type StringSlice](#type-stringslice)
   - [type StringBuilder](#type-stringbuilder)
   - [func new_string_builder](#func-new_string_builder)
+  - [func debug_repr](#func-debug_repr)
 
 - [Floating point math](#floating-point-math)
 
@@ -65,7 +66,6 @@ import std;
 - [Input and output](#input-and-output)
 
   - [func print](#func-print)
-  - [func debug_repr](#func-debug_repr)
   - [func loop_timestamp](#func-loop_timestamp)
 
 - [Coroutines](#coroutines)
@@ -369,6 +369,15 @@ TODO: Internal representation is guaranteed to be UTF-8
 
 ### func new_string_builder
 
+### func debug_repr
+
+```
+func debug_repr(value: Value, pretty = false: Boolean): String;
+```
+
+Returns a debug representation of the given value as a string.
+When the optional `pretty` parameter is true, then the value will be pretty printed.
+
 ## Floating point math
 
 Basic constants and functions for math operations on floating point numbers (`type Float`).
@@ -524,15 +533,6 @@ func print(values...: Value...);
 ```
 
 Prints the given values followed by a new line.
-
-### func debug_repr
-
-```
-func debug_repr(value: Value, pretty = false: Boolean): String;
-```
-
-Returns a debug representation of the given value as a string.
-When the optional `pretty` parameter is true, then the value will be pretty printed.
 
 ### func loop_timestamp
 
