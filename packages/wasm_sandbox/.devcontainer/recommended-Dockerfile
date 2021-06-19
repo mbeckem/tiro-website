@@ -1,0 +1,30 @@
+FROM ubuntu:rolling
+
+ARG TZ=UTC
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update  \
+    && apt-get -y upgrade \
+    && apt-get install -y --no-install-recommends \
+    apt-utils dialog git iproute2 procps lsb-release \
+    curl wget less \
+    build-essential \
+    g++ gdb ninja-build cmake \
+    valgrind  \
+    clang-format \
+    python3 python3-pip python3-venv \
+    default-jre \
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && pip3 install --upgrade wheel setuptools \
+    && mkdir -p /workspace/tiro_wasm /workspace/build
+
+RUN useradd -ms /bin/bash user && chown -R user:user /workspace
+USER user
+
+RUN cd /workspace \
+    && git clone https://github.com/emscripten-core/emsdk.git \
+    && cd emsdk \
+    && ./emsdk install latest \
+    && ./emsdk activate latest \
+    && echo "source /workspace/emsdk/emsdk_env.sh" >> ~/.bashrc
