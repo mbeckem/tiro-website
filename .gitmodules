@@ -1,4 +1,0 @@
-[submodule "tiro"]
-	path = packages/wasm_sandbox/tiro
-	url = https://github.com/mbeckem/tiro.git
-	branch = master

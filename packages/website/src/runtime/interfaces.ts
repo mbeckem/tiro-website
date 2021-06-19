@@ -1,4 +1,4 @@
-import * as wasm from "@lib/tiro";
+import * as wasm from "@tiro-website/wasm_sandbox/dist/tiro";
 
 export type RuntimeInfo = wasm.RuntimeInfo;
 

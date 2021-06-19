@@ -8,6 +8,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 project(tiro_wasm VERSION 0.1.0 LANGUAGES CXX)
+include(FetchContent)
 
 # Output all targets to well known directories.
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
@@ -63,5 +64,19 @@ if (EMSCRIPTEN)
     set(TIRO_SKIP_INSTALL ON CACHE BOOL "-- Override --" FORCE)
 endif()
 
-add_subdirectory(tiro EXCLUDE_FROM_ALL)
+FetchContent_Declare(
+    tiro
+    GIT_REPOSITORY  https://github.com/mbeckem/tiro.git
+    GIT_TAG         eb512adee8a19db22f9711eed3397ab047ca7f28
+    GIT_PROGRESS    TRUE
+    GIT_SHALLOW     TRUE
+)
+
+FetchContent_GetProperties(tiro)
+if(NOT tiro_POPULATED)
+    message(STATUS "# Fetching tiro dependency")
+    FetchContent_Populate(tiro)
+    add_subdirectory(${tiro_SOURCE_DIR} ${tiro_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+
 add_subdirectory(src)

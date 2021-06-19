@@ -1,5 +1,9 @@
-import loadTiroWasmModule, { TiroWasmModule, Runtime as WasmRuntime, Program as WasmProgram } from "@lib/tiro";
-import nativeTiroWasmURL from "@lib/tiro.wasm";
+import loadTiroWasmModule, {
+    TiroWasmModule,
+    Runtime as WasmRuntime,
+    Program as WasmProgram
+} from "@tiro-website/wasm_sandbox/dist/tiro";
+import nativeTiroWasmURL from "@tiro-website/wasm_sandbox/dist/tiro.wasm";
 import {
     CompileOptions,
     CompileResult,
