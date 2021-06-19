@@ -6,7 +6,7 @@ import { Layout } from "@src/components/Layout";
 import { SEO } from "@src/components/SEO";
 import { Container } from "@src/components/Container";
 import { Article as ArticleComponent } from "@src/components/Article";
-import { serializeMDX, SerializedMDX } from "@src/docs/serialize-mdx";
+import { serializeMDX, SerializedMDX } from "@src/docs/serializeMdx";
 import { ApiDocsPage, getApiDocsPage, getApidocsSlugs } from "@src/docs/apidocs";
 
 import styles from "./api.module.scss";

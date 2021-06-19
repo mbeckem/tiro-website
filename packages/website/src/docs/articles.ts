@@ -1,5 +1,5 @@
 import { join } from "path";
-import { getData, getSlugs } from "./file-access";
+import { getData, getSlugs } from "./fileAccess";
 
 export interface Article {
     frontMatter: {

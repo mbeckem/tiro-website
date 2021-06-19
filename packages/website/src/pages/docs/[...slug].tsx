@@ -6,7 +6,7 @@ import { SEO } from "@src/components/SEO";
 import { getArticleSlugs, getArticle, Article } from "@src/docs/articles";
 import { Container } from "@src/components/Container";
 import { Article as ArticleComponent } from "@src/components/Article";
-import { SerializedMDX, serializeMDX } from "@src/docs/serialize-mdx";
+import { SerializedMDX, serializeMDX } from "@src/docs/serializeMdx";
 import { MDXRenderer } from "@src/components/MDXRenderer";
 
 export interface ArticleProps {
