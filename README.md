@@ -45,6 +45,6 @@ Inside packages/website:
 
 ## Deploying the site
 
-- Once (for setup): run `npm run init-site`
-- To deploy, run `npm run deploy`.
+- Once (for setup): run `yarn run init-site`
+- To deploy, run `yarn run deploy`.
   It will perform a clean build and push the changes to github.
