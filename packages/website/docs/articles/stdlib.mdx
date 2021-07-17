@@ -82,7 +82,7 @@ import std;
 
   - [type Result](#type-result)
   - [func success](#func-success)
-  - [func failure](#func-failure)
+  - [func error](#func-error)
   - [type Exception](#type-exception)
   - [func panic](#func-panic)
   - [func catch_panic](#func-catch_panic)
@@ -703,9 +703,9 @@ Results may be in one of two states:
 
 - _Success_. Calling `result.value()` returns the result of the operation.
 
-- _Failure_. Calling `result.reason()` returns a value explaining why the operation failed.
+- _Error_. Calling `result.error()` returns a value explaining why the operation failed.
 
-Results are constructed by calling the [success()](#func-success) and [failure()](#func-failure) functions.
+Results are constructed by calling the [success()](#func-success) and [error()](#func-error) functions.
 
 <span className="caption">Example: simple error handling</span>
 
@@ -717,12 +717,12 @@ export func main() {
     std.print(result1.type(), result1.value()); // #success 10
 
     const result2 = operation(-5);
-    std.print(result2.type(), result2.reason()); // #failure value too small!
+    std.print(result2.type(), result2.error()); // #error value too small!
 }
 
 func operation(n) {
      if (n < 0) {
-        return std.failure("value too small!");
+        return std.error("value too small!");
     } else {
         return std.success(n * 2);
     }
@@ -735,7 +735,7 @@ func operation(n) {
 func Result.type(): Symbol;
 ```
 
-Returns either `#success` or `#failure`, depending on the result's state.
+Returns either `#success` or `#error`, depending on the result's state.
 
 #### func Result.is_success
 
@@ -745,13 +745,13 @@ func Result.is_success(): Boolean;
 
 Returns `true` if the result represents success, `false` otherwise.
 
-#### func Result.is_failure
+#### func Result.is_error
 
 ```
-func Result.is_failure(): Boolean;
+func Result.is_error(): Boolean;
 ```
 
-Returns `true` if the result represents failure, `false` otherwise.
+Returns `true` if the result represents an error, `false` otherwise.
 
 #### func Result.value
 
@@ -762,14 +762,14 @@ func Result.value(): Value;
 Returns the result's value.
 Requires that the result represents success.
 
-#### func Result.reason
+#### func Result.error
 
 ```
-func Result.reason(): Value;
+func Result.error(): Value;
 ```
 
-Returns the result's reason.
-Requires that the result represents failure.
+Returns the result's error.
+Requires that the result represents an error.
 
 ### func success
 
@@ -779,13 +779,13 @@ func success(value: Value): Result;
 
 Returns a new successful [Result](#type-result) that holds the given `value`.
 
-### func failure
+### func error
 
 ```
-func failure(reason: value): Result;
+func error(err: Value): Result;
 ```
 
-Returns a new failure [Result](#type-result) that holds the given `reason`.
+Returns a new error [Result](#type-result) that holds the given `err`.
 
 ### type Exception
 
@@ -828,7 +828,7 @@ Invokes `fn()` and stops propagation of any non-fatal panic thrown by `fn` or it
 After execution of `fn()` completes (either through panic or through normal return), a [Result](#type-result) is returned:
 
 - If `fn` returned normally, its return value is wrapped into a success result and returned.
-- If a panic was caught, a failure result is returned. The result's `reason` is set to the caught value.
+- If a panic was caught, an error result is returned. The result's `error()` is set to the caught exception value.
 
 <span className="caption">Example: catching a panic from a function</span>
 
@@ -840,7 +840,7 @@ export func main() {
     if (result.is_success()) {
         std.print("success:", result.value());
     } else {
-        std.print("failure:", result.reason().message());
+        std.print("error:", result.error().message());
     }
 }
 
