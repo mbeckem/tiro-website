@@ -38,7 +38,8 @@ Contains functions and type definitions for compiling tiro source code to module
 | void | **[tiro_compiler_dump_cst](/docs/api/files/compiler_8h#function-tiro_compiler_dump_cst)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, char ** string, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the string representation of the concrete syntax tree (CST).  |
 | void | **[tiro_compiler_dump_bytecode](/docs/api/files/compiler_8h#function-tiro_compiler_dump_bytecode)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, char ** string, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the string representation of the compiled bytecode module.  |
 | void | **[tiro_compiler_dump_ast](/docs/api/files/compiler_8h#function-tiro_compiler_dump_ast)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, char ** string, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the string representation of the abstract syntax tree (AST).  |
-| void | **[tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro_compiler_add_file)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, const char * file_name, const char * file_content, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Add a source file to the compiler.  |
+| void | **[tiro_compiler_add_file_cstr](/docs/api/files/compiler_8h#function-tiro_compiler_add_file_cstr)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, const char * file_name, const char * file_content, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Same as [tiro_compiler_add_file](), but requires zero terminated strings.  |
+| void | **[tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro_compiler_add_file)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) file_name, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) file_content, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Add a source file to the compiler.  |
 
 ## Types Documentation
 
@@ -270,13 +271,26 @@ Returns `TIRO_ERROR_BAD_STATE` if the compiler cannot produce the AST.
 Otherwise, this function returns `TIRO_OK` and returns a new string using the provided output parameter. The string must be passed to `free` to release memory. 
 
 
+### function tiro_compiler_add_file_cstr
+
+```cpp
+void tiro_compiler_add_file_cstr(
+    tiro_compiler_t compiler,
+    const char * file_name,
+    const char * file_content,
+    tiro_error_t * err
+)
+```
+
+Same as [tiro_compiler_add_file](), but requires zero terminated strings. 
+
 ### function tiro_compiler_add_file
 
 ```cpp
 void tiro_compiler_add_file(
     tiro_compiler_t compiler,
-    const char * file_name,
-    const char * file_content,
+    tiro_string_t file_name,
+    tiro_string_t file_content,
     tiro_error_t * err
 )
 ```
@@ -294,4 +308,4 @@ FIXME: Can only be called for a single source file as of now.
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:20 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

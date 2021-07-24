@@ -54,7 +54,6 @@ This callback is invoked when the vm attempts to print to the standard output st
 **Parameters**: 
 
   * **message** The string to print. Not guaranteed to be null terminated. 
-  * **size** The size (in bytes) of the message string. 
   * **userdata** The userdata pointer set in this settings instance. 
 
 
@@ -63,4 +62,4 @@ When this is set to NULL (the default), the message will be printed to the proce
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:19 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

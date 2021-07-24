@@ -53,10 +53,11 @@ title: Classes
 * **struct [tiro_compiler_settings](/docs/api/classes/structtiro__compiler__settings)** <br>An instance of this type can be passed to the compiler to configure it. 
 * **struct [tiro_module_member_t](/docs/api/classes/structtiro__module__member__t)** 
 * **struct [tiro_native_type](/docs/api/classes/structtiro__native__type)** <br>Describes a native object type to the tiro runtime. 
+* **struct [tiro_string](/docs/api/classes/structtiro__string)** <br>Represents a string that is not necessarily zero terminated. 
 * **struct [tiro_vm_settings](/docs/api/classes/structtiro__vm__settings)** <br>The [tiro_vm_settings]() structure can be provided to `tiro_vm_new` as a configuration parameter. 
 
 
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:20 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

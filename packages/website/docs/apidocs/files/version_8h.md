@@ -97,7 +97,7 @@ The library's version string as a build-time constant.
 ### define TIRO_SOURCE_ID
 
 ```cpp
-#define TIRO_SOURCE_ID "git:272bdcd93c372bcff0d37cc5b49af274fef071c3-dirty"
+#define TIRO_SOURCE_ID "git:71adb2626602ad78ab4774971650173e11afac77-dirty"
 ```
 
 The full source id (from version control) as a build-time constant. 
@@ -123,7 +123,7 @@ Note that the individual version number parts must be smaller than 1000.
 ### define TIRO_FULL_VERSION
 
 ```cpp
-#define TIRO_FULL_VERSION "tiro 0.1.0-dev (git:272bdcd93c372bcff0d37cc5b49af274fef071c3-dirty)"
+#define TIRO_FULL_VERSION "tiro 0.1.0-dev (git:71adb2626602ad78ab4774971650173e11afac77-dirty)"
 ```
 
 The full version string as a build-time constant. 
@@ -132,4 +132,4 @@ The full version string as a build-time constant.
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:20 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

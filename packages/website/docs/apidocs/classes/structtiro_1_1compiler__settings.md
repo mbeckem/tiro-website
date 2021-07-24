@@ -16,7 +16,7 @@ title: tiro::compiler_settings
 
 |                | Name           |
 | -------------- | -------------- |
-| using std::function< void([severity](/docs/api/namespaces/namespacetiro#enum-severity) sev, uint32_t line, uint32_t column, const char *[message](/docs/api/namespaces/namespacetiro#function-message))> | **[message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message_callback_type)**  |
+| using std::function< void([severity](/docs/api/namespaces/namespacetiro#enum-severity) sev, uint32_t line, uint32_t column, std::string_view [message](/docs/api/namespaces/namespacetiro#function-message))> | **[message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message_callback_type)**  |
 
 ## Public Attributes
 
@@ -33,7 +33,7 @@ title: tiro::compiler_settings
 ### using message_callback_type
 
 ```cpp
-using message_callback_type =  std::function<void(severity sev, uint32_t line, uint32_t column, const char* message)>;
+using message_callback_type =  std::function<void(severity sev, uint32_t line, uint32_t column, std::string_view message)>;
 ```
 
 
@@ -76,4 +76,4 @@ bool enable_dump_ast = false;
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:19 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

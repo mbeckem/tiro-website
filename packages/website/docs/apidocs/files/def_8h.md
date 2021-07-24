@@ -8,12 +8,19 @@ summary: Contains basic type and macro definitions.
 
 Contains basic type and macro definitions.  [More...](#detailed-description)
 
+## Classes
+
+|                | Name           |
+| -------------- | -------------- |
+| struct | **[tiro_string](/docs/api/classes/structtiro__string)** <br>Represents a string that is not necessarily zero terminated.  |
+
 ## Types
 
 |                | Name           |
 | -------------- | -------------- |
 | typedef struct tiro_vm * | **[tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t)**  |
 | typedef struct tiro_sync_frame * | **[tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t)**  |
+| typedef struct [tiro_string](/docs/api/classes/structtiro__string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t)** <br>Represents a string that is not necessarily zero terminated.  |
 | typedef struct tiro_module * | **[tiro_module_t](/docs/api/files/def_8h#typedef-tiro_module_t)**  |
 | typedef struct tiro_value * | **[tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t)**  |
 | typedef struct tiro_error * | **[tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t)**  |
@@ -47,6 +54,17 @@ typedef struct tiro_vm* tiro_vm_t;
 ```cpp
 typedef struct tiro_sync_frame* tiro_sync_frame_t;
 ```
+
+
+### typedef tiro_string_t
+
+```cpp
+typedef struct tiro_string tiro_string_t;
+```
+
+Represents a string that is not necessarily zero terminated. 
+
+`data` must have `length` readable bytes. `data` is allowed to be NULL (or any other invalid pointer) if and only if `length` is 0. 
 
 
 ### typedef tiro_module_t
@@ -107,4 +125,4 @@ typedef struct tiro_async_frame* tiro_async_frame_t;
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:20 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

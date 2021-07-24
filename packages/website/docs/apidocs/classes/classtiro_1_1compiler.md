@@ -28,7 +28,7 @@ title: tiro::compiler
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**() |
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings) settings) |
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) raw_compiler) |
-| void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add_file)**(const char * file_name, const char * file_content) |
+| void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add_file)**(std::string_view file_name, std::string_view file_content) |
 
 ## Public Functions Documentation
 
@@ -124,12 +124,12 @@ inline explicit compiler(
 
 ```cpp
 inline void add_file(
-    const char * file_name,
-    const char * file_content
+    std::string_view file_name,
+    std::string_view file_content
 )
 ```
 
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:19 CEST
+Updated on 24 July 2021 at 15:38:22 CEST

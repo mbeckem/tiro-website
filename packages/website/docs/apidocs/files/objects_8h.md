@@ -45,7 +45,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_sync_frame_closure](/docs/api/files/objects_8h#function-tiro_sync_frame_closure)**([tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) frame, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the closure value which was specified when the function was created.  |
 | size_t | **[tiro_sync_frame_argc](/docs/api/files/objects_8h#function-tiro_sync_frame_argc)**([tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) frame)<br>Returns the number of function call arguments present in the given frame.  |
 | void | **[tiro_sync_frame_arg](/docs/api/files/objects_8h#function-tiro_sync_frame_arg)**([tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) frame, size_t index, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Stores the function call argument with the given `index` into `result`.  |
-| void | **[tiro_string_value](/docs/api/files/objects_8h#function-tiro_string_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, const char ** data, size_t * length, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content as a (data, length)-pair without copying the data.  |
+| void | **[tiro_string_value](/docs/api/files/objects_8h#function-tiro_string_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) * value, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content as a (data, length)-pair without copying the data.  |
 | void | **[tiro_string_cstr](/docs/api/files/objects_8h#function-tiro_string_cstr)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, char ** result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content and creates a new zero terminated c string, which is assigned to `*result`.  |
 | void | **[tiro_result_value](/docs/api/files/objects_8h#function-tiro_result_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) out, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the value from the result in `instance` and writes it into `out`.  |
 | bool | **[tiro_result_is_success](/docs/api/files/objects_8h#function-tiro_result_is_success)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance)<br>Returns true if the result in `instance` represents success.  |
@@ -61,8 +61,8 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_make_tuple](/docs/api/files/objects_8h#function-tiro_make_tuple)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, size_t size, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new tuple with `size` entries.  |
 | void | **[tiro_make_sync_function](/docs/api/files/objects_8h#function-tiro_make_sync_function)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) name, [tiro_sync_function_t](/docs/api/files/objects_8h#typedef-tiro_sync_function_t) func, size_t argc, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) closure, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new function object with the given name that will invoke the native function `func` when called.  |
 | void | **[tiro_make_success](/docs/api/files/objects_8h#function-tiro_make_success)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new successful result with the given value.  |
-| void | **[tiro_make_string_from_data](/docs/api/files/objects_8h#function-tiro_make_string_from_data)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * data, size_t length, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new string with the given content.  |
-| void | **[tiro_make_string](/docs/api/files/objects_8h#function-tiro_make_string)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new string with the given content.  |
+| void | **[tiro_make_string_from_cstr](/docs/api/files/objects_8h#function-tiro_make_string_from_cstr)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new string with the given content.  |
+| void | **[tiro_make_string](/docs/api/files/objects_8h#function-tiro_make_string)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new string with the given content.  |
 | void | **[tiro_make_record](/docs/api/files/objects_8h#function-tiro_make_record)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) keys, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new record with the given key names.  |
 | void | **[tiro_make_null](/docs/api/files/objects_8h#function-tiro_make_null)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result)<br>Sets the given `result` handle to null.  |
 | void | **[tiro_make_native](/docs/api/files/objects_8h#function-tiro_make_native)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const [tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro_native_type_t) * type_descriptor, size_t size, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new native object of the given type and size.  |
@@ -434,8 +434,7 @@ Returns `TIRO_ERROR_OUT_OF_BOUNDS` if the argument index is invalid.
 void tiro_string_value(
     tiro_vm_t vm,
     tiro_handle_t string,
-    const char ** data,
-    size_t * length,
+    tiro_string_t * value,
     tiro_error_t * err
 )
 ```
@@ -444,11 +443,11 @@ Retrieves the string's content as a (data, length)-pair without copying the data
 
 **Warning**: 
 
-  * The string content returned through `data` and `length` is a view into the string's current storage. Because objects may move on the heap (e.g. because of garbage collection), this data may be invalidated. The data may only be used immediately after calling this function, and must not be used after another possibly allocating tiro_* function has been called.
+  * The string content returned through `value` is a view into the string's current storage. Because objects may move on the heap (e.g. because of garbage collection), this data may be invalidated. The data may only be used immediately after calling this function, and must not be used after another possibly allocating tiro_* function has been called.
   * The string returned by this function is not zero terminated. 
 
 
-The pointer to the string's storage will be placed in `*data`, and the length (in bytes) will be assigned to `*length`. Returns `TIRO_ERROR_BAD_TYPE` if the value is not actually a string.
+The pointer to the string's storage will be placed in `*value`. Returns `TIRO_ERROR_BAD_TYPE` if the value is not actually a string.
 
 
 ### function tiro_string_cstr
@@ -689,27 +688,10 @@ Constructs a new successful result with the given value.
 The new object will be placed into `result`. 
 
 
-### function tiro_make_string_from_data
+### function tiro_make_string_from_cstr
 
 ```cpp
-void tiro_make_string_from_data(
-    tiro_vm_t vm,
-    const char * data,
-    size_t length,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Constructs a new string with the given content. 
-
-`data` must consist of `length` readable bytes. Returns `TIRO_ERROR_ALLOC` on allocation failure. 
-
-
-### function tiro_make_string
-
-```cpp
-void tiro_make_string(
+void tiro_make_string_from_cstr(
     tiro_vm_t vm,
     const char * value,
     tiro_handle_t result,
@@ -720,6 +702,22 @@ void tiro_make_string(
 Constructs a new string with the given content. 
 
 `value` must be zero terminated or NULL. Passing NULL for `value` creates an empty string. Returns `TIRO_ERROR_ALLOC` on allocation failure. 
+
+
+### function tiro_make_string
+
+```cpp
+void tiro_make_string(
+    tiro_vm_t vm,
+    tiro_string_t value,
+    tiro_handle_t result,
+    tiro_error_t * err
+)
+```
+
+Constructs a new string with the given content. 
+
+Returns `TIRO_ERROR_ALLOC` on allocation failure. 
 
 
 ### function tiro_make_record
@@ -1264,4 +1262,4 @@ Returns `TIRO_ERROR_BAD_TYPE` if the value is not an array.
 
 -------------------------------
 
-Updated on 24 July 2021 at 14:32:20 CEST
+Updated on 24 July 2021 at 15:38:22 CEST
