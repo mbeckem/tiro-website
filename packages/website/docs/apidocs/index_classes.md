@@ -8,6 +8,7 @@ title: Classes
 
 
 
+* **namespace [std](/docs/api/namespaces/namespacestd)** <br>STL namespace. 
 * **namespace [tiro](/docs/api/namespaces/namespacetiro)** 
     * **class [api_error](/docs/api/classes/classtiro_1_1api__error)** <br>Represents an error thrown by the tiro c library. 
     * **class [array](/docs/api/classes/classtiro_1_1array)** 
@@ -28,6 +29,7 @@ title: Classes
         * **class [resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder)** 
     * **class [error](/docs/api/classes/classtiro_1_1error)** <br>Base class for all errors thrown by this library. 
     * **class [error_adapter](/docs/api/classes/classtiro_1_1error__adapter)** 
+    * **class [exception](/docs/api/classes/classtiro_1_1exception)** 
     * **class [float_](/docs/api/classes/classtiro_1_1float__)** 
     * **class [function](/docs/api/classes/classtiro_1_1function)** 
     * **class [generic_error](/docs/api/classes/classtiro_1_1generic__error)** <br>Generic error with a simple message. 
@@ -57,4 +59,4 @@ title: Classes
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

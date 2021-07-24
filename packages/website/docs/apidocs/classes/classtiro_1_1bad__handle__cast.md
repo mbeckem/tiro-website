@@ -9,6 +9,8 @@ summary: Thrown when an invalid cast is attempted.
 
 
 Thrown when an invalid cast is attempted. 
+
+
 `#include "tiropp/objects.hpp"`
 
 Inherits from [error](/docs/api/classes/classtiro_1_1error), exception
@@ -65,4 +67,4 @@ inline explicit bad_handle_cast(
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

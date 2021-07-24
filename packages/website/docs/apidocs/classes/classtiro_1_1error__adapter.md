@@ -8,6 +8,8 @@ title: tiro::error_adapter
 
 
 
+
+
 `#include "tiropp/error.hpp"`
 
 ## Public Functions
@@ -63,4 +65,4 @@ error_adapter(
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

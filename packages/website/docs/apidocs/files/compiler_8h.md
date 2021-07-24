@@ -6,7 +6,9 @@ summary: Contains functions and type definitions for compiling tiro source code 
 
 # tiro/compiler.h
 
-Contains functions and type definitions for compiling tiro source code to modules. ## Classes
+Contains functions and type definitions for compiling tiro source code to modules. 
+
+## Classes
 
 |                | Name           |
 | -------------- | -------------- |
@@ -292,4 +294,4 @@ FIXME: Can only be called for a single source file as of now.
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

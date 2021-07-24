@@ -13,7 +13,7 @@ A handle represents a reference to an object.  [More...](#detailed-description)
 
 `#include "tiropp/objects.hpp"`
 
-Inherited by [array](/docs/api/classes/classtiro_1_1array), [boolean](/docs/api/classes/classtiro_1_1boolean), [coroutine](/docs/api/classes/classtiro_1_1coroutine), [float_](/docs/api/classes/classtiro_1_1float__), [function](/docs/api/classes/classtiro_1_1function), [integer](/docs/api/classes/classtiro_1_1integer), [module](/docs/api/classes/classtiro_1_1module), [native](/docs/api/classes/classtiro_1_1native), [null](/docs/api/classes/classtiro_1_1null), [record](/docs/api/classes/classtiro_1_1record), [result](/docs/api/classes/classtiro_1_1result), [string](/docs/api/classes/classtiro_1_1string), [tuple](/docs/api/classes/classtiro_1_1tuple), [type](/docs/api/classes/classtiro_1_1type)
+Inherited by [array](/docs/api/classes/classtiro_1_1array), [boolean](/docs/api/classes/classtiro_1_1boolean), [coroutine](/docs/api/classes/classtiro_1_1coroutine), [exception](/docs/api/classes/classtiro_1_1exception), [float_](/docs/api/classes/classtiro_1_1float__), [function](/docs/api/classes/classtiro_1_1function), [integer](/docs/api/classes/classtiro_1_1integer), [module](/docs/api/classes/classtiro_1_1module), [native](/docs/api/classes/classtiro_1_1native), [null](/docs/api/classes/classtiro_1_1null), [record](/docs/api/classes/classtiro_1_1record), [result](/docs/api/classes/classtiro_1_1result), [string](/docs/api/classes/classtiro_1_1string), [tuple](/docs/api/classes/classtiro_1_1tuple), [type](/docs/api/classes/classtiro_1_1type)
 
 ## Protected Classes
 
@@ -227,4 +227,4 @@ static constexpr check_kind_t check_kind {};
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

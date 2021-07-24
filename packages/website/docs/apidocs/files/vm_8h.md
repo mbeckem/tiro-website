@@ -6,7 +6,9 @@ summary: Functions and type definitions for working with the tiro virtual machin
 
 # tiro/vm.h
 
-Functions and type definitions for working with the tiro virtual machine. ## Classes
+Functions and type definitions for working with the tiro virtual machine. 
+
+## Classes
 
 |                | Name           |
 | -------------- | -------------- |
@@ -209,7 +211,7 @@ Calls the given function and places the function's return value into `result` (i
   * **vm** The virtual machine instance. 
   * **function** The function to call. Must not be NULL. 
   * **arguments** The function call arguments. Must be a tuple if arguments shall be passed, or a null value or NULL pointer to indicate zero arguments. 
-  * **result** A handle in which the function's return value will be placed. Can be NULL. 
+  * **result** A handle in which the function's return value will be placed. Can be NULL. This value is always of kind `RESULT`. 
   * **err** An optional error handle for detailed error information. 
 
 
@@ -254,4 +256,4 @@ Note: remaining globals are automatically freed when a vm is freed.
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

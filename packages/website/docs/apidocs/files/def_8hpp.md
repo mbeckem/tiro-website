@@ -5,6 +5,8 @@ title: tiropp/def.hpp
 
 # tiropp/def.hpp
 
+
+
 ## Namespaces
 
 | Name           |
@@ -22,7 +24,7 @@ title: tiropp/def.hpp
 
 
 
-## Macro Documentation
+## Macros Documentation
 
 ### define TIRO_HANDLE_CHECKS
 
@@ -52,4 +54,4 @@ assert(expr)
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

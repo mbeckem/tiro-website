@@ -5,6 +5,8 @@ title: tiro
 
 # tiro
 
+
+
 ## Namespaces
 
 | Name           |
@@ -33,6 +35,7 @@ title: tiro
 | class | **[tiro::generic_error](/docs/api/classes/classtiro_1_1generic__error)** <br>Generic error with a simple message.  |
 | class | **[tiro::function](/docs/api/classes/classtiro_1_1function)**  |
 | class | **[tiro::float_](/docs/api/classes/classtiro_1_1float__)**  |
+| class | **[tiro::exception](/docs/api/classes/classtiro_1_1exception)**  |
 | class | **[tiro::error_adapter](/docs/api/classes/classtiro_1_1error__adapter)**  |
 | class | **[tiro::error](/docs/api/classes/classtiro_1_1error)** <br>Base class for all errors thrown by this library.  |
 | class | **[tiro::coroutine](/docs/api/classes/classtiro_1_1coroutine)**  |
@@ -50,9 +53,9 @@ title: tiro
 
 |                | Name           |
 | -------------- | -------------- |
-| enum int | **[value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind)** { type = TIRO_KIND_TYPE, tuple = TIRO_KIND_TUPLE, string = TIRO_KIND_STRING, result = TIRO_KIND_RESULT, record = TIRO_KIND_RECORD, null = TIRO_KIND_NULL, native = TIRO_KIND_NATIVE, module = TIRO_KIND_MODULE, invalid = TIRO_KIND_INVALID, internal = TIRO_KIND_INTERNAL, integer = TIRO_KIND_INTEGER, function = TIRO_KIND_FUNCTION, float_ = TIRO_KIND_FLOAT, coroutine = TIRO_KIND_COROUTINE, boolean = TIRO_KIND_BOOLEAN, array = TIRO_KIND_ARRAY}<br>Represents the kind of a value.  |
-| enum int | **[severity](/docs/api/namespaces/namespacetiro#enum-severity)** { warning = TIRO_SEVERITY_WARNING, error = TIRO_SEVERITY_ERROR} |
-| enum int | **[api_errc](/docs/api/namespaces/namespacetiro#enum-api_errc)** { out_of_bounds = TIRO_ERROR_OUT_OF_BOUNDS, ok = TIRO_OK, module_not_found = TIRO_ERROR_MODULE_NOT_FOUND, module_exists = TIRO_ERROR_MODULE_EXISTS, internal = TIRO_ERROR_INTERNAL, export_not_found = TIRO_ERROR_EXPORT_NOT_FOUND, bad_type = TIRO_ERROR_BAD_TYPE, bad_state = TIRO_ERROR_BAD_STATE, bad_source = TIRO_ERROR_BAD_SOURCE, bad_key = TIRO_ERROR_BAD_KEY, bad_arg = TIRO_ERROR_BAD_ARG, alloc = TIRO_ERROR_ALLOC} |
+| enum class int | **[value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind)** { type = TIRO_KIND_TYPE, tuple = TIRO_KIND_TUPLE, string = TIRO_KIND_STRING, result = TIRO_KIND_RESULT, record = TIRO_KIND_RECORD, null = TIRO_KIND_NULL, native = TIRO_KIND_NATIVE, module = TIRO_KIND_MODULE, invalid = TIRO_KIND_INVALID, internal = TIRO_KIND_INTERNAL, integer = TIRO_KIND_INTEGER, function = TIRO_KIND_FUNCTION, float_ = TIRO_KIND_FLOAT, exception = TIRO_KIND_EXCEPTION, coroutine = TIRO_KIND_COROUTINE, boolean = TIRO_KIND_BOOLEAN, array = TIRO_KIND_ARRAY}<br>Represents the kind of a value.  |
+| enum class int | **[severity](/docs/api/namespaces/namespacetiro#enum-severity)** { warning = TIRO_SEVERITY_WARNING, error = TIRO_SEVERITY_ERROR} |
+| enum class int | **[api_errc](/docs/api/namespaces/namespacetiro#enum-api_errc)** { out_of_bounds = TIRO_ERROR_OUT_OF_BOUNDS, ok = TIRO_OK, module_not_found = TIRO_ERROR_MODULE_NOT_FOUND, module_exists = TIRO_ERROR_MODULE_EXISTS, internal = TIRO_ERROR_INTERNAL, export_not_found = TIRO_ERROR_EXPORT_NOT_FOUND, bad_type = TIRO_ERROR_BAD_TYPE, bad_state = TIRO_ERROR_BAD_STATE, bad_source = TIRO_ERROR_BAD_SOURCE, bad_key = TIRO_ERROR_BAD_KEY, bad_arg = TIRO_ERROR_BAD_ARG, alloc = TIRO_ERROR_ALLOC} |
 
 ## Functions
 
@@ -60,6 +63,7 @@ title: tiro
 | -------------- | -------------- |
 | const char * | **[to_string](/docs/api/namespaces/namespacetiro#function-to_string)**([severity](/docs/api/namespaces/namespacetiro#enum-severity) s) |
 | const char * | **[to_string](/docs/api/namespaces/namespacetiro#function-to_string)**([value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind) k) |
+| bool | **[same](/docs/api/namespaces/namespacetiro#function-same)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [handle](/docs/api/classes/classtiro_1_1handle) & a, const [handle](/docs/api/classes/classtiro_1_1handle) & b)<br>Returns true if and only if `a` and `b` refer to the same value.  |
 | [version](/docs/api/classes/structtiro_1_1version) | **[runtime_version](/docs/api/namespaces/namespacetiro#function-runtime_version)**()<br>Returns the runtime version of the tiro library, i.e.  |
 | template <typename Callback \> <br>void | **[run_async](/docs/api/namespaces/namespacetiro#function-run_async)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func, Callback && cb)<br>Schedules execution of `func` in a new coroutine without any arguments.  |
 | template <typename Callback \> <br>void | **[run_async](/docs/api/namespaces/namespacetiro#function-run_async)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func, const [handle](/docs/api/classes/classtiro_1_1handle) & args, Callback && cb)<br>Schedules execution of `func` in a new coroutine, with the provided arguments.  |
@@ -74,7 +78,7 @@ title: tiro
 | [module](/docs/api/classes/classtiro_1_1module) | **[make_module](/docs/api/namespaces/namespacetiro#function-make_module)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const char * name, const std::vector< std::pair< std::string, [handle](/docs/api/classes/classtiro_1_1handle) >> & exports) |
 | [integer](/docs/api/classes/classtiro_1_1integer) | **[make_integer](/docs/api/namespaces/namespacetiro#function-make_integer)**([vm](/docs/api/classes/classtiro_1_1vm) & v, int64_t value)<br>Constructs a new integer value.  |
 | [float_](/docs/api/classes/classtiro_1_1float__) | **[make_float](/docs/api/namespaces/namespacetiro#function-make_float)**([vm](/docs/api/classes/classtiro_1_1vm) & v, double value)<br>Constructs a new float value.  |
-| [result](/docs/api/classes/classtiro_1_1result) | **[make_failure](/docs/api/namespaces/namespacetiro#function-make_failure)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [handle](/docs/api/classes/classtiro_1_1handle) & reason) |
+| [result](/docs/api/classes/classtiro_1_1result) | **[make_error](/docs/api/namespaces/namespacetiro#function-make_error)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [handle](/docs/api/classes/classtiro_1_1handle) & err) |
 | [coroutine](/docs/api/classes/classtiro_1_1coroutine) | **[make_coroutine](/docs/api/namespaces/namespacetiro#function-make_coroutine)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func, const [handle](/docs/api/classes/classtiro_1_1handle) & arguments)<br>Constructs a new coroutine value.  |
 | [coroutine](/docs/api/classes/classtiro_1_1coroutine) | **[make_coroutine](/docs/api/namespaces/namespacetiro#function-make_coroutine)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func)<br>Constructs a new coroutine value.  |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[make_copy](/docs/api/namespaces/namespacetiro#function-make_copy)**([vm](/docs/api/classes/classtiro_1_1vm) & v, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value)<br>Constructs a new handle as a copy of the given value.  |
@@ -104,6 +108,7 @@ title: tiro
 | integer | TIRO_KIND_INTEGER|   |
 | function | TIRO_KIND_FUNCTION|   |
 | float_ | TIRO_KIND_FLOAT|   |
+| exception | TIRO_KIND_EXCEPTION|   |
 | coroutine | TIRO_KIND_COROUTINE|   |
 | boolean | TIRO_KIND_BOOLEAN|   |
 | array | TIRO_KIND_ARRAY|   |
@@ -162,6 +167,18 @@ inline const char * to_string(
 )
 ```
 
+
+### function same
+
+```cpp
+inline bool same(
+    vm & v,
+    const handle & a,
+    const handle & b
+)
+```
+
+Returns true if and only if `a` and `b` refer to the same value. 
 
 ### function runtime_version
 
@@ -332,12 +349,12 @@ inline float_ make_float(
 
 Constructs a new float value. 
 
-### function make_failure
+### function make_error
 
 ```cpp
-inline result make_failure(
+inline result make_error(
     vm & v,
-    const handle & reason
+    const handle & err
 )
 ```
 
@@ -457,4 +474,4 @@ the version the application was built against.
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

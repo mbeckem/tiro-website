@@ -9,6 +9,8 @@ summary: Base class for all errors thrown by this library.
 
 
 Base class for all errors thrown by this library. 
+
+
 `#include "tiropp/error.hpp"`
 
 Inherits from exception
@@ -32,7 +34,7 @@ virtual const char * message() const =0
 
 A simple message line that describes the error condition. Never null. 
 
-**Reimplemented by**: [tiro::generic_error::message](/docs/api/classes/classtiro_1_1generic__error#function-message), [tiro::bad_handle_cast::message](/docs/api/classes/classtiro_1_1bad__handle__cast#function-message), [tiro::api_error::message](/docs/api/classes/classtiro_1_1api__error#function-message)
+**Reimplemented by**: [tiro::generic_error::message](/docs/api/classes/classtiro_1_1generic__error#function-message), [tiro::api_error::message](/docs/api/classes/classtiro_1_1api__error#function-message), [tiro::bad_handle_cast::message](/docs/api/classes/classtiro_1_1bad__handle__cast#function-message)
 
 
 ### function details
@@ -43,9 +45,9 @@ virtual const char * details() const =0
 
 Optional detailed error information. Never null, but may be empty. 
 
-**Reimplemented by**: [tiro::generic_error::details](/docs/api/classes/classtiro_1_1generic__error#function-details), [tiro::bad_handle_cast::details](/docs/api/classes/classtiro_1_1bad__handle__cast#function-details), [tiro::api_error::details](/docs/api/classes/classtiro_1_1api__error#function-details)
+**Reimplemented by**: [tiro::generic_error::details](/docs/api/classes/classtiro_1_1generic__error#function-details), [tiro::api_error::details](/docs/api/classes/classtiro_1_1api__error#function-details), [tiro::bad_handle_cast::details](/docs/api/classes/classtiro_1_1bad__handle__cast#function-details)
 
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

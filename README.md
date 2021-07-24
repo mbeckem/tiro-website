@@ -37,11 +37,19 @@ Inside packages/website:
   Inside packages/website:
 
   ```sh
-  $ doxybook2 -c docs/apidocs/.doxybook/config.json --input ~/projects/tiro/build/docs/api/xml --output docs/apidocs/
+  $ doxybook2 -c docs/apidocs/.doxybook/config.json --templates docs/apidocs/.doxybook/templates --input ~/projects/tiro/build/docs/api/xml --output docs/apidocs/
   ```
 
   NOTE: At this time, doxybook2 does not support relative links in its generated output.
   Keep the baseUrl in apidocs/.doxybook/config.json in sync with the base url of the api documentation.
+
+- Regenerating doxybook templates:
+
+  ```sh
+  $ doxybook2 --generate-templates docs/apidocs/.doxybook/templates
+  ```
+
+  NOTE: The current templates directory contains the vanilla templates except for a fix regarding whitespaces (see https://github.com/matusnovak/doxybook2/pull/57)
 
 ## Deploying the site
 

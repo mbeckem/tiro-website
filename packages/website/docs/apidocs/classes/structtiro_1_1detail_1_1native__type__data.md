@@ -8,6 +8,8 @@ title: tiro::detail::native_type_data
 
 
 
+
+
 `#include "tiropp/native_type.hpp"`
 
 ## Public Attributes
@@ -35,4 +37,4 @@ tiro_native_type_t descriptor {};
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

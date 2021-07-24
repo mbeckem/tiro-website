@@ -10,7 +10,7 @@ title: tiro::native_type
  [More...](#detailed-description)
 
 
-`#include "tiropp/fwd.hpp"`
+`#include "tiropp/native_type.hpp"`
 
 ## Public Functions
 
@@ -146,4 +146,4 @@ TODO: This API will have to change (or become more dangeous) once the gc starts 
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

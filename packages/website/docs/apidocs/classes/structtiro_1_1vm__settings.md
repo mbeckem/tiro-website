@@ -9,6 +9,8 @@ summary: Settings to control the construction of a virtual machine.
 
 
 Settings to control the construction of a virtual machine. 
+
+
 `#include "tiropp/vm.hpp"`
 
 ## Public Attributes
@@ -32,4 +34,4 @@ when `std.print(...)` was called. The vm will print to the process's standard ou
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

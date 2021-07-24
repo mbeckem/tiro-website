@@ -9,6 +9,8 @@ summary: Represents an error thrown by the tiro c library.
 
 
 Represents an error thrown by the tiro c library. 
+
+
 `#include "tiropp/error.hpp"`
 
 Inherits from [error](/docs/api/classes/classtiro_1_1error), exception
@@ -95,4 +97,4 @@ The error takes ownership of the raw error.
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

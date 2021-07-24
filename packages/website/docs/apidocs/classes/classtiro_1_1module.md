@@ -8,6 +8,8 @@ title: tiro::module
 
 
 
+
+
 `#include "tiropp/objects.hpp"`
 
 Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
@@ -119,4 +121,4 @@ inline handle get_export(
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

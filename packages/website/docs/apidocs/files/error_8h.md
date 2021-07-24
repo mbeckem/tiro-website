@@ -6,7 +6,9 @@ summary: Basic error handling facilities.
 
 # tiro/error.h
 
-Basic error handling facilities. ## Types
+Basic error handling facilities. 
+
+## Types
 
 |                | Name           |
 | -------------- | -------------- |
@@ -158,4 +160,4 @@ The string points into static storage and must not be freed.
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

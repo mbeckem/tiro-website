@@ -5,6 +5,8 @@ title: tiropp/objects.hpp
 
 # tiropp/objects.hpp
 
+
+
 ## Namespaces
 
 | Name           |
@@ -28,6 +30,7 @@ title: tiropp/objects.hpp
 | class | **[tiro::handle](/docs/api/classes/classtiro_1_1handle)** <br>A handle represents a reference to an object.  |
 | class | **[tiro::function](/docs/api/classes/classtiro_1_1function)**  |
 | class | **[tiro::float_](/docs/api/classes/classtiro_1_1float__)**  |
+| class | **[tiro::exception](/docs/api/classes/classtiro_1_1exception)**  |
 | class | **[tiro::coroutine](/docs/api/classes/classtiro_1_1coroutine)**  |
 | class | **[tiro::boolean](/docs/api/classes/classtiro_1_1boolean)**  |
 | class | **[tiro::bad_handle_cast](/docs/api/classes/classtiro_1_1bad__handle__cast)** <br>Thrown when an invalid cast is attempted.  |
@@ -41,4 +44,4 @@ title: tiropp/objects.hpp
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

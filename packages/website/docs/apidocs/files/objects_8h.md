@@ -6,7 +6,9 @@ summary: Functions and type definitions for working with objects of the tiro vir
 
 # tiro/objects.h
 
-Functions and type definitions for working with objects of the tiro virtual machine. ## Classes
+Functions and type definitions for working with objects of the tiro virtual machine. 
+
+## Classes
 
 |                | Name           |
 | -------------- | -------------- |
@@ -21,7 +23,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | typedef struct [tiro_native_type](/docs/api/classes/structtiro__native__type) | **[tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro_native_type_t)** <br>Describes a native object type to the tiro runtime.  |
 | typedef struct [tiro_module_member_t](/docs/api/classes/structtiro__module__member__t) | **[tiro_module_member_t](/docs/api/files/objects_8h#typedef-tiro_module_member_t)**  |
 | typedef enum [tiro_kind](/docs/api/files/objects_8h#enum-tiro_kind) | **[tiro_kind_t](/docs/api/files/objects_8h#typedef-tiro_kind_t)** <br>Represents the kind of a tiro value.  |
-| enum| **[tiro_kind](/docs/api/files/objects_8h#enum-tiro_kind)** { TIRO_KIND_TYPE, TIRO_KIND_TUPLE, TIRO_KIND_STRING, TIRO_KIND_RESULT, TIRO_KIND_RECORD, TIRO_KIND_NULL = 0, TIRO_KIND_NATIVE, TIRO_KIND_MODULE, TIRO_KIND_INVALID, TIRO_KIND_INTERNAL = 1000, TIRO_KIND_INTEGER, TIRO_KIND_FUNCTION, TIRO_KIND_FLOAT, TIRO_KIND_COROUTINE, TIRO_KIND_BOOLEAN, TIRO_KIND_ARRAY}<br>Represents the kind of a tiro value.  |
+| enum| **[tiro_kind](/docs/api/files/objects_8h#enum-tiro_kind)** { TIRO_KIND_TYPE, TIRO_KIND_TUPLE, TIRO_KIND_STRING, TIRO_KIND_RESULT, TIRO_KIND_RECORD, TIRO_KIND_NULL = 0, TIRO_KIND_NATIVE, TIRO_KIND_MODULE, TIRO_KIND_INVALID, TIRO_KIND_INTERNAL = 1000, TIRO_KIND_INTEGER, TIRO_KIND_FUNCTION, TIRO_KIND_FLOAT, TIRO_KIND_EXCEPTION, TIRO_KIND_COROUTINE, TIRO_KIND_BOOLEAN, TIRO_KIND_ARRAY}<br>Represents the kind of a tiro value.  |
 | typedef void(*)(void *userdata) | **[tiro_coroutine_cleanup](/docs/api/files/objects_8h#typedef-tiro_coroutine_cleanup)** <br>Represents a cleanup function associated with a coroutine callback.  |
 | typedef void(*)(tiro_vm_t vm, tiro_handle_t coro, void *userdata) | **[tiro_coroutine_callback](/docs/api/files/objects_8h#typedef-tiro_coroutine_callback)** <br>Represents a coroutine completion callback.  |
 | typedef void(*)(tiro_vm_t vm, tiro_async_frame_t frame) | **[tiro_async_function_t](/docs/api/files/objects_8h#typedef-tiro_async_function_t)** <br>The prototype of a native function callback that provides an asynchronous tiro function.  |
@@ -32,6 +34,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | -------------- | -------------- |
 | void | **[tiro_value_type](/docs/api/files/objects_8h#function-tiro_value_type)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the type of the given `value` by assigning it to `result`.  |
 | void | **[tiro_value_to_string](/docs/api/files/objects_8h#function-tiro_value_to_string)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Outputs a string representing the given value.  |
+| bool | **[tiro_value_same](/docs/api/files/objects_8h#function-tiro_value_same)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) a, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) b)<br>Returns true if and only if `a` and `b` refer to exactly the same value.  |
 | [tiro_kind_t](/docs/api/files/objects_8h#typedef-tiro_kind_t) | **[tiro_value_kind](/docs/api/files/objects_8h#function-tiro_value_kind)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value)<br>Returns the kind of the handle's current value.  |
 | void | **[tiro_value_copy](/docs/api/files/objects_8h#function-tiro_value_copy)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Copies the current `value` to `result`.  |
 | void | **[tiro_type_name](/docs/api/files/objects_8h#function-tiro_type_name)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) type, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the name of this `type` and assigns it to `result`.  |
@@ -45,9 +48,9 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_string_value](/docs/api/files/objects_8h#function-tiro_string_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, const char ** data, size_t * length, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content as a (data, length)-pair without copying the data.  |
 | void | **[tiro_string_cstr](/docs/api/files/objects_8h#function-tiro_string_cstr)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, char ** result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content and creates a new zero terminated c string, which is assigned to `*result`.  |
 | void | **[tiro_result_value](/docs/api/files/objects_8h#function-tiro_result_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) out, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the value from the result in `instance` and writes it into `out`.  |
-| void | **[tiro_result_reason](/docs/api/files/objects_8h#function-tiro_result_reason)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) out, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the reason from the result in `instance` and writes it into `out`.  |
 | bool | **[tiro_result_is_success](/docs/api/files/objects_8h#function-tiro_result_is_success)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance)<br>Returns true if the result in `instance` represents success.  |
-| bool | **[tiro_result_is_failure](/docs/api/files/objects_8h#function-tiro_result_is_failure)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance)<br>Returns true if the result in `instance` represents failure.  |
+| bool | **[tiro_result_is_error](/docs/api/files/objects_8h#function-tiro_result_is_error)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance)<br>Returns true if the result in `instance` represents an error.  |
+| void | **[tiro_result_error](/docs/api/files/objects_8h#function-tiro_result_error)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) out, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the error from the result in `instance` and writes it into `out`.  |
 | void | **[tiro_record_set](/docs/api/files/objects_8h#function-tiro_record_set)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) record, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) key, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Sets the record's value associated with the given `key` to `value`.  |
 | void | **[tiro_record_keys](/docs/api/files/objects_8h#function-tiro_record_keys)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) record, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves an array of valid keys for the given record.  |
 | void | **[tiro_record_get](/docs/api/files/objects_8h#function-tiro_record_get)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) record, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) key, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the value associated with the given key on this record.  |
@@ -66,7 +69,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_make_module](/docs/api/files/objects_8h#function-tiro_make_module)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * name, [tiro_module_member_t](/docs/api/classes/structtiro__module__member__t) * members, size_t members_length, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Creates a new module with the given `name` from the given `members` list.  |
 | void | **[tiro_make_integer](/docs/api/files/objects_8h#function-tiro_make_integer)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, int64_t value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs an integer with the given value.  |
 | void | **[tiro_make_float](/docs/api/files/objects_8h#function-tiro_make_float)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, double value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a float with the given value.  |
-| void | **[tiro_make_failure](/docs/api/files/objects_8h#function-tiro_make_failure)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) reason, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new failed result with the given reason.  |
+| void | **[tiro_make_error](/docs/api/files/objects_8h#function-tiro_make_error)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) error, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new error result with the given error.  |
 | void | **[tiro_make_coroutine](/docs/api/files/objects_8h#function-tiro_make_coroutine)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) func, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) arguments, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new coroutine that will execute the given function.  |
 | void | **[tiro_make_boolean](/docs/api/files/objects_8h#function-tiro_make_boolean)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, bool value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the specified boolean value via the output argument `result`.  |
 | void | **[tiro_make_async_function](/docs/api/files/objects_8h#function-tiro_make_async_function)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) name, [tiro_async_function_t](/docs/api/files/objects_8h#typedef-tiro_async_function_t) func, size_t argc, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) closure, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new function object with the given name that will invoke the native function `func` when called.  |
@@ -75,6 +78,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | const char * | **[tiro_kind_str](/docs/api/files/objects_8h#function-tiro_kind_str)**([tiro_kind_t](/docs/api/files/objects_8h#typedef-tiro_kind_t) kind)<br>Returns the name of the kind, formatted as a string.  |
 | int64_t | **[tiro_integer_value](/docs/api/files/objects_8h#function-tiro_integer_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value)<br>Returns `value` converted to an integer.  |
 | double | **[tiro_float_value](/docs/api/files/objects_8h#function-tiro_float_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value)<br>Returns the floating point of `value`.  |
+| void | **[tiro_exception_message](/docs/api/files/objects_8h#function-tiro_exception_message)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) instance, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the message from the exception in `instance` and writes it into `result`.  |
 | bool | **[tiro_coroutine_started](/docs/api/files/objects_8h#function-tiro_coroutine_started)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) coroutine)<br>Returns true if the coroutine has been started, false otherwise.  |
 | void | **[tiro_coroutine_start](/docs/api/files/objects_8h#function-tiro_coroutine_start)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) coroutine, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Starts the given coroutine by scheduling it for execution.  |
 | void | **[tiro_coroutine_set_callback](/docs/api/files/objects_8h#function-tiro_coroutine_set_callback)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) coroutine, [tiro_coroutine_callback](/docs/api/files/objects_8h#typedef-tiro_coroutine_callback) callback, [tiro_coroutine_cleanup](/docs/api/files/objects_8h#typedef-tiro_coroutine_cleanup) cleanup, void * userdata, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Schedules the given callback to be invoked once the coroutine completes.  |
@@ -167,6 +171,7 @@ Represents the kind of a tiro value.
 | TIRO_KIND_INTEGER | | Value is an integer.   |
 | TIRO_KIND_FUNCTION | | Value is a function.   |
 | TIRO_KIND_FLOAT | | Value is a floating point number.   |
+| TIRO_KIND_EXCEPTION | | Value is an exception.   |
 | TIRO_KIND_COROUTINE | | Value is a coroutine.   |
 | TIRO_KIND_BOOLEAN | | Value is true or false.   |
 | TIRO_KIND_ARRAY | | Value is an array.   |
@@ -272,6 +277,18 @@ Outputs a string representing the given value.
 
 The string is assigned to `result`. 
 
+
+### function tiro_value_same
+
+```cpp
+bool tiro_value_same(
+    tiro_vm_t vm,
+    tiro_handle_t a,
+    tiro_handle_t b
+)
+```
+
+Returns true if and only if `a` and `b` refer to exactly the same value. 
 
 ### function tiro_value_kind
 
@@ -468,22 +485,6 @@ Retrieves the value from the result in `instance` and writes it into `out`.
 Returns `TIRO_ERROR_BAD_STATE` if the result does not represent success, or `TIRO_ERROR_BAD_TYPE` if the instance is no result at all. 
 
 
-### function tiro_result_reason
-
-```cpp
-void tiro_result_reason(
-    tiro_vm_t vm,
-    tiro_handle_t instance,
-    tiro_handle_t out,
-    tiro_error_t * err
-)
-```
-
-Retrieves the reason from the result in `instance` and writes it into `out`. 
-
-Returns `TIRO_ERROR_BAD_STATE` if the result does not represent failure, or `TIRO_ERROR_BAD_TYPE` if the instance is no result at all. 
-
-
 ### function tiro_result_is_success
 
 ```cpp
@@ -495,16 +496,32 @@ bool tiro_result_is_success(
 
 Returns true if the result in `instance` represents success. 
 
-### function tiro_result_is_failure
+### function tiro_result_is_error
 
 ```cpp
-bool tiro_result_is_failure(
+bool tiro_result_is_error(
     tiro_vm_t vm,
     tiro_handle_t instance
 )
 ```
 
-Returns true if the result in `instance` represents failure. 
+Returns true if the result in `instance` represents an error. 
+
+### function tiro_result_error
+
+```cpp
+void tiro_result_error(
+    tiro_vm_t vm,
+    tiro_handle_t instance,
+    tiro_handle_t out,
+    tiro_error_t * err
+)
+```
+
+Retrieves the error from the result in `instance` and writes it into `out`. 
+
+Returns `TIRO_ERROR_BAD_STATE` if the result does not represent an error, or `TIRO_ERROR_BAD_TYPE` if the instance is no result at all. 
+
 
 ### function tiro_record_set
 
@@ -812,18 +829,18 @@ Constructs a float with the given value.
 Returns `TIRO_ERROR_ALLOC` on allocation failure. 
 
 
-### function tiro_make_failure
+### function tiro_make_error
 
 ```cpp
-void tiro_make_failure(
+void tiro_make_error(
     tiro_vm_t vm,
-    tiro_handle_t reason,
+    tiro_handle_t error,
     tiro_handle_t result,
     tiro_error_t * err
 )
 ```
 
-Constructs a new failed result with the given reason. 
+Constructs a new error result with the given error. 
 
 The new object will be placed into `result`. 
 
@@ -956,6 +973,22 @@ double tiro_float_value(
 Returns the floating point of `value`. 
 
 This function supports conversion for integer values, all other values will return 0 (use `tiro_value_kind` to disambiguate between types). 
+
+
+### function tiro_exception_message
+
+```cpp
+void tiro_exception_message(
+    tiro_vm_t vm,
+    tiro_handle_t instance,
+    tiro_handle_t result,
+    tiro_error_t * err
+)
+```
+
+Retrieves the message from the exception in `instance` and writes it into `result`. 
+
+When this call is successful, `result` will reference a string. Returns `TIRO_ERROR_BAD_TYPE` if the instance is no exception. 
 
 
 ### function tiro_coroutine_started
@@ -1231,4 +1264,4 @@ Returns `TIRO_ERROR_BAD_TYPE` if the value is not an array.
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:20 CEST

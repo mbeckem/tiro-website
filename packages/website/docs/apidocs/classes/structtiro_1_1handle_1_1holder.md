@@ -7,6 +7,8 @@ title: tiro::handle::holder
 
 
 
+
+
 ## Public Functions
 
 |                | Name           |
@@ -96,4 +98,4 @@ tiro_handle_t handle;
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST

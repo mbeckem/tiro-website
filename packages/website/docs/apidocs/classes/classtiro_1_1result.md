@@ -8,6 +8,8 @@ title: tiro::result
 
 
 
+
+
 `#include "tiropp/objects.hpp"`
 
 Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
@@ -20,11 +22,11 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 | | **[result](/docs/api/classes/classtiro_1_1result#function-result)**([handle](/docs/api/classes/classtiro_1_1handle) h) |
 | | **[result](/docs/api/classes/classtiro_1_1result#function-result)**(const [result](/docs/api/classes/classtiro_1_1result) & ) =default |
 | | **[result](/docs/api/classes/classtiro_1_1result#function-result)**([result](/docs/api/classes/classtiro_1_1result) && ) =default |
-| [handle](/docs/api/classes/classtiro_1_1handle) | **[reason](/docs/api/classes/classtiro_1_1result#function-reason)**() const |
 | [result](/docs/api/classes/classtiro_1_1result) & | **[operator=](/docs/api/classes/classtiro_1_1result#function-operator=)**(const [result](/docs/api/classes/classtiro_1_1result) & ) =default |
 | [result](/docs/api/classes/classtiro_1_1result) & | **[operator=](/docs/api/classes/classtiro_1_1result#function-operator=)**([result](/docs/api/classes/classtiro_1_1result) && ) =default |
 | bool | **[is_success](/docs/api/classes/classtiro_1_1result#function-is_success)**() const |
-| bool | **[is_failure](/docs/api/classes/classtiro_1_1result#function-is_failure)**() const |
+| bool | **[is_error](/docs/api/classes/classtiro_1_1result#function-is_error)**() const |
+| [handle](/docs/api/classes/classtiro_1_1handle) | **[error](/docs/api/classes/classtiro_1_1result#function-error)**() const |
 
 ## Additional inherited members
 
@@ -100,13 +102,6 @@ result(
 ```
 
 
-### function reason
-
-```cpp
-inline handle reason() const
-```
-
-
 ### function operator=
 
 ```cpp
@@ -132,13 +127,20 @@ inline bool is_success() const
 ```
 
 
-### function is_failure
+### function is_error
 
 ```cpp
-inline bool is_failure() const
+inline bool is_error() const
+```
+
+
+### function error
+
+```cpp
+inline handle error() const
 ```
 
 
 -------------------------------
 
-Updated on  5 May 2021 at 11:21:35 CEST
+Updated on 24 July 2021 at 14:32:19 CEST
