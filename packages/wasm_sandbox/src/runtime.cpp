@@ -186,7 +186,7 @@ ExecuteResult Program::execute_impl(const ExecuteOptions& options) {
             result.value = ret.value().to_string().value();
             result.success = true;
         } else {
-            result.error = ret.reason().to_string().value();
+            result.error = ret.error().to_string().value();
             result.success = false;
         }
         return result;
