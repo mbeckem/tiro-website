@@ -16,16 +16,16 @@ title: tiro::detail::resource_holder
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[~resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-~resource_holder)**() |
 | | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource_holder)**() =default |
 | | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource_holder)**(Resource res) |
+| | **[~resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-~resource_holder)**() |
 | | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource_holder)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
+| [resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) & | **[operator=](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator=)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
+| Resource | **[get](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-get)**() const |
+| | **[operator Resource](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-resource)**() const |
+| | **[operator bool](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-bool)**() const |
 | void | **[reset](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-reset)**() |
 | Resource * | **[out](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-out)**() |
-| [resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) & | **[operator=](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator=)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
-| | **[operator bool](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-bool)**() const |
-| | **[operator Resource](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-resource)**() const |
-| Resource | **[get](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-get)**() const |
 
 ## Detailed Description
 
@@ -36,13 +36,6 @@ class tiro::detail::resource_holder;
 ```
 
 ## Public Functions Documentation
-
-### function ~resource_holder
-
-```cpp
-inline ~resource_holder()
-```
-
 
 ### function resource_holder
 
@@ -60,12 +53,49 @@ inline resource_holder(
 ```
 
 
+### function ~resource_holder
+
+```cpp
+inline ~resource_holder()
+```
+
+
 ### function resource_holder
 
 ```cpp
 inline resource_holder(
     resource_holder && other
 )
+```
+
+
+### function operator=
+
+```cpp
+inline resource_holder & operator=(
+    resource_holder && other
+)
+```
+
+
+### function get
+
+```cpp
+inline Resource get() const
+```
+
+
+### function operator Resource
+
+```cpp
+inline operator Resource() const
+```
+
+
+### function operator bool
+
+```cpp
+inline explicit operator bool() const
 ```
 
 
@@ -83,36 +113,6 @@ inline Resource * out()
 ```
 
 
-### function operator=
-
-```cpp
-inline resource_holder & operator=(
-    resource_holder && other
-)
-```
-
-
-### function operator bool
-
-```cpp
-inline explicit operator bool() const
-```
-
-
-### function operator Resource
-
-```cpp
-inline operator Resource() const
-```
-
-
-### function get
-
-```cpp
-inline Resource get() const
-```
-
-
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

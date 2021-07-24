@@ -27,10 +27,10 @@ Inherits from [generic_error](/docs/api/classes/classtiro_1_1generic__error), [e
 
 |                | Name           |
 | -------------- | -------------- |
-| virtual const char * | **[what](/docs/api/classes/classtiro_1_1generic__error#function-what)**() const override |
-| virtual const char * | **[message](/docs/api/classes/classtiro_1_1generic__error#function-message)**() const override<br>A simple message line that describes the error condition. Never null.  |
 | | **[generic_error](/docs/api/classes/classtiro_1_1generic__error#function-generic_error)**(std::string message) |
+| virtual const char * | **[message](/docs/api/classes/classtiro_1_1generic__error#function-message)**() const override<br>A simple message line that describes the error condition. Never null.  |
 | virtual const char * | **[details](/docs/api/classes/classtiro_1_1generic__error#function-details)**() const override<br>Optional detailed error information. Never null, but may be empty.  |
+| virtual const char * | **[what](/docs/api/classes/classtiro_1_1generic__error#function-what)**() const override |
 
 **Public Functions inherited from [error](/docs/api/classes/classtiro_1_1error)**
 
@@ -53,4 +53,4 @@ inline explicit bad_handle_check(
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

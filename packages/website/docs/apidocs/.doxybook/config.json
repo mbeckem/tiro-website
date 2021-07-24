@@ -33,7 +33,7 @@
     "linkSuffix": "",
     "mainPageInRoot": false,
     "mainPageName": "indexpage",
-    "sort": true,
+    "sort": false,
     "templateIndexClasses": "index_classes",
     "templateIndexExamples": "index_examples",
     "templateIndexFiles": "index_files",

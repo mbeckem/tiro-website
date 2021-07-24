@@ -17,8 +17,8 @@ Represents a string that is not necessarily zero terminated.  [More...](#detaile
 
 |                | Name           |
 | -------------- | -------------- |
-| size_t | **[length](/docs/api/classes/structtiro__string#variable-length)** <br>number of bytes in `data`.  |
 | const char * | **[data](/docs/api/classes/structtiro__string#variable-data)** <br>string data, utf8 encoded.  |
+| size_t | **[length](/docs/api/classes/structtiro__string#variable-length)** <br>number of bytes in `data`.  |
 
 ## Detailed Description
 
@@ -32,14 +32,6 @@ Represents a string that is not necessarily zero terminated.
 
 ## Public Attributes Documentation
 
-### variable length
-
-```cpp
-size_t length;
-```
-
-number of bytes in `data`. 
-
 ### variable data
 
 ```cpp
@@ -48,6 +40,14 @@ const char * data;
 
 string data, utf8 encoded. 
 
+### variable length
+
+```cpp
+size_t length;
+```
+
+number of bytes in `data`. 
+
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

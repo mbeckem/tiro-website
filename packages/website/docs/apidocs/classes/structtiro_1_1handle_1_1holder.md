@@ -13,12 +13,12 @@ title: tiro::handle::holder
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[~holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-~holder)**() |
-| void | **[reset](/docs/api/classes/structtiro_1_1handle_1_1holder#function-reset)**() |
-| holder & | **[operator=](/docs/api/classes/structtiro_1_1handle_1_1holder#function-operator=)**(holder && other) |
 | | **[holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-holder)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm_, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) handle_) |
 | | **[holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-holder)**(holder && other) |
+| | **[~holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-~holder)**() |
+| holder & | **[operator=](/docs/api/classes/structtiro_1_1handle_1_1holder#function-operator=)**(holder && other) |
 | void | **[assign](/docs/api/classes/structtiro_1_1handle_1_1holder#function-assign)**([tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) h) |
+| void | **[reset](/docs/api/classes/structtiro_1_1handle_1_1holder#function-reset)**() |
 
 ## Public Attributes
 
@@ -28,29 +28,6 @@ title: tiro::handle::holder
 | [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) | **[handle](/docs/api/classes/structtiro_1_1handle_1_1holder#variable-handle)**  |
 
 ## Public Functions Documentation
-
-### function ~holder
-
-```cpp
-inline ~holder()
-```
-
-
-### function reset
-
-```cpp
-inline void reset()
-```
-
-
-### function operator=
-
-```cpp
-inline holder & operator=(
-    holder && other
-)
-```
-
 
 ### function holder
 
@@ -71,12 +48,35 @@ inline holder(
 ```
 
 
+### function ~holder
+
+```cpp
+inline ~holder()
+```
+
+
+### function operator=
+
+```cpp
+inline holder & operator=(
+    holder && other
+)
+```
+
+
 ### function assign
 
 ```cpp
 inline void assign(
     tiro_handle_t h
 )
+```
+
+
+### function reset
+
+```cpp
+inline void reset()
 ```
 
 
@@ -98,4 +98,4 @@ tiro_handle_t handle;
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

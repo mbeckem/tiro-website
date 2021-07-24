@@ -19,22 +19,36 @@ Inherits from [error](/docs/api/classes/classtiro_1_1error), exception
 
 |                | Name           |
 | -------------- | -------------- |
-| const char * | **[what](/docs/api/classes/classtiro_1_1api__error#function-what)**() const override |
+| | **[api_error](/docs/api/classes/classtiro_1_1api__error#function-api_error)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) raw_error)<br>Constructs a new error from the given raw error.  |
+| [api_errc](/docs/api/namespaces/namespacetiro#enum-api_errc) | **[code](/docs/api/classes/classtiro_1_1api__error#function-code)**() const<br>Returns the error code represented by this error.  |
 | [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) | **[raw_error](/docs/api/classes/classtiro_1_1api__error#function-raw_error)**() const<br>Returns the wrapped tiro_error_t instance.  |
 | const char * | **[name](/docs/api/classes/classtiro_1_1api__error#function-name)**() const<br>Returns the name of the error (never null).  |
 | virtual const char * | **[message](/docs/api/classes/classtiro_1_1api__error#function-message)**() const override<br>Returns the human readable error message (never null).  |
 | virtual const char * | **[details](/docs/api/classes/classtiro_1_1api__error#function-details)**() const override<br>Returns detailed error information (may be the empty string, but never null).  |
-| [api_errc](/docs/api/namespaces/namespacetiro#enum-api_errc) | **[code](/docs/api/classes/classtiro_1_1api__error#function-code)**() const<br>Returns the error code represented by this error.  |
-| | **[api_error](/docs/api/classes/classtiro_1_1api__error#function-api_error)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) raw_error)<br>Constructs a new error from the given raw error.  |
+| const char * | **[what](/docs/api/classes/classtiro_1_1api__error#function-what)**() const override |
 
 ## Public Functions Documentation
 
-### function what
+### function api_error
 
 ```cpp
-inline const char * what() const override
+inline explicit api_error(
+    tiro_error_t raw_error
+)
 ```
 
+Constructs a new error from the given raw error. 
+
+The error takes ownership of the raw error. 
+
+
+### function code
+
+```cpp
+inline api_errc code() const
+```
+
+Returns the error code represented by this error. 
 
 ### function raw_error
 
@@ -74,27 +88,13 @@ Returns detailed error information (may be the empty string, but never null).
 **Reimplements**: [tiro::error::details](/docs/api/classes/classtiro_1_1error#function-details)
 
 
-### function code
+### function what
 
 ```cpp
-inline api_errc code() const
+inline const char * what() const override
 ```
-
-Returns the error code represented by this error. 
-
-### function api_error
-
-```cpp
-inline explicit api_error(
-    tiro_error_t raw_error
-)
-```
-
-Constructs a new error from the given raw error. 
-
-The error takes ownership of the raw error. 
 
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

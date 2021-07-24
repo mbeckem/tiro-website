@@ -18,21 +18,21 @@ Contains basic type and macro definitions.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
+| typedef struct tiro_error * | **[tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t)**  |
 | typedef struct tiro_vm * | **[tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t)**  |
-| typedef struct tiro_sync_frame * | **[tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t)**  |
-| typedef struct [tiro_string](/docs/api/classes/structtiro__string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t)** <br>Represents a string that is not necessarily zero terminated.  |
+| typedef struct tiro_compiler * | **[tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t)**  |
 | typedef struct tiro_module * | **[tiro_module_t](/docs/api/files/def_8h#typedef-tiro_module_t)**  |
 | typedef struct tiro_value * | **[tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t)**  |
-| typedef struct tiro_error * | **[tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t)**  |
-| typedef struct tiro_compiler * | **[tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t)**  |
+| typedef struct tiro_sync_frame * | **[tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t)**  |
 | typedef struct tiro_async_frame * | **[tiro_async_frame_t](/docs/api/files/def_8h#typedef-tiro_async_frame_t)**  |
+| typedef struct [tiro_string](/docs/api/classes/structtiro__string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t)** <br>Represents a string that is not necessarily zero terminated.  |
 
 ## Defines
 
 |                | Name           |
 | -------------- | -------------- |
-|  | **[TIRO_WARN_UNUSED](/docs/api/files/def_8h#define-tiro_warn_unused)**  |
 |  | **[TIRO_API](/docs/api/files/def_8h#define-tiro_api)**  |
+|  | **[TIRO_WARN_UNUSED](/docs/api/files/def_8h#define-tiro_warn_unused)**  |
 
 ## Detailed Description
 
@@ -42,6 +42,13 @@ This file is included by all other api headers.
 
 ## Types Documentation
 
+### typedef tiro_error_t
+
+```cpp
+typedef struct tiro_error* tiro_error_t;
+```
+
+
 ### typedef tiro_vm_t
 
 ```cpp
@@ -49,22 +56,11 @@ typedef struct tiro_vm* tiro_vm_t;
 ```
 
 
-### typedef tiro_sync_frame_t
+### typedef tiro_compiler_t
 
 ```cpp
-typedef struct tiro_sync_frame* tiro_sync_frame_t;
+typedef struct tiro_compiler* tiro_compiler_t;
 ```
-
-
-### typedef tiro_string_t
-
-```cpp
-typedef struct tiro_string tiro_string_t;
-```
-
-Represents a string that is not necessarily zero terminated. 
-
-`data` must have `length` readable bytes. `data` is allowed to be NULL (or any other invalid pointer) if and only if `length` is 0. 
 
 
 ### typedef tiro_module_t
@@ -81,17 +77,10 @@ typedef struct tiro_value* tiro_handle_t;
 ```
 
 
-### typedef tiro_error_t
+### typedef tiro_sync_frame_t
 
 ```cpp
-typedef struct tiro_error* tiro_error_t;
-```
-
-
-### typedef tiro_compiler_t
-
-```cpp
-typedef struct tiro_compiler* tiro_compiler_t;
+typedef struct tiro_sync_frame* tiro_sync_frame_t;
 ```
 
 
@@ -102,17 +91,21 @@ typedef struct tiro_async_frame* tiro_async_frame_t;
 ```
 
 
+### typedef tiro_string_t
+
+```cpp
+typedef struct tiro_string tiro_string_t;
+```
+
+Represents a string that is not necessarily zero terminated. 
+
+`data` must have `length` readable bytes. `data` is allowed to be NULL (or any other invalid pointer) if and only if `length` is 0. 
+
+
 
 
 
 ## Macros Documentation
-
-### define TIRO_WARN_UNUSED
-
-```cpp
-#define TIRO_WARN_UNUSED 
-```
-
 
 ### define TIRO_API
 
@@ -121,8 +114,15 @@ typedef struct tiro_async_frame* tiro_async_frame_t;
 ```
 
 
+### define TIRO_WARN_UNUSED
+
+```cpp
+#define TIRO_WARN_UNUSED 
+```
+
+
 
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

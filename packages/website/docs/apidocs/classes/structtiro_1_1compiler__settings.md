@@ -22,11 +22,11 @@ title: tiro::compiler_settings
 
 |                | Name           |
 | -------------- | -------------- |
-| [message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message_callback_type) | **[message_callback](/docs/api/classes/structtiro_1_1compiler__settings#variable-message_callback)**  |
-| bool | **[enable_dump_ir](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_ir)**  |
 | bool | **[enable_dump_cst](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_cst)**  |
-| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_bytecode)**  |
 | bool | **[enable_dump_ast](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_ast)**  |
+| bool | **[enable_dump_ir](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_ir)**  |
+| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_bytecode)**  |
+| [message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message_callback_type) | **[message_callback](/docs/api/classes/structtiro_1_1compiler__settings#variable-message_callback)**  |
 
 ## Public Types Documentation
 
@@ -39,31 +39,10 @@ using message_callback_type =  std::function<void(severity sev, uint32_t line, u
 
 ## Public Attributes Documentation
 
-### variable message_callback
-
-```cpp
-message_callback_type message_callback;
-```
-
-
-### variable enable_dump_ir
-
-```cpp
-bool enable_dump_ir = false;
-```
-
-
 ### variable enable_dump_cst
 
 ```cpp
 bool enable_dump_cst = false;
-```
-
-
-### variable enable_dump_bytecode
-
-```cpp
-bool enable_dump_bytecode = false;
 ```
 
 
@@ -74,6 +53,27 @@ bool enable_dump_ast = false;
 ```
 
 
+### variable enable_dump_ir
+
+```cpp
+bool enable_dump_ir = false;
+```
+
+
+### variable enable_dump_bytecode
+
+```cpp
+bool enable_dump_bytecode = false;
+```
+
+
+### variable message_callback
+
+```cpp
+message_callback_type message_callback;
+```
+
+
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

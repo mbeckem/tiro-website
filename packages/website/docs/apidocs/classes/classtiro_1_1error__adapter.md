@@ -16,18 +16,34 @@ title: tiro::error_adapter
 
 |                | Name           |
 | -------------- | -------------- |
+| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error_adapter)**() =default |
 | | **[~error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-~error_adapter)**() |
+| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error_adapter)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) |
 | [error_adapter](/docs/api/classes/classtiro_1_1error__adapter) & | **[operator=](/docs/api/classes/classtiro_1_1error__adapter#function-operator=)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) |
 | | **[operator tiro_error_t *](/docs/api/classes/classtiro_1_1error__adapter#function-operator-tiro_error_t-*)**() |
-| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error_adapter)**() =default |
-| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error_adapter)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) |
 
 ## Public Functions Documentation
+
+### function error_adapter
+
+```cpp
+error_adapter() =default
+```
+
 
 ### function ~error_adapter
 
 ```cpp
 inline ~error_adapter()
+```
+
+
+### function error_adapter
+
+```cpp
+error_adapter(
+    error_adapter && 
+)
 ```
 
 
@@ -47,22 +63,6 @@ inline operator tiro_error_t *()
 ```
 
 
-### function error_adapter
-
-```cpp
-error_adapter() =default
-```
-
-
-### function error_adapter
-
-```cpp
-error_adapter(
-    error_adapter && 
-)
-```
-
-
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

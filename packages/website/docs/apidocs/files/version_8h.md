@@ -21,10 +21,10 @@ Contains version information both at compile time and runtime.
 
 |                | Name           |
 | -------------- | -------------- |
+|  | **[TIRO_MAKE_VERSION](/docs/api/files/version_8h#define-tiro_make_version)**(major, minor, patch) <br>Tiro uses semantic versioning.  |
 |  | **[TIRO_VERSION_NUMBER](/docs/api/files/version_8h#define-tiro_version_number)** <br>The library's version number as a build-time constant.  |
 |  | **[TIRO_VERSION](/docs/api/files/version_8h#define-tiro_version)** <br>The library's version string as a build-time constant.  |
 |  | **[TIRO_SOURCE_ID](/docs/api/files/version_8h#define-tiro_source_id)** <br>The full source id (from version control) as a build-time constant.  |
-|  | **[TIRO_MAKE_VERSION](/docs/api/files/version_8h#define-tiro_make_version)**(major, minor, patch) <br>Tiro uses semantic versioning.  |
 |  | **[TIRO_FULL_VERSION](/docs/api/files/version_8h#define-tiro_full_version)** <br>The full version string as a build-time constant.  |
 
 
@@ -78,6 +78,24 @@ The returned string points into static storage and must not be modified.
 
 ## Macros Documentation
 
+### define TIRO_MAKE_VERSION
+
+```cpp
+#define TIRO_MAKE_VERSION(
+    major,
+    minor,
+    patch
+)
+    (uint32_t)((major) * 1000000 + (minor) * 1000 + (patch))
+```
+
+Tiro uses semantic versioning. 
+
+The version number is incremented for every api change. The following macro constructs a single version number by combining the major, minor and patch version parts. The final version number supports comparison through relational operators.
+
+Note that the individual version number parts must be smaller than 1000. 
+
+
 ### define TIRO_VERSION_NUMBER
 
 ```cpp
@@ -102,24 +120,6 @@ The library's version string as a build-time constant.
 
 The full source id (from version control) as a build-time constant. 
 
-### define TIRO_MAKE_VERSION
-
-```cpp
-#define TIRO_MAKE_VERSION(
-    major,
-    minor,
-    patch
-)
-    (uint32_t)((major) * 1000000 + (minor) * 1000 + (patch))
-```
-
-Tiro uses semantic versioning. 
-
-The version number is incremented for every api change. The following macro constructs a single version number by combining the major, minor and patch version parts. The final version number supports comparison through relational operators.
-
-Note that the individual version number parts must be smaller than 1000. 
-
-
 ### define TIRO_FULL_VERSION
 
 ```cpp
@@ -132,4 +132,4 @@ The full version string as a build-time constant.
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

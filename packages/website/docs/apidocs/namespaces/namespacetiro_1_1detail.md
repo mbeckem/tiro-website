@@ -12,8 +12,8 @@ title: tiro::detail
 |                | Name           |
 | -------------- | -------------- |
 | class | **[tiro::detail::resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder)**  |
-| struct | **[tiro::detail::native_type_data](/docs/api/classes/structtiro_1_1detail_1_1native__type__data)**  |
 | struct | **[tiro::detail::native_traits](/docs/api/classes/structtiro_1_1detail_1_1native__traits)**  |
+| struct | **[tiro::detail::native_type_data](/docs/api/classes/structtiro_1_1detail_1_1native__type__data)**  |
 
 ## Functions
 
@@ -41,4 +41,4 @@ void check_handles(
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

@@ -17,11 +17,11 @@ title: tiropp/error.hpp
 
 |                | Name           |
 | -------------- | -------------- |
-| class | **[tiro::generic_error](/docs/api/classes/classtiro_1_1generic__error)** <br>Generic error with a simple message.  |
-| class | **[tiro::error_adapter](/docs/api/classes/classtiro_1_1error__adapter)**  |
 | class | **[tiro::error](/docs/api/classes/classtiro_1_1error)** <br>Base class for all errors thrown by this library.  |
+| class | **[tiro::generic_error](/docs/api/classes/classtiro_1_1generic__error)** <br>Generic error with a simple message.  |
 | class | **[tiro::bad_handle_check](/docs/api/classes/classtiro_1_1bad__handle__check)** <br>Thrown when a debug mode handle check failed.  |
 | class | **[tiro::api_error](/docs/api/classes/classtiro_1_1api__error)** <br>Represents an error thrown by the tiro c library.  |
+| class | **[tiro::error_adapter](/docs/api/classes/classtiro_1_1error__adapter)**  |
 
 
 
@@ -30,4 +30,4 @@ title: tiropp/error.hpp
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

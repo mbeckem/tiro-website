@@ -19,17 +19,20 @@ Inherits from [error](/docs/api/classes/classtiro_1_1error), exception
 
 |                | Name           |
 | -------------- | -------------- |
-| virtual const char * | **[what](/docs/api/classes/classtiro_1_1bad__handle__cast#function-what)**() const override |
+| | **[bad_handle_cast](/docs/api/classes/classtiro_1_1bad__handle__cast#function-bad_handle_cast)**([value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind) actual, [value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind) expected) |
 | virtual const char * | **[message](/docs/api/classes/classtiro_1_1bad__handle__cast#function-message)**() const override<br>A simple message line that describes the error condition. Never null.  |
 | virtual const char * | **[details](/docs/api/classes/classtiro_1_1bad__handle__cast#function-details)**() const override<br>Optional detailed error information. Never null, but may be empty.  |
-| | **[bad_handle_cast](/docs/api/classes/classtiro_1_1bad__handle__cast#function-bad_handle_cast)**([value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind) actual, [value_kind](/docs/api/namespaces/namespacetiro#enum-value_kind) expected) |
+| virtual const char * | **[what](/docs/api/classes/classtiro_1_1bad__handle__cast#function-what)**() const override |
 
 ## Public Functions Documentation
 
-### function what
+### function bad_handle_cast
 
 ```cpp
-inline virtual const char * what() const override
+inline explicit bad_handle_cast(
+    value_kind actual,
+    value_kind expected
+)
 ```
 
 
@@ -55,16 +58,13 @@ Optional detailed error information. Never null, but may be empty.
 **Reimplements**: [tiro::error::details](/docs/api/classes/classtiro_1_1error#function-details)
 
 
-### function bad_handle_cast
+### function what
 
 ```cpp
-inline explicit bad_handle_cast(
-    value_kind actual,
-    value_kind expected
-)
+inline virtual const char * what() const override
 ```
 
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

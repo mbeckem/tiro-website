@@ -18,12 +18,12 @@ title: tiro::sync_frame
 | -------------- | -------------- |
 | | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync_frame)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) raw_vm, [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) raw_frame) |
 | | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync_frame)**(const [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & ) |
-| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) | **[raw_vm](/docs/api/classes/classtiro_1_1sync__frame#function-raw_vm)**() const |
-| [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) | **[raw_frame](/docs/api/classes/classtiro_1_1sync__frame#function-raw_frame)**() const |
 | [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & | **[operator=](/docs/api/classes/classtiro_1_1sync__frame#function-operator=)**(const [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & ) |
-| [handle](/docs/api/classes/classtiro_1_1handle) | **[closure](/docs/api/classes/classtiro_1_1sync__frame#function-closure)**() const |
 | size_t | **[argc](/docs/api/classes/classtiro_1_1sync__frame#function-argc)**() const |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[arg](/docs/api/classes/classtiro_1_1sync__frame#function-arg)**(size_t index) const |
+| [handle](/docs/api/classes/classtiro_1_1handle) | **[closure](/docs/api/classes/classtiro_1_1sync__frame#function-closure)**() const |
+| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) | **[raw_vm](/docs/api/classes/classtiro_1_1sync__frame#function-raw_vm)**() const |
+| [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) | **[raw_frame](/docs/api/classes/classtiro_1_1sync__frame#function-raw_frame)**() const |
 
 ## Public Functions Documentation
 
@@ -46,33 +46,12 @@ sync_frame(
 ```
 
 
-### function raw_vm
-
-```cpp
-inline tiro_vm_t raw_vm() const
-```
-
-
-### function raw_frame
-
-```cpp
-inline tiro_sync_frame_t raw_frame() const
-```
-
-
 ### function operator=
 
 ```cpp
 sync_frame & operator=(
     const sync_frame & 
 )
-```
-
-
-### function closure
-
-```cpp
-inline handle closure() const
 ```
 
 
@@ -92,6 +71,27 @@ inline handle arg(
 ```
 
 
+### function closure
+
+```cpp
+inline handle closure() const
+```
+
+
+### function raw_vm
+
+```cpp
+inline tiro_vm_t raw_vm() const
+```
+
+
+### function raw_frame
+
+```cpp
+inline tiro_sync_frame_t raw_frame() const
+```
+
+
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

@@ -11,8 +11,8 @@ title: tiropp/detail/handle_check.hpp
 
 | Name           |
 | -------------- |
-| **[tiro::detail](/docs/api/namespaces/namespacetiro_1_1detail)**  |
 | **[tiro](/docs/api/namespaces/namespacetiro)**  |
+| **[tiro::detail](/docs/api/namespaces/namespacetiro_1_1detail)**  |
 
 
 
@@ -21,4 +21,4 @@ title: tiropp/detail/handle_check.hpp
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

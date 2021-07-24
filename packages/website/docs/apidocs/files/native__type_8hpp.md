@@ -11,17 +11,17 @@ title: tiropp/native_type.hpp
 
 | Name           |
 | -------------- |
-| **[tiro::detail](/docs/api/namespaces/namespacetiro_1_1detail)**  |
 | **[tiro](/docs/api/namespaces/namespacetiro)**  |
+| **[tiro::detail](/docs/api/namespaces/namespacetiro_1_1detail)**  |
 
 ## Classes
 
 |                | Name           |
 | -------------- | -------------- |
-| class | **[tiro::native_type](/docs/api/classes/classtiro_1_1native__type)**  |
-| struct | **[tiro::detail::native_type_data](/docs/api/classes/structtiro_1_1detail_1_1native__type__data)**  |
-| struct | **[tiro::detail::native_traits::layout](/docs/api/classes/structtiro_1_1detail_1_1native__traits_1_1layout)**  |
 | struct | **[tiro::detail::native_traits](/docs/api/classes/structtiro_1_1detail_1_1native__traits)**  |
+| struct | **[tiro::detail::native_traits::layout](/docs/api/classes/structtiro_1_1detail_1_1native__traits_1_1layout)**  |
+| struct | **[tiro::detail::native_type_data](/docs/api/classes/structtiro_1_1detail_1_1native__type__data)**  |
+| class | **[tiro::native_type](/docs/api/classes/classtiro_1_1native__type)**  |
 
 
 
@@ -30,4 +30,4 @@ title: tiropp/native_type.hpp
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

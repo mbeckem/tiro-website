@@ -16,17 +16,10 @@ title: tiro_module_member_t
 
 |                | Name           |
 | -------------- | -------------- |
-| [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) | **[value](/docs/api/classes/structtiro__module__member__t#variable-value)**  |
 | const char * | **[name](/docs/api/classes/structtiro__module__member__t#variable-name)**  |
+| [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) | **[value](/docs/api/classes/structtiro__module__member__t#variable-value)**  |
 
 ## Public Attributes Documentation
-
-### variable value
-
-```cpp
-tiro_handle_t value;
-```
-
 
 ### variable name
 
@@ -35,6 +28,13 @@ const char * name;
 ```
 
 
+### variable value
+
+```cpp
+tiro_handle_t value;
+```
+
+
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

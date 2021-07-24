@@ -18,8 +18,8 @@ title: tiropp/compiler.hpp
 |                | Name           |
 | -------------- | -------------- |
 | struct | **[tiro::compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings)**  |
-| class | **[tiro::compiler](/docs/api/classes/classtiro_1_1compiler)**  |
 | class | **[tiro::compiled_module](/docs/api/classes/classtiro_1_1compiled__module)**  |
+| class | **[tiro::compiler](/docs/api/classes/classtiro_1_1compiler)**  |
 
 
 
@@ -28,4 +28,4 @@ title: tiropp/compiler.hpp
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST

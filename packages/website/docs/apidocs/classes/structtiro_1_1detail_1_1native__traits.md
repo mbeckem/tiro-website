@@ -22,9 +22,9 @@ title: tiro::detail::native_traits
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[finalizer](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-finalizer)**(void * data, ] size_t data_size) |
 | void | **[constructor](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-constructor)**(T && instance, void * data) |
 | T * | **[accessor](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-accessor)**(void * data) |
+| void | **[finalizer](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-finalizer)**(void * data, ] size_t data_size) |
 
 ## Public Attributes
 
@@ -40,16 +40,6 @@ struct tiro::detail::native_traits;
 ```
 
 ## Public Functions Documentation
-
-### function finalizer
-
-```cpp
-static inline void finalizer(
-    void * data,
-    ] size_t data_size
-)
-```
-
 
 ### function constructor
 
@@ -70,6 +60,16 @@ static inline T * accessor(
 ```
 
 
+### function finalizer
+
+```cpp
+static inline void finalizer(
+    void * data,
+    ] size_t data_size
+)
+```
+
+
 ## Public Attributes Documentation
 
 ### variable size
@@ -81,4 +81,4 @@ static constexpr size_t size = sizeof([layout](/docs/api/classes/structtiro_1_1d
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:38:22 CEST
+Updated on 24 July 2021 at 15:41:20 CEST
