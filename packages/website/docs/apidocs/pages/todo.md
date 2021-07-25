@@ -16,4 +16,4 @@ Member [tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro_native_type_
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST

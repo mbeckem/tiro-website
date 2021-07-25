@@ -81,8 +81,8 @@ title: tiro
 | [result](/docs/api/classes/classtiro_1_1result) | **[make_error](/docs/api/namespaces/namespacetiro#function-make_error)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [handle](/docs/api/classes/classtiro_1_1handle) & err) |
 | [coroutine](/docs/api/classes/classtiro_1_1coroutine) | **[make_coroutine](/docs/api/namespaces/namespacetiro#function-make_coroutine)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func, const [handle](/docs/api/classes/classtiro_1_1handle) & arguments)<br>Constructs a new coroutine value.  |
 | [coroutine](/docs/api/classes/classtiro_1_1coroutine) | **[make_coroutine](/docs/api/namespaces/namespacetiro#function-make_coroutine)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func)<br>Constructs a new coroutine value.  |
-| [module](/docs/api/classes/classtiro_1_1module) | **[make_module](/docs/api/namespaces/namespacetiro#function-make_module)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const char * name, const std::vector< std::pair< std::string, [handle](/docs/api/classes/classtiro_1_1handle) >> & exports) |
-| [handle](/docs/api/classes/classtiro_1_1handle) | **[get_export](/docs/api/namespaces/namespacetiro#function-get_export)**(const [vm](/docs/api/classes/classtiro_1_1vm) & v, const char * module_name, const char * export_name)<br>Attempts to find an exported value called `export_name` in the module `module_name`.  |
+| [module](/docs/api/classes/classtiro_1_1module) | **[make_module](/docs/api/namespaces/namespacetiro#function-make_module)**([vm](/docs/api/classes/classtiro_1_1vm) & v, std::string_view name, const std::vector< std::pair< std::string, [handle](/docs/api/classes/classtiro_1_1handle) >> & exports) |
+| [handle](/docs/api/classes/classtiro_1_1handle) | **[get_export](/docs/api/namespaces/namespacetiro#function-get_export)**(const [vm](/docs/api/classes/classtiro_1_1vm) & v, std::string_view module_name, std::string_view export_name)<br>Attempts to find an exported value called `export_name` in the module `module_name`.  |
 | void | **[load_module](/docs/api/namespaces/namespacetiro#function-load_module)**(const [vm](/docs/api/classes/classtiro_1_1vm) & v, const [module](/docs/api/classes/classtiro_1_1module) & m)<br>Attempts to load the given module into the virtual machine.  |
 | template <typename Callback \> <br>void | **[run_async](/docs/api/namespaces/namespacetiro#function-run_async)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func, Callback && cb)<br>Schedules execution of `func` in a new coroutine without any arguments.  |
 | template <typename Callback \> <br>void | **[run_async](/docs/api/namespaces/namespacetiro#function-run_async)**([vm](/docs/api/classes/classtiro_1_1vm) & v, const [function](/docs/api/classes/classtiro_1_1function) & func, const [handle](/docs/api/classes/classtiro_1_1handle) & args, Callback && cb)<br>Schedules execution of `func` in a new coroutine, with the provided arguments.  |
@@ -384,7 +384,7 @@ The coroutine will call the given function without any arguments, once it has be
 ```cpp
 inline module make_module(
     vm & v,
-    const char * name,
+    std::string_view name,
     const std::vector< std::pair< std::string, handle >> & exports
 )
 ```
@@ -395,8 +395,8 @@ inline module make_module(
 ```cpp
 inline handle get_export(
     const vm & v,
-    const char * module_name,
-    const char * export_name
+    std::string_view module_name,
+    std::string_view export_name
 )
 ```
 
@@ -474,4 +474,4 @@ the version the application is currently running against.
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST

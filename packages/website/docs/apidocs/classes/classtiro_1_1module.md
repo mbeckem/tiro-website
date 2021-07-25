@@ -23,7 +23,7 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 | | **[module](/docs/api/classes/classtiro_1_1module#function-module)**([module](/docs/api/classes/classtiro_1_1module) && ) =default |
 | [module](/docs/api/classes/classtiro_1_1module) & | **[operator=](/docs/api/classes/classtiro_1_1module#function-operator=)**(const [module](/docs/api/classes/classtiro_1_1module) & ) =default |
 | [module](/docs/api/classes/classtiro_1_1module) & | **[operator=](/docs/api/classes/classtiro_1_1module#function-operator=)**([module](/docs/api/classes/classtiro_1_1module) && ) =default |
-| [handle](/docs/api/classes/classtiro_1_1handle) | **[get_export](/docs/api/classes/classtiro_1_1module#function-get_export)**(const char * export_name) const |
+| [handle](/docs/api/classes/classtiro_1_1handle) | **[get_export](/docs/api/classes/classtiro_1_1module#function-get_export)**(std::string_view export_name) const |
 
 ## Additional inherited members
 
@@ -114,11 +114,11 @@ module & operator=(
 
 ```cpp
 inline handle get_export(
-    const char * export_name
+    std::string_view export_name
 ) const
 ```
 
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST

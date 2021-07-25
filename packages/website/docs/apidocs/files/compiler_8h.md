@@ -31,7 +31,6 @@ Contains functions and type definitions for compiling tiro source code to module
 | [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) | **[tiro_compiler_new](/docs/api/files/compiler_8h#function-tiro_compiler_new)**(const [tiro_compiler_settings_t](/docs/api/files/compiler_8h#typedef-tiro_compiler_settings_t) * settings, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Allocates a new compiler instance.  |
 | void | **[tiro_compiler_free](/docs/api/files/compiler_8h#function-tiro_compiler_free)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler)<br>Destroys and frees the given compiler instance.  |
 | void | **[tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro_compiler_add_file)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) file_name, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) file_content, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Add a source file to the compiler.  |
-| void | **[tiro_compiler_add_file_cstr](/docs/api/files/compiler_8h#function-tiro_compiler_add_file_cstr)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, const char * file_name, const char * file_content, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Same as [tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro_compiler_add_file), but requires zero terminated strings.  |
 | void | **[tiro_compiler_run](/docs/api/files/compiler_8h#function-tiro_compiler_run)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Run the compiler on the set of source files provided via `tiro_compiler_add_file`.  |
 | bool | **[tiro_compiler_has_module](/docs/api/files/compiler_8h#function-tiro_compiler_has_module)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler)<br>Returns true if this compiler has successfully compiled a set of source files and produced a bytecode module.  |
 | void | **[tiro_compiler_take_module](/docs/api/files/compiler_8h#function-tiro_compiler_take_module)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) compiler, [tiro_module_t](/docs/api/files/def_8h#typedef-tiro_module_t) * module, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Extracts the compiled module from the compiler and returns it.  |
@@ -151,19 +150,6 @@ Can only be called before compilation started.
 
 FIXME: Can only be called for a single source file as of now. 
 
-
-### function tiro_compiler_add_file_cstr
-
-```cpp
-void tiro_compiler_add_file_cstr(
-    tiro_compiler_t compiler,
-    const char * file_name,
-    const char * file_content,
-    tiro_error_t * err
-)
-```
-
-Same as [tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro_compiler_add_file), but requires zero terminated strings. 
 
 ### function tiro_compiler_run
 
@@ -308,4 +294,4 @@ Does nothing if `module` is NULL.
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST

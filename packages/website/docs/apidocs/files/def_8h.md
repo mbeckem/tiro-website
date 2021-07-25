@@ -27,6 +27,12 @@ Contains basic type and macro definitions.  [More...](#detailed-description)
 | typedef struct tiro_async_frame * | **[tiro_async_frame_t](/docs/api/files/def_8h#typedef-tiro_async_frame_t)**  |
 | typedef struct [tiro_string](/docs/api/classes/structtiro__string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t)** <br>Represents a string that is not necessarily zero terminated.  |
 
+## Functions
+
+|                | Name           |
+| -------------- | -------------- |
+| [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) | **[tiro_cstr](/docs/api/files/def_8h#function-tiro_cstr)**(const char * data)<br>Helper function to construct a tiro_string_t from a zero terminated string.  |
+
 ## Defines
 
 |                | Name           |
@@ -103,6 +109,26 @@ Represents a string that is not necessarily zero terminated.
 
 
 
+## Functions Documentation
+
+### function tiro_cstr
+
+```cpp
+inline tiro_string_t tiro_cstr(
+    const char * data
+)
+```
+
+Helper function to construct a tiro_string_t from a zero terminated string. 
+
+**Parameters**: 
+
+  * **data** a zero terminated string, or NULL. 
+
+
+Internally calls strlen on non-NULL inputs to determine their length.
+
+
 
 
 ## Macros Documentation
@@ -125,4 +151,4 @@ Represents a string that is not necessarily zero terminated.
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST

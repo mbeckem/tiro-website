@@ -31,7 +31,7 @@ Functions and type definitions for working with the tiro virtual machine.
 | void | **[tiro_vm_load_std](/docs/api/files/vm_8h#function-tiro_vm_load_std)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Load the default modules provided by the runtime.  |
 | void | **[tiro_vm_load_bytecode](/docs/api/files/vm_8h#function-tiro_vm_load_bytecode)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_module_t](/docs/api/files/def_8h#typedef-tiro_module_t) module, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Loads the compiled module into the virtual machine.  |
 | void | **[tiro_vm_load_module](/docs/api/files/vm_8h#function-tiro_vm_load_module)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) module, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Loads the given module object into the virtual machine.  |
-| void | **[tiro_vm_get_export](/docs/api/files/vm_8h#function-tiro_vm_get_export)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * module_name, const char * function_name, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Attempts to find the exported value with the given name in the specified module.  |
+| void | **[tiro_vm_get_export](/docs/api/files/vm_8h#function-tiro_vm_get_export)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) module_name, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) function_name, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Attempts to find the exported value with the given name in the specified module.  |
 | void | **[tiro_vm_call](/docs/api/files/vm_8h#function-tiro_vm_call)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) function, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) arguments, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Calls the given function and places the function's return value into `result` (if present).  |
 | void | **[tiro_vm_run_ready](/docs/api/files/vm_8h#function-tiro_vm_run_ready)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Runs all ready coroutines.  |
 | bool | **[tiro_vm_has_ready](/docs/api/files/vm_8h#function-tiro_vm_has_ready)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm)<br>Returns true if the virtual machine has at least one coroutine ready for execution, false otherwise.  |
@@ -154,8 +154,8 @@ Returns `TIRO_ERROR_MODULE_EXISTS` if a module with the same name already exists
 ```cpp
 void tiro_vm_get_export(
     tiro_vm_t vm,
-    const char * module_name,
-    const char * function_name,
+    tiro_string_t module_name,
+    tiro_string_t function_name,
     tiro_handle_t result,
     tiro_error_t * err
 )
@@ -256,4 +256,4 @@ Note: remaining globals are automatically freed when a vm is freed.
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST

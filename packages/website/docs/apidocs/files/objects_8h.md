@@ -47,7 +47,6 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_make_float](/docs/api/files/objects_8h#function-tiro_make_float)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, double value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a float with the given value.  |
 | double | **[tiro_float_value](/docs/api/files/objects_8h#function-tiro_float_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) value)<br>Returns the floating point of `value`.  |
 | void | **[tiro_make_string](/docs/api/files/objects_8h#function-tiro_make_string)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new string with the given content.  |
-| void | **[tiro_make_string_from_cstr](/docs/api/files/objects_8h#function-tiro_make_string_from_cstr)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * value, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new string with the given content.  |
 | void | **[tiro_string_value](/docs/api/files/objects_8h#function-tiro_string_value)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) * value, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content as a (data, length)-pair without copying the data.  |
 | void | **[tiro_string_cstr](/docs/api/files/objects_8h#function-tiro_string_cstr)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) string, char ** result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the string's content and creates a new zero terminated c string, which is assigned to `*result`.  |
 | void | **[tiro_make_tuple](/docs/api/files/objects_8h#function-tiro_make_tuple)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, size_t size, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new tuple with `size` entries.  |
@@ -78,8 +77,8 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_coroutine_result](/docs/api/files/objects_8h#function-tiro_coroutine_result)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) coroutine, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Returns the coroutine's result by assigning it to `result`.  |
 | void | **[tiro_coroutine_set_callback](/docs/api/files/objects_8h#function-tiro_coroutine_set_callback)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) coroutine, [tiro_coroutine_callback](/docs/api/files/objects_8h#typedef-tiro_coroutine_callback) callback, [tiro_coroutine_cleanup](/docs/api/files/objects_8h#typedef-tiro_coroutine_cleanup) cleanup, void * userdata, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Schedules the given callback to be invoked once the coroutine completes.  |
 | void | **[tiro_coroutine_start](/docs/api/files/objects_8h#function-tiro_coroutine_start)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) coroutine, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Starts the given coroutine by scheduling it for execution.  |
-| void | **[tiro_make_module](/docs/api/files/objects_8h#function-tiro_make_module)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const char * name, [tiro_module_member_t](/docs/api/classes/structtiro__module__member__t) * members, size_t members_length, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Creates a new module with the given `name` from the given `members` list.  |
-| void | **[tiro_module_get_export](/docs/api/files/objects_8h#function-tiro_module_get_export)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) module, const char * export_name, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Attempts to retrieve the exported module member called `export_name` from the given module.  |
+| void | **[tiro_make_module](/docs/api/files/objects_8h#function-tiro_make_module)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) name, [tiro_module_member_t](/docs/api/classes/structtiro__module__member__t) * members, size_t members_length, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Creates a new module with the given `name` from the given `members` list.  |
+| void | **[tiro_module_get_export](/docs/api/files/objects_8h#function-tiro_module_get_export)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) module, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro_string_t) export_name, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Attempts to retrieve the exported module member called `export_name` from the given module.  |
 | void | **[tiro_type_name](/docs/api/files/objects_8h#function-tiro_type_name)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) type, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Retrieves the name of this `type` and assigns it to `result`.  |
 | void | **[tiro_make_native](/docs/api/files/objects_8h#function-tiro_make_native)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, const [tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro_native_type_t) * type_descriptor, size_t size, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) * err)<br>Constructs a new native object of the given type and size.  |
 | const [tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro_native_type_t) * | **[tiro_native_type_descriptor](/docs/api/files/objects_8h#function-tiro_native_type_descriptor)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) object)<br>Returns the address of the `tiro_native_type_t` instance that was used to create the given native object.  |
@@ -457,22 +456,6 @@ Constructs a new string with the given content.
 Returns `TIRO_ERROR_ALLOC` on allocation failure. 
 
 
-### function tiro_make_string_from_cstr
-
-```cpp
-void tiro_make_string_from_cstr(
-    tiro_vm_t vm,
-    const char * value,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Constructs a new string with the given content. 
-
-`value` must be zero terminated or NULL. Passing NULL for `value` creates an empty string. Returns `TIRO_ERROR_ALLOC` on allocation failure. 
-
-
 ### function tiro_string_value
 
 ```cpp
@@ -488,7 +471,7 @@ Retrieves the string's content as a (data, length)-pair without copying the data
 
 **Warning**: 
 
-  * The string content returned through `value` is a view into the string's current storage. Because objects may move on the heap (e.g. because of garbage collection), this data may be invalidated. The data may only be used immediately after calling this function, and must not be used after another possibly allocating tiro_* function has been called.
+  * The string content returned through `value` is a view into the string's current storage. Because objects may move on the heap (e.g. because of garbage collection), this data may be invalidated. The data may only be used immediately after calling this function in native code that is guaranteed to NOT allocate on the tiro heap. It MUST NOT be used as input tiro an allocating function (which includes most functions of this API), or after such a function has been called.
   * The string returned by this function is not zero terminated. 
 
 
@@ -955,7 +938,7 @@ The coroutine must not have been started before. Coroutines are not invoked from
 ```cpp
 void tiro_make_module(
     tiro_vm_t vm,
-    const char * name,
+    tiro_string_t name,
     tiro_module_member_t * members,
     size_t members_length,
     tiro_handle_t result,
@@ -967,9 +950,7 @@ Creates a new module with the given `name` from the given `members` list.
 
 **Note**: All members listed in this function call will be exported by the module.
 
-`name` must be a valid, null terminated string and non-empty string.
-
-`members` must be a valid pointer that points to `members_length` entries. When the module has been created successfully, it will be written to `result`.
+`name` must be a non-empty string. `members` must be a valid pointer that points to `members_length` entries. When the module has been created successfully, it will be written to `result`.
 
 
 TODO: Do we need an API for non-exported members? 
@@ -981,7 +962,7 @@ TODO: Do we need an API for non-exported members?
 void tiro_module_get_export(
     tiro_vm_t vm,
     tiro_handle_t module,
-    const char * export_name,
+    tiro_string_t export_name,
     tiro_handle_t result,
     tiro_error_t * err
 )
@@ -991,9 +972,7 @@ Attempts to retrieve the exported module member called `export_name` from the gi
 
 On success, the member will be written to `result`.
 
-Returns `TIRO_ERROR_BAD_TYPE` if the module is not actually of kind `TIRO_KIND_MODULE`. Returns `TIRO_ERROR_EXPORT_NOT_FOUND` if no exported member with that name exists in this module.
-
-TODO: Use tiro strings instead of c strings? Or expose symbols? 
+Returns `TIRO_ERROR_BAD_TYPE` if the module is not actually of kind `TIRO_KIND_MODULE`. Returns `TIRO_ERROR_EXPORT_NOT_FOUND` if no exported member with that name exists in this module. 
 
 
 ### function tiro_type_name
@@ -1262,4 +1241,4 @@ On success, the new function will be stored in `result`. Returns `TIRO_BAD_TYPE`
 
 -------------------------------
 
-Updated on 24 July 2021 at 15:41:20 CEST
+Updated on 25 July 2021 at 13:14:57 CEST
