@@ -49,7 +49,7 @@ CompileResult Runtime::compile_impl(const CompileOptions& options) {
     compiler_settings.enable_dump_ir = options.enable_ir;
     compiler_settings.message_callback = [&](tiro::severity sev, uint32_t line,
                                              uint32_t column,
-                                             const char* message) {
+                                             std::string_view message) {
         if (callback_error)
             return;
 
