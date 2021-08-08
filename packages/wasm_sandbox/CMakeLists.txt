@@ -23,6 +23,9 @@ set(CMAKE_CXX_STANDARD 17)
 if (EMSCRIPTEN)
     SET(CMAKE_EXECUTABLE_SUFFIX ".js")
 
+    # See
+    # - https://emscripten.org/docs/optimizing/Optimizing-Code.html
+    # - https://github.com/emscripten-core/emscripten/blob/main/src/settings.js
     set(EMSCRIPTEN_COMPILE_FLAGS
         "--bind -s DISABLE_EXCEPTION_CATCHING=0 -s STRICT=1"
     )
