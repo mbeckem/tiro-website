@@ -1241,4 +1241,4 @@ On success, the new function will be stored in `result`. Returns `TIRO_BAD_TYPE`
 
 -------------------------------
 
-Updated on 2021-09-26 at 12:54:43 +0200
+Updated on 2021-09-26 at 16:20:42 +0200
