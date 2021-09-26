@@ -117,9 +117,12 @@ The type of all functions.
 
 The type of all modules:
 
-```
+```tiro
 import std;
-// std.type_of(std) == std.Module
+
+export func main() {
+    assert(std.type_of(std) == std.Module);
+}
 ```
 
 ### type NativeObject
@@ -144,8 +147,12 @@ func type_of(v: Value): Type;
 
 Returns the type of `v`. For example:
 
-```
-assert(std.type_of(true) == std.Boolean);
+```tiro
+import std;
+
+export func main() {
+    assert(std.type_of(true) == std.Boolean);
+}
 ```
 
 ## Containers
@@ -224,7 +231,7 @@ When iterating a map, keys and values are visited in the order in which they wer
 
 <span className="caption">Example: iterating over a map</span>
 
-```
+```tiro
 import std;
 
 export func main() {
