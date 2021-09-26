@@ -51,10 +51,10 @@ export const LibTiro = {
 } as const;
 
 export function withBasePath(appRelativePath: string): string {
-    let result: string = basePath;
-    if (!result.endsWith("/") && !appRelativePath.startsWith("/")) {
-        result += "/";
+    let absolute: string = basePath;
+    if (absolute && !absolute.endsWith("/") && !appRelativePath.startsWith("/")) {
+        absolute += "/";
     }
-    result += appRelativePath;
-    return result;
+    absolute += appRelativePath;
+    return absolute;
 }
