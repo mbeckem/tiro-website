@@ -5,17 +5,16 @@ import { Classes } from "@blueprintjs/core";
 import { Layout } from "@components/Layout";
 import { SEO } from "@components/SEO";
 import { isServer } from "@src/utils";
+import {
+    SandboxState,
+    SANDBOX_STATE_VERSION,
+    loadStateFromString,
+    saveStateToString
+} from "@src/components/sandbox/state";
 
 const LazySandbox = dynamic(async () => (await import("@components/sandbox")).Sandbox, {
     ssr: false
 });
-
-interface SandboxState {
-    version: typeof SANDBOX_STATE_VERSION;
-    source: string;
-}
-
-const SANDBOX_STATE_VERSION = 1 as const;
 
 const SANDBOX_DEFAULT_SOURCE = `
 import std;
@@ -80,12 +79,7 @@ function Loader() {
 }
 
 function saveStateToLocation(state: SandboxState): void {
-    const json = JSON.stringify({
-        v: state.version,
-        s: state.source
-    });
-    const payload = btoa(json);
-
+    const payload = saveStateToString(state);
     const url = new URL(window.location.href);
     url.hash = `#${payload}`;
     window.history.replaceState(null, "", url.href);
@@ -97,29 +91,8 @@ function loadStateFromLocation(): SandboxState | undefined {
     }
 
     const url = new URL(window.location.href);
-    const hash = url.hash;
-    if (hash === "" || hash === "#") {
-        return undefined;
-    }
-
     try {
-        const json = atob(hash.substring(1));
-        const state = JSON.parse(json);
-        if (typeof state !== "object") {
-            throw new Error("expected an object");
-        }
-
-        const version = state.v;
-        if (version !== SANDBOX_STATE_VERSION) {
-            throw new Error(`state version version mismatch (expected ${SANDBOX_STATE_VERSION}, got ${version})`);
-        }
-
-        const source = state.s;
-        if (typeof source !== "string") {
-            throw new Error(`source should be a string (got ${typeof source})`);
-        }
-
-        return { version, source };
+        return loadStateFromString(url.hash);
     } catch (e) {
         console.error("Failed to parse sandbox state from url", e);
         return undefined;

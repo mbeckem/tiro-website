@@ -1,3 +1,4 @@
+import { saveStateToString } from "@src/components/sandbox/state";
 import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
@@ -11,8 +12,12 @@ export function about(): string {
     return "/about";
 }
 
-export function sandbox(): string {
-    return "/sandbox";
+export function sandbox(code?: string): string {
+    let payload = "";
+    if (code) {
+        payload = "#" + saveStateToString({ source: code });
+    }
+    return `/sandbox${payload}`;
 }
 
 export function docs(): string {
@@ -46,11 +51,10 @@ export const LibTiro = {
 } as const;
 
 export function withBasePath(appRelativePath: string): string {
-    let r: string = basePath;
-    if (!r.endsWith("/") && !r.startsWith("/")) {
-        r += "/";
+    let result: string = basePath;
+    if (!result.endsWith("/") && !appRelativePath.startsWith("/")) {
+        result += "/";
     }
-    r += "/";
-    r += appRelativePath;
-    return r;
+    result += appRelativePath;
+    return result;
 }

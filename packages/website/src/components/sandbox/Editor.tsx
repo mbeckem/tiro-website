@@ -3,7 +3,7 @@ import type * as monaco from "monaco-editor";
 import MonacoEditor, { loader, Monaco } from "@monaco-editor/react";
 import { withBasePath } from "@src/routes";
 import { useAsync } from "@src/hooks/useAsync";
-import { setupLanguage } from "./tiro-language";
+import { setupLanguage } from "./tiroLanguage";
 import { useDebounce } from "@src/hooks/useDebounce";
 
 export interface EditorProps {
