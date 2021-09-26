@@ -13,11 +13,11 @@ title: tiro::coroutine::callback_wrapper
 
 |                | Name           |
 | -------------- | -------------- |
-| template <typename T \> <br>| **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback-wrapper)**(in_place_t , T && t) |
-| | **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback-wrapper)**(callback_wrapper && ) =deleted |
-| callback_wrapper & | **[operator=](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-operator=)**(callback_wrapper && ) =deleted |
-| void | **[invoke](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-invoke)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) raw_vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) raw_coroutine, void * userdata) |
-| void | **[cleanup](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-cleanup)**(void * userdata) |
+| template <typename T \> <br>| **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback-wrapper)**(in&#95;place&#95;t , T && t) |
+| | **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback-wrapper)**(callback&#95;wrapper && ) =delete |
+| callback_wrapper & | **[operator=](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-operator=)**(callback&#95;wrapper && ) =delete |
+| void | **[invoke](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-invoke)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) raw_vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) raw_coroutine, void &#42; userdata) |
+| void | **[cleanup](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-cleanup)**(void &#42; userdata) |
 
 ## Public Attributes
 
@@ -50,7 +50,7 @@ inline callback_wrapper(
 ```cpp
 callback_wrapper(
     callback_wrapper && 
-) =deleted
+) =delete
 ```
 
 
@@ -59,7 +59,7 @@ callback_wrapper(
 ```cpp
 callback_wrapper & operator=(
     callback_wrapper && 
-) =deleted
+) =delete
 ```
 
 
@@ -94,4 +94,4 @@ Callback cb;
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

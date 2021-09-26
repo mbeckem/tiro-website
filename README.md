@@ -25,6 +25,9 @@ Inside packages/website:
 ## Building tiro apidocs
 
 - Install [doxybook2](https://github.com/matusnovak/doxybook2)
+
+  > NOTE: For now please use the fork at https://github.com/mbeckem/doxybook2 for better markdown output.
+
 - Build doxygen xml database in the tiro repository, e.g.
 
   ```sh

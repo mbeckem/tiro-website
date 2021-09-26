@@ -18,11 +18,11 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[type](/docs/api/classes/classtiro_1_1type#function-type)**([handle](/docs/api/classes/classtiro_1_1handle) h) |
-| | **[type](/docs/api/classes/classtiro_1_1type#function-type)**(const [type](/docs/api/classes/classtiro_1_1type) & ) =default |
-| | **[type](/docs/api/classes/classtiro_1_1type#function-type)**([type](/docs/api/classes/classtiro_1_1type) && ) =default |
-| [type](/docs/api/classes/classtiro_1_1type) & | **[operator=](/docs/api/classes/classtiro_1_1type#function-operator=)**(const [type](/docs/api/classes/classtiro_1_1type) & ) =default |
-| [type](/docs/api/classes/classtiro_1_1type) & | **[operator=](/docs/api/classes/classtiro_1_1type#function-operator=)**([type](/docs/api/classes/classtiro_1_1type) && ) =default |
+| | **[type](/docs/api/classes/classtiro_1_1type#function-type)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) h) |
+| | **[type](/docs/api/classes/classtiro_1_1type#function-type)**(const [type](/docs/api/classes/classtiro&#95;1&#95;1type) & ) =default |
+| | **[type](/docs/api/classes/classtiro_1_1type#function-type)**([type](/docs/api/classes/classtiro&#95;1&#95;1type) && ) =default |
+| [type](/docs/api/classes/classtiro_1_1type) & | **[operator=](/docs/api/classes/classtiro_1_1type#function-operator=)**(const [type](/docs/api/classes/classtiro&#95;1&#95;1type) & ) =default |
+| [type](/docs/api/classes/classtiro_1_1type) & | **[operator=](/docs/api/classes/classtiro_1_1type#function-operator=)**([type](/docs/api/classes/classtiro&#95;1&#95;1type) && ) =default |
 | [string](/docs/api/classes/classtiro_1_1string) | **[name](/docs/api/classes/classtiro_1_1type#function-name)**() const |
 
 ## Additional inherited members
@@ -37,9 +37,9 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) raw_vm)<br>Constructs a new handle instance.  |
-| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**(const [handle](/docs/api/classes/classtiro_1_1handle) & other)<br>Constructs a new handle and initialize is it with the same value as `other`.  |
-| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([handle](/docs/api/classes/classtiro_1_1handle) && other) =default<br>Move constructs a handle.  |
+| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) raw_vm)<br>Constructs a new handle instance.  |
+| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**(const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & other)<br>Constructs a new handle and initialize is it with the same value as `other`.  |
+| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other) =default<br>Move constructs a handle.  |
 | | **[~handle](/docs/api/classes/classtiro_1_1handle#function-~handle)**() =default |
 | bool | **[valid](/docs/api/classes/classtiro_1_1handle#function-valid)**() const<br>Returns true if this handle points to an object (i.e. it was not moved from).  |
 | [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) | **[kind](/docs/api/classes/classtiro_1_1handle#function-kind)**() const<br>Returns the kind of the value currently held by this handle.  |
@@ -54,13 +54,13 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([check_kind_t](/docs/api/classes/structtiro_1_1handle_1_1check__kind__t) , [handle](/docs/api/classes/classtiro_1_1handle) && other, [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) expected) |
+| | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([check&#95;kind&#95;t](/docs/api/classes/structtiro&#95;1&#95;1handle&#95;1&#95;1check&#95;&#95;kind&#95;&#95;t) , [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other, [value&#95;kind](/docs/api/namespaces/namespacetiro#enum-value-kind) expected) |
 
 **Protected Attributes inherited from [handle](/docs/api/classes/classtiro_1_1handle)**
 
 |                | Name           |
 | -------------- | -------------- |
-| constexpr [check_kind_t](/docs/api/classes/structtiro_1_1handle_1_1check__kind__t) | **[check_kind](/docs/api/classes/classtiro_1_1handle#variable-check-kind)**  |
+| constexpr [check&#95;kind&#95;t](/docs/api/classes/structtiro&#95;1&#95;1handle&#95;1&#95;1check&#95;&#95;kind&#95;&#95;t) | **[check_kind](/docs/api/classes/classtiro_1_1handle#variable-check-kind)**  |
 
 
 ## Public Functions Documentation
@@ -119,4 +119,4 @@ inline string name() const
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

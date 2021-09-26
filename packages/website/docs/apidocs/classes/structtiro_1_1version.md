@@ -17,13 +17,13 @@ Represents a library version.
 
 |                | Name           |
 | -------------- | -------------- |
-| uint32_t | **[version_number](/docs/api/classes/structtiro_1_1version#variable-version-number)**  |
-| uint32_t | **[major](/docs/api/classes/structtiro_1_1version#variable-major)**  |
-| uint32_t | **[minor](/docs/api/classes/structtiro_1_1version#variable-minor)**  |
-| uint32_t | **[patch](/docs/api/classes/structtiro_1_1version#variable-patch)**  |
-| const char * | **[version_string](/docs/api/classes/structtiro_1_1version#variable-version-string)**  |
-| const char * | **[source_id](/docs/api/classes/structtiro_1_1version#variable-source-id)**  |
-| const char * | **[full_version_string](/docs/api/classes/structtiro_1_1version#variable-full-version-string)**  |
+| uint32&#95;t | **[version_number](/docs/api/classes/structtiro_1_1version#variable-version-number)**  |
+| uint32&#95;t | **[major](/docs/api/classes/structtiro_1_1version#variable-major)**  |
+| uint32&#95;t | **[minor](/docs/api/classes/structtiro_1_1version#variable-minor)**  |
+| uint32&#95;t | **[patch](/docs/api/classes/structtiro_1_1version#variable-patch)**  |
+| const char &#42; | **[version_string](/docs/api/classes/structtiro_1_1version#variable-version-string)**  |
+| const char &#42; | **[source_id](/docs/api/classes/structtiro_1_1version#variable-source-id)**  |
+| const char &#42; | **[full_version_string](/docs/api/classes/structtiro_1_1version#variable-full-version-string)**  |
 
 ## Public Attributes Documentation
 
@@ -78,4 +78,4 @@ const char * full_version_string = "";
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:43 +0200

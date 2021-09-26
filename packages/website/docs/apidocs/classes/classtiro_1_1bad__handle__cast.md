@@ -19,7 +19,7 @@ Inherits from [error](/docs/api/classes/classtiro_1_1error), exception
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[bad_handle_cast](/docs/api/classes/classtiro_1_1bad__handle__cast#function-bad-handle-cast)**([value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) actual, [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) expected) |
+| | **[bad_handle_cast](/docs/api/classes/classtiro_1_1bad__handle__cast#function-bad-handle-cast)**([value&#95;kind](/docs/api/namespaces/namespacetiro#enum-value-kind) actual, [value&#95;kind](/docs/api/namespaces/namespacetiro#enum-value-kind) expected) |
 | virtual const char * | **[message](/docs/api/classes/classtiro_1_1bad__handle__cast#function-message)**() const override<br>A simple message line that describes the error condition. Never null.  |
 | virtual const char * | **[details](/docs/api/classes/classtiro_1_1bad__handle__cast#function-details)**() const override<br>Optional detailed error information. Never null, but may be empty.  |
 | virtual const char * | **[what](/docs/api/classes/classtiro_1_1bad__handle__cast#function-what)**() const override |
@@ -67,4 +67,4 @@ inline virtual const char * what() const override
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

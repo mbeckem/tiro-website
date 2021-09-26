@@ -19,8 +19,8 @@ title: tiro::detail::resource_holder
 | | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**() =default |
 | | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**(Resource res) |
 | | **[~resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-~resource-holder)**() |
-| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
-| [resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) & | **[operator=](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator=)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
+| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**([resource&#95;holder](/docs/api/classes/classtiro&#95;1&#95;1detail&#95;1&#95;1resource&#95;&#95;holder) && other) |
+| [resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) & | **[operator=](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator=)**([resource&#95;holder](/docs/api/classes/classtiro&#95;1&#95;1detail&#95;1&#95;1resource&#95;&#95;holder) && other) |
 | Resource | **[get](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-get)**() const |
 | | **[operator Resource](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-resource)**() const |
 | | **[operator bool](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-bool)**() const |
@@ -115,4 +115,4 @@ inline Resource * out()
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:43 +0200

@@ -18,24 +18,24 @@ Functions and type definitions for working with the tiro virtual machine.
 
 |                | Name           |
 | -------------- | -------------- |
-| typedef struct [tiro_vm_settings](/docs/api/classes/structtiro__vm__settings) | **[tiro_vm_settings_t](/docs/api/files/vm_8h#typedef-tiro-vm-settings-t)** <br>The [tiro_vm_settings](/docs/api/classes/structtiro__vm__settings) structure can be provided to `tiro_vm_new` as a configuration parameter.  |
+| typedef struct [tiro&#95;vm&#95;settings](/docs/api/classes/structtiro&#95;&#95;vm&#95;&#95;settings) | **[tiro_vm_settings_t](/docs/api/files/vm_8h#typedef-tiro-vm-settings-t)** <br>The [tiro_vm_settings](/docs/api/classes/structtiro__vm__settings) structure can be provided to `tiro_vm_new` as a configuration parameter.  |
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[tiro_vm_settings_init](/docs/api/files/vm_8h#function-tiro-vm-settings-init)**([tiro_vm_settings_t](/docs/api/files/vm_8h#typedef-tiro-vm-settings-t) * settings)<br>Initializes the given tiro settings object with default values.  |
-| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[tiro_vm_new](/docs/api/files/vm_8h#function-tiro-vm-new)**(const [tiro_vm_settings_t](/docs/api/files/vm_8h#typedef-tiro-vm-settings-t) * settings, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Allocates a new virtual machine instance.  |
-| void | **[tiro_vm_free](/docs/api/files/vm_8h#function-tiro-vm-free)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm)<br>Free a virtual machine.  |
-| void * | **[tiro_vm_userdata](/docs/api/files/vm_8h#function-tiro-vm-userdata)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm)<br>Returns the userdata pointer that was passed in the settings struct during vm construction.  |
-| void | **[tiro_vm_load_std](/docs/api/files/vm_8h#function-tiro-vm-load-std)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Load the default modules provided by the runtime.  |
-| void | **[tiro_vm_load_bytecode](/docs/api/files/vm_8h#function-tiro-vm-load-bytecode)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_module_t](/docs/api/files/def_8h#typedef-tiro-module-t) module, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Loads the compiled module into the virtual machine.  |
-| void | **[tiro_vm_load_module](/docs/api/files/vm_8h#function-tiro-vm-load-module)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) module, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Loads the given module object into the virtual machine.  |
-| void | **[tiro_vm_get_export](/docs/api/files/vm_8h#function-tiro-vm-get-export)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t) module_name, [tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t) function_name, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) result, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Attempts to find the exported value with the given name in the specified module.  |
-| void | **[tiro_vm_run_ready](/docs/api/files/vm_8h#function-tiro-vm-run-ready)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Runs all ready coroutines.  |
-| bool | **[tiro_vm_has_ready](/docs/api/files/vm_8h#function-tiro-vm-has-ready)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm)<br>Returns true if the virtual machine has at least one coroutine ready for execution, false otherwise.  |
-| [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) | **[tiro_global_new](/docs/api/files/vm_8h#function-tiro-global-new)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) * err)<br>Allocates a new global handle.  |
-| void | **[tiro_global_free](/docs/api/files/vm_8h#function-tiro-global-free)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) global)<br>Frees a global handle allocated with `tiro_global_new`.  |
+| void | **[tiro_vm_settings_init](/docs/api/files/vm_8h#function-tiro-vm-settings-init)**([tiro&#95;vm&#95;settings&#95;t](/docs/api/files/vm&#95;8h#typedef-tiro-vm-settings-t) &#42; settings)<br>Initializes the given tiro settings object with default values.  |
+| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[tiro_vm_new](/docs/api/files/vm_8h#function-tiro-vm-new)**(const [tiro&#95;vm&#95;settings&#95;t](/docs/api/files/vm&#95;8h#typedef-tiro-vm-settings-t) &#42; settings, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new virtual machine instance.  |
+| void | **[tiro_vm_free](/docs/api/files/vm_8h#function-tiro-vm-free)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Free a virtual machine.  |
+| void * | **[tiro_vm_userdata](/docs/api/files/vm_8h#function-tiro-vm-userdata)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns the userdata pointer that was passed in the settings struct during vm construction.  |
+| void | **[tiro_vm_load_std](/docs/api/files/vm_8h#function-tiro-vm-load-std)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Load the default modules provided by the runtime.  |
+| void | **[tiro_vm_load_bytecode](/docs/api/files/vm_8h#function-tiro-vm-load-bytecode)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;module&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-module-t) module, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Loads the compiled module into the virtual machine.  |
+| void | **[tiro_vm_load_module](/docs/api/files/vm_8h#function-tiro-vm-load-module)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) module, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Loads the given module object into the virtual machine.  |
+| void | **[tiro_vm_get_export](/docs/api/files/vm_8h#function-tiro-vm-get-export)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) module_name, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) function_name, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Attempts to find the exported value with the given name in the specified module.  |
+| void | **[tiro_vm_run_ready](/docs/api/files/vm_8h#function-tiro-vm-run-ready)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Runs all ready coroutines.  |
+| bool | **[tiro_vm_has_ready](/docs/api/files/vm_8h#function-tiro-vm-has-ready)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns true if the virtual machine has at least one coroutine ready for execution, false otherwise.  |
+| [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) | **[tiro_global_new](/docs/api/files/vm_8h#function-tiro-global-new)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new global handle.  |
+| void | **[tiro_global_free](/docs/api/files/vm_8h#function-tiro-global-free)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) global)<br>Frees a global handle allocated with `tiro_global_new`.  |
 
 ## Types Documentation
 
@@ -229,4 +229,4 @@ Note: remaining globals are automatically freed when a vm is freed.
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:43 +0200

@@ -28,7 +28,7 @@ template <{% for param in child.templateParams -%}
 {{param.typePlain}} {{param.name}}{% if existsIn(param, "defvalPlain") %} ={{param.defvalPlain}}{% endif -%}
 {% if not loop.is_last %},{% endif -%}
 {% endfor %}\> <br>{% endif -%}
-{{child.kind}}{% if child.kind == "enum" and child.strong %} class{% endif %}{% if existsIn(child, "type") %} {{child.type}} {% endif -%}| **[{{child.name}}]({{child.url}})** {% if child.kind == "enum" %}{ {% for enumvalue in child.enumvalues -%}
+{{child.kind}}{% if child.kind == "enum" and child.strong %} class{% endif %}{% if existsIn(child, "type") %} {{escape(child.type)}} {% endif -%}| **[{{child.name}}]({{child.url}})** {% if child.kind == "enum" %}{ {% for enumvalue in child.enumvalues -%}
 {{enumvalue.name}}{% if existsIn(enumvalue, "initializer") %} {{enumvalue.initializer}}{% endif -%}
 {% if not loop.is_last %}, {% endif %}{% endfor -%}
  }{% endif -%}
@@ -46,7 +46,7 @@ template <{% for param in child.templateParams -%}
 {{param.typePlain}} {{param.name}}{% if existsIn(param, "defvalPlain") %} ={{param.defvalPlain}}{% endif -%}
 {% if not loop.is_last %},{% endif -%}
 {% endfor %}\> <br>{% endif -%}
-{{child.kind}}{% if child.kind == "enum" and child.strong %} class{% endif %}{% if existsIn(child, "type") %} {{child.type}} {% endif -%}| **[{{child.name}}]({{child.url}})** {% if child.kind == "enum" %}{ {% for enumvalue in child.enumvalues -%}
+{{child.kind}}{% if child.kind == "enum" and child.strong %} class{% endif %}{% if existsIn(child, "type") %} {{escape(child.type)}} {% endif -%}| **[{{child.name}}]({{child.url}})** {% if child.kind == "enum" %}{ {% for enumvalue in child.enumvalues -%}
 {{enumvalue.name}}{% if existsIn(enumvalue, "initializer") %} {{enumvalue.initializer}}{% endif -%}
 {% if not loop.is_last %}, {% endif %}{% endfor -%}
  }{% endif -%}
@@ -67,12 +67,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -91,12 +91,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -115,12 +115,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -139,12 +139,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -163,12 +163,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -187,12 +187,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -211,12 +211,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -235,12 +235,12 @@ template <{% for param in child.templateParams -%}
 {% if child.virtual %}virtual {% endif -%}
 {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
 | **[{{child.name}}]({{child.url}})**({% for param in child.params -%}
-{{param.type}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
+{{escape(param.type)}} {{param.name}}{% if existsIn(param, "defval") %} ={{param.defval}}{% endif -%}
 {% if not loop.is_last %}, {% endif -%}
 {% endfor %}){% if child.const %} const{% endif -%}
 {% if child.override %} override{% endif -%}
 {% if child.default %} =default{% endif -%}
-{% if child.deleted %} =deleted{% endif -%}
+{% if child.deleted %} =delete{% endif -%}
 {% if child.pureVirtual %} =0{% endif -%}
  {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
@@ -251,7 +251,7 @@ template <{% for param in child.templateParams -%}
 |                | Name           |
 | -------------- | -------------- |
 {% for child in base.publicProperties -%}
-| {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
+| {% if existsIn(child, "type") %}{{escape(child.type)}} {% endif -%}
 | **[{{child.name}}]({{child.url}})** {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
 {% endif -%}
@@ -261,7 +261,7 @@ template <{% for param in child.templateParams -%}
 |                | Name           |
 | -------------- | -------------- |
 {% for child in base.protectedProperties -%}
-| {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
+| {% if existsIn(child, "type") %}{{escape(child.type)}} {% endif -%}
 | **[{{child.name}}]({{child.url}})** {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
 {% endif -%}
@@ -271,7 +271,7 @@ template <{% for param in child.templateParams -%}
 |                | Name           |
 | -------------- | -------------- |
 {% for child in base.publicAttributes -%}
-| {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
+| {% if existsIn(child, "type") %}{{escape(child.type)}} {% endif -%}
 | **[{{child.name}}]({{child.url}})** {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
 {% endif -%}
@@ -281,7 +281,7 @@ template <{% for param in child.templateParams -%}
 |                | Name           |
 | -------------- | -------------- |
 {% for child in base.protectedAttributes -%}
-| {% if existsIn(child, "type") %}{{child.type}} {% endif -%}
+| {% if existsIn(child, "type") %}{{escape(child.type)}} {% endif -%}
 | **[{{child.name}}]({{child.url}})** {% if existsIn(child, "brief") %}<br>{{child.brief}}{% endif %} |
 {% endfor %}
 {% endif -%}

@@ -22,15 +22,15 @@ title: tiro::detail::native_traits
 
 |                | Name           |
 | -------------- | -------------- |
-| void | **[constructor](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-constructor)**(T && instance, void * data) |
-| T * | **[accessor](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-accessor)**(void * data) |
-| void | **[finalizer](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-finalizer)**(void * data, ] size_t data_size) |
+| void | **[constructor](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-constructor)**(T && instance, void &#42; data) |
+| T * | **[accessor](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-accessor)**(void &#42; data) |
+| void | **[finalizer](/docs/api/classes/structtiro_1_1detail_1_1native__traits#function-finalizer)**(void &#42; data, ] size&#95;t data_size) |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| constexpr size_t | **[size](/docs/api/classes/structtiro_1_1detail_1_1native__traits#variable-size)**  |
+| constexpr size&#95;t | **[size](/docs/api/classes/structtiro_1_1detail_1_1native__traits#variable-size)**  |
 
 ## Detailed Description
 
@@ -81,4 +81,4 @@ static constexpr size_t size = sizeof(layout);
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:43 +0200

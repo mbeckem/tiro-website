@@ -17,8 +17,8 @@ The [tiro_vm_settings]() structure can be provided to `tiro_vm_new` as a configu
 
 |                | Name           |
 | -------------- | -------------- |
-| void * | **[userdata](/docs/api/classes/structtiro__vm__settings#variable-userdata)** <br>Arbitrary user data that will be accessible by calling `[tiro_vm_userdata()]()`.  |
-| void(* | **[print_stdout](/docs/api/classes/structtiro__vm__settings#variable-print-stdout)** <br>This callback is invoked when the vm attempts to print to the standard output stream, for example when `std.print(...)` has been called.  |
+| void &#42; | **[userdata](/docs/api/classes/structtiro__vm__settings#variable-userdata)** <br>Arbitrary user data that will be accessible by calling `[tiro_vm_userdata()]()`.  |
+| void(&#42;)(tiro&#95;string&#95;t message, void &#42;userdata) | **[print_stdout](/docs/api/classes/structtiro__vm__settings#variable-print-stdout)** <br>This callback is invoked when the vm attempts to print to the standard output stream, for example when `std.print(...)` has been called.  |
 
 ## Detailed Description
 
@@ -46,7 +46,7 @@ This value is never interpreted in any way. This value is NULL by default.
 ### variable print_stdout
 
 ```cpp
-void(* print_stdout;
+void(*)(tiro_string_t message, void *userdata) print_stdout;
 ```
 
 This callback is invoked when the vm attempts to print to the standard output stream, for example when `std.print(...)` has been called. 
@@ -62,4 +62,4 @@ When this is set to NULL (the default), the message will be printed to the proce
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

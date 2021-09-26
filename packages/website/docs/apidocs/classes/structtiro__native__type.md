@@ -17,8 +17,8 @@ Describes a native object type to the tiro runtime.  [More...](#detailed-descrip
 
 |                | Name           |
 | -------------- | -------------- |
-| const char * | **[name](/docs/api/classes/structtiro__native__type#variable-name)** <br>The human readable name of this type, mainly for debugging.  |
-| void(* | **[finalizer](/docs/api/classes/structtiro__native__type#variable-finalizer)** <br>This function will be invoked exactly once for each object when it is being garbage collected.  |
+| const char &#42; | **[name](/docs/api/classes/structtiro__native__type#variable-name)** <br>The human readable name of this type, mainly for debugging.  |
+| void(&#42;)(void &#42;data, size&#95;t size) | **[finalizer](/docs/api/classes/structtiro__native__type#variable-finalizer)** <br>This function will be invoked exactly once for each object when it is being garbage collected.  |
 
 ## Detailed Description
 
@@ -52,7 +52,7 @@ Must be a valid zero terminated string.
 ### variable finalizer
 
 ```cpp
-void(* finalizer;
+void(*)(void *data, size_t size) finalizer;
 ```
 
 This function will be invoked exactly once for each object when it is being garbage collected. 
@@ -68,4 +68,4 @@ This member may be NULL if no finalization is needed.
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

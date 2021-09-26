@@ -18,8 +18,8 @@ title: tiro::error_adapter
 | -------------- | -------------- |
 | | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error-adapter)**() =default |
 | | **[~error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-~error-adapter)**() |
-| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error-adapter)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) =deleted |
-| [error_adapter](/docs/api/classes/classtiro_1_1error__adapter) & | **[operator=](/docs/api/classes/classtiro_1_1error__adapter#function-operator=)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) =deleted |
+| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error-adapter)**([error&#95;adapter](/docs/api/classes/classtiro&#95;1&#95;1error&#95;&#95;adapter) && ) =delete |
+| [error_adapter](/docs/api/classes/classtiro_1_1error__adapter) & | **[operator=](/docs/api/classes/classtiro_1_1error__adapter#function-operator=)**([error&#95;adapter](/docs/api/classes/classtiro&#95;1&#95;1error&#95;&#95;adapter) && ) =delete |
 | | **[operator tiro_error_t *](/docs/api/classes/classtiro_1_1error__adapter#function-operator-tiro-error-t-*)**() |
 
 ## Public Functions Documentation
@@ -43,7 +43,7 @@ inline ~error_adapter()
 ```cpp
 error_adapter(
     error_adapter && 
-) =deleted
+) =delete
 ```
 
 
@@ -52,7 +52,7 @@ error_adapter(
 ```cpp
 error_adapter & operator=(
     error_adapter && 
-) =deleted
+) =delete
 ```
 
 
@@ -65,4 +65,4 @@ inline operator tiro_error_t *()
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

@@ -18,20 +18,20 @@ Contains basic type and macro definitions.  [More...](#detailed-description)
 
 |                | Name           |
 | -------------- | -------------- |
-| typedef struct tiro_error * | **[tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t)**  |
-| typedef struct tiro_vm * | **[tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t)**  |
-| typedef struct tiro_compiler * | **[tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t)**  |
-| typedef struct tiro_module * | **[tiro_module_t](/docs/api/files/def_8h#typedef-tiro-module-t)**  |
-| typedef struct tiro_value * | **[tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t)**  |
-| typedef struct tiro_sync_frame * | **[tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro-sync-frame-t)**  |
-| typedef struct tiro_async_frame * | **[tiro_async_frame_t](/docs/api/files/def_8h#typedef-tiro-async-frame-t)**  |
-| typedef struct [tiro_string](/docs/api/classes/structtiro__string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t)** <br>Represents a string that is not necessarily zero terminated.  |
+| typedef struct tiro&#95;error &#42; | **[tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t)**  |
+| typedef struct tiro&#95;vm &#42; | **[tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t)**  |
+| typedef struct tiro&#95;compiler &#42; | **[tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t)**  |
+| typedef struct tiro&#95;module &#42; | **[tiro_module_t](/docs/api/files/def_8h#typedef-tiro-module-t)**  |
+| typedef struct tiro&#95;value &#42; | **[tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t)**  |
+| typedef struct tiro&#95;sync&#95;frame &#42; | **[tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro-sync-frame-t)**  |
+| typedef struct tiro&#95;async&#95;frame &#42; | **[tiro_async_frame_t](/docs/api/files/def_8h#typedef-tiro-async-frame-t)**  |
+| typedef struct [tiro&#95;string](/docs/api/classes/structtiro&#95;&#95;string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t)** <br>Represents a string that is not necessarily zero terminated.  |
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| [tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t) | **[tiro_cstr](/docs/api/files/def_8h#function-tiro-cstr)**(const char * data)<br>Helper function to construct a tiro_string_t from a zero terminated string.  |
+| [tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t) | **[tiro_cstr](/docs/api/files/def_8h#function-tiro-cstr)**(const char &#42; data)<br>Helper function to construct a tiro_string_t from a zero terminated string.  |
 
 ## Defines
 
@@ -151,4 +151,4 @@ Internally calls strlen on non-NULL inputs to determine their length.
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:43 +0200

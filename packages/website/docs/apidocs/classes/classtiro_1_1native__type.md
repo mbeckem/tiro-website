@@ -18,15 +18,15 @@ title: tiro::native_type
 | -------------- | -------------- |
 | | **[native_type](/docs/api/classes/classtiro_1_1native__type#function-native-type)**(std::string name) |
 | | **[~native_type](/docs/api/classes/classtiro_1_1native__type#function-~native-type)**() =default |
-| | **[native_type](/docs/api/classes/classtiro_1_1native__type#function-native-type)**([native_type](/docs/api/classes/classtiro_1_1native__type) && ) =default |
-| [native_type](/docs/api/classes/classtiro_1_1native__type) & | **[operator=](/docs/api/classes/classtiro_1_1native__type#function-operator=)**([native_type](/docs/api/classes/classtiro_1_1native__type) && ) =default |
+| | **[native_type](/docs/api/classes/classtiro_1_1native__type#function-native-type)**([native&#95;type](/docs/api/classes/classtiro&#95;1&#95;1native&#95;&#95;type) && ) =default |
+| [native_type](/docs/api/classes/classtiro_1_1native__type) & | **[operator=](/docs/api/classes/classtiro_1_1native__type#function-operator=)**([native&#95;type](/docs/api/classes/classtiro&#95;1&#95;1native&#95;&#95;type) && ) =default |
 | bool | **[valid](/docs/api/classes/classtiro_1_1native__type#function-valid)**() const<br>Returns true is valid, i.e. if this [native_type](/docs/api/classes/classtiro_1_1native__type) has not been moved from.  |
 | const std::string & | **[name](/docs/api/classes/classtiro_1_1native__type#function-name)**() const<br>Returns the native type's name (the value of original constructor argument).  |
-| bool | **[is_instance](/docs/api/classes/classtiro_1_1native__type#function-is-instance)**(const [native](/docs/api/classes/classtiro_1_1native) & object) const<br>Returns true if the given native object is an instance of this type.  |
-| [native](/docs/api/classes/classtiro_1_1native) | **[make](/docs/api/classes/classtiro_1_1native__type#function-make)**([vm](/docs/api/classes/classtiro_1_1vm) & v, T && instance) const<br>Constructs a new object of this type. The contents of `instance` will be moved into the constructed object.  |
-| T * | **[access](/docs/api/classes/classtiro_1_1native__type#function-access)**(const [native](/docs/api/classes/classtiro_1_1native) & object) const<br>Returns the address of the native object instance.  |
-| bool | **[is_destroyed](/docs/api/classes/classtiro_1_1native__type#function-is-destroyed)**(const [native](/docs/api/classes/classtiro_1_1native) & object) const<br>Returns true if the referenced object was already destroyed manually by calling `[destroy()]()`.  |
-| void | **[destroy](/docs/api/classes/classtiro_1_1native__type#function-destroy)**(const [native](/docs/api/classes/classtiro_1_1native) & object) const<br>Manually destroys the native object.  |
+| bool | **[is_instance](/docs/api/classes/classtiro_1_1native__type#function-is-instance)**(const [native](/docs/api/classes/classtiro&#95;1&#95;1native) & object) const<br>Returns true if the given native object is an instance of this type.  |
+| [native](/docs/api/classes/classtiro_1_1native) | **[make](/docs/api/classes/classtiro_1_1native__type#function-make)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, T && instance) const<br>Constructs a new object of this type. The contents of `instance` will be moved into the constructed object.  |
+| T * | **[access](/docs/api/classes/classtiro_1_1native__type#function-access)**(const [native](/docs/api/classes/classtiro&#95;1&#95;1native) & object) const<br>Returns the address of the native object instance.  |
+| bool | **[is_destroyed](/docs/api/classes/classtiro_1_1native__type#function-is-destroyed)**(const [native](/docs/api/classes/classtiro&#95;1&#95;1native) & object) const<br>Returns true if the referenced object was already destroyed manually by calling `[destroy()]()`.  |
+| void | **[destroy](/docs/api/classes/classtiro_1_1native__type#function-destroy)**(const [native](/docs/api/classes/classtiro&#95;1&#95;1native) & object) const<br>Manually destroys the native object.  |
 
 ## Detailed Description
 
@@ -146,4 +146,4 @@ Future `[access()](/docs/api/classes/classtiro_1_1native__type#function-access)`
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

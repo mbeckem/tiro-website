@@ -17,8 +17,8 @@ Represents a string that is not necessarily zero terminated.  [More...](#detaile
 
 |                | Name           |
 | -------------- | -------------- |
-| const char * | **[data](/docs/api/classes/structtiro__string#variable-data)** <br>string data, utf8 encoded.  |
-| size_t | **[length](/docs/api/classes/structtiro__string#variable-length)** <br>number of bytes in `data`.  |
+| const char &#42; | **[data](/docs/api/classes/structtiro__string#variable-data)** <br>string data, utf8 encoded.  |
+| size&#95;t | **[length](/docs/api/classes/structtiro__string#variable-length)** <br>number of bytes in `data`.  |
 
 ## Detailed Description
 
@@ -50,4 +50,4 @@ number of bytes in `data`.
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

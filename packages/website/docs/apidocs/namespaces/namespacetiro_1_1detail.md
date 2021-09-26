@@ -19,7 +19,7 @@ title: tiro::detail
 
 |                | Name           |
 | -------------- | -------------- |
-| template <typename... Handles\> <br>void | **[check_handles](/docs/api/namespaces/namespacetiro_1_1detail#function-check-handles)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) , const Handles & ...) |
+| template <typename... Handles\> <br>void | **[check_handles](/docs/api/namespaces/namespacetiro_1_1detail#function-check-handles)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) , const Handles & ...) |
 
 
 ## Functions Documentation
@@ -41,4 +41,4 @@ void check_handles(
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:43 +0200

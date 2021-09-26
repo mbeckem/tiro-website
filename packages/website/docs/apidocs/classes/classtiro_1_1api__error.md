@@ -19,7 +19,7 @@ Inherits from [error](/docs/api/classes/classtiro_1_1error), exception
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[api_error](/docs/api/classes/classtiro_1_1api__error#function-api-error)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) raw_error)<br>Constructs a new error from the given raw error.  |
+| | **[api_error](/docs/api/classes/classtiro_1_1api__error#function-api-error)**([tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) raw_error)<br>Constructs a new error from the given raw error.  |
 | [api_errc](/docs/api/namespaces/namespacetiro#enum-api-errc) | **[code](/docs/api/classes/classtiro_1_1api__error#function-code)**() const<br>Returns the error code represented by this error.  |
 | [tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) | **[raw_error](/docs/api/classes/classtiro_1_1api__error#function-raw-error)**() const<br>Returns the wrapped tiro_error_t instance.  |
 | const char * | **[name](/docs/api/classes/classtiro_1_1api__error#function-name)**() const<br>Returns the name of the error (never null).  |
@@ -97,4 +97,4 @@ inline const char * what() const override
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200

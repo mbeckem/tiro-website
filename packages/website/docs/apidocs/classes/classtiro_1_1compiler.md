@@ -17,9 +17,9 @@ title: tiro::compiler
 |                | Name           |
 | -------------- | -------------- |
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**() |
-| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings) settings) |
-| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) raw_compiler) |
-| void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add-file)**(std::string_view file_name, std::string_view file_content) |
+| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([compiler&#95;settings](/docs/api/classes/structtiro&#95;1&#95;1compiler&#95;&#95;settings) settings) |
+| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) raw_compiler) |
+| void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add-file)**(std::string&#95;view file_name, std::string&#95;view file_content) |
 | void | **[run](/docs/api/classes/classtiro_1_1compiler#function-run)**() |
 | bool | **[has_module](/docs/api/classes/classtiro_1_1compiler#function-has-module)**() const |
 | [compiled_module](/docs/api/classes/classtiro_1_1compiled__module) | **[take_module](/docs/api/classes/classtiro_1_1compiler#function-take-module)**() |
@@ -132,4 +132,4 @@ inline tiro_compiler_t raw_compiler() const
 
 -------------------------------
 
-Updated on 26 September 2021 at 09:32:12 CEST
+Updated on 2021-09-26 at 12:54:42 +0200
