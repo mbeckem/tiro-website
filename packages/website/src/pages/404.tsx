@@ -6,7 +6,7 @@ import { Container } from "@components/Container";
 
 const NotFoundPage = (): JSX.Element => (
     <Layout>
-        <SEO title="404: Not found" />
+        <SEO title="Page not found" />
         <Container>
             <h1>Page not found</h1>
             <p>The requested page does not exist.</p>

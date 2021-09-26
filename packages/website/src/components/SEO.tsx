@@ -11,14 +11,12 @@ export interface SEOProps {
 
 export const SEO = memo(function SEO({ title, description = "", meta = [] }: SEOProps) {
     const titleArray = Array.isArray(title) ? title : [title];
-    const titleString = join(titleArray);
-    const fullTitleString = join([...titleArray, config.title]);
-
+    const titleString = config.title + ": " + join(titleArray);
     const metaDescription = description || config.description;
 
     return (
         <Head>
-            <title>{fullTitleString}</title>
+            <title>{titleString}</title>
             <meta name="description" content={metaDescription} />
             <meta property="og:type" content="website" />
             <meta property="og:title" content={titleString} />
@@ -32,5 +30,5 @@ export const SEO = memo(function SEO({ title, description = "", meta = [] }: SEO
 });
 
 function join(titleComponents: string[]) {
-    return titleComponents.join(" | ");
+    return titleComponents.join(" - ");
 }

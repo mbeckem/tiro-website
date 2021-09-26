@@ -29,7 +29,7 @@ export default function ApiPage({ frontMatter, mdx }: ApiProps): JSX.Element {
 
     return (
         <Layout>
-            <SEO title={[frontMatter.title, "API Documentation"]} />
+            <SEO title={["Native API", frontMatter.title]} />
             <Container>
                 <ArticleComponent>
                     <div className={styles.tabs}>
