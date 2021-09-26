@@ -25,7 +25,7 @@ import std;
   - [type NativeObject](#type-nativeobject)
   - [type NativePointer](#type-nativepointer)
   - [type Type](#type-type)
-  - [func type_of](#func-type_of)
+  - [func type_of](#func-type-of)
 
 - [Containers](#containers)
 
@@ -41,8 +41,8 @@ import std;
   - [type String](#type-string)
   - [type StringSlice](#type-stringslice)
   - [type StringBuilder](#type-stringbuilder)
-  - [func new_string_builder](#func-new_string_builder)
-  - [func debug_repr](#func-debug_repr)
+  - [func new_string_builder](#func-new-string-builder)
+  - [func debug_repr](#func-debug-repr)
 
 - [Floating point math](#floating-point-math)
 
@@ -66,17 +66,17 @@ import std;
 - [Input and output](#input-and-output)
 
   - [func print](#func-print)
-  - [func loop_timestamp](#func-loop_timestamp)
+  - [func loop_timestamp](#func-loop-timestamp)
 
 - [Coroutines](#coroutines)
 
   - [type Coroutine](#type-coroutine)
   - [type CoroutineToken](#type-coroutinetoken)
-  - [func current_coroutine](#func-current_coroutine)
+  - [func current_coroutine](#func-current-coroutine)
   - [func launch](#func-launch)
   - [func dispatch](#func-dispatch)
-  - [func coroutine_token](#func-coroutine_token)
-  - [func yield_coroutine](#func-yield_coroutine)
+  - [func coroutine_token](#func-coroutine-token)
+  - [func yield_coroutine](#func-yield-coroutine)
 
 - [Error handling](#error-handling)
 
@@ -85,7 +85,7 @@ import std;
   - [func error](#func-error)
   - [type Exception](#type-exception)
   - [func panic](#func-panic)
-  - [func catch_panic](#func-catch_panic)
+  - [func catch_panic](#func-catch-panic)
 
 ## Basic types and functions
 
@@ -560,7 +560,7 @@ In order to give up control (also called _yielding_), a coroutine can perform on
 
 - Call an asynchronous function.
   Asynchronous functions usually yield behind the scenes automatically, transparent to the caller.
-  They can be implemented in native code or by using the the [yield_coroutine()](#func-yield_coroutine) function (like the function `lock()` in the [mutex example](#mutex-example)).
+  They can be implemented in native code or by using the the [yield_coroutine()](#func-yield-coroutine) function (like the function `lock()` in the [mutex example](#mutex-example)).
 
   While an asynchronous function waits for its completion, other coroutines can execute on the shared operating system thread.
 
@@ -570,7 +570,7 @@ In order to give up control (also called _yielding_), a coroutine can perform on
 
   It can be useful to invoke `dispatch()` in potentially long loops to avoid blocking the system for too long.
 
-- Call [yield_coroutine()](#func-yield_coroutine).
+- Call [yield_coroutine()](#func-yield-coroutine).
   This will stop the coroutine until it has been manually resumed by another coroutine.
   Care must be taken when using this primitive function!
 
@@ -617,7 +617,7 @@ func coroutine_token(): CoroutineToken;
 
 Returns a [CoroutineToken](#type-coroutinetoken) instance suitable for resuming the current coroutine.
 Coroutine tokens are invalidated after the coroutine has been resumed again.
-See [yield_coroutine()](#func-yield_coroutine) for an example.
+See [yield_coroutine()](#func-yield-coroutine) for an example.
 
 WARNING: This is a low level API designed to control the execution of a coroutine manually.
 It should only be used to create new asynchronous abstractions.
@@ -629,7 +629,7 @@ func yield_coroutine();
 ```
 
 Immediately pauses execution of the current coroutine.
-Execution will only continue once the coroutine has been resumed via a [CoroutineToken](#type-coroutinetoken) previously obtained from [coroutine_token()](#func-coroutine_token).
+Execution will only continue once the coroutine has been resumed via a [CoroutineToken](#type-coroutinetoken) previously obtained from [coroutine_token()](#func-coroutine-token).
 
 WARNING: This is a low level API designed to control the execution of a coroutine manually.
 It should only be used to create new asynchronous abstractions.
@@ -813,7 +813,7 @@ func panic(message: String);
 
 Immediately aborts execution of the current function with an error explained by `message`.
 From within the `panic` function, a new [Exception](#type-exception) is constructed with the given `message` and [stack unwinding](https://en.wikipedia.org/wiki/Call_stack#Unwinding) is started.
-Unwinding can be stopped by using the [catch_panic](#func-catch_panic) function.
+Unwinding can be stopped by using the [catch_panic](#func-catch-panic) function.
 
 This function is designed to report _unexpected_ errors such as programming errors.
 Use the [Result](#type-result) type instead if errors can be expected, e.g. to report missing files.
