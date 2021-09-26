@@ -17,12 +17,12 @@ An instance of this type can be passed to the compiler to configure it.  [More..
 
 |                | Name           |
 | -------------- | -------------- |
-| bool | **[enable_dump_cst](/docs/api/classes/structtiro__compiler__settings#variable-enable_dump_cst)**  |
-| bool | **[enable_dump_ast](/docs/api/classes/structtiro__compiler__settings#variable-enable_dump_ast)**  |
-| bool | **[enable_dump_ir](/docs/api/classes/structtiro__compiler__settings#variable-enable_dump_ir)**  |
-| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro__compiler__settings#variable-enable_dump_bytecode)**  |
-| void * | **[message_callback_data](/docs/api/classes/structtiro__compiler__settings#variable-message_callback_data)**  |
-| void(* | **[message_callback](/docs/api/classes/structtiro__compiler__settings#variable-message_callback)**  |
+| bool | **[enable_dump_cst](/docs/api/classes/structtiro__compiler__settings#variable-enable-dump-cst)**  |
+| bool | **[enable_dump_ast](/docs/api/classes/structtiro__compiler__settings#variable-enable-dump-ast)**  |
+| bool | **[enable_dump_ir](/docs/api/classes/structtiro__compiler__settings#variable-enable-dump-ir)**  |
+| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro__compiler__settings#variable-enable-dump-bytecode)**  |
+| void * | **[message_callback_data](/docs/api/classes/structtiro__compiler__settings#variable-message-callback-data)**  |
+| void(* | **[message_callback](/docs/api/classes/structtiro__compiler__settings#variable-message-callback)**  |
 
 ## Detailed Description
 
@@ -80,4 +80,4 @@ void(* message_callback;
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

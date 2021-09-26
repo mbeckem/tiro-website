@@ -16,8 +16,8 @@ title: tiro::compiled_module
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[compiled_module](/docs/api/classes/classtiro_1_1compiled__module#function-compiled_module)**([tiro_module_t](/docs/api/files/def_8h#typedef-tiro_module_t) raw_module) |
-| [tiro_module_t](/docs/api/files/def_8h#typedef-tiro_module_t) | **[raw_module](/docs/api/classes/classtiro_1_1compiled__module#function-raw_module)**() const |
+| | **[compiled_module](/docs/api/classes/classtiro_1_1compiled__module#function-compiled-module)**([tiro_module_t](/docs/api/files/def_8h#typedef-tiro-module-t) raw_module) |
+| [tiro_module_t](/docs/api/files/def_8h#typedef-tiro-module-t) | **[raw_module](/docs/api/classes/classtiro_1_1compiled__module#function-raw-module)**() const |
 
 ## Public Functions Documentation
 
@@ -39,4 +39,4 @@ inline tiro_module_t raw_module() const
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

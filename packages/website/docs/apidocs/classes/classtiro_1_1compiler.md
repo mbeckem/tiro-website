@@ -18,17 +18,17 @@ title: tiro::compiler
 | -------------- | -------------- |
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**() |
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings) settings) |
-| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) raw_compiler) |
-| void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add_file)**(std::string_view file_name, std::string_view file_content) |
+| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) raw_compiler) |
+| void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add-file)**(std::string_view file_name, std::string_view file_content) |
 | void | **[run](/docs/api/classes/classtiro_1_1compiler#function-run)**() |
-| bool | **[has_module](/docs/api/classes/classtiro_1_1compiler#function-has_module)**() const |
-| [compiled_module](/docs/api/classes/classtiro_1_1compiled__module) | **[take_module](/docs/api/classes/classtiro_1_1compiler#function-take_module)**() |
-| std::string | **[dump_cst](/docs/api/classes/classtiro_1_1compiler#function-dump_cst)**() const |
-| std::string | **[dump_ast](/docs/api/classes/classtiro_1_1compiler#function-dump_ast)**() const |
-| std::string | **[dump_ir](/docs/api/classes/classtiro_1_1compiler#function-dump_ir)**() const |
-| std::string | **[dump_bytecode](/docs/api/classes/classtiro_1_1compiler#function-dump_bytecode)**() const |
+| bool | **[has_module](/docs/api/classes/classtiro_1_1compiler#function-has-module)**() const |
+| [compiled_module](/docs/api/classes/classtiro_1_1compiled__module) | **[take_module](/docs/api/classes/classtiro_1_1compiler#function-take-module)**() |
+| std::string | **[dump_cst](/docs/api/classes/classtiro_1_1compiler#function-dump-cst)**() const |
+| std::string | **[dump_ast](/docs/api/classes/classtiro_1_1compiler#function-dump-ast)**() const |
+| std::string | **[dump_ir](/docs/api/classes/classtiro_1_1compiler#function-dump-ir)**() const |
+| std::string | **[dump_bytecode](/docs/api/classes/classtiro_1_1compiler#function-dump-bytecode)**() const |
 | const [compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings) & | **[settings](/docs/api/classes/classtiro_1_1compiler#function-settings)**() const |
-| [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro_compiler_t) | **[raw_compiler](/docs/api/classes/classtiro_1_1compiler#function-raw_compiler)**() const |
+| [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) | **[raw_compiler](/docs/api/classes/classtiro_1_1compiler#function-raw-compiler)**() const |
 
 ## Public Functions Documentation
 
@@ -132,4 +132,4 @@ inline tiro_compiler_t raw_compiler() const
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

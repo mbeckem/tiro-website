@@ -13,6 +13,12 @@ title: tiropp/fwd.hpp
 | -------------- |
 | **[tiro](/docs/api/namespaces/namespacetiro)**  |
 
+## Classes
+
+|                | Name           |
+| -------------- | -------------- |
+| class | **[tiro::native_type](/docs/api/classes/classtiro_1_1native__type)**  |
+
 
 
 
@@ -20,4 +26,4 @@ title: tiropp/fwd.hpp
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

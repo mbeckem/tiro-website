@@ -12,20 +12,20 @@ Basic error handling facilities.
 
 |                | Name           |
 | -------------- | -------------- |
-| enum| **[tiro_errc_t](/docs/api/files/error_8h#enum-tiro_errc_t)** { TIRO_OK = 0, TIRO_ERROR_BAD_STATE = 1, TIRO_ERROR_BAD_ARG = 2, TIRO_ERROR_BAD_SOURCE = 3, TIRO_ERROR_BAD_TYPE = 4, TIRO_ERROR_BAD_KEY = 5, TIRO_ERROR_MODULE_EXISTS = 6, TIRO_ERROR_MODULE_NOT_FOUND = 7, TIRO_ERROR_EXPORT_NOT_FOUND = 8, TIRO_ERROR_OUT_OF_BOUNDS = 9, TIRO_ERROR_ALLOC = 10, TIRO_ERROR_INTERNAL = 1000}<br>Defines all possible error codes.  |
-| typedef enum [tiro_errc_t](/docs/api/files/error_8h#enum-tiro_errc_t) | **[tiro_errc_t](/docs/api/files/error_8h#typedef-tiro_errc_t)** <br>Defines all possible error codes.  |
+| enum| **[tiro_errc_t](/docs/api/files/error_8h#enum-tiro-errc-t)** { TIRO_OK = 0, TIRO_ERROR_BAD_STATE = 1, TIRO_ERROR_BAD_ARG = 2, TIRO_ERROR_BAD_SOURCE = 3, TIRO_ERROR_BAD_TYPE = 4, TIRO_ERROR_BAD_KEY = 5, TIRO_ERROR_MODULE_EXISTS = 6, TIRO_ERROR_MODULE_NOT_FOUND = 7, TIRO_ERROR_EXPORT_NOT_FOUND = 8, TIRO_ERROR_OUT_OF_BOUNDS = 9, TIRO_ERROR_ALLOC = 10, TIRO_ERROR_INTERNAL = 1000}<br>Defines all possible error codes.  |
+| typedef enum [tiro_errc_t](/docs/api/files/error_8h#enum-tiro-errc-t) | **[tiro_errc_t](/docs/api/files/error_8h#typedef-tiro-errc-t)** <br>Defines all possible error codes.  |
 
 ## Functions
 
 |                | Name           |
 | -------------- | -------------- |
-| const char * | **[tiro_errc_name](/docs/api/files/error_8h#function-tiro_errc_name)**([tiro_errc_t](/docs/api/files/error_8h#enum-tiro_errc_t) e)<br>Returns the name of the given error code.  |
-| const char * | **[tiro_errc_message](/docs/api/files/error_8h#function-tiro_errc_message)**([tiro_errc_t](/docs/api/files/error_8h#enum-tiro_errc_t) e)<br>Returns a human readable description of the given error code.  |
-| void | **[tiro_error_free](/docs/api/files/error_8h#function-tiro_error_free)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) err)<br>Frees the given error instance.  |
-| [tiro_errc_t](/docs/api/files/error_8h#enum-tiro_errc_t) | **[tiro_error_errc](/docs/api/files/error_8h#function-tiro_error_errc)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) err)<br>Returns the error code stored in the given error.  |
-| const char * | **[tiro_error_name](/docs/api/files/error_8h#function-tiro_error_name)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) err)<br>Returns the name of the error code in the given error.  |
-| const char * | **[tiro_error_message](/docs/api/files/error_8h#function-tiro_error_message)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) err)<br>Returns the human readable message of the error code in the given error.  |
-| const char * | **[tiro_error_details](/docs/api/files/error_8h#function-tiro_error_details)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro_error_t) err)<br>Returns detailed error information as a human readable string.  |
+| const char * | **[tiro_errc_name](/docs/api/files/error_8h#function-tiro-errc-name)**([tiro_errc_t](/docs/api/files/error_8h#enum-tiro-errc-t) e)<br>Returns the name of the given error code.  |
+| const char * | **[tiro_errc_message](/docs/api/files/error_8h#function-tiro-errc-message)**([tiro_errc_t](/docs/api/files/error_8h#enum-tiro-errc-t) e)<br>Returns a human readable description of the given error code.  |
+| void | **[tiro_error_free](/docs/api/files/error_8h#function-tiro-error-free)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) err)<br>Frees the given error instance.  |
+| [tiro_errc_t](/docs/api/files/error_8h#enum-tiro-errc-t) | **[tiro_error_errc](/docs/api/files/error_8h#function-tiro-error-errc)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) err)<br>Returns the error code stored in the given error.  |
+| const char * | **[tiro_error_name](/docs/api/files/error_8h#function-tiro-error-name)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) err)<br>Returns the name of the error code in the given error.  |
+| const char * | **[tiro_error_message](/docs/api/files/error_8h#function-tiro-error-message)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) err)<br>Returns the human readable message of the error code in the given error.  |
+| const char * | **[tiro_error_details](/docs/api/files/error_8h#function-tiro-error-details)**([tiro_error_t](/docs/api/files/def_8h#typedef-tiro-error-t) err)<br>Returns detailed error information as a human readable string.  |
 
 ## Types Documentation
 
@@ -160,4 +160,4 @@ The returned string is managed by the error and will remain valid for as long as
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

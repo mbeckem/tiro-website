@@ -17,7 +17,7 @@ Settings to control the construction of a virtual machine.
 
 |                | Name           |
 | -------------- | -------------- |
-| std::function< void(std::string_view [message](/docs/api/namespaces/namespacetiro#function-message))> | **[print_stdout](/docs/api/classes/structtiro_1_1vm__settings#variable-print_stdout)** <br>Invoked by the vm to print a message to the standard output, e.g.  |
+| std::function< void(std::string_view [message](/docs/api/namespaces/namespacetiro#function-message))> | **[print_stdout](/docs/api/classes/structtiro_1_1vm__settings#variable-print-stdout)** <br>Invoked by the vm to print a message to the standard output, e.g.  |
 
 ## Public Attributes Documentation
 
@@ -34,4 +34,4 @@ when `std.print(...)` was called. The vm will print to the process's standard ou
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

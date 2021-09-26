@@ -16,10 +16,10 @@ title: tiro::detail::resource_holder
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource_holder)**() =default |
-| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource_holder)**(Resource res) |
-| | **[~resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-~resource_holder)**() |
-| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource_holder)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
+| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**() =default |
+| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**(Resource res) |
+| | **[~resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-~resource-holder)**() |
+| | **[resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-resource-holder)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
 | [resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) & | **[operator=](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator=)**([resource_holder](/docs/api/classes/classtiro_1_1detail_1_1resource__holder) && other) |
 | Resource | **[get](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-get)**() const |
 | | **[operator Resource](/docs/api/classes/classtiro_1_1detail_1_1resource__holder#function-operator-resource)**() const |
@@ -115,4 +115,4 @@ inline Resource * out()
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

@@ -13,10 +13,10 @@ title: tiro::coroutine::callback_wrapper
 
 |                | Name           |
 | -------------- | -------------- |
-| template <typename T \> <br>| **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback_wrapper)**(in_place_t , T && t) |
-| | **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback_wrapper)**(callback_wrapper && ) |
-| callback_wrapper & | **[operator=](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-operator=)**(callback_wrapper && ) |
-| void | **[invoke](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-invoke)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) raw_vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) raw_coroutine, void * userdata) |
+| template <typename T \> <br>| **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback-wrapper)**(in_place_t , T && t) |
+| | **[callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-callback-wrapper)**(callback_wrapper && ) =deleted |
+| callback_wrapper & | **[operator=](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-operator=)**(callback_wrapper && ) =deleted |
+| void | **[invoke](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-invoke)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) raw_vm, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) raw_coroutine, void * userdata) |
 | void | **[cleanup](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper#function-cleanup)**(void * userdata) |
 
 ## Public Attributes
@@ -50,7 +50,7 @@ inline callback_wrapper(
 ```cpp
 callback_wrapper(
     callback_wrapper && 
-)
+) =deleted
 ```
 
 
@@ -59,7 +59,7 @@ callback_wrapper(
 ```cpp
 callback_wrapper & operator=(
     callback_wrapper && 
-)
+) =deleted
 ```
 
 
@@ -94,4 +94,4 @@ Callback cb;
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

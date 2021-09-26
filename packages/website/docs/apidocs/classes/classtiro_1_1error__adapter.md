@@ -16,11 +16,11 @@ title: tiro::error_adapter
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error_adapter)**() =default |
-| | **[~error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-~error_adapter)**() |
-| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error_adapter)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) |
-| [error_adapter](/docs/api/classes/classtiro_1_1error__adapter) & | **[operator=](/docs/api/classes/classtiro_1_1error__adapter#function-operator=)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) |
-| | **[operator tiro_error_t *](/docs/api/classes/classtiro_1_1error__adapter#function-operator-tiro_error_t-*)**() |
+| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error-adapter)**() =default |
+| | **[~error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-~error-adapter)**() |
+| | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error-adapter)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) =deleted |
+| [error_adapter](/docs/api/classes/classtiro_1_1error__adapter) & | **[operator=](/docs/api/classes/classtiro_1_1error__adapter#function-operator=)**([error_adapter](/docs/api/classes/classtiro_1_1error__adapter) && ) =deleted |
+| | **[operator tiro_error_t *](/docs/api/classes/classtiro_1_1error__adapter#function-operator-tiro-error-t-*)**() |
 
 ## Public Functions Documentation
 
@@ -43,7 +43,7 @@ inline ~error_adapter()
 ```cpp
 error_adapter(
     error_adapter && 
-)
+) =deleted
 ```
 
 
@@ -52,7 +52,7 @@ error_adapter(
 ```cpp
 error_adapter & operator=(
     error_adapter && 
-)
+) =deleted
 ```
 
 
@@ -65,4 +65,4 @@ inline operator tiro_error_t *()
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

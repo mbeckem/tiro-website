@@ -16,17 +16,17 @@ title: tiro::compiler_settings
 
 |                | Name           |
 | -------------- | -------------- |
-| using std::function< void([severity](/docs/api/namespaces/namespacetiro#enum-severity) sev, uint32_t line, uint32_t column, std::string_view [message](/docs/api/namespaces/namespacetiro#function-message))> | **[message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message_callback_type)**  |
+| using std::function< void([severity](/docs/api/namespaces/namespacetiro#enum-severity) sev, uint32_t line, uint32_t column, std::string_view [message](/docs/api/namespaces/namespacetiro#function-message))> | **[message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message-callback-type)**  |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| bool | **[enable_dump_cst](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_cst)**  |
-| bool | **[enable_dump_ast](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_ast)**  |
-| bool | **[enable_dump_ir](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_ir)**  |
-| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable_dump_bytecode)**  |
-| [message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message_callback_type) | **[message_callback](/docs/api/classes/structtiro_1_1compiler__settings#variable-message_callback)**  |
+| bool | **[enable_dump_cst](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-cst)**  |
+| bool | **[enable_dump_ast](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-ast)**  |
+| bool | **[enable_dump_ir](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-ir)**  |
+| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-bytecode)**  |
+| [message_callback_type](/docs/api/classes/structtiro_1_1compiler__settings#using-message-callback-type) | **[message_callback](/docs/api/classes/structtiro_1_1compiler__settings#variable-message-callback)**  |
 
 ## Public Types Documentation
 
@@ -76,4 +76,4 @@ message_callback_type message_callback;
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

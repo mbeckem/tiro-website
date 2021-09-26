@@ -21,7 +21,7 @@ Inherited by [bad_handle_check](/docs/api/classes/classtiro_1_1bad__handle__chec
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[generic_error](/docs/api/classes/classtiro_1_1generic__error#function-generic_error)**(std::string message) |
+| | **[generic_error](/docs/api/classes/classtiro_1_1generic__error#function-generic-error)**(std::string message) |
 | virtual const char * | **[message](/docs/api/classes/classtiro_1_1generic__error#function-message)**() const override<br>A simple message line that describes the error condition. Never null.  |
 | virtual const char * | **[details](/docs/api/classes/classtiro_1_1generic__error#function-details)**() const override<br>Optional detailed error information. Never null, but may be empty.  |
 | virtual const char * | **[what](/docs/api/classes/classtiro_1_1generic__error#function-what)**() const override |
@@ -68,4 +68,4 @@ inline virtual const char * what() const override
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

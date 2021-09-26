@@ -13,19 +13,19 @@ title: tiro::handle::holder
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-holder)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) vm_, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) handle_) |
+| | **[holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-holder)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) vm_, [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) handle_) |
 | | **[holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-holder)**(holder && other) |
 | | **[~holder](/docs/api/classes/structtiro_1_1handle_1_1holder#function-~holder)**() |
 | holder & | **[operator=](/docs/api/classes/structtiro_1_1handle_1_1holder#function-operator=)**(holder && other) |
-| void | **[assign](/docs/api/classes/structtiro_1_1handle_1_1holder#function-assign)**([tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) h) |
+| void | **[assign](/docs/api/classes/structtiro_1_1handle_1_1holder#function-assign)**([tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) h) |
 | void | **[reset](/docs/api/classes/structtiro_1_1handle_1_1holder#function-reset)**() |
 
 ## Public Attributes
 
 |                | Name           |
 | -------------- | -------------- |
-| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) | **[vm](/docs/api/classes/structtiro_1_1handle_1_1holder#variable-vm)**  |
-| [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro_handle_t) | **[handle](/docs/api/classes/structtiro_1_1handle_1_1holder#variable-handle)**  |
+| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[vm](/docs/api/classes/structtiro_1_1handle_1_1holder#variable-vm)**  |
+| [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) | **[handle](/docs/api/classes/structtiro_1_1handle_1_1holder#variable-handle)**  |
 
 ## Public Functions Documentation
 
@@ -98,4 +98,4 @@ tiro_handle_t handle;
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

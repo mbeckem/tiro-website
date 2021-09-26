@@ -16,14 +16,14 @@ title: tiro::sync_frame
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync_frame)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) raw_vm, [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) raw_frame) |
-| | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync_frame)**(const [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & ) |
-| [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & | **[operator=](/docs/api/classes/classtiro_1_1sync__frame#function-operator=)**(const [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & ) |
+| | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync-frame)**([tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) raw_vm, [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro-sync-frame-t) raw_frame) |
+| | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync-frame)**(const [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & ) =deleted |
+| [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & | **[operator=](/docs/api/classes/classtiro_1_1sync__frame#function-operator=)**(const [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & ) =deleted |
 | size_t | **[argc](/docs/api/classes/classtiro_1_1sync__frame#function-argc)**() const |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[arg](/docs/api/classes/classtiro_1_1sync__frame#function-arg)**(size_t index) const |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[closure](/docs/api/classes/classtiro_1_1sync__frame#function-closure)**() const |
-| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro_vm_t) | **[raw_vm](/docs/api/classes/classtiro_1_1sync__frame#function-raw_vm)**() const |
-| [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro_sync_frame_t) | **[raw_frame](/docs/api/classes/classtiro_1_1sync__frame#function-raw_frame)**() const |
+| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[raw_vm](/docs/api/classes/classtiro_1_1sync__frame#function-raw-vm)**() const |
+| [tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro-sync-frame-t) | **[raw_frame](/docs/api/classes/classtiro_1_1sync__frame#function-raw-frame)**() const |
 
 ## Public Functions Documentation
 
@@ -42,7 +42,7 @@ inline sync_frame(
 ```cpp
 sync_frame(
     const sync_frame & 
-)
+) =deleted
 ```
 
 
@@ -51,7 +51,7 @@ sync_frame(
 ```cpp
 sync_frame & operator=(
     const sync_frame & 
-)
+) =deleted
 ```
 
 
@@ -94,4 +94,4 @@ inline tiro_sync_frame_t raw_frame() const
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

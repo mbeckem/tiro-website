@@ -17,9 +17,9 @@ title: tiropp/def.hpp
 
 |                | Name           |
 | -------------- | -------------- |
-|  | **[TIRO_DEBUG](/docs/api/files/def_8hpp#define-tiro_debug)**  |
-|  | **[TIRO_HANDLE_CHECKS](/docs/api/files/def_8hpp#define-tiro_handle_checks)**  |
-|  | **[TIRO_ASSERT](/docs/api/files/def_8hpp#define-tiro_assert)**(expr)  |
+|  | **[TIRO_DEBUG](/docs/api/files/def_8hpp#define-tiro-debug)**  |
+|  | **[TIRO_HANDLE_CHECKS](/docs/api/files/def_8hpp#define-tiro-handle-checks)**  |
+|  | **[TIRO_ASSERT](/docs/api/files/def_8hpp#define-tiro-assert)**(expr)  |
 
 
 
@@ -54,4 +54,4 @@ assert(expr)
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

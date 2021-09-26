@@ -34,7 +34,7 @@ virtual const char * message() const =0
 
 A simple message line that describes the error condition. Never null. 
 
-**Reimplemented by**: [tiro::generic_error::message](/docs/api/classes/classtiro_1_1generic__error#function-message), [tiro::api_error::message](/docs/api/classes/classtiro_1_1api__error#function-message), [tiro::bad_handle_cast::message](/docs/api/classes/classtiro_1_1bad__handle__cast#function-message)
+**Reimplemented by**: [tiro::generic_error::message](/docs/api/classes/classtiro_1_1generic__error#function-message), [tiro::bad_handle_cast::message](/docs/api/classes/classtiro_1_1bad__handle__cast#function-message), [tiro::api_error::message](/docs/api/classes/classtiro_1_1api__error#function-message)
 
 
 ### function details
@@ -45,9 +45,9 @@ virtual const char * details() const =0
 
 Optional detailed error information. Never null, but may be empty. 
 
-**Reimplemented by**: [tiro::generic_error::details](/docs/api/classes/classtiro_1_1generic__error#function-details), [tiro::api_error::details](/docs/api/classes/classtiro_1_1api__error#function-details), [tiro::bad_handle_cast::details](/docs/api/classes/classtiro_1_1bad__handle__cast#function-details)
+**Reimplemented by**: [tiro::generic_error::details](/docs/api/classes/classtiro_1_1generic__error#function-details), [tiro::bad_handle_cast::details](/docs/api/classes/classtiro_1_1bad__handle__cast#function-details), [tiro::api_error::details](/docs/api/classes/classtiro_1_1api__error#function-details)
 
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST

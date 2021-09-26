@@ -75,10 +75,10 @@ static inline void finalizer(
 ### variable size
 
 ```cpp
-static constexpr size_t size = sizeof([layout](/docs/api/classes/structtiro_1_1detail_1_1native__traits_1_1layout));
+static constexpr size_t size = sizeof(layout);
 ```
 
 
 -------------------------------
 
-Updated on 25 July 2021 at 13:14:57 CEST
+Updated on 26 September 2021 at 09:32:12 CEST
