@@ -1,9 +1,9 @@
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote/dist/types";
-import remarkSlug from "remark-slug";
 import remarkHeadingId from "remark-heading-id";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { ensureServer } from "@src/utils";
+import { slugPlugin } from "./slug";
 
 export type SerializedMDX = MDXRemoteSerializeResult;
 
@@ -23,7 +23,7 @@ export async function serializeMDX(mdxSource: string): Promise<MDXRemoteSerializ
 
     return serialize(mdxSource, {
         mdxOptions: {
-            remarkPlugins: [remarkHeadingId, remarkSlug],
+            remarkPlugins: [remarkHeadingId, slugPlugin],
             rehypePlugins: [[rehypeAutolinkHeadings, autolinkOptions as any]]
         }
     });
