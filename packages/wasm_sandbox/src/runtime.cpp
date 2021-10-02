@@ -47,21 +47,20 @@ CompileResult Runtime::compile_impl(const CompileOptions& options) {
     compiler_settings.enable_dump_ast = options.enable_ast;
     compiler_settings.enable_dump_bytecode = options.enable_bytecode;
     compiler_settings.enable_dump_ir = options.enable_ir;
-    compiler_settings.message_callback = [&](tiro::severity sev, uint32_t line,
-                                             uint32_t column,
-                                             std::string_view message) {
-        if (callback_error)
-            return;
+    compiler_settings.message_callback =
+        [&](const tiro::compiler_message& message) {
+            if (callback_error)
+                return;
 
-        try {
-            std::ostringstream ss;
-            ss << tiro::to_string(sev) << " " << line << ":" << column << ": "
-               << message;
-            result.messages.push_back(ss.str());
-        } catch (...) {
-            callback_error = std::current_exception();
-        }
-    };
+            try {
+                std::ostringstream ss;
+                ss << tiro::to_string(message.severity) << " " << message.line
+                   << ":" << message.column << ": " << message.text;
+                result.messages.push_back(ss.str());
+            } catch (...) {
+                callback_error = std::current_exception();
+            }
+        };
 
     auto report = [&](std::string_view context, const tiro::error& error) {
         std::ostringstream ss;
@@ -73,7 +72,7 @@ CompileResult Runtime::compile_impl(const CompileOptions& options) {
         result.messages.push_back(ss.str());
     };
 
-    tiro::compiler compiler(compiler_settings);
+    tiro::compiler compiler("sandbox", compiler_settings);
     try {
         compiler.add_file(options.filename.c_str(), options.source.c_str());
         compiler.run();
