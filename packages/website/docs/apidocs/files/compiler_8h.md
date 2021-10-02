@@ -12,6 +12,7 @@ Contains functions and type definitions for compiling tiro source code to module
 
 |                | Name           |
 | -------------- | -------------- |
+| struct | **[tiro_compiler_message](/docs/api/classes/structtiro__compiler__message)** <br>Represents a diagnostic message emitted by the compiler.  |
 | struct | **[tiro_compiler_settings](/docs/api/classes/structtiro__compiler__settings)** <br>An instance of this type can be passed to the compiler to configure it.  |
 
 ## Types
@@ -20,6 +21,7 @@ Contains functions and type definitions for compiling tiro source code to module
 | -------------- | -------------- |
 | enum| **[tiro_severity](/docs/api/files/compiler_8h#enum-tiro-severity)** { TIRO_SEVERITY_WARNING = 1, TIRO_SEVERITY_ERROR = 2}<br>Defines the possible values for the severity of diagnostic compiler messages.  |
 | typedef enum [tiro&#95;severity](/docs/api/files/compiler&#95;8h#enum-tiro-severity) | **[tiro_severity_t](/docs/api/files/compiler_8h#typedef-tiro-severity-t)** <br>Defines the possible values for the severity of diagnostic compiler messages.  |
+| typedef struct [tiro&#95;compiler&#95;message](/docs/api/classes/structtiro&#95;&#95;compiler&#95;&#95;message) | **[tiro_compiler_message_t](/docs/api/files/compiler_8h#typedef-tiro-compiler-message-t)** <br>Represents a diagnostic message emitted by the compiler.  |
 | typedef struct [tiro&#95;compiler&#95;settings](/docs/api/classes/structtiro&#95;&#95;compiler&#95;&#95;settings) | **[tiro_compiler_settings_t](/docs/api/files/compiler_8h#typedef-tiro-compiler-settings-t)** <br>An instance of this type can be passed to the compiler to configure it.  |
 
 ## Functions
@@ -28,7 +30,7 @@ Contains functions and type definitions for compiling tiro source code to module
 | -------------- | -------------- |
 | const char * | **[tiro_severity_str](/docs/api/files/compiler_8h#function-tiro-severity-str)**([tiro&#95;severity&#95;t](/docs/api/files/compiler&#95;8h#typedef-tiro-severity-t) severity)<br>Returns the string representation of the given severity value.  |
 | void | **[tiro_compiler_settings_init](/docs/api/files/compiler_8h#function-tiro-compiler-settings-init)**([tiro&#95;compiler&#95;settings&#95;t](/docs/api/files/compiler&#95;8h#typedef-tiro-compiler-settings-t) &#42; settings)<br>Initializes the given compiler settings object with default values.  |
-| [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) | **[tiro_compiler_new](/docs/api/files/compiler_8h#function-tiro-compiler-new)**(const [tiro&#95;compiler&#95;settings&#95;t](/docs/api/files/compiler&#95;8h#typedef-tiro-compiler-settings-t) &#42; settings, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new compiler instance.  |
+| [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) | **[tiro_compiler_new](/docs/api/files/compiler_8h#function-tiro-compiler-new)**([tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) module_name, const [tiro&#95;compiler&#95;settings&#95;t](/docs/api/files/compiler&#95;8h#typedef-tiro-compiler-settings-t) &#42; settings, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new compiler instance.  |
 | void | **[tiro_compiler_free](/docs/api/files/compiler_8h#function-tiro-compiler-free)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler)<br>Destroys and frees the given compiler instance.  |
 | void | **[tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro-compiler-add-file)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) file_name, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) file_content, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Add a source file to the compiler.  |
 | void | **[tiro_compiler_run](/docs/api/files/compiler_8h#function-tiro-compiler-run)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Run the compiler on the set of source files provided via `tiro_compiler_add_file`.  |
@@ -60,6 +62,17 @@ typedef enum tiro_severity tiro_severity_t;
 ```
 
 Defines the possible values for the severity of diagnostic compiler messages. 
+
+### typedef tiro_compiler_message_t
+
+```cpp
+typedef struct tiro_compiler_message tiro_compiler_message_t;
+```
+
+Represents a diagnostic message emitted by the compiler. 
+
+All fields are only valid for the duration of the `message_callback` function call. 
+
 
 ### typedef tiro_compiler_settings_t
 
@@ -102,6 +115,7 @@ Initializes the given compiler settings object with default values.
 
 ```cpp
 tiro_compiler_t tiro_compiler_new(
+    tiro_string_t module_name,
     const tiro_compiler_settings_t * settings,
     tiro_error_t * err
 )
@@ -111,13 +125,11 @@ Allocates a new compiler instance.
 
 **Parameters**: 
 
-  * **settings** The compiler settings (optional). Default values will be used if this parameter is NULL.
+  * **module_name** The name of the compiled module. Must be a valid, non-empty string. Does not have to remain valid for after the completion of this function, a copy is made internally.
+  * **settings** The compiler settings (optional). Default values will be used if this parameter is NULL. Does not have to remain valid after the completion of this function. 
 
 
 A compiler can be used to compile a set of source files into a module. Warnings or errors emitted during compilation can be observed through the `settings->message_callback` function.
-
-
-FIXME: Currently only works for a single source files, implement _add api. 
 
 
 ### function tiro_compiler_free
@@ -148,7 +160,7 @@ Add a source file to the compiler.
 
 Can only be called before compilation started.
 
-FIXME: Can only be called for a single source file as of now. 
+Filenames should be unique within a single module. 
 
 
 ### function tiro_compiler_run
@@ -294,4 +306,4 @@ Does nothing if `module` is NULL.
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200

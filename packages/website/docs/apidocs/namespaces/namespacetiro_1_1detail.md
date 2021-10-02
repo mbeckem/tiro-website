@@ -20,6 +20,8 @@ title: tiro::detail
 |                | Name           |
 | -------------- | -------------- |
 | template <typename... Handles\> <br>void | **[check_handles](/docs/api/namespaces/namespacetiro_1_1detail#function-check-handles)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) , const Handles & ...) |
+| std::string_view | **[from_raw](/docs/api/namespaces/namespacetiro_1_1detail#function-from-raw)**(const [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) & str) |
+| [tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t) | **[to_raw](/docs/api/namespaces/namespacetiro_1_1detail#function-to-raw)**(const std::string&#95;view & str) |
 
 
 ## Functions Documentation
@@ -35,10 +37,28 @@ void check_handles(
 ```
 
 
+### function from_raw
+
+```cpp
+inline std::string_view from_raw(
+    const tiro_string_t & str
+)
+```
+
+
+### function to_raw
+
+```cpp
+inline tiro_string_t to_raw(
+    const std::string_view & str
+)
+```
+
+
 
 
 
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200

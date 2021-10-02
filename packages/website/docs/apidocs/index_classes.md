@@ -18,6 +18,7 @@ title: Classes
     * **class [boolean](/docs/api/classes/classtiro_1_1boolean)** 
     * **class [compiled_module](/docs/api/classes/classtiro_1_1compiled__module)** 
     * **class [compiler](/docs/api/classes/classtiro_1_1compiler)** 
+    * **struct [compiler_message](/docs/api/classes/structtiro_1_1compiler__message)** 
     * **struct [compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings)** 
     * **class [coroutine](/docs/api/classes/classtiro_1_1coroutine)** 
         * **struct [callback_wrapper](/docs/api/classes/structtiro_1_1coroutine_1_1callback__wrapper)** 
@@ -50,6 +51,7 @@ title: Classes
     * **struct [version](/docs/api/classes/structtiro_1_1version)** <br>Represents a library version. 
     * **class [vm](/docs/api/classes/classtiro_1_1vm)** 
     * **struct [vm_settings](/docs/api/classes/structtiro_1_1vm__settings)** <br>Settings to control the construction of a virtual machine. 
+* **struct [tiro_compiler_message](/docs/api/classes/structtiro__compiler__message)** <br>Represents a diagnostic message emitted by the compiler. 
 * **struct [tiro_compiler_settings](/docs/api/classes/structtiro__compiler__settings)** <br>An instance of this type can be passed to the compiler to configure it. 
 * **struct [tiro_module_member_t](/docs/api/classes/structtiro__module__member__t)** 
 * **struct [tiro_native_type](/docs/api/classes/structtiro__native__type)** <br>Describes a native object type to the tiro runtime. 
@@ -60,4 +62,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200

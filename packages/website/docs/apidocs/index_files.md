@@ -28,6 +28,7 @@ title: Files
     * **dir [tiropp/detail](/docs/api/files/dir_cc9165f2e48b3112d9525ed4bc876408#dir-tiropp/detail)** 
         * **file [tiropp/detail/handle_check.hpp](/docs/api/files/handle__check_8hpp#file-handle-check.hpp)** 
         * **file [tiropp/detail/resource_holder.hpp](/docs/api/files/resource__holder_8hpp#file-resource-holder.hpp)** 
+        * **file [tiropp/detail/translate.hpp](/docs/api/files/translate_8hpp#file-translate.hpp)** 
     * **file [tiropp/version.hpp](/docs/api/files/version_8hpp#file-version.hpp)** 
     * **file [tiropp/vm.hpp](/docs/api/files/vm_8hpp#file-vm.hpp)** 
 
@@ -35,4 +36,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200

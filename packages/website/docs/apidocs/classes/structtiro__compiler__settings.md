@@ -22,7 +22,7 @@ An instance of this type can be passed to the compiler to configure it.  [More..
 | bool | **[enable_dump_ir](/docs/api/classes/structtiro__compiler__settings#variable-enable-dump-ir)**  |
 | bool | **[enable_dump_bytecode](/docs/api/classes/structtiro__compiler__settings#variable-enable-dump-bytecode)**  |
 | void &#42; | **[message_callback_data](/docs/api/classes/structtiro__compiler__settings#variable-message-callback-data)**  |
-| void(&#42;)(tiro&#95;severity&#95;t severity, uint32&#95;t line, uint32&#95;t column, tiro&#95;string&#95;t message, void &#42;userdata) | **[message_callback](/docs/api/classes/structtiro__compiler__settings#variable-message-callback)**  |
+| void(&#42;)(const tiro&#95;compiler&#95;message&#95;t &#42;message, void &#42;userdata) | **[message_callback](/docs/api/classes/structtiro__compiler__settings#variable-message-callback)**  |
 
 ## Detailed Description
 
@@ -74,10 +74,10 @@ void * message_callback_data;
 ### variable message_callback
 
 ```cpp
-void(*)(tiro_severity_t severity, uint32_t line, uint32_t column, tiro_string_t message, void *userdata) message_callback;
+void(*)(const tiro_compiler_message_t *message, void *userdata) message_callback;
 ```
 
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200

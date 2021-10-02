@@ -25,6 +25,7 @@ title: tiro
 | class | **[tiro::boolean](/docs/api/classes/classtiro_1_1boolean)**  |
 | class | **[tiro::compiled_module](/docs/api/classes/classtiro_1_1compiled__module)**  |
 | class | **[tiro::compiler](/docs/api/classes/classtiro_1_1compiler)**  |
+| struct | **[tiro::compiler_message](/docs/api/classes/structtiro_1_1compiler__message)**  |
 | struct | **[tiro::compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings)**  |
 | class | **[tiro::coroutine](/docs/api/classes/classtiro_1_1coroutine)**  |
 | class | **[tiro::error](/docs/api/classes/classtiro_1_1error)** <br>Base class for all errors thrown by this library.  |
@@ -474,4 +475,4 @@ the version the application is currently running against.
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200

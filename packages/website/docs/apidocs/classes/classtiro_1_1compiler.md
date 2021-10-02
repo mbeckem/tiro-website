@@ -16,8 +16,8 @@ title: tiro::compiler
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**() |
-| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([compiler&#95;settings](/docs/api/classes/structtiro&#95;1&#95;1compiler&#95;&#95;settings) settings) |
+| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**(std::string&#95;view module_name) |
+| | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**(std::string&#95;view module_name, [compiler&#95;settings](/docs/api/classes/structtiro&#95;1&#95;1compiler&#95;&#95;settings) settings) |
 | | **[compiler](/docs/api/classes/classtiro_1_1compiler#function-compiler)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) raw_compiler) |
 | void | **[add_file](/docs/api/classes/classtiro_1_1compiler#function-add-file)**(std::string&#95;view file_name, std::string&#95;view file_content) |
 | void | **[run](/docs/api/classes/classtiro_1_1compiler#function-run)**() |
@@ -35,7 +35,9 @@ title: tiro::compiler
 ### function compiler
 
 ```cpp
-inline compiler()
+inline compiler(
+    std::string_view module_name
+)
 ```
 
 
@@ -43,6 +45,7 @@ inline compiler()
 
 ```cpp
 inline explicit compiler(
+    std::string_view module_name,
     compiler_settings settings
 )
 ```
@@ -132,4 +135,4 @@ inline tiro_compiler_t raw_compiler() const
 
 -------------------------------
 
-Updated on 2021-09-26 at 20:39:59 +0200
+Updated on 2021-10-02 at 17:24:37 +0200
