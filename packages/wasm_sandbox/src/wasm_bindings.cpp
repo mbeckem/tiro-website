@@ -53,7 +53,7 @@ public:
         auto raw = rt_.info();
 
         emscripten::val info = emscripten::val::object();
-        info.set("full_version", raw.tiro_version.full_version_string);
+        info.set("full_version", raw.tiro_version.full_version);
         return info;
     }
 
