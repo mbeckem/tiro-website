@@ -16,13 +16,13 @@ title: tiro::vm
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[vm](/docs/api/classes/classtiro_1_1vm#function-vm)**() |
-| | **[vm](/docs/api/classes/classtiro_1_1vm#function-vm)**([vm&#95;settings](/docs/api/classes/structtiro&#95;1&#95;1vm&#95;&#95;settings) settings) |
+| const std::any & | **[userdata](/docs/api/classes/classtiro_1_1vm#function-userdata)**() const<br>Userdata associated with this virtual machine.  |
+| std::any & | **[userdata](/docs/api/classes/classtiro_1_1vm#function-userdata)**()<br>Userdata associated with this virtual machine.  |
+| | **[vm](/docs/api/classes/classtiro_1_1vm#function-vm)**()<br>Constructs a new vm with default settings.  |
+| | **[vm](/docs/api/classes/classtiro_1_1vm#function-vm)**([vm&#95;settings](/docs/api/classes/structtiro&#95;1&#95;1vm&#95;&#95;settings) settings)<br>Constructs a new vm with the given settings.  |
 | | **[vm](/docs/api/classes/classtiro_1_1vm#function-vm)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) && ) =delete |
 | [vm](/docs/api/classes/classtiro_1_1vm) & | **[operator=](/docs/api/classes/classtiro_1_1vm#function-operator=)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) && ) =delete |
 | size_t | **[page_size](/docs/api/classes/classtiro_1_1vm#function-page-size)**() const<br>Returns the vm's page size, in bytes.  |
-| const std::any & | **[userdata](/docs/api/classes/classtiro_1_1vm#function-userdata)**() const |
-| std::any & | **[userdata](/docs/api/classes/classtiro_1_1vm#function-userdata)**() |
 | void | **[load_std](/docs/api/classes/classtiro_1_1vm#function-load-std)**()<br>Loads the "std" module.  |
 | void | **[load](/docs/api/classes/classtiro_1_1vm#function-load)**(const [compiled&#95;module](/docs/api/classes/classtiro&#95;1&#95;1compiled&#95;&#95;module) & mod)<br>Loads the given compiled module.  |
 | bool | **[has_ready](/docs/api/classes/classtiro_1_1vm#function-has-ready)**() const<br>Returns true if the virtual machine has at least one coroutine ready for execution, false otherwise.  |
@@ -32,12 +32,29 @@ title: tiro::vm
 
 ## Public Functions Documentation
 
+### function userdata
+
+```cpp
+inline const std::any & userdata() const
+```
+
+Userdata associated with this virtual machine. 
+
+### function userdata
+
+```cpp
+inline std::any & userdata()
+```
+
+Userdata associated with this virtual machine. 
+
 ### function vm
 
 ```cpp
 inline vm()
 ```
 
+Constructs a new vm with default settings. 
 
 ### function vm
 
@@ -47,6 +64,7 @@ inline explicit vm(
 )
 ```
 
+Constructs a new vm with the given settings. 
 
 ### function vm
 
@@ -73,20 +91,6 @@ inline size_t page_size() const
 ```
 
 Returns the vm's page size, in bytes. 
-
-### function userdata
-
-```cpp
-inline const std::any & userdata() const
-```
-
-
-### function userdata
-
-```cpp
-inline std::any & userdata()
-```
-
 
 ### function load_std
 
@@ -145,4 +149,4 @@ The raw_vm MUST have been created by the [tiro::vm](/docs/api/classes/classtiro_
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

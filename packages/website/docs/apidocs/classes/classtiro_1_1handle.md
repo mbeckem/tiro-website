@@ -25,6 +25,8 @@ Inherited by [array](/docs/api/classes/classtiro_1_1array), [boolean](/docs/api/
 
 |                | Name           |
 | -------------- | -------------- |
+| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() const<br>Converts this value to the target type.  |
+| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**()<br>Converts this value to the target type.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) raw_vm)<br>Constructs a new handle instance.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**(const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & other)<br>Constructs a new handle and initialize is it with the same value as `other`.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other) =default<br>Move constructs a handle.  |
@@ -33,8 +35,6 @@ Inherited by [array](/docs/api/classes/classtiro_1_1array), [boolean](/docs/api/
 | [handle](/docs/api/classes/classtiro_1_1handle) & | **[operator=](/docs/api/classes/classtiro_1_1handle#function-operator=)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other) =default<br>Move assigns a handle.  |
 | bool | **[valid](/docs/api/classes/classtiro_1_1handle#function-valid)**() const<br>Returns true if this handle points to an object (i.e. it was not moved from).  |
 | [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) | **[kind](/docs/api/classes/classtiro_1_1handle#function-kind)**() const<br>Returns the kind of the value currently held by this handle.  |
-| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() const<br>Converts this value to the target type.  |
-| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() |
 | [type](/docs/api/classes/classtiro_1_1type) | **[type_of](/docs/api/classes/classtiro_1_1handle#function-type-of)**() const<br>Returns the type of the value currently held by this handle.  |
 | [string](/docs/api/classes/classtiro_1_1string) | **[to_string](/docs/api/classes/classtiro_1_1handle#function-to-string)**() const<br>Returns a string that represents the current value.  |
 | [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[raw_vm](/docs/api/classes/classtiro_1_1handle#function-raw-vm)**() const<br>Returns the raw vm instance associated with this handle.  |
@@ -63,6 +63,24 @@ A handle represents a reference to an object.
 Valid handles point to an object slot which is managed by the tiro runtime. All handles internally refer to the virtual machine they belong to. 
 
 ## Public Functions Documentation
+
+### function as
+
+```cpp
+template <typename T >
+inline T as() const
+```
+
+Converts this value to the target type. 
+
+### function as
+
+```cpp
+template <typename T >
+inline T as()
+```
+
+Converts this value to the target type. 
 
 ### function handle
 
@@ -154,23 +172,6 @@ inline value_kind kind() const
 
 Returns the kind of the value currently held by this handle. 
 
-### function as
-
-```cpp
-template <typename T >
-inline T as() const
-```
-
-Converts this value to the target type. 
-
-### function as
-
-```cpp
-template <typename T >
-inline T as()
-```
-
-
 ### function type_of
 
 ```cpp
@@ -227,4 +228,4 @@ static constexpr check_kind_t check_kind {};
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

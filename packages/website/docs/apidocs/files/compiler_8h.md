@@ -32,7 +32,7 @@ Contains functions and type definitions for compiling tiro source code to module
 | void | **[tiro_compiler_settings_init](/docs/api/files/compiler_8h#function-tiro-compiler-settings-init)**([tiro&#95;compiler&#95;settings&#95;t](/docs/api/files/compiler&#95;8h#typedef-tiro-compiler-settings-t) &#42; settings)<br>Initializes the given compiler settings object with default values.  |
 | [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) | **[tiro_compiler_new](/docs/api/files/compiler_8h#function-tiro-compiler-new)**([tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) module_name, const [tiro&#95;compiler&#95;settings&#95;t](/docs/api/files/compiler&#95;8h#typedef-tiro-compiler-settings-t) &#42; settings, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new compiler instance.  |
 | void | **[tiro_compiler_free](/docs/api/files/compiler_8h#function-tiro-compiler-free)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler)<br>Destroys and frees the given compiler instance.  |
-| void | **[tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro-compiler-add-file)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) file_name, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) file_content, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Add a source file to the compiler.  |
+| void | **[tiro_compiler_add_file](/docs/api/files/compiler_8h#function-tiro-compiler-add-file)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) file_name, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) file_content, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Add a source file to the compiler's source set.  |
 | void | **[tiro_compiler_run](/docs/api/files/compiler_8h#function-tiro-compiler-run)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Run the compiler on the set of source files provided via `tiro_compiler_add_file`.  |
 | bool | **[tiro_compiler_has_module](/docs/api/files/compiler_8h#function-tiro-compiler-has-module)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler)<br>Returns true if this compiler has successfully compiled a set of source files and produced a bytecode module.  |
 | void | **[tiro_compiler_take_module](/docs/api/files/compiler_8h#function-tiro-compiler-take-module)**([tiro&#95;compiler&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-compiler-t) compiler, [tiro&#95;module&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-module-t) &#42; module, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Extracts the compiled module from the compiler and returns it.  |
@@ -156,7 +156,7 @@ void tiro_compiler_add_file(
 )
 ```
 
-Add a source file to the compiler. 
+Add a source file to the compiler's source set. 
 
 Can only be called before compilation started.
 
@@ -174,7 +174,7 @@ void tiro_compiler_run(
 
 Run the compiler on the set of source files provided via `tiro_compiler_add_file`. 
 
-Requires at least once source file. This function can only be called once for every compiler instance.
+Requires at least one source file. This function can only be called once for every compiler instance.
 
 Returns an error if the compilation fails. 
 
@@ -189,7 +189,7 @@ bool tiro_compiler_has_module(
 
 Returns true if this compiler has successfully compiled a set of source files and produced a bytecode module. 
 
-In order for this function to return true, a previous call to `tiro_compiler_run` must have returned `TIRO_OK` and the compiler must have beeen configured to actually produce a module. 
+In order for this function to return true, a previous call to `tiro_compiler_run` must have returned `TIRO_OK` and the compiler must have been configured to actually produce a module. 
 
 
 ### function tiro_compiler_take_module
@@ -306,4 +306,4 @@ Does nothing if `module` is NULL.
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

@@ -17,13 +17,13 @@ Represents a library version.
 
 |                | Name           |
 | -------------- | -------------- |
-| uint32&#95;t | **[version_number](/docs/api/classes/structtiro_1_1version#variable-version-number)**  |
-| uint32&#95;t | **[major](/docs/api/classes/structtiro_1_1version#variable-major)**  |
-| uint32&#95;t | **[minor](/docs/api/classes/structtiro_1_1version#variable-minor)**  |
-| uint32&#95;t | **[patch](/docs/api/classes/structtiro_1_1version#variable-patch)**  |
-| const char &#42; | **[version_string](/docs/api/classes/structtiro_1_1version#variable-version-string)**  |
-| const char &#42; | **[source_id](/docs/api/classes/structtiro_1_1version#variable-source-id)**  |
-| const char &#42; | **[full_version_string](/docs/api/classes/structtiro_1_1version#variable-full-version-string)**  |
+| uint32&#95;t | **[version_number](/docs/api/classes/structtiro_1_1version#variable-version-number)** <br>The full version number (see TIRO_MAKE_VERSION).  |
+| uint32&#95;t | **[major](/docs/api/classes/structtiro_1_1version#variable-major)** <br>The major version extracted from the version number.  |
+| uint32&#95;t | **[minor](/docs/api/classes/structtiro_1_1version#variable-minor)** <br>The minor version extracted from the version number.  |
+| uint32&#95;t | **[patch](/docs/api/classes/structtiro_1_1version#variable-patch)** <br>The patch version extracted from the version number.  |
+| const char &#42; | **[version](/docs/api/classes/structtiro_1_1version#variable-version)** <br>The library's version as a string.  |
+| const char &#42; | **[source_id](/docs/api/classes/structtiro_1_1version#variable-source-id)** <br>The library's source id (build system identifier).  |
+| const char &#42; | **[full_version](/docs/api/classes/structtiro_1_1version#variable-full-version)** <br>The library's full version as a string.  |
 
 ## Public Attributes Documentation
 
@@ -33,6 +33,7 @@ Represents a library version.
 uint32_t version_number = 0;
 ```
 
+The full version number (see TIRO_MAKE_VERSION). 
 
 ### variable major
 
@@ -40,6 +41,7 @@ uint32_t version_number = 0;
 uint32_t major = 0;
 ```
 
+The major version extracted from the version number. 
 
 ### variable minor
 
@@ -47,6 +49,7 @@ uint32_t major = 0;
 uint32_t minor = 0;
 ```
 
+The minor version extracted from the version number. 
 
 ### variable patch
 
@@ -54,12 +57,17 @@ uint32_t minor = 0;
 uint32_t patch = 0;
 ```
 
+The patch version extracted from the version number. 
 
-### variable version_string
+### variable version
 
 ```cpp
-const char * version_string = "";
+const char * version = "";
 ```
+
+The library's version as a string. 
+
+Points into static storage if this object was returned by this libray. 
 
 
 ### variable source_id
@@ -68,14 +76,22 @@ const char * version_string = "";
 const char * source_id = "";
 ```
 
+The library's source id (build system identifier). 
 
-### variable full_version_string
+Points into static storage if this object was returned by this libray. 
+
+
+### variable full_version
 
 ```cpp
-const char * full_version_string = "";
+const char * full_version = "";
 ```
+
+The library's full version as a string. 
+
+Points into static storage if this object was returned by this libray. 
 
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

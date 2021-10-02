@@ -889,7 +889,7 @@ void tiro_coroutine_result(
 
 Returns the coroutine's result by assigning it to `result`. 
 
-The coroutine must have completed execution, i.e. `[tiro_coroutine_completed()](/docs/api/files/objects_8h#function-tiro-coroutine-completed)` must return true (for example, when invoked from a coroutine's completion callback). 
+The coroutine must have completed execution, i.e. `[tiro_coroutine_completed()](/docs/api/files/objects_8h#function-tiro-coroutine-completed)` must return true (for example, when invoked from a coroutine's completion callback). If the coroutine terminated with an uncaught panic, the result will hold an error. 
 
 
 ### function tiro_coroutine_set_callback
@@ -909,7 +909,7 @@ Schedules the given callback to be invoked once the coroutine completes.
 
 `coroutine` must be a handle to a coroutine, otherwise `TIRO_ERROR_BAD_TYPE` is returned.
 
-`callback` will be invoked when the coroutine completes its execution. A coroutine completes when the outermost function returns normally or if an uncaught exception is thrown from that function. The callback receives a handle to the completed coroutine, which can be inspected in order to retrieve the coroutine's result, and the original `userdata` argument. It will _not_ be invoked if the virtual machine shuts down before the coroutine has completed. The callback must not be NULL, otherwise `TIRO_ERROR_BAD_ARG` will be returned.
+`callback` will be invoked when the coroutine completes its execution. A coroutine completes when the outermost function returns normally or if an uncaught panic is thrown from that function. The callback receives a handle to the completed coroutine, which can be inspected in order to retrieve the coroutine's result, and the original `userdata` argument. It will _not_ be invoked if the virtual machine shuts down before the coroutine has completed. The callback must not be NULL, otherwise `TIRO_ERROR_BAD_ARG` will be returned.
 
 Note: all callback invocations happen from within one of the `tiro_vm_run*` functions.
 
@@ -1037,7 +1037,9 @@ void * tiro_native_data(
 
 Returns the address of the allocated user storage of the given native object. 
 
-Returns NULL on error. 
+**Warning**: The pointer returned by this function points into the object's current storage. Because objects may move on the heap (e.g. because of garbage collection), this data may be invalidated. The data may only be used immediately after calling this function in native code that is guaranteed to NOT allocate on the tiro heap. It MUST NOT be used as input tiro an allocating function (which includes most functions of this API), or after such a function has been called. 
+
+Returns NULL on error.
 
 
 ### function tiro_native_size
@@ -1241,4 +1243,4 @@ On success, the new function will be stored in `result`. Returns `TIRO_BAD_TYPE`
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

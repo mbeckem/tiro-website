@@ -1,5 +1,6 @@
 ---
 title: tiro::compiled_module
+summary: Represents a compiled bytecode module. 
 
 ---
 
@@ -7,7 +8,7 @@ title: tiro::compiled_module
 
 
 
-
+Represents a compiled bytecode module.  [More...](#detailed-description)
 
 
 `#include "tiropp/compiler.hpp"`
@@ -18,6 +19,16 @@ title: tiro::compiled_module
 | -------------- | -------------- |
 | | **[compiled_module](/docs/api/classes/classtiro_1_1compiled__module#function-compiled-module)**([tiro&#95;module&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-module-t) raw_module) |
 | [tiro_module_t](/docs/api/files/def_8h#typedef-tiro-module-t) | **[raw_module](/docs/api/classes/classtiro_1_1compiled__module#function-raw-module)**() const |
+
+## Detailed Description
+
+```cpp
+class tiro::compiled_module;
+```
+
+Represents a compiled bytecode module. 
+
+Modules are produced by the compiler. 
 
 ## Public Functions Documentation
 
@@ -39,4 +50,4 @@ inline tiro_module_t raw_module() const
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

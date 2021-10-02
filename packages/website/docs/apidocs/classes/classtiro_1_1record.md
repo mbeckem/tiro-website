@@ -1,5 +1,6 @@
 ---
 title: tiro::record
+summary: Refers to a record value. 
 
 ---
 
@@ -7,7 +8,7 @@ title: tiro::record
 
 
 
-
+Refers to a record value. 
 
 
 `#include "tiropp/objects.hpp"`
@@ -23,9 +24,9 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 | | **[record](/docs/api/classes/classtiro_1_1record#function-record)**([record](/docs/api/classes/classtiro&#95;1&#95;1record) && ) =default |
 | [record](/docs/api/classes/classtiro_1_1record) & | **[operator=](/docs/api/classes/classtiro_1_1record#function-operator=)**(const [record](/docs/api/classes/classtiro&#95;1&#95;1record) & ) =default |
 | [record](/docs/api/classes/classtiro_1_1record) & | **[operator=](/docs/api/classes/classtiro_1_1record#function-operator=)**([record](/docs/api/classes/classtiro&#95;1&#95;1record) && ) =default |
-| [array](/docs/api/classes/classtiro_1_1array) | **[keys](/docs/api/classes/classtiro_1_1record#function-keys)**() const |
-| [handle](/docs/api/classes/classtiro_1_1handle) | **[get](/docs/api/classes/classtiro_1_1record#function-get)**(const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & key) const |
-| void | **[set](/docs/api/classes/classtiro_1_1record#function-set)**(const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & key, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & value) |
+| [array](/docs/api/classes/classtiro_1_1array) | **[keys](/docs/api/classes/classtiro_1_1record#function-keys)**() const<br>Returns the keys of this record, as an array.  |
+| [handle](/docs/api/classes/classtiro_1_1handle) | **[get](/docs/api/classes/classtiro_1_1record#function-get)**(const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & key) const<br>Returns the value associated with the given key.  |
+| void | **[set](/docs/api/classes/classtiro_1_1record#function-set)**(const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & key, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & value)<br>Sets the value associated with the given key.  |
 
 ## Additional inherited members
 
@@ -39,14 +40,14 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 |                | Name           |
 | -------------- | -------------- |
+| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() const<br>Converts this value to the target type.  |
+| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**()<br>Converts this value to the target type.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) raw_vm)<br>Constructs a new handle instance.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**(const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & other)<br>Constructs a new handle and initialize is it with the same value as `other`.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other) =default<br>Move constructs a handle.  |
 | | **[~handle](/docs/api/classes/classtiro_1_1handle#function-~handle)**() =default |
 | bool | **[valid](/docs/api/classes/classtiro_1_1handle#function-valid)**() const<br>Returns true if this handle points to an object (i.e. it was not moved from).  |
 | [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) | **[kind](/docs/api/classes/classtiro_1_1handle#function-kind)**() const<br>Returns the kind of the value currently held by this handle.  |
-| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() const<br>Converts this value to the target type.  |
-| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() |
 | [type](/docs/api/classes/classtiro_1_1type) | **[type_of](/docs/api/classes/classtiro_1_1handle#function-type-of)**() const<br>Returns the type of the value currently held by this handle.  |
 | [string](/docs/api/classes/classtiro_1_1string) | **[to_string](/docs/api/classes/classtiro_1_1handle#function-to-string)**() const<br>Returns a string that represents the current value.  |
 | [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[raw_vm](/docs/api/classes/classtiro_1_1handle#function-raw-vm)**() const<br>Returns the raw vm instance associated with this handle.  |
@@ -118,6 +119,7 @@ record & operator=(
 inline array keys() const
 ```
 
+Returns the keys of this record, as an array. 
 
 ### function get
 
@@ -127,6 +129,7 @@ inline handle get(
 ) const
 ```
 
+Returns the value associated with the given key. 
 
 ### function set
 
@@ -137,7 +140,8 @@ inline void set(
 )
 ```
 
+Sets the value associated with the given key. 
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

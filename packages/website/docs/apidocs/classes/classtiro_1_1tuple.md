@@ -1,5 +1,6 @@
 ---
 title: tiro::tuple
+summary: Refers to a tuple value. 
 
 ---
 
@@ -7,7 +8,7 @@ title: tiro::tuple
 
 
 
-
+Refers to a tuple value. 
 
 
 `#include "tiropp/objects.hpp"`
@@ -23,9 +24,9 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 | | **[tuple](/docs/api/classes/classtiro_1_1tuple#function-tuple)**([tuple](/docs/api/classes/classtiro&#95;1&#95;1tuple) && ) =default |
 | [tuple](/docs/api/classes/classtiro_1_1tuple) & | **[operator=](/docs/api/classes/classtiro_1_1tuple#function-operator=)**(const [tuple](/docs/api/classes/classtiro&#95;1&#95;1tuple) & ) =default |
 | [tuple](/docs/api/classes/classtiro_1_1tuple) & | **[operator=](/docs/api/classes/classtiro_1_1tuple#function-operator=)**([tuple](/docs/api/classes/classtiro&#95;1&#95;1tuple) && ) =default |
-| size_t | **[size](/docs/api/classes/classtiro_1_1tuple#function-size)**() const |
-| [handle](/docs/api/classes/classtiro_1_1handle) | **[get](/docs/api/classes/classtiro_1_1tuple#function-get)**(size&#95;t index) const |
-| void | **[set](/docs/api/classes/classtiro_1_1tuple#function-set)**(size&#95;t index, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & value) |
+| size_t | **[size](/docs/api/classes/classtiro_1_1tuple#function-size)**() const<br>Returns the tuple's size.  |
+| [handle](/docs/api/classes/classtiro_1_1handle) | **[get](/docs/api/classes/classtiro_1_1tuple#function-get)**(size&#95;t index) const<br>Returns the tuple element at the given index (`0 <= index < size`).  |
+| void | **[set](/docs/api/classes/classtiro_1_1tuple#function-set)**(size&#95;t index, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & value)<br>Sets the tuple element at the given index (`0 <= index < size`) to `value`.  |
 
 ## Additional inherited members
 
@@ -39,14 +40,14 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 |                | Name           |
 | -------------- | -------------- |
+| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() const<br>Converts this value to the target type.  |
+| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**()<br>Converts this value to the target type.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) raw_vm)<br>Constructs a new handle instance.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**(const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & other)<br>Constructs a new handle and initialize is it with the same value as `other`.  |
 | | **[handle](/docs/api/classes/classtiro_1_1handle#function-handle)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other) =default<br>Move constructs a handle.  |
 | | **[~handle](/docs/api/classes/classtiro_1_1handle#function-~handle)**() =default |
 | bool | **[valid](/docs/api/classes/classtiro_1_1handle#function-valid)**() const<br>Returns true if this handle points to an object (i.e. it was not moved from).  |
 | [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) | **[kind](/docs/api/classes/classtiro_1_1handle#function-kind)**() const<br>Returns the kind of the value currently held by this handle.  |
-| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() const<br>Converts this value to the target type.  |
-| template <typename T \> <br>T | **[as](/docs/api/classes/classtiro_1_1handle#function-as)**() |
 | [type](/docs/api/classes/classtiro_1_1type) | **[type_of](/docs/api/classes/classtiro_1_1handle#function-type-of)**() const<br>Returns the type of the value currently held by this handle.  |
 | [string](/docs/api/classes/classtiro_1_1string) | **[to_string](/docs/api/classes/classtiro_1_1handle#function-to-string)**() const<br>Returns a string that represents the current value.  |
 | [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[raw_vm](/docs/api/classes/classtiro_1_1handle#function-raw-vm)**() const<br>Returns the raw vm instance associated with this handle.  |
@@ -118,6 +119,7 @@ tuple & operator=(
 inline size_t size() const
 ```
 
+Returns the tuple's size. 
 
 ### function get
 
@@ -127,6 +129,7 @@ inline handle get(
 ) const
 ```
 
+Returns the tuple element at the given index (`0 <= index < size`). 
 
 ### function set
 
@@ -137,7 +140,8 @@ inline void set(
 )
 ```
 
+Sets the tuple element at the given index (`0 <= index < size`) to `value`. 
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

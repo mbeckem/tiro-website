@@ -1,5 +1,6 @@
 ---
 title: tiro::error_adapter
+summary: Error adapter class for the tiro_error_t* argument expected by most tiro_* functions. 
 
 ---
 
@@ -7,7 +8,7 @@ title: tiro::error_adapter
 
 
 
-
+Error adapter class for the tiro_error_t* argument expected by most tiro_* functions.  [More...](#detailed-description)
 
 
 `#include "tiropp/error.hpp"`
@@ -21,6 +22,18 @@ title: tiro::error_adapter
 | | **[error_adapter](/docs/api/classes/classtiro_1_1error__adapter#function-error-adapter)**([error&#95;adapter](/docs/api/classes/classtiro&#95;1&#95;1error&#95;&#95;adapter) && ) =delete |
 | [error_adapter](/docs/api/classes/classtiro_1_1error__adapter) & | **[operator=](/docs/api/classes/classtiro_1_1error__adapter#function-operator=)**([error&#95;adapter](/docs/api/classes/classtiro&#95;1&#95;1error&#95;&#95;adapter) && ) =delete |
 | | **[operator tiro_error_t *](/docs/api/classes/classtiro_1_1error__adapter#function-operator-tiro-error-t-*)**() |
+
+## Detailed Description
+
+```cpp
+class tiro::error_adapter;
+```
+
+Error adapter class for the tiro_error_t* argument expected by most tiro_* functions. 
+
+This class implicitly converts to a tiro_error_t* and will throw any error from its destructor.
+
+Thanks to Stefanus Du Toit ([https://www.slideshare.net/StefanusDuToit/cpp-con-2014-hourglass-interfaces-for-c-apis](https://www.slideshare.net/StefanusDuToit/cpp-con-2014-hourglass-interfaces-for-c-apis)) for showing this technique. 
 
 ## Public Functions Documentation
 
@@ -65,4 +78,4 @@ inline operator tiro_error_t *()
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

@@ -1,5 +1,6 @@
 ---
 title: tiro::compiler_settings
+summary: An instance of this type can be passed to the compiler to configure it. 
 
 ---
 
@@ -7,7 +8,7 @@ title: tiro::compiler_settings
 
 
 
-
+An instance of this type can be passed to the compiler to configure it.  [More...](#detailed-description)
 
 
 `#include "tiropp/compiler.hpp"`
@@ -22,11 +23,21 @@ title: tiro::compiler_settings
 
 |                | Name           |
 | -------------- | -------------- |
-| bool | **[enable_dump_cst](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-cst)**  |
-| bool | **[enable_dump_ast](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-ast)**  |
-| bool | **[enable_dump_ir](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-ir)**  |
-| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-bytecode)**  |
-| [message&#95;callback&#95;type](/docs/api/classes/structtiro&#95;1&#95;1compiler&#95;&#95;settings#using-message-callback-type) | **[message_callback](/docs/api/classes/structtiro_1_1compiler__settings#variable-message-callback)**  |
+| bool | **[enable_dump_cst](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-cst)** <br>Enables the compiler's dump_cst() method.  |
+| bool | **[enable_dump_ast](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-ast)** <br>Enables the compiler's dump_ast() method.  |
+| bool | **[enable_dump_ir](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-ir)** <br>Enables the compiler's dump_ir() method.  |
+| bool | **[enable_dump_bytecode](/docs/api/classes/structtiro_1_1compiler__settings#variable-enable-dump-bytecode)** <br>Enables the compiler's dump_bytecode() method.  |
+| [message&#95;callback&#95;type](/docs/api/classes/structtiro&#95;1&#95;1compiler&#95;&#95;settings#using-message-callback-type) | **[message_callback](/docs/api/classes/structtiro_1_1compiler__settings#variable-message-callback)** <br>Callback for diagnostic messages (may be empty).  |
+
+## Detailed Description
+
+```cpp
+struct tiro::compiler_settings;
+```
+
+An instance of this type can be passed to the compiler to configure it. 
+
+The default constructor fills an instance with default values. 
 
 ## Public Types Documentation
 
@@ -45,6 +56,7 @@ using message_callback_type =  std::function<void(const compiler_message& messag
 bool enable_dump_cst = false;
 ```
 
+Enables the compiler's dump_cst() method. 
 
 ### variable enable_dump_ast
 
@@ -52,6 +64,7 @@ bool enable_dump_cst = false;
 bool enable_dump_ast = false;
 ```
 
+Enables the compiler's dump_ast() method. 
 
 ### variable enable_dump_ir
 
@@ -59,6 +72,7 @@ bool enable_dump_ast = false;
 bool enable_dump_ir = false;
 ```
 
+Enables the compiler's dump_ir() method. 
 
 ### variable enable_dump_bytecode
 
@@ -66,6 +80,7 @@ bool enable_dump_ir = false;
 bool enable_dump_bytecode = false;
 ```
 
+Enables the compiler's dump_bytecode() method. 
 
 ### variable message_callback
 
@@ -73,7 +88,11 @@ bool enable_dump_bytecode = false;
 message_callback_type message_callback;
 ```
 
+Callback for diagnostic messages (may be empty). 
+
+The compiler will print to the process output stream if this is not set. 
+
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200

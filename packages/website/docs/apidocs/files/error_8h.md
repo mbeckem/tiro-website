@@ -33,7 +33,7 @@ Basic error handling facilities.
 
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| TIRO_OK | 0|   |
+| TIRO_OK | 0| Success.   |
 | TIRO_ERROR_BAD_STATE | 1| Instance is not in the correct state.   |
 | TIRO_ERROR_BAD_ARG | 2| Invalid argument.   |
 | TIRO_ERROR_BAD_SOURCE | 3| Invalid source code.   |
@@ -160,4 +160,4 @@ The returned string is managed by the error and will remain valid for as long as
 
 -------------------------------
 
-Updated on 2021-10-02 at 17:24:37 +0200
+Updated on 2021-10-02 at 22:50:45 +0200
