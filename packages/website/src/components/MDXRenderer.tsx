@@ -4,6 +4,7 @@ import { MDXRemoteSerializeResult } from "next-mdx-remote/dist/types";
 
 import { AutoLink } from "@components/AutoLink";
 import { CodeBlock } from "@components/CodeBlock";
+import { Rule } from "@components/Grammar";
 
 const components = {
     a: AutoLink,
@@ -11,7 +12,8 @@ const components = {
     code: CodeBlock,
     pre(props: any) {
         return <div {...props} />;
-    }
+    },
+    Rule: Rule,
 } as const;
 
 export interface MDXRendererProps {
