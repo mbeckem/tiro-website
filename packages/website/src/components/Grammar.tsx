@@ -6,7 +6,7 @@ export interface RuleProps {
 }
 
 // Strings are literals, arrays are sequences, the other types have their own docs.
-export type Item = string | Item[] | Choice | Optional | Repeat | NonTerminal;
+export type Item = string | Item[] | Choice | Optional | Repeat | Not | Note | NonTerminal;
 
 // (a | b)
 export interface Choice {
@@ -25,6 +25,19 @@ export interface Repeat {
     type: "repeat";
     child: Item;
     min?: number;
+}
+
+// ~a
+export interface Not {
+    type: "not";
+    child: Item;
+}
+
+// a_subscript
+export interface Note {
+    type: "note";
+    child: Item;
+    note: string;
 }
 
 // Reference to another rule
@@ -46,6 +59,7 @@ function renderRule(name: string, definition: Item): string {
     return `${name} -> ${renderItem(definition, true)}`;
 }
 
+// TODO: Sloppy precedence rules
 function renderItem(item: Item, topLevel = false): string {
     if (typeof item === "string") {
         return JSON.stringify(item); // literal
@@ -76,10 +90,14 @@ function renderItem(item: Item, topLevel = false): string {
             const sign = min === 0 ? "*" : "+";
             return renderItem(item.child) + sign;
         }
+        case "not":
+            return `~${renderItem(item.child)}`;
+        case "note":
+            return `${renderItem(item.child)}_${item.note}`; // TODO <sub>
         case "nonterminal": {
             return `${item.name}`;
         }
+        default:
+            throw new Error(`invalid grammar item of type ${(item as any).type}`);
     }
-
-    throw new Error("invalid grammar item");
 }
