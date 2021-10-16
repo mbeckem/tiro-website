@@ -4,7 +4,7 @@ import { MDXRemoteSerializeResult } from "next-mdx-remote/dist/types";
 
 import { AutoLink } from "@components/AutoLink";
 import { CodeBlock } from "@components/CodeBlock";
-import { Rule } from "@components/Grammar";
+import { Rule, Rules } from "@components/Grammar";
 import { ItemTable } from "@components/ItemTable";
 
 const components = {
@@ -16,6 +16,7 @@ const components = {
     },
 
     Rule: Rule,
+    Rules: Rules,
     ItemTable: ItemTable
 } as const;
 

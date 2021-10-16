@@ -1,0 +1,39 @@
+.rule {
+    text-indent: -3.5em;
+    padding-top: 0.25em;
+    padding-left: 3.5em;
+
+    dt,
+    dd {
+        display: inline;
+        margin: 0;
+    }
+
+    dt:after {
+        content: "\02192";
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}
+
+.item {
+    sub,
+    sup {
+        padding-left: 0.25em;
+    }
+}
+
+.group {
+    & > span:first-child {
+        padding-right: 0.25em;
+    }
+
+    & > span:last-child {
+        padding-left: 0.25em;
+    }
+}
+
+.separator {
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
