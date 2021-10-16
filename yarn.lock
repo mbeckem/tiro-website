@@ -2651,7 +2651,7 @@ __metadata:
     sass: 1.32.13
     slug: ^5.1.0
     stringify-object: ^3.3.0
-    typescript: ^4.3.5
+    typescript: ^4.4.0
     unist-util-visit: ^4.1.0
     webpack: ^5.47.1
     webpack-bundle-analyzer: ^4.4.2
@@ -11273,23 +11273,23 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-typescript@^4.3.5:
-  version: 4.3.5
-  resolution: "typescript@npm:4.3.5"
+typescript@^4.4.0:
+  version: 4.4.4
+  resolution: "typescript@npm:4.4.4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: bab033b5e2b0790dd35b77fd005df976ef80b8d84fd2c6e63cc31808151875beae9216e5a315fe7068e8499905c3c354248fe83272cdfc13b7705635f0c66c97
+  checksum: 89ecb8436bb48ef5594d49289f5f89103071716b6e4844278f4fb3362856e31203e187a9c76d205c3f0b674d221a058fd28310dbcbcf5d95e9a57229bb5203f1
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.3.5#~builtin<compat/typescript>":
-  version: 4.3.5
-  resolution: "typescript@patch:typescript@npm%3A4.3.5#~builtin<compat/typescript>::version=4.3.5&hash=34ad7d"
+"typescript@patch:typescript@^4.4.0#~builtin<compat/typescript>":
+  version: 4.4.4
+  resolution: "typescript@patch:typescript@npm%3A4.4.4#~builtin<compat/typescript>::version=4.4.4&hash=34ad7d"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 94acb9409712c7073eaecb328cf9be872e4882c62d991cc3d9b53d59f4844d72afbf75818471e086bfb26c444e3a411667a9517f2be2518f8be95bab9fa50ae9
+  checksum: 4a639b6886be13616582ab82abdb4ffbbf5b0458069d13c10cd5d44fc1cafa33eab005e8ac8691ad8fae249fee85844bb7d523263c4568fe9a2ca31cd3c91c3d
   languageName: node
   linkType: hard
 
