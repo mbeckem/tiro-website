@@ -1,18 +1,941 @@
 ---
-title: "Language reference"
+title: "Reference Documentation"
 slug: "/reference"
 ---
 
-# Language reference
+# Tiro Reference Documentation
 
-## Contents
+## Basics
+
+Tiro accepts UTF-8 encoded source files as input.
+Source files must conform to the rules outlined in this document to form a valid program.
+At the very basic level, a source file will be recognized as a series of tokens.
+
+> NOTE: Grammar rules in this section work on _characters_.
+> No whitespace is not allowed unless it matches one of the required patterns.
+
+### Whitespace
+
+Whitespace tokens consists of a sequence of characters having the Unicode _White_Space_ property. (TODO: White Space Pattern instead, add link)
+Whitespace is not significant: its only use is to separate characters of adjacent tokens that would otherwise be parsed as a single token.
+
+### Comments
+
+Comments are used to annotate source code, but they have no meaning of their own.
+They are simply treated as whitespace.
+
+<Rules>
+
+<Rule
+  name="Comment"
+  definition={{
+    type: "choice",
+    children: [
+      { type: "nonterminal", name: "LineComment" },
+      { type: "nonterminal", name: "BlockComment" }
+    ]
+  }}
+/>
+
+<Rule
+  name="LineComment"
+  definition={[
+    "//",
+    {
+      type: "repeat",
+      child: [
+        {
+          type: "not",
+          child: "\\n"
+        }
+      ]
+    }
+  ]}
+/>
+
+<Rule
+  name="BlockComment"
+  definition={[
+    "/*",
+    {
+      type: "repeat",
+      child: {
+        type: "choice",
+        children: [
+          { type: "nonterminal", name: "BlockComment" },
+          { type: "repeat", child: { type: "not", child: "*/" } }
+        ]
+      }
+    },
+    "*/"
+  ]}
+/>
+
+</Rules>
+
+Line comments are introduced by `//` and continue until the end of the line.
+Block comments are delimited by `/*` and `*/` and may be nested.
+
+### Keywords
+
+The following words have special meaning in the Tiro programming language:
+
+<ItemTable
+  columns={5}
+  items={[
+    "assert",
+    "break",
+    "const",
+    "continue",
+    "defer",
+    "else",
+    "export",
+    "false",
+    "for",
+    "func",
+    "if",
+    "import",
+    "in",
+    "null",
+    "return",
+    "true",
+    "var",
+    "while"
+  ]}
+/>
+
+#### Reserved keywords
+
+The following keywords are reserved for future use:
+
+<ItemTable
+  columns={5}
+  items={[
+    "as",
+    "catch",
+    "class",
+    "interface",
+    "is",
+    "package",
+    "protocol",
+    "scope",
+    "struct",
+    "switch",
+    "throw",
+    "try",
+    "yield"
+  ]}
+/>
+
+### Identifiers
+
+Identifiers are used to name items.
+They consist of one or more identifier characters as defined by the _XID_Start_ and _XID_Continue_ Unicode properties. (TODO: Link)
+Keywords cannot be used as identifiers.
+
+<Rules>
+
+<Rule
+  name="KeywordOrIdentifier"
+  definition={[
+    { type: "choice", children: [{ type: "nonterminal", name: "XID_Start" }, "_"] },
+    {
+      type: "repeat",
+      child: {
+        type: "nonterminal",
+        name: "XID_Continue"
+      }
+    }
+  ]}
+/>
+
+<Rule
+  name="Identifier"
+  definition={{
+    type: "note",
+    child: {
+      type: "nonterminal",
+      name: "KeywordOrIdentifier"
+    },
+    note: "Excluding listed keywords or reserved keywords"
+  }}
+/>
+
+</Rules>
+
+### Number literals
+
+<Rules>
+
+<Rule
+  name="Integer"
+  definition={{
+    type: "choice",
+    children: [
+      { type: "nonterminal", name: "DecInteger" },
+      { type: "nonterminal", name: "BinInteger" },
+      { type: "nonterminal", name: "OctInteger" },
+      { type: "nonterminal", name: "HexInteger" }
+    ]
+  }}
+/>
+
+<Rule
+  name="DecInteger"
+  definition={[
+    { type: "nonterminal", name: "DecDigit" },
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "DecDigit" }, "_"] }
+    }
+  ]}
+/>
+
+<Rule
+  name="BinInteger"
+  definition={[
+    "0b",
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "BinDigit" }, "_"] }
+    },
+    { type: "nonterminal", name: "BinDigit" },
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "BinDigit" }, "_"] }
+    }
+  ]}
+/>
+
+<Rule
+  name="OctInteger"
+  definition={[
+    "0o",
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "OctDigit" }, "_"] }
+    },
+    { type: "nonterminal", name: "OctDigit" },
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "OctDigit" }, "_"] }
+    }
+  ]}
+/>
+
+<Rule
+  name="HexInteger"
+  definition={[
+    "0x",
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "HexDigit" }, "_"] }
+    },
+    { type: "nonterminal", name: "HexDigit" },
+    {
+      type: "repeat",
+      child: { type: "choice", children: [{ type: "nonterminal", name: "HexDigit" }, "_"] }
+    }
+  ]}
+/>
+
+<Rule
+  name="DecDigit"
+  definition={{
+    type: "range",
+    value: ["0", "9"]
+  }}
+/>
+
+<Rule
+  name="BinDigit"
+  definition={{
+    type: "choice",
+    children: ["0", "1"]
+  }}
+/>
+
+<Rule
+  name="OctDigit"
+  definition={{
+    type: "range",
+    value: ["0", "7"]
+  }}
+/>
+
+<Rule
+  name="HexDigit"
+  definition={{
+    type: "choice",
+    children: [
+      { type: "range", value: ["0", "9"] },
+      { type: "range", value: ["a", "f"] },
+      { type: "range", value: ["A", "F"] }
+    ]
+  }}
+/>
+
+</Rules>
+
+TODO: Floats
+
+### String literals
+
+Strings are sequences of characters enclosed by matching quote characters (`"` or `'`).
+Within a string, variables can be interpolated when prefixed with a `$` sign and full expressions can be interpolated when enclosed within a
+block started with `${` and closed with a `}` sign.
+
+<Rules>
+
+<Rule
+  name="String"
+  definition={[
+    {
+      type: "nonterminal",
+      name: "StringDelimiter"
+    },
+    {
+      type: "repeat",
+      child: {
+        type: "choice",
+        children: [
+          { type: "nonterminal", name: "PlainStringContent" },
+          { type: "nonterminal", name: "EscapedCharacter" },
+          { type: "nonterminal", name: "AsciiEscape" },
+          { type: "nonterminal", name: "UnicodeEscape" },
+          { type: "nonterminal", name: "InterpolatedVariableOrExpression" }
+        ]
+      }
+    },
+    {
+      type: "note",
+      child: {
+        type: "nonterminal",
+        name: "StringDelimiter"
+      },
+      note: "matches starting delimiter"
+    }
+  ]}
+/>
+
+<Rule name="StringDelimiter" definition={{ type: "choice", children: ['"', "'"] }} />
+
+<Rule
+  name="PlainStringContent"
+  definition={{
+    type: "repeat",
+    child: {
+      type: "not",
+      child: {
+        type: "choice",
+        children: [
+          "\\",
+          "$",
+          {
+            type: "note",
+            child: {
+              type: "nonterminal",
+              name: "StringDelimiter"
+            },
+            note: "matches starting delimiter"
+          }
+        ]
+      }
+    }
+  }}
+/>
+
+<Rule
+  name="InterpolatedVariableOrExpression"
+  definition={{
+    type: "choice",
+    children: [
+      ["$", { type: "nonterminal", name: "Identifier" }],
+      ["${", { type: "nonterminal", name: "Expr" }, "}"]
+    ]
+  }}
+/>
+
+<Rule
+  name="EscapedCharacter"
+  definition={{ type: "choice", children: ["\\\\", "\\n", "\\r", "\\t", '\\"', "\\'", "\\$"] }}
+/>
+
+<Rule
+  name="AsciiEscape"
+  definition={["\\x", { type: "nonterminal", name: "HexDigit" }, { type: "nonterminal", name: "HexDigit" }]}
+/>
+
+<Rule
+  name="UnicodeEscape"
+  definition={[
+    "\\u{",
+    {
+      type: "repeat",
+      min: 1,
+      child: {
+        type: "nonterminal",
+        name: "HexDigit"
+      }
+    },
+    "}"
+  ]}
+/>
+
+</Rules>
+
+### Symbol literals
+
+<Rules>
+
+<Rule name="Symbol" definition={["#", { type: "nonterminal", name: "Identifier" }]} />
+
+</Rules>
 
 TODO
 
-## Introduction
+## Grammar
 
-## Builtin
+> NOTE: Grammar rules in this section work on _tokens_.
+> Any amount of white space may appear between matching tokens.
 
-## Expressions
+### Items
 
-## Statements
+<Rules>
+
+<Rule
+  name="File"
+  definition={{
+    type: "repeat",
+    child: {
+      type: "nonterminal",
+      name: "Item"
+    }
+  }}
+/>
+
+<Rule
+  name="Item"
+  definition={[
+    {
+      type: "optional",
+      child: "export"
+    },
+    {
+      type: "choice",
+      children: [
+        [{ type: "nonterminal", name: "ImportDecl" }, ";"],
+        [{ type: "nonterminal", name: "VarDecl" }, ";"],
+        [{ type: "nonterminal", name: "FuncDecl" }]
+      ]
+    }
+  ]}
+/>
+
+<Rule
+  name="ImportDecl"
+  definition={[
+    "import",
+    {
+      type: "nonterminal",
+      name: "ImportPath"
+    },
+    {
+      type: "optional",
+      child: ["as", { type: "nonterminal", name: "Identifier" }]
+    }
+  ]}
+/>
+
+<Rule
+  name="ImportPath"
+  definition={[
+    { type: "nonterminal", name: "Identifier" },
+    {
+      type: "repeat",
+      child: [".", { type: "nonterminal", name: "Identifier" }]
+    }
+  ]}
+/>
+
+<Rule
+  name="VarDecl"
+  definition={[
+    { type: "choice", children: ["const", "var"] },
+    { type: "nonterminal", name: "Binding" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "Binding" }] }
+  ]}
+/>
+
+<Rule
+  name="Binding"
+  definition={[
+    { type: "nonterminal", name: "BindingPattern" },
+    { type: "optional", child: ["=", { type: "nonterminal", name: "Expr" }] }
+  ]}
+/>
+
+<Rule
+  name="BindingPattern"
+  definition={{
+    type: "choice",
+    children: [
+      { type: "nonterminal", name: "Identifier" },
+      [
+        "(",
+        { type: "nonterminal", name: "Identifier" },
+        {
+          type: "repeat",
+          child: [",", { type: "nonterminal", name: "Identifier" }]
+        },
+        ")"
+      ]
+    ]
+  }}
+/>
+
+<Rule
+  name="FuncDecl"
+  definition={[
+    "func",
+    { type: "optional", child: { type: "nonterminal", name: "Identifier" } },
+    "(",
+    { type: "optional", child: { type: "nonterminal", name: "ParamList" } },
+    ")",
+    { type: "nonterminal", name: "FuncBody" }
+  ]}
+/>
+
+<Rule
+  name="ParamList"
+  definition={[
+    { type: "nonterminal", name: "Identifier" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "Identifier" }] }
+  ]}
+/>
+
+<Rule
+  name="FuncBody"
+  definition={{
+    type: "choice",
+    children: [["=", { type: "nonterminal", name: "Expr" }], { type: "nonterminal", name: "BlockExpr" }]
+  }}
+/>
+
+</Rules>
+
+### Statements
+
+<Rules>
+
+<Rule
+  name="Stmt"
+  definition={{
+    type: "choice",
+    children: [
+      [{ type: "nonterminal", name: "VarDecl" }, ";"],
+      [{ type: "nonterminal", name: "AssertStmt" }, ";"],
+      [{ type: "nonterminal", name: "DeferStmt" }, ";"],
+      [{ type: "nonterminal", name: "ForEachStmt" }],
+      [{ type: "nonterminal", name: "ForStmt" }],
+      [{ type: "nonterminal", name: "WhileStmt" }],
+      [{ type: "nonterminal", name: "IfExpr" }],
+      [{ type: "nonterminal", name: "BlockExpr" }],
+      [{ type: "nonterminal", name: "Expr" }, ";"],
+      ";"
+    ]
+  }}
+/>
+
+<Rule
+  name="AssertStmt"
+  definition={[
+    "assert",
+    "(",
+    { type: "nonterminal", name: "Expr" },
+    { type: "optional", child: [",", { type: "nonterminal", name: "StringExpr" }] },
+    ")"
+  ]}
+/>
+
+<Rule
+  name="ForEachStmt"
+  definition={[
+    "for",
+    { type: "nonterminal", name: "BindingPattern" },
+    "in",
+    { type: "nonterminal", name: "Expr" },
+    { type: "nonterminal", name: "BlockExpr" }
+  ]}
+/>
+
+<Rule
+  name="ForStmt"
+  definition={[
+    "for",
+    { type: "optional", child: { type: "nonterminal", name: "VarDecl" } },
+    ";",
+    { type: "optional", child: { type: "nonterminal", name: "Expr" } },
+    ";",
+    { type: "optional", child: { type: "nonterminal", name: "Expr" } },
+    { type: "nonterminal", name: "BlockExpr" }
+  ]}
+/>
+
+<Rule
+  name="WhileStmt"
+  definition={["while", { type: "nonterminal", name: "Expr" }, { type: "nonterminal", name: "BlockExpr" }]}
+/>
+
+<Rule name="DeferStmt" definition={["defer", { type: "nonterminal", name: "Expr" }]} />
+
+</Rules>
+
+### Expressions
+
+<Rules>
+
+<Rule
+  name="Expr"
+  definition={{
+    type: "choice",
+    children: [
+      { type: "nonterminal", name: "VarExpr" },
+      { type: "nonterminal", name: "FieldExpr" },
+      { type: "nonterminal", name: "TupleFieldExpr" },
+      { type: "nonterminal", name: "ElementExpr" },
+      { type: "nonterminal", name: "CallExpr" },
+      { type: "nonterminal", name: "UnaryExpr" },
+      { type: "nonterminal", name: "BinaryExpr" },
+      { type: "nonterminal", name: "AssignExpr" },
+      { type: "nonterminal", name: "ContinueExpr" },
+      { type: "nonterminal", name: "BreakExpr" },
+      { type: "nonterminal", name: "ReturnExpr" },
+      { type: "nonterminal", name: "GroupedExpr" },
+      { type: "nonterminal", name: "IfExpr" },
+      { type: "nonterminal", name: "FuncExpr" },
+      { type: "nonterminal", name: "BlockExpr" }
+    ]
+  }}
+/>
+
+<Rule
+  name="VarExpr"
+  definition={{
+    type: "nonterminal",
+    name: "Identifier"
+  }}
+/>
+
+<Rule
+  name="FieldExpr"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "choice", children: [".", "?."] },
+    { type: "nonterminal", name: "Identifier" }
+  ]}
+/>
+
+<Rule
+  name="TupleFieldExpr"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "choice", children: [".", "?."] },
+    { type: "nonterminal", name: "NonNegativeInt" }
+  ]}
+/>
+
+<Rule
+  name="ElementExpr"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "choice", children: ["[", "?["] },
+    { type: "nonterminal", name: "Expr" },
+    "]"
+  ]}
+/>
+
+<Rule
+  name="CallExpr"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "choice", children: ["(", "?("] },
+    { type: "optional", child: { type: "nonterminal", name: "CallArguments" } },
+    ")"
+  ]}
+/>
+
+<Rule
+  name="CallArguments"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "Expr" }] }
+  ]}
+/>
+
+<Rule
+  name="UnaryExpr"
+  definition={[
+    { type: "nonterminal", name: "UnaryOp" },
+    { type: "nonterminal", name: "Expr" }
+  ]}
+/>
+
+<Rule name="UnaryOp" definition={{ type: "choice", children: ["+", "-", "!", "~"] }} />
+
+<Rule
+  name="BinaryExpr"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "nonterminal", name: "BinaryOp" },
+    { type: "nonterminal", name: "Expr" }
+  ]}
+/>
+
+<Rule
+  name="BinaryOp"
+  definition={{
+    type: "choice",
+    children: [
+      "+",
+      "-",
+      "*",
+      "**",
+      "/",
+      "%",
+      "<<",
+      ">>",
+      "&",
+      "|",
+      "^",
+      "<",
+      ">",
+      "<=",
+      ">=",
+      "==",
+      "!=",
+      "??",
+      "&&",
+      "||"
+    ]
+  }}
+/>
+
+<Rule
+  name="AssignExpr"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "nonterminal", name: "AssignOp" },
+    { type: "nonterminal", name: "Expr" }
+  ]}
+/>
+
+<Rule
+  name="AssignOp"
+  definition={{
+    type: "choice",
+    children: ["=", "+=", "-=", "*=", "**=", "/=", "%="]
+  }}
+/>
+
+<Rule name="ContinueExpr" definition="continue" />
+
+<Rule name="BreakExpr" definition="break" />
+
+<Rule name="ReturnExpr" definition={["return", { type: "optional", child: { type: "nonterminal", name: "Expr" } }]} />
+
+<Rule name="GroupedExpr" definition={["(", { type: "nonterminal", name: "Expr" }, ")"]} />
+
+<Rule
+  name="IfExpr"
+  definition={[
+    "if",
+    { type: "nonterminal", name: "Expr" },
+    { type: "nonterminal", name: "BlockExpr" },
+    { type: "optional", child: ["else", { type: "nonterminal", name: "BlockExpr" }] }
+  ]}
+/>
+
+<Rule name="FuncExpr" definition={{ type: "nonterminal", name: "FuncDecl" }} />
+
+<Rule name="BlockExpr" definition={["{", { type: "repeat", child: { type: "nonterminal", name: "Stmt" } }, "}"]} />
+
+</Rules>
+
+### Literals
+
+<Rules>
+
+<Rule
+  name="Literal"
+  definition={{
+    type: "choice",
+    children: [
+      "true",
+      "false",
+      "null",
+      { type: "nonterminal", name: "Integer" },
+      {
+        type: "nonterminal",
+        name: "Float"
+      },
+      {
+        type: "nonterminal",
+        name: "String"
+      },
+      {
+        type: "nonterminal",
+        name: "Symbol"
+      },
+      {
+        type: "nonterminal",
+        name: "TupleLiteral"
+      },
+      {
+        type: "nonterminal",
+        name: "RecordLiteral"
+      },
+      {
+        type: "nonterminal",
+        name: "ArrayLiteral"
+      },
+      {
+        type: "nonterminal",
+        name: "MapLiteral"
+      },
+      {
+        type: "nonterminal",
+        name: "SetLiteral"
+      }
+    ]
+  }}
+/>
+
+<Rule
+  name="TupleLiteral"
+  definition={["(", { type: "optional", child: { type: "nonterminal", name: "TupleElements" } }, ")"]}
+/>
+<Rule
+  name="TupleElements"
+  definition={[
+    { type: "repeat", min: 1, child: [{ type: "nonterminal", name: "Expr" }, ","] },
+    {
+      type: "optional",
+      child: {
+        type: "nonterminal",
+        name: "Expr"
+      }
+    }
+  ]}
+/>
+
+<Rule
+  name="RecordLiteral"
+  definition={[
+    "(",
+    {
+      type: "choice",
+      children: [{ type: "nonterminal", name: "RecordElements" }, ":"]
+    },
+    ")"
+  ]}
+/>
+
+<Rule
+  name="RecordElements"
+  definition={[
+    { type: "nonterminal", name: "RecordEntry" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "RecordEntry" }] },
+    { type: "optional", child: "," }
+  ]}
+/>
+
+<Rule
+  name="RecordEntry"
+  definition={[{ type: "nonterminal", name: "Identifier" }, ":", { type: "nonterminal", name: "Expr" }]}
+/>
+
+<Rule
+  name="ArrayLiteral"
+  definition={[
+    "[",
+    {
+      type: "optional",
+      child: {
+        type: "nonterminal",
+        name: "ArrayElements"
+      }
+    },
+    "]"
+  ]}
+/>
+
+<Rule
+  name="ArrayElements"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "Expr" }] },
+    { type: "optional", child: "," }
+  ]}
+/>
+
+<Rule
+  name="MapLiteral"
+  definition={[
+    "map",
+    "{",
+    {
+      type: "optional",
+      child: {
+        type: "nonterminal",
+        name: "MapElements"
+      }
+    },
+    "}"
+  ]}
+/>
+
+<Rule
+  name="MapElements"
+  definition={[
+    { type: "nonterminal", name: "MapEntry" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "MapEntry" }] },
+    { type: "optional", child: "," }
+  ]}
+/>
+
+<Rule
+  name="MapEntry"
+  definition={[{ type: "nonterminal", name: "Expr" }, ":", { type: "nonterminal", name: "Expr" }]}
+/>
+
+<Rule
+  name="SetLiteral"
+  definition={[
+    "set",
+    "{",
+    {
+      type: "optional",
+      child: {
+        type: "nonterminal",
+        name: "SetElements"
+      }
+    },
+    "}"
+  ]}
+/>
+
+<Rule
+  name="SetElements"
+  definition={[
+    { type: "nonterminal", name: "Expr" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "Expr" }] },
+    { type: "optional", child: "," }
+  ]}
+/>
+
+</Rules>
+
+## Modules
+
+TODO
