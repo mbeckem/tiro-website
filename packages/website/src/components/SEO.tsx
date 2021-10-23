@@ -9,7 +9,7 @@ export interface SEOProps {
     title: string | string[];
 }
 
-export const SEO = memo(function SEO({ title, description = "", meta = [] }: SEOProps) {
+export const SEO = memo(function SEO({ title, description = "" }: SEOProps) {
     const titleArray = Array.isArray(title) ? title : [title];
     const titleString = config.title + ": " + join(titleArray);
     const metaDescription = description || config.description;

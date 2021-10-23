@@ -57,5 +57,13 @@ module.exports = {
                 additionalHooks: "(useUpdateEffect)"
             }
         ]
-    }
+    },
+    overrides: [
+        {
+            files: ["**/*.jsx"],
+            rules: {
+                "@typescript-eslint/explicit-module-boundary-types": "off"
+            }
+        }
+    ]
 };

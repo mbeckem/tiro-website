@@ -12,7 +12,7 @@ describe("arrayUtils", function () {
             ]);
         });
 
-        it("should not return empty chunks", function() {
+        it("should not return empty chunks", function () {
             expect(chunked([], 123)).toEqual([]);
         });
     });
