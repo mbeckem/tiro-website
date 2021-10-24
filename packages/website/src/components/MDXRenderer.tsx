@@ -6,6 +6,7 @@ import { AutoLink } from "@/components/AutoLink";
 import { CodeBlock } from "@/components/CodeBlock";
 import { Rule, Rules } from "@/components/Grammar";
 import { ItemTable } from "@/components/ItemTable";
+import { Block, Info, Todo, Warning } from "@/components/Block";
 
 const components = {
     a: AutoLink,
@@ -17,7 +18,11 @@ const components = {
 
     Rule: Rule,
     Rules: Rules,
-    ItemTable: ItemTable
+    ItemTable: ItemTable,
+    Block,
+    Todo,
+    Info,
+    Warning
 } as const;
 
 export interface MDXRendererProps {

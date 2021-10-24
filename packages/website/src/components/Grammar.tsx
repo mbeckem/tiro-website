@@ -36,7 +36,7 @@ export interface Range {
 export interface NonTerminal {
     type: "nonterminal";
     name: string;
-    href?: string;
+    undefined?: boolean;
 }
 
 // a b c
@@ -83,7 +83,7 @@ export const Rules: FC<{}> = ({ children }) => {
 
 export const Rule: FC<RuleProps> = ({ name, definition }) => {
     return (
-        <div className={styles.rule}>
+        <div id={anchorId(name)} className={styles.rule}>
             <dt>
                 <em>{name}</em>
             </dt>
@@ -160,7 +160,11 @@ function render(item: NormalizedItem, parentPrecedence: number): ReactNode {
                     </span>
                 );
             case "nonterminal": {
-                return <em className={styles.item}>{item.name}</em>;
+                const content = <em className={styles.item}>{item.name}</em>;
+                if (item.undefined) {
+                    return content;
+                }
+                return <a href={`#${anchorId(item.name)}`}>{content}</a>;
             }
             case "sequence": {
                 const children = item.children.map((item) => render(normalize(item), currentPrecedence));
@@ -214,6 +218,10 @@ function render(item: NormalizedItem, parentPrecedence: number): ReactNode {
         );
     }
     return rendered;
+}
+
+function anchorId(ruleName: string) {
+    return `grammar_${ruleName}`;
 }
 
 function join(items: ReactNode[], sepText: string): ReactNode {

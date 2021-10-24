@@ -11,8 +11,12 @@ Tiro accepts UTF-8 encoded source files as input.
 Source files must conform to the rules outlined in this document to form a valid program.
 At the very basic level, a source file will be recognized as a series of tokens.
 
-> NOTE: Grammar rules in this section work on _characters_.
-> No whitespace is not allowed unless it matches one of the required patterns.
+<Info title="Note">
+
+Grammar rules in this section work on _characters_.
+No whitespace is not allowed unless it matches one of the required patterns.
+
+</Info>
 
 ### Whitespace
 
@@ -136,20 +140,6 @@ Keywords cannot be used as identifiers.
 <Rules>
 
 <Rule
-  name="KeywordOrIdentifier"
-  definition={[
-    { type: "choice", children: [{ type: "nonterminal", name: "XID_Start" }, "_"] },
-    {
-      type: "repeat",
-      child: {
-        type: "nonterminal",
-        name: "XID_Continue"
-      }
-    }
-  ]}
-/>
-
-<Rule
   name="Identifier"
   definition={{
     type: "note",
@@ -157,8 +147,23 @@ Keywords cannot be used as identifiers.
       type: "nonterminal",
       name: "KeywordOrIdentifier"
     },
-    note: "Excluding listed keywords or reserved keywords"
+    note: "Not including keywords"
   }}
+/>
+
+<Rule
+  name="KeywordOrIdentifier"
+  definition={[
+    { type: "choice", children: [{ type: "nonterminal", name: "XID_Start", undefined: true }, "_"] },
+    {
+      type: "repeat",
+      child: {
+        type: "nonterminal",
+        name: "XID_Continue",
+        undefined: true
+      }
+    }
+  ]}
 />
 
 </Rules>
@@ -277,7 +282,11 @@ Keywords cannot be used as identifiers.
 
 </Rules>
 
-TODO: Floats
+<Todo>
+  
+Document floating point numbers.
+
+</Todo>
 
 ### String literals
 
@@ -300,10 +309,8 @@ block started with `${` and closed with a `}` sign.
         type: "choice",
         children: [
           { type: "nonterminal", name: "PlainStringContent" },
-          { type: "nonterminal", name: "EscapedCharacter" },
-          { type: "nonterminal", name: "AsciiEscape" },
-          { type: "nonterminal", name: "UnicodeEscape" },
-          { type: "nonterminal", name: "InterpolatedVariableOrExpression" }
+          { type: "nonterminal", name: "EscapeSequence" },
+          { type: "nonterminal", name: "InterpolatedValue" }
         ]
       }
     },
@@ -346,12 +353,40 @@ block started with `${` and closed with a `}` sign.
 />
 
 <Rule
-  name="InterpolatedVariableOrExpression"
+  name="InterpolatedValue"
   definition={{
     type: "choice",
     children: [
       ["$", { type: "nonterminal", name: "Identifier" }],
       ["${", { type: "nonterminal", name: "Expr" }, "}"]
+    ]
+  }}
+/>
+
+</Rules>
+
+<Todo>
+
+Open design questions:
+
+- Should strings be multi line by default (current state)? Or should a `\` at the end of a line be necessary to continue to the following line?
+- Should all strings support interpolation by default? Or provide a variant (e.g. delimited by `'`) that does _not_ support interpolation?
+- Should all strings be guaranteed (required) to be valid UTF-8?
+
+</Todo>
+
+#### Escape sequences
+
+<Rules>
+
+<Rule
+  name="EscapeSequence"
+  definition={{
+    type: "choice",
+    children: [
+      { type: "nonterminal", name: "EscapedCharacter" },
+      { type: "nonterminal", name: "AsciiEscape" },
+      { type: "nonterminal", name: "UnicodeEscape" }
     ]
   }}
 />
@@ -384,6 +419,20 @@ block started with `${` and closed with a `}` sign.
 
 </Rules>
 
+Escape sequences produce the following string content:
+
+| Escape Sequence    | Production                  |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------------ |
+| `\\`               | Literal `\`                 |                                                                                            |
+| `\n`               | Newline                     |                                                                                            |
+| `\r`               | Carriage return             |                                                                                            |
+| `\t`               | Tabulator                   |                                                                                            |
+| `\"`               | Literal `"`                 |                                                                                            |
+| `\'`               | Literal `'`                 |                                                                                            |
+| `\$`               | Literal `$`                 |                                                                                            |
+| `\x` digits..      | A single byte               | The numeric value of the two hex digits is produced as a byte (TODO: Must be valid utf-8?) |
+| `\u{` digits.. `}` | A single unicode code point | The sequence of hex digits is interpreted as the value of a unicode code point.            |
+
 ### Symbol literals
 
 <Rules>
@@ -392,12 +441,20 @@ block started with `${` and closed with a `}` sign.
 
 </Rules>
 
-TODO
+<Todo>
+
+Documentation
+
+</Todo>
 
 ## Grammar
 
-> NOTE: Grammar rules in this section work on _tokens_.
-> Any amount of white space may appear between matching tokens.
+<Info title="Note">
+
+Grammar rules in this section work on _tokens_.
+Any amount of white space may appear between matching tokens.
+
+</Info>
 
 ### Items
 
@@ -432,6 +489,16 @@ TODO
   ]}
 />
 
+</Rules>
+
+A Tiro source file is a sequence of _Items_.
+An item containing the `export` modifier will be exported from the current module.
+Exported items are visible to other modules and may be imported.
+
+#### Imports
+
+<Rules>
+
 <Rule
   name="ImportDecl"
   definition={[
@@ -458,6 +525,26 @@ TODO
   ]}
 />
 
+</Rules>
+
+An `import` item imports the module referenced by the _ImportPath_ and introduces it into the current scope.
+The last _Identifier_ in the _ImportPath_ serves as the name of the imported reference by default.
+A custom name may be provided by using the `as` keyword.
+
+<Todo>
+  
+The import path must currently point to a module.
+It should also allow for entities within a module.
+For example, `import std.print as myprint` should be valid.
+
+Grouping imports should be possible, for example `import std { print, PI as MY_PI}`.
+
+</Todo>
+
+#### Variables
+
+<Rules>
+
 <Rule
   name="VarDecl"
   definition={[
@@ -481,18 +568,48 @@ TODO
     type: "choice",
     children: [
       { type: "nonterminal", name: "Identifier" },
-      [
-        "(",
-        { type: "nonterminal", name: "Identifier" },
-        {
-          type: "repeat",
-          child: [",", { type: "nonterminal", name: "Identifier" }]
-        },
-        ")"
-      ]
+      { type: "nonterminal", name: "TupleBindingPattern" }
     ]
   }}
 />
+
+<Rule
+  name="TupleBindingPattern"
+  definition={[
+    "(",
+    { type: "nonterminal", name: "Identifier" },
+    {
+      type: "repeat",
+      child: [",", { type: "nonterminal", name: "Identifier" }]
+    },
+    ")"
+  ]}
+/>
+
+</Rules>
+
+Variable declarations introduce one or more variables into the current scope.
+Each variable is defined by a _Binding_, which may provide an initializer expression for the _Identifier_ or _Identifiers_ mentioned in the _BindingPattern_.
+
+Bindings introduce a single new variable when the _BindingPattern_ consists of a single identifier.
+The optional initializer expression may produce any value in this case.
+A _TupleBindingPattern_ introduces multiple variables at once.
+The optional initializer for a tuple pattern must produce a tuple value with a compatible size (at least the number of declared variable names).
+
+Using the `var` keyword creates a mutable variable, while a variable declared using the `const` keyword cannot be reassigned after its initialization.
+Constants must have an initializer.
+
+| Declaration kind     | Example                | Meaning                                                              |
+| -------------------- | ---------------------- | -------------------------------------------------------------------- |
+| Simple declaration   | `var x;`               | Declares the initialized variable _x_ in the current scope           |
+| Multiple variables   | `var x, y;`            | Declares _x_ and _y_ in the current scope                            |
+| With initializer     | `var x = 3.14;`        | Declares _x_ and with the initial value `3.14`                       |
+| Constant declaration | `const x = 3.14; `     | Like the above, but _x_ cannot be reassigned anymore                 |
+| Tuple unpacking      | `var (x, y) = (1, 2);` | Unpacks the right hand side tuple into the new variables _x_ and _y_ |
+
+#### Functions
+
+<Rules>
 
 <Rule
   name="FuncDecl"
@@ -524,6 +641,30 @@ TODO
 
 </Rules>
 
+A function declaration introduce a function into the current scope.
+Functions may have a name, a set of parameters and a body.
+
+The body of a function may be specified as either a _BlockExpr_ or as a single expression introduced by a `=` sign.
+The shorthand syntax is useful for very simple functions.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    std.print(block_body(1));
+    std.print(shorthand_body(2));
+}
+
+func block_body(p) {
+    const result = p * 2;
+    return result;
+}
+
+func shorthand_body(p) = p * 2;
+```
+
 ### Statements
 
 <Rules>
@@ -536,9 +677,9 @@ TODO
       [{ type: "nonterminal", name: "VarDecl" }, ";"],
       [{ type: "nonterminal", name: "AssertStmt" }, ";"],
       [{ type: "nonterminal", name: "DeferStmt" }, ";"],
+      [{ type: "nonterminal", name: "WhileStmt" }],
       [{ type: "nonterminal", name: "ForEachStmt" }],
       [{ type: "nonterminal", name: "ForStmt" }],
-      [{ type: "nonterminal", name: "WhileStmt" }],
       [{ type: "nonterminal", name: "IfExpr" }],
       [{ type: "nonterminal", name: "BlockExpr" }],
       [{ type: "nonterminal", name: "Expr" }, ";"],
@@ -546,6 +687,16 @@ TODO
     ]
   }}
 />
+
+</Rules>
+
+Statements are constructs used in block expressions such as function bodies.
+Most statements must be terminated with a semicolon.
+The semicolon is optional for block-like statements, where the end of the statement is obvious from the position of the closing `}`.
+
+#### Assertions
+
+<Rules>
 
 <Rule
   name="AssertStmt"
@@ -558,6 +709,53 @@ TODO
   ]}
 />
 
+</Rules>
+
+An assertion verifies that the expression produces a truthful value.
+A failed assertion results in a _panic_.
+
+An optional message argument may be specified; it will be included in the panic's diagnostic error message.
+
+#### Defer statements
+
+<Rules>
+
+<Rule name="DeferStmt" definition={["defer", { type: "nonterminal", name: "Expr" }]} />
+
+</Rules>
+
+The defer statement registers an expression to be evaluated when the program leaves the current scope.
+It's main use is to ensure that resources are cleaned up properly.
+
+Defer statements that have been visited by the program will run even if the scope is being left abrubtly, such as by an early `return`, `break`, `continue` or a panic.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    std.print("aquire resource");
+    defer std.print("release resource");
+    std.print("use resource");
+}
+```
+
+#### While loops
+
+<Rules>
+
+<Rule
+  name="WhileStmt"
+  definition={["while", { type: "nonterminal", name: "Expr" }, { type: "nonterminal", name: "BlockExpr" }]}
+/>
+
+</Rules>
+
+#### For-each loops
+
+<Rules>
+
 <Rule
   name="ForEachStmt"
   definition={[
@@ -568,6 +766,12 @@ TODO
     { type: "nonterminal", name: "BlockExpr" }
   ]}
 />
+
+</Rules>
+
+#### Classic for loops
+
+<Rules>
 
 <Rule
   name="ForStmt"
@@ -581,13 +785,6 @@ TODO
     { type: "nonterminal", name: "BlockExpr" }
   ]}
 />
-
-<Rule
-  name="WhileStmt"
-  definition={["while", { type: "nonterminal", name: "Expr" }, { type: "nonterminal", name: "BlockExpr" }]}
-/>
-
-<Rule name="DeferStmt" definition={["defer", { type: "nonterminal", name: "Expr" }]} />
 
 </Rules>
 
@@ -938,4 +1135,4 @@ TODO
 
 ## Modules
 
-TODO
+<Todo>Documentation</Todo>
