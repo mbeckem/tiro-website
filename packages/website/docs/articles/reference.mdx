@@ -589,12 +589,13 @@ Grouping imports should be possible, for example `import std { print, PI as MY_P
 </Rules>
 
 Variable declarations introduce one or more variables into the current scope.
-Each variable is defined by a _Binding_, which may provide an initializer expression for the _Identifier_ or _Identifiers_ mentioned in the _BindingPattern_.
+A variable declaration contains _Bindings_, which may provide an initializer expression for the _Identifier_ or _Identifiers_ mentioned in the _BindingPattern_.
 
 Bindings introduce a single new variable when the _BindingPattern_ consists of a single identifier.
-The optional initializer expression may produce any value in this case.
+The optional initializer expression may yield any value in this case.
+
 A _TupleBindingPattern_ introduces multiple variables at once.
-The optional initializer for a tuple pattern must produce a tuple value with a compatible size (at least the number of declared variable names).
+The optional initializer for a tuple pattern must yield a tuple value with a compatible size (at least the number of declared variable names).
 
 Using the `var` keyword creates a mutable variable, while a variable declared using the `const` keyword cannot be reassigned after its initialization.
 Constants must have an initializer.
@@ -641,8 +642,9 @@ Constants must have an initializer.
 
 </Rules>
 
-A function declaration introduce a function into the current scope.
+A function declaration creates a new function.
 Functions may have a name, a set of parameters and a body.
+When a function is _invoked_, values passed as arguments in the function call expression will be bound to the declared parameters of that function.
 
 The body of a function may be specified as either a _BlockExpr_ or as a single expression introduced by a `=` sign.
 The shorthand syntax is useful for very simple functions.
@@ -691,7 +693,7 @@ func shorthand_body(p) = p * 2;
 </Rules>
 
 Statements are constructs used in block expressions such as function bodies.
-Most statements must be terminated with a semicolon.
+Most statements must be terminated by a semicolon.
 The semicolon is optional for block-like statements, where the end of the statement is obvious from the position of the closing `}`.
 
 #### Assertions
@@ -711,7 +713,7 @@ The semicolon is optional for block-like statements, where the end of the statem
 
 </Rules>
 
-An assertion verifies that the expression produces a truthful value.
+An assertion verifies that the expression yields a truthful value.
 A failed assertion results in a _panic_.
 
 An optional message argument may be specified; it will be included in the panic's diagnostic error message.
@@ -750,6 +752,25 @@ export func main() {
   definition={["while", { type: "nonterminal", name: "Expr" }, { type: "nonterminal", name: "BlockExpr" }]}
 />
 
+A while loop consists of a condition expression and a loop body.
+The condition will be repeatedly evaluated, and while it is truthful, the loop body will also be executed.
+The loop's execution stops as soon as the condition is false.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    var i = 0;
+    while i < 3 {
+        std.print(i);
+        i += 1;
+    }
+    std.print("done");
+}
+```
+
 </Rules>
 
 #### For-each loops
@@ -768,6 +789,30 @@ export func main() {
 />
 
 </Rules>
+
+The for-each loop allows iteration over a collection or sequence such as an array.
+It requires a _BindingPattern_ that specifies the variable names used for iteration and an expression that yields an iterable sequence.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const numbers = [1, 2, 3];
+    for c in numbers {
+        std.print(c);
+    }
+
+    const constants = map{
+        "pi": 3.14,
+        "e": 2.72
+    };
+    for (name, value) in constants {
+        std.print("$name = $value");
+    }
+}
+```
 
 #### Classic for loops
 
@@ -788,6 +833,28 @@ export func main() {
 
 </Rules>
 
+The classic for loop allows iteration using one or more control variables, a condition expression and an update step.
+
+When the loop starts its execution, the optional control variables are defined and possibly initialized.
+
+Before every iteration, the optional condition expression is evaluated, and if it is truthful, the loop body is executed.
+If the condition is false, loop execution stops.
+If the condition is not defined, it is implicitly truthful.
+
+The optional update expression is evaluted after every completed loop iteration.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    for var i = 0; i < 3; i += 1 {
+        std.print(i);
+    }
+}
+```
+
 ### Expressions
 
 <Rules>
@@ -800,7 +867,7 @@ export func main() {
       { type: "nonterminal", name: "VarExpr" },
       { type: "nonterminal", name: "FieldExpr" },
       { type: "nonterminal", name: "TupleFieldExpr" },
-      { type: "nonterminal", name: "ElementExpr" },
+      { type: "nonterminal", name: "IndexExpr" },
       { type: "nonterminal", name: "CallExpr" },
       { type: "nonterminal", name: "UnaryExpr" },
       { type: "nonterminal", name: "BinaryExpr" },
@@ -816,6 +883,21 @@ export func main() {
   }}
 />
 
+</Rules>
+
+Expressions are syntax constructs that yield a value.
+Tiro is an expression-oriented language; most syntax constructions are expressions.
+
+<Todo>
+
+Open design question: should loops be expressions?
+
+</Todo>
+
+#### Variable expressions
+
+<Rules>
+
 <Rule
   name="VarExpr"
   definition={{
@@ -823,6 +905,35 @@ export func main() {
     name: "Identifier"
   }}
 />
+
+</Rules>
+
+A variable expression yields the current value of the variable identified by the given identifier.
+Tiro is a lexically scoped language: variables may only be referenced from within the scope in which they have been defined.
+If there are multiple variable declarations for the same identifier in scope, the closest variable declaration is referenced.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const x = 0;
+    {
+        const x = 1;
+        {
+            const x = 2;
+            std.print(x);
+        }
+        std.print(x);
+    }
+    std.print(x);
+}
+```
+
+#### Field expressions
+
+<Rules>
 
 <Rule
   name="FieldExpr"
@@ -842,8 +953,42 @@ export func main() {
   ]}
 />
 
+</Rules>
+
+A field expression evalautes the expression left to the `.` symbol and yields the specified field of that value.
+
+The `?.` token can be used to make the field lookup optional.
+If the left hand side is `null`, the field expression will also yield `null`.
+
+The tuple field expression is a variant of the above that allows to lookup a tuple member instead.
+The left hand side expression must yield a tuple value and the right hand side token must be a non negative integer.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const rec = (x: 1);
+    const no_rec = null;
+    std.print(rec.x);
+    std.print(rec?.x);
+    std.print(no_rec?.x);
+
+    const tuple = (1, 2);
+    const no_tuple = null;
+    std.print(tuple.1);
+    std.print(tuple?.1);
+    std.print(no_tuple?.1);
+}
+```
+
+#### Index expressions
+
+<Rules>
+
 <Rule
-  name="ElementExpr"
+  name="IndexExpr"
   definition={[
     { type: "nonterminal", name: "Expr" },
     { type: "choice", children: ["[", "?["] },
@@ -851,6 +996,37 @@ export func main() {
     "]"
   ]}
 />
+
+</Rules>
+
+Index expressions are used to lookup a value within a container by its index.
+
+The `?[` can be used to make the value lookup optional.
+If the left hand side is `null`, the index expression will also yield `null`.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const numbers = [1, 2, 3];
+    std.print(numbers[1]);
+
+    const constants = map{
+        "pi": 3.14,
+        "e": 2.72
+    };
+    std.print(constants["pi"]);
+
+    const no_container = null;
+    std.print(no_container?[1]);
+}
+```
+
+#### Call expressions
+
+<Rules>
 
 <Rule
   name="CallExpr"
@@ -870,6 +1046,12 @@ export func main() {
   ]}
 />
 
+</Rules>
+
+#### Unary expressions
+
+<Rules>
+
 <Rule
   name="UnaryExpr"
   definition={[
@@ -879,6 +1061,12 @@ export func main() {
 />
 
 <Rule name="UnaryOp" definition={{ type: "choice", children: ["+", "-", "!", "~"] }} />
+
+</Rules>
+
+#### Binary expressions
+
+<Rules>
 
 <Rule
   name="BinaryExpr"
@@ -917,6 +1105,12 @@ export func main() {
     ]
   }}
 />
+
+</Rules>
+
+#### Assignment expressions
+
+<Rules>
 
 <Rule
   name="AssignExpr"
