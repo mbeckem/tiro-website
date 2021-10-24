@@ -25,11 +25,6 @@ export default function DocsPage(): JSX.Element {
                                 <Link href={routes.Lang.reference()}>Language reference</Link>
                             </li>
                             <li>
-                                <ExternalLink href="https://github.com/mbeckem/tiro/blob/master/docs/grammar.md">
-                                    Grammar
-                                </ExternalLink>
-                            </li>
-                            <li>
                                 <Link href={routes.Lang.standardLibrary()}>
                                     <a>The standard library</a>
                                 </Link>
