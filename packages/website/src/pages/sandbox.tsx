@@ -2,17 +2,17 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { Classes } from "@blueprintjs/core";
 
-import { Layout } from "@components/Layout";
-import { SEO } from "@components/SEO";
-import { isServer } from "@src/utils";
+import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
+import { isServer } from "@/utils";
 import {
     SandboxState,
     SANDBOX_STATE_VERSION,
     loadStateFromString,
     saveStateToString
-} from "@src/components/sandbox/state";
+} from "@/components/sandbox/state";
 
-const LazySandbox = dynamic(async () => (await import("@components/sandbox")).Sandbox, {
+const LazySandbox = dynamic(async () => (await import("@/components/sandbox")).Sandbox, {
     ssr: false
 });
 

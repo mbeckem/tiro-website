@@ -2,16 +2,16 @@ import React from "react";
 import Link from "next/link";
 import { GetStaticPaths, GetStaticProps } from "next";
 
-import { Layout } from "@src/components/Layout";
-import { SEO } from "@src/components/SEO";
-import { Container } from "@src/components/Container";
-import { Article as ArticleComponent } from "@src/components/Article";
-import { serializeMDX, SerializedMDX } from "@src/docs/serializeMdx";
-import { ApiDocsPage, getApiDocsPage, getApidocsSlugs } from "@src/docs/apidocs";
+import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
+import { Container } from "@/components/Container";
+import { Article as ArticleComponent } from "@/components/Article";
+import { serializeMDX, SerializedMDX } from "@/docs/serializeMdx";
+import { ApiDocsPage, getApiDocsPage, getApidocsSlugs } from "@/docs/apidocs";
 
 import styles from "./api.module.scss";
-import { apidocsFile } from "@src/routes";
-import { MDXRenderer } from "@src/components/MDXRenderer";
+import { apidocsFile } from "@/routes";
+import { MDXRenderer } from "@/components/MDXRenderer";
 
 export interface ApiProps {
     slug: string;

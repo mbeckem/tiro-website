@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useCallback } from "react";
 import type * as monaco from "monaco-editor";
 import MonacoEditor, { loader, Monaco } from "@monaco-editor/react";
-import { withBasePath } from "@src/routes";
-import { useAsync } from "@src/hooks/useAsync";
+import { withBasePath } from "@/routes";
+import { useAsync } from "@/hooks/useAsync";
 import { setupLanguage } from "./tiroLanguage";
-import { useDebounce } from "@src/hooks/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export interface EditorProps {
     initialSource: string;

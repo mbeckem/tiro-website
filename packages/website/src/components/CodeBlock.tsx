@@ -1,7 +1,7 @@
 import React from "react";
 import Highlight, { Prism, Language } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/github";
-import { sandbox, withBasePath } from "@src/routes";
+import { sandbox, withBasePath } from "@/routes";
 import { AnchorButton } from "@blueprintjs/core";
 
 export interface CodeBlockProps {

@@ -2,7 +2,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote/dist/types";
 import remarkHeadingId from "remark-heading-id";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { ensureServer } from "@src/utils";
+import { ensureServer } from "@/utils";
 import { slugPlugin } from "./slug";
 
 export type SerializedMDX = MDXRemoteSerializeResult;

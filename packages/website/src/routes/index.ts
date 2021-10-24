@@ -1,4 +1,4 @@
-import { saveStateToString } from "@src/components/sandbox/state";
+import { saveStateToString } from "@/components/sandbox/state";
 import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();

@@ -3,8 +3,8 @@ import { Tabs, Tab, UL, Classes } from "@blueprintjs/core";
 import { ObjectInspector, chromeLight, InspectorThemeDefinition } from "react-inspector";
 import classNames from "classnames";
 
-import { CompileResult } from "@src/runtime";
-import { defined } from "@src/utils";
+import { CompileResult } from "@/runtime";
+import { defined } from "@/utils";
 import styles from "./CompilerPanel.module.scss";
 
 export interface CompilerPanelProps {

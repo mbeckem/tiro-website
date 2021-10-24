@@ -16,11 +16,8 @@ module.exports = {
         "^.+\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/src/__mocks__/fileMock.js",
 
         // Keep in sync with tsconfig paths
-        "^@src/(.*)$": ["<rootDir>/src/$1"],
-        "^@assets/(.*)$": ["<rootDir>/src/assets/$1"],
-        "^@components/(.*)$": ["<rootDir>/src/components/$1"],
-        "^@styles/(.*)$": ["<rootDir>/src/styles/$1"],
-        "^@docs/(.*)$": ["<rootDir>/docs/$1"]
+        "^@/(.*)$": ["<rootDir>/src/$1"],
+        "^~/(.*)$": ["<rootDir>/$1"]
     },
     setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
     testPathIgnorePatterns: ["<rootDir>/node_modules/", "<rootDir>/.next/"],

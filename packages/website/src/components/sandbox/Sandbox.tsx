@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { List } from "immutable";
 
-import { CompileResult, ExecuteResult, Program } from "@src/runtime";
+import { CompileResult, ExecuteResult, Program } from "@/runtime";
 import { SandboxUI } from "./SandboxUI";
 import { CompilerPanelProps } from "./CompilerPanel";
 import { OutputPanelProps } from "./OutputPanel";
 import { useRuntime } from "./useRuntime";
-import { useForceRerender } from "@src/hooks/useForceRerender";
-import { useOnce } from "@src/hooks/useOnce";
+import { useForceRerender } from "@/hooks/useForceRerender";
+import { useOnce } from "@/hooks/useOnce";
 
 export interface SandboxProps {
     initialSource?: string;

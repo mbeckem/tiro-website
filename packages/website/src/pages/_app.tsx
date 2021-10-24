@@ -1,8 +1,8 @@
 import { FocusStyleManager } from "@blueprintjs/core";
 import Head from "next/head";
 
-import "@styles/main.scss";
-import { withBasePath } from "@src/routes";
+import "@/styles/main.scss";
+import { withBasePath } from "@/routes";
 
 FocusStyleManager.onlyShowFocusOnTabs();
 

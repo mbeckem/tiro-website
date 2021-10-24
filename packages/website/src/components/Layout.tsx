@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Classes, Navbar } from "@blueprintjs/core";
 import classNames from "classnames";
 
-import config from "@src/config";
-import GithubIcon from "!svg-react!@assets/github.inline.svg";
-import * as routes from "@src/routes";
+import config from "@/config";
+import GithubIcon from "!svg-react!@/assets/github.inline.svg";
+import * as routes from "@/routes";
 import { ExternalLink } from "./ExternalLink";
 import styles from "./Layout.module.scss";
 

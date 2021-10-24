@@ -1,7 +1,7 @@
 import glob from "fast-glob";
 import matter from "gray-matter";
 import { join } from "path";
-import { ensureServer } from "@src/utils";
+import { ensureServer } from "@/utils";
 import { promises as asyncFs } from "fs";
 
 const access = asyncFs.access;

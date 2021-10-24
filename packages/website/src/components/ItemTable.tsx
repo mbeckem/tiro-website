@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { HTMLTable } from "@blueprintjs/core";
-import { chunked } from "@src/utils/arrayUtils";
+import { chunked } from "@/utils/arrayUtils";
 import styles from "./ItemTable.module.scss";
 
 export interface ItemTableProps {

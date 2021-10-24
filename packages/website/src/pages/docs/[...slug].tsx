@@ -1,13 +1,13 @@
 import React from "react";
 import { GetStaticPaths, GetStaticProps } from "next";
 
-import { Layout } from "@src/components/Layout";
-import { SEO } from "@src/components/SEO";
-import { getArticleSlugs, getArticle, Article } from "@src/docs/articles";
-import { Container } from "@src/components/Container";
-import { Article as ArticleComponent } from "@src/components/Article";
-import { SerializedMDX, serializeMDX } from "@src/docs/serializeMdx";
-import { MDXRenderer } from "@src/components/MDXRenderer";
+import { Layout } from "@/components/Layout";
+import { SEO } from "@/components/SEO";
+import { getArticleSlugs, getArticle, Article } from "@/docs/articles";
+import { Container } from "@/components/Container";
+import { Article as ArticleComponent } from "@/components/Article";
+import { SerializedMDX, serializeMDX } from "@/docs/serializeMdx";
+import { MDXRenderer } from "@/components/MDXRenderer";
 
 export interface ArticleProps {
     slug: string;

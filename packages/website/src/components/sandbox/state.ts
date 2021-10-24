@@ -1,4 +1,4 @@
-import { isClient } from "@src/utils";
+import { isClient } from "@/utils";
 
 export interface SandboxState {
     version: typeof SANDBOX_STATE_VERSION;

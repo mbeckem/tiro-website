@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import Head from "next/head";
-import config from "@src/config";
+import config from "@/config";
 
 export interface SEOProps {
     description?: string;
