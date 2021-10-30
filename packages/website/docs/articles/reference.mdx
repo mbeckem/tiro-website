@@ -357,7 +357,7 @@ block started with `${` and closed with a `}` sign.
   definition={{
     type: "choice",
     children: [
-      ["$", { type: "nonterminal", name: "Identifier" }],
+      ["$", { type: "nonterminal", name: "VarExpr" }],
       ["${", { type: "nonterminal", name: "Expr" }, "}"]
     ]
   }}
@@ -729,7 +729,7 @@ An optional message argument may be specified; it will be included in the panic'
 The defer statement registers an expression to be evaluated when the program leaves the current scope.
 It's main use is to ensure that resources are cleaned up properly.
 
-Defer statements that have been visited by the program will run even if the scope is being left abrubtly, such as by an early `return`, `break`, `continue` or a panic.
+Defer statements that have been visited by the program will run even if the scope is being left abruptly, such as by an early `return`, `break`, `continue` or a panic.
 
 <span className="caption">Example:</span>
 
@@ -737,7 +737,7 @@ Defer statements that have been visited by the program will run even if the scop
 import std;
 
 export func main() {
-    std.print("aquire resource");
+    std.print("acquire resource");
     defer std.print("release resource");
     std.print("use resource");
 }
@@ -841,7 +841,7 @@ Before every iteration, the optional condition expression is evaluated, and if i
 If the condition is false, loop execution stops.
 If the condition is not defined, it is implicitly truthful.
 
-The optional update expression is evaluted after every completed loop iteration.
+The optional update expression is evaluated after every completed loop iteration.
 
 <span className="caption">Example:</span>
 
@@ -955,7 +955,7 @@ export func main() {
 
 </Rules>
 
-A field expression evalautes the expression left to the `.` symbol and yields the specified field of that value.
+A field expression evaluates the expression left to the `.` symbol and yields the specified field of that value.
 
 The `?.` token can be used to make the field lookup optional.
 If the left hand side is `null`, the field expression will also yield `null`.
