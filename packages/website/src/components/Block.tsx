@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Callout, Intent } from "@blueprintjs/core";
 
 export interface BlockProps {
-    title: string;
+    title?: string;
     type?: "info" | "warning";
 }
 
