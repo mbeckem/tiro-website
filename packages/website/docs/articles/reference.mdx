@@ -375,6 +375,21 @@ Open design questions:
 
 </Todo>
 
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const greeting = "Hello";
+    std.print("$greeting ${get_target()}!");
+}
+
+func get_target() {
+    return "World";
+}
+```
+
 #### Escape sequences
 
 <Rules>
@@ -532,14 +547,25 @@ The last _Identifier_ in the _ImportPath_ serves as the name of the imported ref
 A custom name may be provided by using the `as` keyword.
 
 <Todo>
-  
+
 The import path must currently point to a module.
 It should also allow for entities within a module.
+
 For example, `import std.print as myprint` should be valid.
 
 Grouping imports should be possible, for example `import std { print, PI as MY_PI}`.
 
 </Todo>
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    std.print("Hello World");
+}
+```
 
 #### Variables
 
@@ -607,6 +633,19 @@ Constants must have an initializer.
 | With initializer     | `var x = 3.14;`        | Declares _x_ and with the initial value `3.14`                       |
 | Constant declaration | `const x = 3.14; `     | Like the above, but _x_ cannot be reassigned anymore                 |
 | Tuple unpacking      | `var (x, y) = (1, 2);` | Unpacks the right hand side tuple into the new variables _x_ and _y_ |
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    var a = "single variable";
+    const b = 1, c = 2;
+    var (d, e) = ("first", "second");
+    std.print(a, b, c, d, e);
+}
+```
 
 #### Functions
 
@@ -706,7 +745,7 @@ The semicolon is optional for block-like statements, where the end of the statem
     "assert",
     "(",
     { type: "nonterminal", name: "Expr" },
-    { type: "optional", child: [",", { type: "nonterminal", name: "StringExpr" }] },
+    { type: "optional", child: [",", { type: "nonterminal", name: "String" }] },
     ")"
   ]}
 />
@@ -717,6 +756,26 @@ An assertion verifies that the expression yields a truthful value.
 A failed assertion results in a _panic_.
 
 An optional message argument may be specified; it will be included in the panic's diagnostic error message.
+
+<Info>
+
+Assertions should be used to verify program invariants during development.
+They may be disabled by compilation flags.
+Do not rely on their presence at runtime.
+Most importantly, avoid side effects inside assertions.
+
+</Info>
+
+<span className="caption">Example:</span>
+
+```tiro
+export func main() {
+    var n = 1;
+    assert(n % 2 == 0, "n must be even!"); // fails
+}
+```
+
+#### While loops
 
 #### Defer statements
 
@@ -894,6 +953,10 @@ Open design question: should loops be expressions?
 
 </Todo>
 
+#### Evaluation order
+
+All expressions are evaluated strictly from left to right.
+
 #### Variable expressions
 
 <Rules>
@@ -1001,8 +1064,8 @@ export func main() {
 
 Index expressions are used to lookup a value within a container by its index.
 
-The `?[` can be used to make the value lookup optional.
-If the left hand side is `null`, the index expression will also yield `null`.
+The `?[` token can be used to make the value lookup optional.
+If the left hand side is `null`, the index expression will also yield `null` and the expression between brackets will not be evaluated.
 
 <span className="caption">Example:</span>
 
@@ -1048,6 +1111,31 @@ export func main() {
 
 </Rules>
 
+A Call expression invokes a function with a set of arguments.
+
+The first expression must yield a function.
+Expressions passed as arguments (between parentheses) will be evaluated, then control will be passed to function with all
+arguments bound to the corresponding function parameter.
+The call expression yields the return value of the invoked function.
+
+The `?(` token can be used to make the function call optional.
+If the function value yields `null`, the arguments will not be evaluated and the entire expression will also yield `null`.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    std.print(add(1, 2));
+    std.print(add(4, 2 * 3));
+}
+
+func add(x, y) {
+    return x + y;
+}
+```
+
 #### Unary expressions
 
 <Rules>
@@ -1063,6 +1151,15 @@ export func main() {
 <Rule name="UnaryOp" definition={{ type: "choice", children: ["+", "-", "!", "~"] }} />
 
 </Rules>
+
+Unary expressions evaluate the right hand side expression and then apply the specified operator to its result.
+
+| Operator | Description                                                                                                |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| +        | Unary plus. Requires a number operand. Yields the number as-is.                                            |
+| -        | Unary minus. Requires a number operand. Yields the arithmetic negative of its operand.                     |
+| !        | Unary NOT. Returns the logical negative of its operand: `false` for all truthful values, `true` otherwise. |
+| ~        | Bitwise NOT. Requires an integer operand. Yields an integer with all bits inverted.                        |
 
 #### Binary expressions
 
@@ -1088,25 +1185,80 @@ export func main() {
       "**",
       "/",
       "%",
-      "<<",
-      ">>",
       "&",
       "|",
+      "<<",
+      ">>",
       "^",
+      "==",
+      "!=",
       "<",
       ">",
       "<=",
       ">=",
-      "==",
-      "!=",
-      "??",
       "&&",
-      "||"
+      "||",
+      "??"
     ]
   }}
 />
 
 </Rules>
+
+Binary expressions apply an operation to the left hand and right hand side expressions..
+
+##### Arithmetic operators
+
+These operators require two numeric operands and apply the specified arithmetic operation on them.
+
+| Operator     | Name           | Description                                     |
+| ------------ | -------------- | ----------------------------------------------- |
+| _a_ + _b_    | Addition       | Yields the sum of _a_ and _b_.                  |
+| _a_ - _b_    | Subtraction    | Yields the difference of _a_ and _b_.           |
+| _a_ \* _b_   | Multiplication | Yields the product of _a_ and _b_.              |
+| _a_ \*\* _b_ | Power          | Yields _a_ raised to the power of _b_.          |
+| _a_ / _b_    | Division       | Yields _a_ divided by _b_.                      |
+| _a_ % _b_    | Modulo         | Yields the remainder after dividing _a_ by _b_. |
+
+##### Binary operators
+
+Operators that operate on the bits of their operands.
+
+| Operator   | Name                 | Description |
+| ---------- | -------------------- | ----------- |
+| _a_ & _b_  | Binary AND           | TODO        |
+| _a_ \| _b_ | Binary OR            | TODO        |
+| _a_ ^ _b_  | Binary XOR           | TODO        |
+| _a_ << _b_ | Bitwise left shift.  | TODO        |
+| _a_ >> _b_ | Bitwise right shift. | TODO        |
+
+##### Relational operators
+
+Relational operators compare their two operands and yield a boolean value depending on the comparison's result.
+
+| Operator   | Name                     | Description                                                                                                    |
+| ---------- | ------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| _a_ == _b_ | Equal to                 | Yields `true` if _a_ is equal to _b_, `false` otherwise.                                                       |
+| _a_ != _b_ | Not equal to             | Yields `false` if _a_ is equal to _b_, `true` otherwise.                                                       |
+| _a_ < _b_  | Less than                | Requires both operands to be numbers. Yields `true` if _a_ is less than _b_, `false` otherwise.                |
+| _a_ > _b_  | Greater than             | Requires both operands to be numbers. Yields `true` if _a_ is greater than _b_, `false` otherwise.             |
+| _a_ <= _b_ | Less than or equal to    | Requires both operands to be numbers. Yields `true` if _a_ is less than or equal to _b_, `false` otherwise.    |
+| _a_ >= _b_ | Greater than or equal to | Requires both operands to be numbers. Yields `true` if _a_ is greater than or equal to _b_, `false` otherwise. |
+
+##### Logical operators
+
+| Operator     | Name        | Description                                                                                                 |
+| ------------ | ----------- | ----------------------------------------------------------------------------------------------------------- |
+| _a_ && _b_   | Logical AND | Yields _a_ if is not truthful. Otherwise yields _b_. Note that _b_ is only evaluated if _a_ is truthful.    |
+| _a_ \|\| _b_ | Logical OR  | Yields _a_ if it is truthful. Otherwise yields _b_. Note that _b_ is only evaluated if _a_ is not truthful. |
+
+<Todo>Should these operation always return a boolean instead of the result yielded by its operands?</Todo>
+
+##### Other operators
+
+| Operator   | Name            | Description                                                                                           |
+| ---------- | --------------- | ----------------------------------------------------------------------------------------------------- |
+| _a_ ?? _b_ | Null coalescing | Yields _a_ if it is not null. Otherwise yields _b_. Note that _b_ is only evaluated if _a_ is `null`. |
 
 #### Assignment expressions
 
@@ -1129,13 +1281,125 @@ export func main() {
   }}
 />
 
-<Rule name="ContinueExpr" definition="continue" />
+</Rules>
+
+<Todo>TODO</Todo>
+
+#### Break expressions
+
+<Rules>
 
 <Rule name="BreakExpr" definition="break" />
 
+</Rules>
+
+Aborts execution of the current (most nested) _for_, _for each_ or _while_ loop.
+Execution resumes directly after the loop statement.
+
+Note that pending _defer_ statements will be executed before execution resumes after the loop.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    var i = 0;
+    while (true) {
+        if (i == 3) {
+            break;
+        }
+        std.print(i);
+        i += 1;
+    }
+    std.print("done");
+}
+```
+
+#### Continue expressions
+
+<Rules>
+
+<Rule name="ContinueExpr" definition="continue" />
+
+</Rules>
+
+Jumps directly to the end of the current (most nested) _for_, _for each_ or _while_ loop's body.
+
+Note that pending _defer_ statements will be executed before execution of the loop resumes.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    for var i = 0; i <= 6; i += 1 {
+        if i % 2 == 0 {
+          continue; // Skip even numbers
+        }
+        std.print(i);
+    }
+}
+```
+
+#### Return expressions
+
+<Rules>
+
 <Rule name="ReturnExpr" definition={["return", { type: "optional", child: { type: "nonterminal", name: "Expr" } }]} />
 
+</Rules>
+
+Returns from the current (most nested) function.
+Program execution will continue in that function's caller.
+
+An optional expression may be specified.
+The value yielded by that expression will be come the function's return value.
+If the expression is omitted, `null` is returned.
+
+Note that pending _defer_ statements will be executed when returning from a function.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    std.print(next_even(1));
+    std.print(next_even(2));
+}
+
+func next_even(n) {
+    if (n % 2 == 0) {
+        return n;
+    }
+    return n + 1;
+}
+```
+
+#### Grouped expressions
+
+<Rules>
+
 <Rule name="GroupedExpr" definition={["(", { type: "nonterminal", name: "Expr" }, ")"]} />
+
+</Rules>
+
+Parentheses can be used to group expressions, for example to override the default precedence rules within expressions:
+
+```tiro
+import std;
+
+export func main() {
+    std.print(1 + 2 * 3);
+    std.print((1 + 2) * 3);
+}
+```
+
+#### If expressions
+
+<Rules>
 
 <Rule
   name="IfExpr"
@@ -1147,7 +1411,19 @@ export func main() {
   ]}
 />
 
+</Rules>
+
+#### Function expressions
+
+<Rules>
+
 <Rule name="FuncExpr" definition={{ type: "nonterminal", name: "FuncDecl" }} />
+
+</Rules>
+
+#### Block expressions
+
+<Rules>
 
 <Rule name="BlockExpr" definition={["{", { type: "repeat", child: { type: "nonterminal", name: "Stmt" } }, "}"]} />
 
