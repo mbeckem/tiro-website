@@ -147,7 +147,7 @@ Keywords cannot be used as identifiers.
       type: "nonterminal",
       name: "KeywordOrIdentifier"
     },
-    note: "Not including keywords"
+    note: "Excluding keywords"
   }}
 />
 
@@ -706,6 +706,12 @@ func block_body(p) {
 func shorthand_body(p) = p * 2;
 ```
 
+<Todo>
+
+Open design question: Use `->` or `=>` instead of the plain `=` in the shorthand syntax?
+
+</Todo>
+
 ### Statements
 
 <Rules>
@@ -775,8 +781,6 @@ export func main() {
 }
 ```
 
-#### While loops
-
 #### Defer statements
 
 <Rules>
@@ -808,7 +812,11 @@ export func main() {
 
 <Rule
   name="WhileStmt"
-  definition={["while", { type: "nonterminal", name: "Expr" }, { type: "nonterminal", name: "BlockExpr" }]}
+  definition={[
+    "while",
+    { type: "note", child: { type: "nonterminal", name: "Expr" }, note: "Excluding BlockExpr" },
+    { type: "nonterminal", name: "BlockExpr" }
+  ]}
 />
 
 A while loop consists of a condition expression and a loop body.
@@ -842,7 +850,7 @@ export func main() {
     "for",
     { type: "nonterminal", name: "BindingPattern" },
     "in",
-    { type: "nonterminal", name: "Expr" },
+    { type: "note", child: { type: "nonterminal", name: "Expr" }, note: "Excluding BlockExpr" },
     { type: "nonterminal", name: "BlockExpr" }
   ]}
 />
@@ -881,11 +889,17 @@ export func main() {
   name="ForStmt"
   definition={[
     "for",
-    { type: "optional", child: { type: "nonterminal", name: "VarDecl" } },
-    ";",
-    { type: "optional", child: { type: "nonterminal", name: "Expr" } },
-    ";",
-    { type: "optional", child: { type: "nonterminal", name: "Expr" } },
+    {
+      type: "note",
+      child: [
+        { type: "optional", child: { type: "nonterminal", name: "VarDecl" } },
+        ";",
+        { type: "optional", child: { type: "nonterminal", name: "Expr" } },
+        ";",
+        { type: "optional", child: { type: "nonterminal", name: "Expr" } }
+      ],
+      note: "Excluding BlockExpr"
+    },
     { type: "nonterminal", name: "BlockExpr" }
   ]}
 />
@@ -1306,7 +1320,7 @@ import std;
 export func main() {
     var i = 0;
     while (true) {
-        if (i == 3) {
+        if i == 3 {
             break;
         }
         std.print(i);
@@ -1371,7 +1385,7 @@ export func main() {
 }
 
 func next_even(n) {
-    if (n % 2 == 0) {
+    if n % 2 == 0 {
         return n;
     }
     return n + 1;
@@ -1388,8 +1402,9 @@ func next_even(n) {
 
 Parentheses can be used to group expressions, for example to override the default precedence rules within expressions:
 
-```tiro
-import std;
+<span className="caption">Example:</span>
+
+```tiro import std;
 
 export func main() {
     std.print(1 + 2 * 3);
@@ -1405,13 +1420,74 @@ export func main() {
   name="IfExpr"
   definition={[
     "if",
-    { type: "nonterminal", name: "Expr" },
+    { type: "note", child: { type: "nonterminal", name: "Expr" }, note: "Excluding BlockExpr" },
     { type: "nonterminal", name: "BlockExpr" },
-    { type: "optional", child: ["else", { type: "nonterminal", name: "BlockExpr" }] }
+    {
+      type: "optional",
+      child: [
+        "else",
+        {
+          type: "choice",
+          children: [
+            { type: "nonterminal", name: "IfExpr" },
+            { type: "nonterminal", name: "BlockExpr" }
+          ]
+        }
+      ]
+    }
   ]}
 />
 
 </Rules>
+
+If expressions provide support for conditional execution.
+They consist of a mandatory condition, a _then_ block expression, an optional series of _else if_ expressions with additional conditions and finally an optional _else_ block.
+
+If the condition yields a truthful value, the _then_ block is executed and all other blocks are skipped.
+Otherwise, conditions of any _else if_ expressions are attempted in order, and the block expression after the first truthful condition will be executed.
+If no condition yielded a truthful value, the optional _else_ block is executed instead.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    if_example(3);
+    if_example(5);
+    if_example(10);
+}
+
+func if_example(x) {
+    if x == 3 {
+        std.print("x is 3");
+    } else if x % 2 == 1 {
+        std.print("x is odd");
+    } else {
+        std.print("x is something else");
+    }
+}
+
+```
+
+If expressions may be used in positions where a value is expected.
+If that is the case, then the expression _must_ have an _else_ block and all blocks must yield a value as well.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const u = 3;
+    const v = if u > 0 {
+        u + 1;
+    } else {
+        u - 1;
+    };
+    std.print(v);
+}
+```
 
 #### Function expressions
 
@@ -1421,6 +1497,19 @@ export func main() {
 
 </Rules>
 
+Function expressions yield the declared function as a value.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const twice = func(x) = x * 2;
+    std.print(twice(1));
+}
+```
+
 #### Block expressions
 
 <Rules>
@@ -1428,6 +1517,48 @@ export func main() {
 <Rule name="BlockExpr" definition={["{", { type: "repeat", child: { type: "nonterminal", name: "Stmt" } }, "}"]} />
 
 </Rules>
+
+Block expressions contain a sequence of statements.
+When a block expression is evaluated, all its statements are evaluated in order.
+
+```tiro
+import std;
+
+export func main() {
+    // this function body is a block expression in its own right
+    std.print("a");
+    std.print("b");
+
+    // blocks can be nested using if expressions, loops etc. or plainly like this:
+    {
+        std.print("c");
+        std.print("d");
+    }
+}
+```
+
+Block expressions may be used in positions where a value is expected.
+If that is the case, there must be at least one statement and the last statement must yield a value.
+That value will then be yielded by the block expression.
+
+```tiro
+import std;
+
+export func main() {
+    // This pattern is helpful for constants with complex initialization logic
+    const value = {
+        var v = 1;
+        if true {
+            v += 1;
+        }
+        if !false {
+            v *= 2;
+        }
+        v;
+    };
+    std.print(value);
+}
+```
 
 ### Literals
 
@@ -1478,6 +1609,10 @@ export func main() {
   }}
 />
 
+</Rules>
+
+<Rules>
+
 <Rule
   name="TupleLiteral"
   definition={["(", { type: "optional", child: { type: "nonterminal", name: "TupleElements" } }, ")"]}
@@ -1495,6 +1630,10 @@ export func main() {
     }
   ]}
 />
+
+</Rules>
+
+<Rules>
 
 <Rule
   name="RecordLiteral"
@@ -1522,6 +1661,10 @@ export func main() {
   definition={[{ type: "nonterminal", name: "Identifier" }, ":", { type: "nonterminal", name: "Expr" }]}
 />
 
+</Rules>
+
+<Rules>
+
 <Rule
   name="ArrayLiteral"
   definition={[
@@ -1545,6 +1688,10 @@ export func main() {
     { type: "optional", child: "," }
   ]}
 />
+
+</Rules>
+
+<Rules>
 
 <Rule
   name="MapLiteral"
@@ -1575,6 +1722,10 @@ export func main() {
   name="MapEntry"
   definition={[{ type: "nonterminal", name: "Expr" }, ":", { type: "nonterminal", name: "Expr" }]}
 />
+
+</Rules>
+
+<Rules>
 
 <Rule
   name="SetLiteral"
