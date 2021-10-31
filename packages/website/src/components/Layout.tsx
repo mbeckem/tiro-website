@@ -34,11 +34,12 @@ export const Layout = memo(function Layout({ fullHeight = false, children }: Lay
             <main className={styles.content} style={contentStyle}>
                 {children}
             </main>
+            <Footer small={!fullHeight} />
         </div>
     );
 });
 
-const Nav = function Nav(props: { siteTitle: string }) {
+const Nav = (props: { siteTitle: string }) => {
     return (
         <Navbar className={classNames(Classes.DARK, styles.nav)}>
             <Navbar.Group>
@@ -61,5 +62,14 @@ const Nav = function Nav(props: { siteTitle: string }) {
                 </ExternalLink>
             </Navbar.Group>
         </Navbar>
+    );
+};
+
+// small: only render a single line in full height layout
+const Footer = ({ small }: { small: boolean }) => {
+    return (
+        <footer className={classNames(Classes.DARK, styles.footer, small && styles.small)}>
+            &copy; {config.copyright}
+        </footer>
     );
 };

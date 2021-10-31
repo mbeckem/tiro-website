@@ -1,1 +1,11 @@
+@use "~@blueprintjs/core/lib/scss/variables" as vars;
+
+@mixin dark() {
+    &:global(.bp3-dark) {
+        @content;
+    }
+}
+
+$dark-background: vars.$pt-dark-app-background-color;
+
 $space-1: 4px;

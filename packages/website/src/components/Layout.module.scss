@@ -1,7 +1,10 @@
+@use "@/styles/layout" as layout;
+
 .container {
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-height: 100%;
 
     &.fullHeight {
         height: 100%;
@@ -16,6 +19,21 @@
 .content {
     position: relative;
     flex: 1 1 auto;
+}
+
+.footer {
+    flex: 0 0 auto;
+    text-align: center;
+
+    padding: 2px 0px;
+
+    @include layout.dark {
+        background-color: layout.$dark-background;
+    }
+
+    &.small {
+        // TODO
+    }
 }
 
 .nav {
