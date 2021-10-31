@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { HTMLTable } from "@blueprintjs/core";
 import { MDXRemote } from "next-mdx-remote";
 import { MDXRemoteSerializeResult } from "next-mdx-remote/dist/types";
 
@@ -14,6 +15,10 @@ const components = {
     code: CodeBlock,
     pre(props: any) {
         return <div {...props} />;
+    },
+
+    table(props: any) {
+        return <HTMLTable {...props} condensed />;
     },
 
     Rule: Rule,

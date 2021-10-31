@@ -9,7 +9,8 @@ slug: "/reference"
 
 Tiro accepts UTF-8 encoded source files as input.
 Source files must conform to the rules outlined in this document to form a valid program.
-At the very basic level, a source file will be recognized as a series of tokens.
+
+This section describes the lexical structure of _tokens_ accepted by the language.
 
 <Info title="Note">
 
@@ -20,7 +21,7 @@ No whitespace is not allowed unless it matches one of the required patterns.
 
 ### Whitespace
 
-Whitespace tokens consists of a sequence of characters having the Unicode _White_Space_ property. (TODO: White Space Pattern instead, add link)
+Whitespace tokens consists of a sequence of characters having the _Pattern_White_Space_ Unicode property (see (see [Unicode® Standard Annex #31](https://unicode.org/reports/tr31)).
 Whitespace is not significant: its only use is to separate characters of adjacent tokens that would otherwise be parsed as a single token.
 
 ### Comments
@@ -134,7 +135,7 @@ The following keywords are reserved for future use:
 ### Identifiers
 
 Identifiers are used to name items.
-They consist of one or more identifier characters as defined by the _XID_Start_ and _XID_Continue_ Unicode properties. (TODO: Link)
+They consist of one or more identifier characters as defined by the _XID_Start_ and _XID_Continue_ Unicode properties (see [Unicode® Standard Annex #31](https://unicode.org/reports/tr31)).
 Keywords cannot be used as identifiers.
 
 <Rules>
@@ -463,6 +464,8 @@ Documentation
 </Todo>
 
 ## Grammar
+
+This section describes higher level syntax constructions based on tokens.
 
 <Info title="Note">
 
@@ -1297,7 +1300,53 @@ Relational operators compare their two operands and yield a boolean value depend
 
 </Rules>
 
-<Todo>TODO</Todo>
+Assignment expressions evaluate their operands and assign the result to the location specified at the right hand side.
+
+The `=` assignment operator simply evaluates its right hand side and assigns it to the target location.
+The other _compound assignment operators_ take the current value of the left hand side expression into account:
+
+| Compound operator | Equivalent Expression |
+| ----------------- | --------------------- |
+| _a_ += _b_        | _a_ = _a_ + _b_       |
+| _a_ -= _b_        | _a_ = _a_ - _b_       |
+| _a_ \*= _b_       | _a_ = _a_ \* _b_      |
+| _a_ \*\*= _b_     | _a_ = _a_ \*\* _b_    |
+| _a_ /= _b_        | _a_ = _a_ / _b_       |
+| _a_ %= _b_        | _a_ = _a_ % _b_       |
+
+Not all kinds of expression are valid targets for assignments.
+The following expressions are valid:
+
+- _Var expressions_.
+  The result is written to the specified variable.
+- _(Tuple) field expressions_.
+  The result is written to the specified (tuple) field.
+- _Element expressions_.
+  The result is written to the specified element.
+- _Tuple expressions_ containing expressions of the previously mentioned kind.
+  The result should be a tuple that will be decomposed and assigned to the specified locations.
+
+The left hand side of an assignment expression may not use the optional variants of the _field-_, _element-_ and _call expressions_.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    var x = 3;
+    x = 4;
+    std.print("(1)", x); // (1) 4
+
+    var y = 3;
+    (x, y) = (y, x);
+    std.print("(2)", x, y); // (2) 3 4
+
+    const z = [1, 2];
+    (z[0], z[1]) = ("a", "b");
+    std.print("(3)", z[0], z[1]); // (3) a b
+}
+```
 
 #### Break expressions
 
@@ -1489,6 +1538,12 @@ export func main() {
 }
 ```
 
+<Todo>
+  
+Open design question: should a shorthand syntax (no block statement) be allowed? For example `const foo = if condition 1 else 2;`
+
+</Todo>
+
 #### Function expressions
 
 <Rules>
@@ -1521,6 +1576,8 @@ export func main() {
 Block expressions contain a sequence of statements.
 When a block expression is evaluated, all its statements are evaluated in order.
 
+<span className="caption">Example:</span>
+
 ```tiro
 import std;
 
@@ -1540,6 +1597,8 @@ export func main() {
 Block expressions may be used in positions where a value is expected.
 If that is the case, there must be at least one statement and the last statement must yield a value.
 That value will then be yielded by the block expression.
+
+<span className="caption">Example:</span>
 
 ```tiro
 import std;
@@ -1611,6 +1670,11 @@ export func main() {
 
 </Rules>
 
+Literals are expressions are source code representations of concrete values.
+Literals themselves do not require and additional context to evaluate (although nested expressions might).
+
+#### Tuple literals
+
 <Rules>
 
 <Rule
@@ -1632,6 +1696,29 @@ export func main() {
 />
 
 </Rules>
+
+Creates a tuple containing the values yielded by the nested expressions in their written order.
+
+In order to avoid ambiguity with _grouped expressions_, a one-element tuple must be contain a trailing comma.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const t0 = (); // empty tuple
+    std.print(std.debug_repr(t0));
+
+    const t1 = (1, ); // one element
+    std.print(std.debug_repr(t1));
+
+    const t2 = (1, 2); // two elements
+    std.print(std.debug_repr(t2));
+}
+```
+
+#### Record literals
 
 <Rules>
 
@@ -1663,6 +1750,32 @@ export func main() {
 
 </Rules>
 
+Creates a record containing the values yielded by the nested expressions associated with the declared field names.
+
+In order to avoid ambiguity with empty tuples, an empty record must be spelled `(:)`.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const r0 = (:);
+    std.print(std.debug_repr(r0));
+
+    const r1 = (field: "value");
+    std.print(std.debug_repr(r1));
+
+    const r2 = (
+        x: 3.14,
+        y: std.PI
+    );
+    std.print(std.debug_repr(r2));
+}
+```
+
+#### Array literals
+
 <Rules>
 
 <Rule
@@ -1691,6 +1804,27 @@ export func main() {
 
 </Rules>
 
+Creates an array containing the values yielded by the nested expressions in their written order.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const a0 = [];
+    std.print(std.debug_repr(a0));
+
+    const a1 = [1, 2, 3];
+    std.print(std.debug_repr(a1));
+
+    a1.append(4);
+    std.print(std.debug_repr(a1));
+}
+```
+
+#### Map literals
+
 <Rules>
 
 <Rule
@@ -1712,18 +1846,42 @@ export func main() {
 <Rule
   name="MapElements"
   definition={[
-    { type: "nonterminal", name: "MapEntry" },
-    { type: "repeat", child: [",", { type: "nonterminal", name: "MapEntry" }] },
+    { type: "nonterminal", name: "MapElement" },
+    { type: "repeat", child: [",", { type: "nonterminal", name: "MapElement" }] },
     { type: "optional", child: "," }
   ]}
 />
 
 <Rule
-  name="MapEntry"
+  name="MapElement"
   definition={[{ type: "nonterminal", name: "Expr" }, ":", { type: "nonterminal", name: "Expr" }]}
 />
 
 </Rules>
+
+Creates a map with the specified elements.
+Every element is specified using two expressions.
+The expression to the right of the `:` specifies the _value_, and the left expression specifies the associated _key_.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const pi = 3.14;
+    const m = map{
+        1: 2,
+        "a": null,
+        "pi": pi,
+        #foo: "bar",
+    };
+
+    std.print(std.debug_repr(m));
+}
+```
+
+#### Set literals
 
 <Rules>
 
@@ -1753,6 +1911,26 @@ export func main() {
 />
 
 </Rules>
+
+Creates a set with the specified elements.
+
+<span className="caption">Example:</span>
+
+```tiro
+import std;
+
+export func main() {
+    const pi = 3.14;
+    const s = set{
+        2,
+        null,
+        pi,
+        "bar",
+    };
+
+    std.print(std.debug_repr(s));
+}
+```
 
 ## Modules
 
