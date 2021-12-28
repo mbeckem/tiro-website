@@ -1,0 +1,55 @@
+@use "@/styles/layout" as layout;
+
+.container {
+    padding-left: layout.$space-8;
+    padding-right: layout.$space-8;
+}
+
+.header {
+    text-align: center;
+}
+
+.split {
+    display: flex;
+
+    flex-direction: row;
+    gap: layout.$space-8;
+}
+
+.pitch {
+    font-weight: 300;
+    align-items: center;
+    padding-top: layout.$space-4;
+
+    .intro {
+        flex-basis: 66.67%;
+        flex-shrink: 0;
+        flex-grow: 1;
+        font-size: 1.25em;
+
+        > * {
+            margin: 0;
+        }
+    }
+
+    .links {
+        flex-shrink: 1;
+        flex-grow: 0;
+    }
+}
+
+.features {
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+    .list {
+        flex-basis: auto;
+        flex-shrink: 1;
+        flex-grow: 0;
+    }
+
+    .example {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+}

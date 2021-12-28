@@ -1,17 +1,20 @@
-import React from "react";
+import React, { FC } from "react";
 import Highlight, { Prism, Language } from "prism-react-renderer";
 import theme from "prism-react-renderer/themes/github";
 import { sandbox, withBasePath } from "@/routes";
 import { AnchorButton } from "@blueprintjs/core";
 
 export interface CodeBlockProps {
+    language: string;
+    code: string;
+}
+
+export interface MarkdownCodeBlockProps {
     className?: string;
     children: string | string[];
 }
 
-export const CodeBlock: React.FC<CodeBlockProps> = ({ className, children }) => {
-    const language = className?.replace(/language-/, "") || "plain";
-    const code = Array.isArray(children) ? children.join("") : children;
+export const CodeBlock: FC<CodeBlockProps> = ({ language, code }) => {
     const sandboxLink =
         language === "tiro" ? (
             <AnchorButton
@@ -45,4 +48,10 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ className, children }) => 
             </Highlight>
         </div>
     );
+};
+
+export const MarkdownCodeBlock: FC<MarkdownCodeBlockProps> = ({ className, children }) => {
+    const language = className?.replace(/language-/, "") || "plain";
+    const code = Array.isArray(children) ? children.join("") : children;
+    return <CodeBlock language={language} code={code} />;
 };

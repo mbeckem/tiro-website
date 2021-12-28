@@ -1,6 +1,11 @@
 import React from "react";
+import classNames from "classnames";
 import styles from "./Container.module.scss";
 
-export const Container: React.FC = ({ children }) => {
-    return <div className={styles.container}>{children}</div>;
+export interface ContainerProps {
+    className?: string;
+}
+
+export const Container: React.FC<ContainerProps> = ({ className, children }) => {
+    return <div className={classNames(styles.container, className)}>{children}</div>;
 };

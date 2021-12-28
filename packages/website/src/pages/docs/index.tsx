@@ -17,7 +17,7 @@ export default function DocsPage(): JSX.Element {
                 <Article>
                     <h1>Documentation</h1>
                     <section>
-                        <h2>The tiro language</h2>
+                        <h2>The Tiro language</h2>
                         Documentation for the language itself.
                         <ul>
                             <li>Introduction</li>
@@ -57,6 +57,11 @@ export default function DocsPage(): JSX.Element {
                             </li>
                             <li>
                                 <ExternalLink href="https://github.com/mbeckem/tiro">Github project</ExternalLink>
+                            </li>
+                            <li>
+                                <ExternalLink href="https://github.com/mbeckem/tiro/tree/master/docs">
+                                    Internal documentation
+                                </ExternalLink>
                             </li>
                         </ul>
                     </section>
