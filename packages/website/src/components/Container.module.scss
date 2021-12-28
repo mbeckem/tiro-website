@@ -3,6 +3,7 @@
 .container {
     max-width: 1080px;
     margin: 0 auto;
+    margin-bottom: 6em; // For spacing above footer
 
     padding-left: layout.$main-padding;
     padding-right: layout.$main-padding;
