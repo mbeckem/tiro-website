@@ -18,7 +18,7 @@ export async function serializeMDX(mdxSource: string): Promise<MDXRemoteSerializ
         },
         content: {
             type: "text",
-            value: "foo"
+            value: "§"
         } as Literal
     };
 
