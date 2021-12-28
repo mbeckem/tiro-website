@@ -4,6 +4,7 @@ import remarkHeadingId from "remark-heading-id";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { ensureServer } from "@/utils";
 import { slugPlugin } from "./slug";
+import { Literal } from "hast";
 
 export type SerializedMDX = MDXRemoteSerializeResult;
 
@@ -17,8 +18,8 @@ export async function serializeMDX(mdxSource: string): Promise<MDXRemoteSerializ
         },
         content: {
             type: "text",
-            value: "#"
-        }
+            value: "foo"
+        } as Literal
     };
 
     return serialize(mdxSource, {
