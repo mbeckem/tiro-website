@@ -3,10 +3,15 @@
 .container {
     padding-left: layout.$space-8;
     padding-right: layout.$space-8;
-}
 
-.header {
-    text-align: center;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        text-align: center;
+    }
 }
 
 .split {

@@ -19,7 +19,7 @@ export func main() {
     const greeting = if is_authorized() {
         "Welcome to Tiro's home page, \${name}!";
     } else {
-        std.panic("You are not authorized to view this");
+        std.panic("You are not authorized to view this site");
     };
     std.print(greeting);
 }
@@ -32,7 +32,7 @@ export default function IndexPage(): JSX.Element {
         <Layout>
             <SEO title="Home" />
             <Container className={classNames(styles.container, Classes.RUNNING_TEXT, Classes.TEXT_LARGE)}>
-                <h1 className={styles.header}>The Tiro programming language</h1>
+                <h1>The Tiro programming language</h1>
 
                 <div className={classNames(styles.pitch, styles.split)}>
                     <div className={styles.intro}>
@@ -41,7 +41,7 @@ export default function IndexPage(): JSX.Element {
                             host applications.
                         </p>
                         <p>
-                            The language focuses on readability and expressiveness while the runtime aims at being small
+                            The language focuses on readability and expressiveness while the runtime aims to being small
                             and simple to integrate.
                         </p>
                     </div>
@@ -62,7 +62,7 @@ export default function IndexPage(): JSX.Element {
                     </div>
                 </div>
 
-                <h2 className={styles.header}>Main features</h2>
+                <h2>Main features</h2>
                 <div className={classNames(styles.features, styles.split)}>
                     <div className={styles.list}>
                         <ul>
@@ -81,7 +81,7 @@ export default function IndexPage(): JSX.Element {
                     </div>
                 </div>
 
-                <h2 className={styles.header}>Project status</h2>
+                <h2>Project status</h2>
                 <p>
                     This project is still under active development. Most major features are complete, but many small
                     tasks still remain:
@@ -107,6 +107,13 @@ export default function IndexPage(): JSX.Element {
                             .
                         </li>
                     </ul>
+                </p>
+
+                <h2>Contact</h2>
+                <p>
+                    Please use either{" "}
+                    <ExternalLink href="https://github.com/mbeckem/tiro/discussions">Github Discussions</ExternalLink>{" "}
+                    or the <ExternalLink href="https://github.com/mbeckem/tiro/issues">Issue Tracker</ExternalLink>.
                 </p>
             </Container>
         </Layout>
