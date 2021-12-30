@@ -34,5 +34,6 @@ jobs:
             - name: Deploy
               shell: bash
               run: |
+                  git fetch --no-tags --prune --progress --depth=1 origin site
                   yarn run init-site
                   yarn run deploy
