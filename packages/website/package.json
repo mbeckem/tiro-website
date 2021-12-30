@@ -10,7 +10,7 @@
         "test": "jest --watch",
         "clean": "rimraf .next out",
         "prettier": "yarn g:prettier \"./**/*.{js,jsx,ts,tsx,html,md,mdx,json}\" --write --config $PROJECT_CWD/.prettierrc --ignore-path $PROJECT_CWD/.prettierignore",
-        "lint": "yarn g:eslint \"src\" --ext js,jsx,ts,tsx",
+        "lint": "yarn g:eslint \"src\" --ext js,jsx,ts,tsx && yarn run check-types",
         "check-types": "tsc --noEmit",
         "update-monaco-assets": "rimraf public/monaco && mkdir -p public/monaco && cp -r $PROJECT_CWD/node_modules/monaco-editor/min/* public/monaco/"
     },
