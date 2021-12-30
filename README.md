@@ -56,6 +56,10 @@ Inside packages/website:
 
 ## Deploying the site
 
+This is done automatically when pushing to master (see workflow file `.github/workflows/deploy.yml`).
+
+### Manual deployment
+
 - Once (for setup): run `yarn run init-site`
-- To deploy, run `yarn run deploy`.
+- To deploy, run `yarn run clean && yarn run deploy`.
   It will perform a clean build and push the changes to github.
