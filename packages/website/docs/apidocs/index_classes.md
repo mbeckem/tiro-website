@@ -18,6 +18,7 @@ title: Classes
     * **class [boolean](/docs/api/classes/classtiro_1_1boolean)** <br>Refers to a boolean value (true or false). 
     * **class [compiled_module](/docs/api/classes/classtiro_1_1compiled__module)** <br>Represents a compiled bytecode module. 
     * **class [compiler](/docs/api/classes/classtiro_1_1compiler)** <br>Translates a set of source files into a module. 
+        * **struct [state_t](/docs/api/classes/structtiro_1_1compiler_1_1state__t)** 
     * **struct [compiler_message](/docs/api/classes/structtiro_1_1compiler__message)** <br>Represents a diagnostic message emitted by the compiler. 
     * **struct [compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings)** <br>An instance of this type can be passed to the compiler to configure it. 
     * **class [coroutine](/docs/api/classes/classtiro_1_1coroutine)** <br>Refers to a coroutine. 
@@ -62,4 +63,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2021-10-02 at 22:50:45 +0200
+Updated on 2022-01-01 at 12:38:40 +0100

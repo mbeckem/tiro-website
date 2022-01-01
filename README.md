@@ -40,6 +40,7 @@ Inside packages/website:
   Inside packages/website:
 
   ```sh
+  $ cd packages/website
   $ doxybook2 -c docs/apidocs/.doxybook/config.json --templates docs/apidocs/.doxybook/templates --input ~/projects/tiro/build/docs/api/xml --output docs/apidocs/
   ```
 

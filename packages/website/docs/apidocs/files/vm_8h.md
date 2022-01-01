@@ -28,11 +28,12 @@ Functions and type definitions for working with the tiro virtual machine.
 | [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[tiro_vm_new](/docs/api/files/vm_8h#function-tiro-vm-new)**(const [tiro&#95;vm&#95;settings&#95;t](/docs/api/files/vm&#95;8h#typedef-tiro-vm-settings-t) &#42; settings, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new virtual machine instance.  |
 | void | **[tiro_vm_free](/docs/api/files/vm_8h#function-tiro-vm-free)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Free a virtual machine.  |
 | void * | **[tiro_vm_userdata](/docs/api/files/vm_8h#function-tiro-vm-userdata)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns the userdata pointer that was passed in the settings struct during vm construction.  |
-| size_t | **[tiro_vm_page_size](/docs/api/files/vm_8h#function-tiro-vm-page-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns the vm's page size.  |
+| size_t | **[tiro_vm_page_size](/docs/api/files/vm_8h#function-tiro-vm-page-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns the vm's page size (in bytes).  |
+| size_t | **[tiro_vm_max_heap_size](/docs/api/files/vm_8h#function-tiro-vm-max-heap-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns the vm's maximum heap size (in bytes).  |
 | void | **[tiro_vm_load_std](/docs/api/files/vm_8h#function-tiro-vm-load-std)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Load the default modules provided by the runtime.  |
 | void | **[tiro_vm_load_bytecode](/docs/api/files/vm_8h#function-tiro-vm-load-bytecode)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;module&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-module-t) module, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Loads the compiled module into the virtual machine.  |
 | void | **[tiro_vm_load_module](/docs/api/files/vm_8h#function-tiro-vm-load-module)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) module, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Loads the given module object into the virtual machine.  |
-| void | **[tiro_vm_get_export](/docs/api/files/vm_8h#function-tiro-vm-get-export)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) module_name, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) function_name, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Attempts to find the exported value with the given name in the specified module.  |
+| void | **[tiro_vm_get_export](/docs/api/files/vm_8h#function-tiro-vm-get-export)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) module_name, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) export_name, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Attempts to find the exported value with the given name in the specified module.  |
 | void | **[tiro_vm_run_ready](/docs/api/files/vm_8h#function-tiro-vm-run-ready)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Runs all ready coroutines.  |
 | bool | **[tiro_vm_has_ready](/docs/api/files/vm_8h#function-tiro-vm-has-ready)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm)<br>Returns true if the virtual machine has at least one coroutine ready for execution, false otherwise.  |
 | [tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t) | **[tiro_global_new](/docs/api/files/vm_8h#function-tiro-global-new)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Allocates a new global handle.  |
@@ -113,7 +114,17 @@ size_t tiro_vm_page_size(
 )
 ```
 
-Returns the vm's page size. 
+Returns the vm's page size (in bytes). 
+
+### function tiro_vm_max_heap_size
+
+```cpp
+size_t tiro_vm_max_heap_size(
+    tiro_vm_t vm
+)
+```
+
+Returns the vm's maximum heap size (in bytes). 
 
 ### function tiro_vm_load_std
 
@@ -165,7 +176,7 @@ Returns `TIRO_ERROR_MODULE_EXISTS` if a module with the same name already exists
 void tiro_vm_get_export(
     tiro_vm_t vm,
     tiro_string_t module_name,
-    tiro_string_t function_name,
+    tiro_string_t export_name,
     tiro_handle_t result,
     tiro_error_t * err
 )
@@ -173,7 +184,7 @@ void tiro_vm_get_export(
 
 Attempts to find the exported value with the given name in the specified module. 
 
-The found function value will be stored in the `result` handle, which must not be NULL.
+The found value will be stored in the `result` handle, which must not be NULL.
 
 Returns `TIRO_ERROR_MODULE_NOT_FOUND` if the specified module was not loaded. Returns `TIRO_ERROR_EXPORT_NOT_FOUND` if the module does not contain an exported member with that name. 
 
@@ -240,4 +251,4 @@ Note: remaining globals are automatically freed when a vm is freed.
 
 -------------------------------
 
-Updated on 2021-10-02 at 22:50:45 +0200
+Updated on 2022-01-01 at 12:38:40 +0100

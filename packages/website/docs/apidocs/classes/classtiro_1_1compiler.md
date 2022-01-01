@@ -28,7 +28,6 @@ Translates a set of source files into a module.
 | std::string | **[dump_ast](/docs/api/classes/classtiro_1_1compiler#function-dump-ast)**() const<br>Returns a dump of the compiler's abstract syntax tree.  |
 | std::string | **[dump_ir](/docs/api/classes/classtiro_1_1compiler#function-dump-ir)**() const<br>Returns a dump of the compiler's internal representation.  |
 | std::string | **[dump_bytecode](/docs/api/classes/classtiro_1_1compiler#function-dump-bytecode)**() const<br>Returns a dump of the disassembled bytecode.  |
-| const [compiler_settings](/docs/api/classes/structtiro_1_1compiler__settings) & | **[settings](/docs/api/classes/classtiro_1_1compiler#function-settings)**() const |
 | [tiro_compiler_t](/docs/api/files/def_8h#typedef-tiro-compiler-t) | **[raw_compiler](/docs/api/classes/classtiro_1_1compiler#function-raw-compiler)**() const |
 
 ## Public Functions Documentation
@@ -36,7 +35,7 @@ Translates a set of source files into a module.
 ### function compiler
 
 ```cpp
-inline compiler(
+inline explicit compiler(
     std::string_view module_name
 )
 ```
@@ -153,13 +152,6 @@ Returns a dump of the disassembled bytecode.
 Can only be called after a call to [run()](/docs/api/classes/classtiro_1_1compiler#function-run), and only if the `enable_bytecode` option was set to true. 
 
 
-### function settings
-
-```cpp
-inline const compiler_settings & settings() const
-```
-
-
 ### function raw_compiler
 
 ```cpp
@@ -169,4 +161,4 @@ inline tiro_compiler_t raw_compiler() const
 
 -------------------------------
 
-Updated on 2021-10-02 at 22:50:45 +0200
+Updated on 2022-01-01 at 12:38:40 +0100

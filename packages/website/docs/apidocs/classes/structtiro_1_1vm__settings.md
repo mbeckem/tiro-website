@@ -18,6 +18,7 @@ Settings to control the construction of a virtual machine.
 |                | Name           |
 | -------------- | -------------- |
 | size&#95;t | **[page_size](/docs/api/classes/structtiro_1_1vm__settings#variable-page-size)** <br>The size (in bytes) of heap pages allocated by the virtual machine for the storage of most objects.  |
+| size&#95;t | **[max_heap_size](/docs/api/classes/structtiro_1_1vm__settings#variable-max-heap-size)** <br>The maximum size (in bytes) that can be occupied by the virtual machine's heap.  |
 | std::function&lt; void(std::string&#95;view [message](/docs/api/namespaces/namespacetiro#function-message))&gt; | **[print_stdout](/docs/api/classes/structtiro_1_1vm__settings#variable-print-stdout)** <br>Invoked by the vm to print a message to the standard output, e.g.  |
 
 ## Public Attributes Documentation
@@ -37,6 +38,19 @@ Smaller pages waste less memory if only small workloads are to be expected. Larg
 Note that objects that do not fit into a single page reasonably well will be allocated "on the side" using a separate allocation. 
 
 
+### variable max_heap_size
+
+```cpp
+size_t max_heap_size = 0;
+```
+
+The maximum size (in bytes) that can be occupied by the virtual machine's heap. 
+
+The virtual machine will throw out of memory errors if this limit is reached.
+
+The default value (0) will apply a sane default memory limit. Use `std::numeric_limits<size_t>::max()` for an unconstrained heap size. 
+
+
 ### variable print_stdout
 
 ```cpp
@@ -50,4 +64,4 @@ when `std.print(...)` was called. The vm will print to the process's standard ou
 
 -------------------------------
 
-Updated on 2021-10-02 at 22:50:45 +0200
+Updated on 2022-01-01 at 12:38:40 +0100
