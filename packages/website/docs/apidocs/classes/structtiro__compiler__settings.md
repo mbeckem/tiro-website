@@ -80,4 +80,4 @@ bool(*)(const tiro_compiler_message_t *message, void *userdata) message_callback
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:39 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

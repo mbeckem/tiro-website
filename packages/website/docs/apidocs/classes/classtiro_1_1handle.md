@@ -35,6 +35,7 @@ Inherited by [array](/docs/api/classes/classtiro_1_1array), [boolean](/docs/api/
 | [handle](/docs/api/classes/classtiro_1_1handle) & | **[operator=](/docs/api/classes/classtiro_1_1handle#function-operator=)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) && other) =default<br>Move assigns a handle.  |
 | bool | **[valid](/docs/api/classes/classtiro_1_1handle#function-valid)**() const<br>Returns true if this handle points to an object (i.e. it was not moved from).  |
 | [value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind) | **[kind](/docs/api/classes/classtiro_1_1handle#function-kind)**() const<br>Returns the kind of the value currently held by this handle.  |
+| template <typename T \> <br>bool | **[is](/docs/api/classes/classtiro_1_1handle#function-is)**() const<br>Returns true if this value is of the target type.  |
 | [type](/docs/api/classes/classtiro_1_1type) | **[type_of](/docs/api/classes/classtiro_1_1handle#function-type-of)**() const<br>Returns the type of the value currently held by this handle.  |
 | [string](/docs/api/classes/classtiro_1_1string) | **[to_string](/docs/api/classes/classtiro_1_1handle#function-to-string)**() const<br>Returns a string that represents the current value.  |
 | [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[raw_vm](/docs/api/classes/classtiro_1_1handle#function-raw-vm)**() const<br>Returns the raw vm instance associated with this handle.  |
@@ -172,6 +173,15 @@ inline value_kind kind() const
 
 Returns the kind of the value currently held by this handle. 
 
+### function is
+
+```cpp
+template <typename T >
+inline bool is() const
+```
+
+Returns true if this value is of the target type. 
+
 ### function type_of
 
 ```cpp
@@ -228,4 +238,4 @@ static constexpr check_kind_t check_kind {};
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

@@ -25,6 +25,8 @@ Contains basic type and macro definitions.  [More...](#detailed-description)
 | typedef struct tiro&#95;value &#42; | **[tiro_handle_t](/docs/api/files/def_8h#typedef-tiro-handle-t)**  |
 | typedef struct tiro&#95;sync&#95;frame &#42; | **[tiro_sync_frame_t](/docs/api/files/def_8h#typedef-tiro-sync-frame-t)**  |
 | typedef struct tiro&#95;async&#95;frame &#42; | **[tiro_async_frame_t](/docs/api/files/def_8h#typedef-tiro-async-frame-t)**  |
+| typedef struct tiro&#95;async&#95;token &#42; | **[tiro_async_token_t](/docs/api/files/def_8h#typedef-tiro-async-token-t)**  |
+| typedef struct tiro&#95;resumable&#95;frame &#42; | **[tiro_resumable_frame_t](/docs/api/files/def_8h#typedef-tiro-resumable-frame-t)**  |
 | typedef struct [tiro&#95;string](/docs/api/classes/structtiro&#95;&#95;string) | **[tiro_string_t](/docs/api/files/def_8h#typedef-tiro-string-t)** <br>Represents a string that is not necessarily zero terminated.  |
 
 ## Functions
@@ -97,6 +99,20 @@ typedef struct tiro_async_frame* tiro_async_frame_t;
 ```
 
 
+### typedef tiro_async_token_t
+
+```cpp
+typedef struct tiro_async_token* tiro_async_token_t;
+```
+
+
+### typedef tiro_resumable_frame_t
+
+```cpp
+typedef struct tiro_resumable_frame* tiro_resumable_frame_t;
+```
+
+
 ### typedef tiro_string_t
 
 ```cpp
@@ -151,4 +167,4 @@ Internally calls strlen on non-NULL inputs to determine their length.
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

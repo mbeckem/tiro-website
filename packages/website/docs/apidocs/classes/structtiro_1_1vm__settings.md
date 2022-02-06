@@ -20,6 +20,7 @@ Settings to control the construction of a virtual machine.
 | size&#95;t | **[page_size](/docs/api/classes/structtiro_1_1vm__settings#variable-page-size)** <br>The size (in bytes) of heap pages allocated by the virtual machine for the storage of most objects.  |
 | size&#95;t | **[max_heap_size](/docs/api/classes/structtiro_1_1vm__settings#variable-max-heap-size)** <br>The maximum size (in bytes) that can be occupied by the virtual machine's heap.  |
 | std::function&lt; void(std::string&#95;view [message](/docs/api/namespaces/namespacetiro#function-message))&gt; | **[print_stdout](/docs/api/classes/structtiro_1_1vm__settings#variable-print-stdout)** <br>Invoked by the vm to print a message to the standard output, e.g.  |
+| bool | **[enable_panic_stack_traces](/docs/api/classes/structtiro_1_1vm__settings#variable-enable-panic-stack-traces)** <br>Set this to true to enable capturing of the current call stack trace when an exception is created during a panic.  |
 
 ## Public Attributes Documentation
 
@@ -62,6 +63,17 @@ Invoked by the vm to print a message to the standard output, e.g.
 when `std.print(...)` was called. The vm will print to the process's standard output when this function is not set. 
 
 
+### variable enable_panic_stack_traces
+
+```cpp
+bool enable_panic_stack_traces = false;
+```
+
+Set this to true to enable capturing of the current call stack trace when an exception is created during a panic. 
+
+Capturing stack traces has a significant performance impact because many call frames on the call stack have to be visited. 
+
+
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

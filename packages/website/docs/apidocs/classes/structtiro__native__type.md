@@ -34,7 +34,7 @@ Describes a native object type to the tiro runtime.
 
 Instances of this type must be provided to the API when constructing a new native object.
 
-Native objects that are created with a certain type will continue refencing that type instance by its address. The lifetime of `tiro_native_type_t` instances is not managued by the runtime, they must remain valid for as long as there are native objects referring to them.
+Native objects that are created with a certain type will continue refencing that type instance by its address. The lifetime of `tiro_native_type_t` instances is not managed by the runtime, they must remain valid for as long as there are native objects referring to them.
 
 ## Public Attributes Documentation
 
@@ -68,4 +68,4 @@ It may be NULL if no finalization is needed.
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:39 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

@@ -15,6 +15,7 @@ title: Files
     * **file [tiro/compiler.h](/docs/api/files/compiler_8h#file-compiler.h)** <br>Contains functions and type definitions for compiling tiro source code to modules. 
     * **file [tiro/def.h](/docs/api/files/def_8h#file-def.h)** <br>Contains basic type and macro definitions. 
     * **file [tiro/error.h](/docs/api/files/error_8h#file-error.h)** <br>Basic error handling facilities. 
+    * **file [tiro/functions.h](/docs/api/files/functions_8h#file-functions.h)** <br>Functions and type definitions for creating native functions that are callable from tiro. 
     * **file [tiro/objects.h](/docs/api/files/objects_8h#file-objects.h)** <br>Functions and type definitions for working with objects of the tiro virtual machine. 
     * **file [tiro/vm.h](/docs/api/files/vm_8h#file-vm.h)** <br>Functions and type definitions for working with the tiro virtual machine. 
 * **dir [tiropp](/docs/api/files/dir_1afa3d02dad28855ed97b47c27baf04d#dir-tiropp)** 
@@ -22,6 +23,7 @@ title: Files
     * **file [tiropp/compiler.hpp](/docs/api/files/compiler_8hpp#file-compiler.hpp)** 
     * **file [tiropp/def.hpp](/docs/api/files/def_8hpp#file-def.hpp)** 
     * **file [tiropp/error.hpp](/docs/api/files/error_8hpp#file-error.hpp)** 
+    * **file [tiropp/functions.hpp](/docs/api/files/functions_8hpp#file-functions.hpp)** 
     * **file [tiropp/fwd.hpp](/docs/api/files/fwd_8hpp#file-fwd.hpp)** 
     * **file [tiropp/native_type.hpp](/docs/api/files/native__type_8hpp#file-native-type.hpp)** 
     * **file [tiropp/objects.hpp](/docs/api/files/objects_8hpp#file-objects.hpp)** 
@@ -36,4 +38,4 @@ title: Files
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

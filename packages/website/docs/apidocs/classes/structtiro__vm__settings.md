@@ -21,6 +21,7 @@ The [tiro_vm_settings]() structure can be provided to `tiro_vm_new` as a configu
 | size&#95;t | **[max_heap_size](/docs/api/classes/structtiro__vm__settings#variable-max-heap-size)** <br>The maximum size (in bytes) that can be occupied by the virtual machine's heap.  |
 | void &#42; | **[userdata](/docs/api/classes/structtiro__vm__settings#variable-userdata)** <br>Arbitrary user data that will be accessible by calling `[tiro_vm_userdata()]()`.  |
 | void(&#42;)(tiro&#95;string&#95;t message, void &#42;userdata) | **[print_stdout](/docs/api/classes/structtiro__vm__settings#variable-print-stdout)** <br>This callback is invoked when the vm attempts to print to the standard output stream, for example when `std.print(...)` has been called.  |
+| bool | **[enable_panic_stack_trace](/docs/api/classes/structtiro__vm__settings#variable-enable-panic-stack-trace)** <br>Set this to true to enable capturing of the current call stack trace when an exception is created during a panic.  |
 
 ## Detailed Description
 
@@ -90,6 +91,19 @@ This callback is invoked when the vm attempts to print to the standard output st
 When this is set to NULL (the default), the message will be printed to the process's standard output.
 
 
+### variable enable_panic_stack_trace
+
+```cpp
+bool enable_panic_stack_trace;
+```
+
+Set this to true to enable capturing of the current call stack trace when an exception is created during a panic. 
+
+Capturing stack traces has a significant performance impact because many call frames on the call stack have to be visited.
+
+Defaults to `false`. 
+
+
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:39 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

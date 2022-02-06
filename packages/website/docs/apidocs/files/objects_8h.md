@@ -21,12 +21,10 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | -------------- | -------------- |
 | enum| **[tiro_kind](/docs/api/files/objects_8h#enum-tiro-kind)** { TIRO_KIND_NULL = 0, TIRO_KIND_BOOLEAN, TIRO_KIND_INTEGER, TIRO_KIND_FLOAT, TIRO_KIND_STRING, TIRO_KIND_FUNCTION, TIRO_KIND_TUPLE, TIRO_KIND_RECORD, TIRO_KIND_ARRAY, TIRO_KIND_RESULT, TIRO_KIND_EXCEPTION, TIRO_KIND_COROUTINE, TIRO_KIND_MODULE, TIRO_KIND_TYPE, TIRO_KIND_NATIVE, TIRO_KIND_INTERNAL = 1000, TIRO_KIND_INVALID}<br>Represents the kind of a tiro value.  |
 | typedef enum [tiro&#95;kind](/docs/api/files/objects&#95;8h#enum-tiro-kind) | **[tiro_kind_t](/docs/api/files/objects_8h#typedef-tiro-kind-t)** <br>Represents the kind of a tiro value.  |
-| typedef void(&#42;)(tiro&#95;vm&#95;t vm, tiro&#95;handle&#95;t coro, void &#42;userdata) | **[tiro_coroutine_callback](/docs/api/files/objects_8h#typedef-tiro-coroutine-callback)** <br>Represents a coroutine completion callback.  |
-| typedef void(&#42;)(void &#42;userdata) | **[tiro_coroutine_cleanup](/docs/api/files/objects_8h#typedef-tiro-coroutine-cleanup)** <br>Represents a cleanup function associated with a coroutine callback.  |
+| typedef void(&#42;)(tiro&#95;vm&#95;t vm, tiro&#95;handle&#95;t coro, void &#42;userdata) | **[tiro_coroutine_callback_t](/docs/api/files/objects_8h#typedef-tiro-coroutine-callback-t)** <br>Represents a coroutine completion callback.  |
+| typedef void(&#42;)(void &#42;userdata) | **[tiro_coroutine_cleanup_t](/docs/api/files/objects_8h#typedef-tiro-coroutine-cleanup-t)** <br>Represents a cleanup function associated with a coroutine callback.  |
 | typedef struct [tiro&#95;module&#95;member&#95;t](/docs/api/classes/structtiro&#95;&#95;module&#95;&#95;member&#95;&#95;t) | **[tiro_module_member_t](/docs/api/files/objects_8h#typedef-tiro-module-member-t)**  |
 | typedef struct [tiro&#95;native&#95;type](/docs/api/classes/structtiro&#95;&#95;native&#95;&#95;type) | **[tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro-native-type-t)** <br>Describes a native object type to the tiro runtime.  |
-| typedef void(&#42;)(tiro&#95;vm&#95;t vm, tiro&#95;sync&#95;frame&#95;t frame) | **[tiro_sync_function_t](/docs/api/files/objects_8h#typedef-tiro-sync-function-t)** <br>The prototype of a native function callback that provides a synchronous tiro function.  |
-| typedef void(&#42;)(tiro&#95;vm&#95;t vm, tiro&#95;async&#95;frame&#95;t frame) | **[tiro_async_function_t](/docs/api/files/objects_8h#typedef-tiro-async-function-t)** <br>The prototype of a native function callback that provides an asynchronous tiro function.  |
 
 ## Functions
 
@@ -51,7 +49,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_string_cstr](/docs/api/files/objects_8h#function-tiro-string-cstr)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) string, char &#42;&#42; result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the string's content and creates a new zero terminated c string, which is assigned to `*result`.  |
 | void | **[tiro_make_tuple](/docs/api/files/objects_8h#function-tiro-make-tuple)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, size&#95;t size, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new tuple with `size` entries.  |
 | size_t | **[tiro_tuple_size](/docs/api/files/objects_8h#function-tiro-tuple-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple)<br>Returns the tuple's size, or 0 if the given value is not a tuple (use `tiro_value_kind` to disambiguate between types).  |
-| void | **[tiro_tuple_get](/docs/api/files/objects_8h#function-tiro-tuple-get)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the tuple element at the given `index` from `tuple` and assigns it to `result`, unless an error occcurs.  |
+| void | **[tiro_tuple_get](/docs/api/files/objects_8h#function-tiro-tuple-get)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the tuple element at the given `index` from `tuple` and assigns it to `result`, unless an error occurs.  |
 | void | **[tiro_tuple_set](/docs/api/files/objects_8h#function-tiro-tuple-set)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the tuple's element at position `index` to `value`.  |
 | void | **[tiro_make_record](/docs/api/files/objects_8h#function-tiro-make-record)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) keys, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new record with the given key names.  |
 | void | **[tiro_record_keys](/docs/api/files/objects_8h#function-tiro-record-keys)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) record, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves an array of valid keys for the given record.  |
@@ -59,7 +57,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_record_set](/docs/api/files/objects_8h#function-tiro-record-set)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) record, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) key, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the record's value associated with the given `key` to `value`.  |
 | void | **[tiro_make_array](/docs/api/files/objects_8h#function-tiro-make-array)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, size&#95;t initial_capacity, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new, empty array with the given initial capacity.  |
 | size_t | **[tiro_array_size](/docs/api/files/objects_8h#function-tiro-array-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) array)<br>Returns the array's size, or 0 if the given value is not an array (use `tiro_value_kind` to disambiguate between types).  |
-| void | **[tiro_array_get](/docs/api/files/objects_8h#function-tiro-array-get)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) array, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the array element at the given `index` from `array` and assigns it to `result`, unless an error occcurs.  |
+| void | **[tiro_array_get](/docs/api/files/objects_8h#function-tiro-array-get)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) array, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the array element at the given `index` from `array` and assigns it to `result`, unless an error occurs.  |
 | void | **[tiro_array_set](/docs/api/files/objects_8h#function-tiro-array-set)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) array, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the array's element at position `index` to `value`.  |
 | void | **[tiro_array_push](/docs/api/files/objects_8h#function-tiro-array-push)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) array, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Appends `value` to the given `array`.  |
 | void | **[tiro_array_pop](/docs/api/files/objects_8h#function-tiro-array-pop)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) array, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Removes the last element from the given `array`.  |
@@ -71,11 +69,12 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | void | **[tiro_result_value](/docs/api/files/objects_8h#function-tiro-result-value)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) instance, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) out, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the value from the result in `instance` and writes it into `out`.  |
 | void | **[tiro_result_error](/docs/api/files/objects_8h#function-tiro-result-error)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) instance, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) out, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the error from the result in `instance` and writes it into `out`.  |
 | void | **[tiro_exception_message](/docs/api/files/objects_8h#function-tiro-exception-message)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) instance, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the message from the exception in `instance` and writes it into `result`.  |
+| void | **[tiro_exception_trace](/docs/api/files/objects_8h#function-tiro-exception-trace)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) instance, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the exception's call stack trace and writes it into `result`.  |
 | void | **[tiro_make_coroutine](/docs/api/files/objects_8h#function-tiro-make-coroutine)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) func, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) arguments, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new coroutine that will execute the given function.  |
 | bool | **[tiro_coroutine_started](/docs/api/files/objects_8h#function-tiro-coroutine-started)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) coroutine)<br>Returns true if the coroutine has been started, false otherwise.  |
 | bool | **[tiro_coroutine_completed](/docs/api/files/objects_8h#function-tiro-coroutine-completed)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) coroutine)<br>Returns true if the coroutine has finished its execution, false otherwise.  |
 | void | **[tiro_coroutine_result](/docs/api/files/objects_8h#function-tiro-coroutine-result)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) coroutine, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Returns the coroutine's result by assigning it to `result`.  |
-| void | **[tiro_coroutine_set_callback](/docs/api/files/objects_8h#function-tiro-coroutine-set-callback)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) coroutine, [tiro&#95;coroutine&#95;callback](/docs/api/files/objects&#95;8h#typedef-tiro-coroutine-callback) callback, [tiro&#95;coroutine&#95;cleanup](/docs/api/files/objects&#95;8h#typedef-tiro-coroutine-cleanup) cleanup, void &#42; userdata, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Schedules the given callback to be invoked once the coroutine completes.  |
+| void | **[tiro_coroutine_set_callback](/docs/api/files/objects_8h#function-tiro-coroutine-set-callback)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) coroutine, [tiro&#95;coroutine&#95;callback&#95;t](/docs/api/files/objects&#95;8h#typedef-tiro-coroutine-callback-t) callback, [tiro&#95;coroutine&#95;cleanup&#95;t](/docs/api/files/objects&#95;8h#typedef-tiro-coroutine-cleanup-t) cleanup, void &#42; userdata, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Schedules the given callback to be invoked once the coroutine completes.  |
 | void | **[tiro_coroutine_start](/docs/api/files/objects_8h#function-tiro-coroutine-start)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) coroutine, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Starts the given coroutine by scheduling it for execution.  |
 | void | **[tiro_make_module](/docs/api/files/objects_8h#function-tiro-make-module)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) name, [tiro&#95;module&#95;member&#95;t](/docs/api/classes/structtiro&#95;&#95;module&#95;&#95;member&#95;&#95;t) &#42; members, size&#95;t members_length, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Creates a new module with the given `name` from the given `members` list.  |
 | void | **[tiro_module_get_export](/docs/api/files/objects_8h#function-tiro-module-get-export)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) module, [tiro&#95;string&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-string-t) export_name, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Attempts to retrieve the exported module member called `export_name` from the given module.  |
@@ -84,18 +83,6 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | const [tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro-native-type-t) * | **[tiro_native_type_descriptor](/docs/api/files/objects_8h#function-tiro-native-type-descriptor)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) object)<br>Returns the address of the `tiro_native_type_t` instance that was used to create the given native object.  |
 | void * | **[tiro_native_data](/docs/api/files/objects_8h#function-tiro-native-data)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) object)<br>Returns the address of the allocated user storage of the given native object.  |
 | size_t | **[tiro_native_size](/docs/api/files/objects_8h#function-tiro-native-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) object)<br>Returns the size (in bytes) of the given native object's user storage.  |
-| size_t | **[tiro_sync_frame_argc](/docs/api/files/objects_8h#function-tiro-sync-frame-argc)**([tiro&#95;sync&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-sync-frame-t) frame)<br>Returns the number of function call arguments present in the given frame.  |
-| void | **[tiro_sync_frame_arg](/docs/api/files/objects_8h#function-tiro-sync-frame-arg)**([tiro&#95;sync&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-sync-frame-t) frame, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Stores the function call argument with the given `index` into `result`.  |
-| void | **[tiro_sync_frame_closure](/docs/api/files/objects_8h#function-tiro-sync-frame-closure)**([tiro&#95;sync&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-sync-frame-t) frame, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Returns the closure value which was specified when the function was created.  |
-| void | **[tiro_sync_frame_return_value](/docs/api/files/objects_8h#function-tiro-sync-frame-return-value)**([tiro&#95;sync&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-sync-frame-t) frame, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the return value for the given function call frame to the given `value`.  |
-| void | **[tiro_make_sync_function](/docs/api/files/objects_8h#function-tiro-make-sync-function)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) name, [tiro&#95;sync&#95;function&#95;t](/docs/api/files/objects&#95;8h#typedef-tiro-sync-function-t) func, size&#95;t argc, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) closure, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new function object with the given name that will invoke the native function `func` when called.  |
-| void | **[tiro_async_frame_free](/docs/api/files/objects_8h#function-tiro-async-frame-free)**([tiro&#95;async&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-async-frame-t) frame)<br>Frees an async frame.  |
-| [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[tiro_async_frame_vm](/docs/api/files/objects_8h#function-tiro-async-frame-vm)**([tiro&#95;async&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-async-frame-t) frame)<br>Returns the vm instance that this frame belongs to.  |
-| size_t | **[tiro_async_frame_argc](/docs/api/files/objects_8h#function-tiro-async-frame-argc)**([tiro&#95;async&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-async-frame-t) frame)<br>Returns the number of function call arguments received by this frame.  |
-| void | **[tiro_async_frame_arg](/docs/api/files/objects_8h#function-tiro-async-frame-arg)**([tiro&#95;async&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-async-frame-t) frame, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the function call argument at the specified index and stores it into `result`.  |
-| void | **[tiro_async_frame_closure](/docs/api/files/objects_8h#function-tiro-async-frame-closure)**([tiro&#95;async&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-async-frame-t) frame, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Returns the closure value which was specified when the function was created.  |
-| void | **[tiro_async_frame_return_value](/docs/api/files/objects_8h#function-tiro-async-frame-return-value)**([tiro&#95;async&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-async-frame-t) frame, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the return value for the given function call frame to the given `value`.  |
-| void | **[tiro_make_async_function](/docs/api/files/objects_8h#function-tiro-make-async-function)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) name, [tiro&#95;async&#95;function&#95;t](/docs/api/files/objects&#95;8h#typedef-tiro-async-function-t) func, size&#95;t argc, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) closure, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new function object with the given name that will invoke the native function `func` when called.  |
 
 ## Types Documentation
 
@@ -133,10 +120,10 @@ typedef enum tiro_kind tiro_kind_t;
 
 Represents the kind of a tiro value. 
 
-### typedef tiro_coroutine_callback
+### typedef tiro_coroutine_callback_t
 
 ```cpp
-typedef void(* tiro_coroutine_callback) (tiro_vm_t vm, tiro_handle_t coro, void *userdata);
+typedef void(* tiro_coroutine_callback_t) (tiro_vm_t vm, tiro_handle_t coro, void *userdata);
 ```
 
 Represents a coroutine completion callback. 
@@ -151,10 +138,10 @@ Represents a coroutine completion callback.
 These are invoked when a coroutine finishes execution, either successfully or with an error.
 
 
-### typedef tiro_coroutine_cleanup
+### typedef tiro_coroutine_cleanup_t
 
 ```cpp
-typedef void(* tiro_coroutine_cleanup) (void *userdata);
+typedef void(* tiro_coroutine_cleanup_t) (void *userdata);
 ```
 
 Represents a cleanup function associated with a coroutine callback. 
@@ -191,55 +178,7 @@ Describes a native object type to the tiro runtime.
 
 Instances of this type must be provided to the API when constructing a new native object.
 
-Native objects that are created with a certain type will continue refencing that type instance by its address. The lifetime of `tiro_native_type_t` instances is not managued by the runtime, they must remain valid for as long as there are native objects referring to them.
-
-
-### typedef tiro_sync_function_t
-
-```cpp
-typedef void(* tiro_sync_function_t) (tiro_vm_t vm, tiro_sync_frame_t frame);
-```
-
-The prototype of a native function callback that provides a synchronous tiro function. 
-
-**Parameters**: 
-
-  * **vm** The virtual machine the function is executing on. 
-  * **frame** The function call frame. Use `tiro_sync_frame_arg` and `tiro_sync_frame_argc` to access the function call arguments. Call `tiro_sync_frame_result` to set the return value (it defaults to null if not set). The closure is also available by calling `tiro_sync_frame_closure`. The frame value is only valid for the duration of the function call.
-
-
-This type of native function is appropriate for simple, nonblocking operations. Use the more complex asynchronous API instead if the operation has the potential of blocking the process.
-
-Note that this API does not allow for custom native userdata. Use native objects instead and pass them in the closure.
-
-
-TODO: Exception API 
-
-
-### typedef tiro_async_function_t
-
-```cpp
-typedef void(* tiro_async_function_t) (tiro_vm_t vm, tiro_async_frame_t frame);
-```
-
-The prototype of a native function callback that provides an asynchronous tiro function. 
-
-**Parameters**: 
-
-  * **vm** The virtual machine the function is executing on. 
-  * **frame** The function call frame. Use `tiro_async_frame_arg` and `tiro_async_frame_argc` to access the function call arguments. Call `tiro_async_frame_return_value` to set the return value (it defaults to null if not set). The closure is also available by calling `tiro_async_frame_closure`.
-
-
-Functions of this type should be used to implement long running operations that would otherwise block the calling coroutine (for example, a socket read or write).
-
-Calling an asynchronous function will pause ("yield") the calling coroutine. It will be resumed when a result is provided to the frame object, e.g. by calling `tiro_async_frame_return_value`. Attempting to resume a coroutine multiple times is an error.
-
-Note that this API does not allow for custom native userdata. Use native objects instead and pass them in the closure.
-
-
-The frame remains valid until it is freed by the caller by invoking `tiro_async_frame_free` (forgetting to free a frame results in a memory leak).
-
-TODO: Exception API 
+Native objects that are created with a certain type will continue refencing that type instance by its address. The lifetime of `tiro_native_type_t` instances is not managed by the runtime, they must remain valid for as long as there are native objects referring to them.
 
 
 
@@ -535,7 +474,7 @@ void tiro_tuple_get(
 )
 ```
 
-Retrieves the tuple element at the given `index` from `tuple` and assigns it to `result`, unless an error occcurs. 
+Retrieves the tuple element at the given `index` from `tuple` and assigns it to `result`, unless an error occurs. 
 
 Returns `TIRO_ERROR_BAD_TYPE` if the instance is not a tuple, or `TIRO_ERROR_OUT_OF_BOUNDS` if the index is out of bounds. 
 
@@ -570,7 +509,7 @@ void tiro_make_record(
 
 Constructs a new record with the given key names. 
 
-`keys` must be an array consisting of strings (which mus be unique). The specified keys will be valid propery names on the new record. The value associated with each key will be initialized to null.
+`keys` must be an array consisting of strings (which mus be unique). The specified keys will be valid property names on the new record. The value associated with each key will be initialized to null.
 
 Returns `TIRO_ERROR_BAD_TYPE` if `keys` is not an array, or if its contents are not all strings. On success, the constructed record will be assigned to `result`. 
 
@@ -664,7 +603,7 @@ void tiro_array_get(
 )
 ```
 
-Retrieves the array element at the given `index` from `array` and assigns it to `result`, unless an error occcurs. 
+Retrieves the array element at the given `index` from `array` and assigns it to `result`, unless an error occurs. 
 
 Returns `TIRO_ERROR_BAD_TYPE` if the instance is not an array, or `TIRO_ERROR_OUT_OF_BOUNDS` if the index is out of bounds. 
 
@@ -828,7 +767,23 @@ void tiro_exception_message(
 
 Retrieves the message from the exception in `instance` and writes it into `result`. 
 
-When this call is successful, `result` will reference a string. Returns `TIRO_ERROR_BAD_TYPE` if the instance is no exception. 
+If this call is successful, `result` will reference a string. Returns `TIRO_ERROR_BAD_TYPE` if the instance is no exception. 
+
+
+### function tiro_exception_trace
+
+```cpp
+void tiro_exception_trace(
+    tiro_vm_t vm,
+    tiro_handle_t instance,
+    tiro_handle_t result,
+    tiro_error_t * err
+)
+```
+
+Retrieves the exception's call stack trace and writes it into `result`. 
+
+If this call is successful, `result` will reference a string (if stack traces are enabled and one could be retrieved) or null otherwise. Returns `TIRO_ERROR_BAD_TYPE` if the instance is no exception. 
 
 
 ### function tiro_make_coroutine
@@ -898,8 +853,8 @@ The coroutine must have completed execution, i.e. `[tiro_coroutine_completed()](
 void tiro_coroutine_set_callback(
     tiro_vm_t vm,
     tiro_handle_t coroutine,
-    tiro_coroutine_callback callback,
-    tiro_coroutine_cleanup cleanup,
+    tiro_coroutine_callback_t callback,
+    tiro_coroutine_cleanup_t cleanup,
     void * userdata,
     tiro_error_t * err
 )
@@ -1056,191 +1011,10 @@ Returns the size (in bytes) of the given native object's user storage.
 Returns 0 on error. 
 
 
-### function tiro_sync_frame_argc
-
-```cpp
-size_t tiro_sync_frame_argc(
-    tiro_sync_frame_t frame
-)
-```
-
-Returns the number of function call arguments present in the given frame. 
-
-Returns 0 for invalid input arguments. 
-
-
-### function tiro_sync_frame_arg
-
-```cpp
-void tiro_sync_frame_arg(
-    tiro_sync_frame_t frame,
-    size_t index,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Stores the function call argument with the given `index` into `result`. 
-
-Returns `TIRO_ERROR_OUT_OF_BOUNDS` if the argument index is invalid. 
-
-
-### function tiro_sync_frame_closure
-
-```cpp
-void tiro_sync_frame_closure(
-    tiro_sync_frame_t frame,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Returns the closure value which was specified when the function was created. 
-
-### function tiro_sync_frame_return_value
-
-```cpp
-void tiro_sync_frame_return_value(
-    tiro_sync_frame_t frame,
-    tiro_handle_t value,
-    tiro_error_t * err
-)
-```
-
-Sets the return value for the given function call frame to the given `value`. 
-
-### function tiro_make_sync_function
-
-```cpp
-void tiro_make_sync_function(
-    tiro_vm_t vm,
-    tiro_handle_t name,
-    tiro_sync_function_t func,
-    size_t argc,
-    tiro_handle_t closure,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Constructs a new function object with the given name that will invoke the native function `func` when called. 
-
-`argc` is the number of arguments required for calling `func`. `closure` may be an arbitrary value that will be passed to the function on every invocation.
-
-On success, the new function will be stored in `result`. Returns `TIRO_BAD_TYPE` if `name` is not a string. Returns `TIRO_BAD_ARG` if the the requested number of parameters is too large. The current maximum is `1024`. 
-
-
-### function tiro_async_frame_free
-
-```cpp
-void tiro_async_frame_free(
-    tiro_async_frame_t frame
-)
-```
-
-Frees an async frame. 
-
-**Warning**: _All_ async call frames must be freed before the vm itself is freed. If there are pending async operations when the vm shall be destroyed, always free them first (they do not have to receive a result). 
-
-Does nothing if `frame` is NULL.
-
-Frames are allocated for the caller before invoking the native callback function. They must be freed by calling this function after async operation has been completed (e.g. after calling `tiro_async_frame_return_value(...)`).
-
-
-### function tiro_async_frame_vm
-
-```cpp
-tiro_vm_t tiro_async_frame_vm(
-    tiro_async_frame_t frame
-)
-```
-
-Returns the vm instance that this frame belongs to. 
-
-Returns NULL on error. 
-
-
-### function tiro_async_frame_argc
-
-```cpp
-size_t tiro_async_frame_argc(
-    tiro_async_frame_t frame
-)
-```
-
-Returns the number of function call arguments received by this frame. 
-
-Returns 0 on error. 
-
-
-### function tiro_async_frame_arg
-
-```cpp
-void tiro_async_frame_arg(
-    tiro_async_frame_t frame,
-    size_t index,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Retrieves the function call argument at the specified index and stores it into `result`. 
-
-Returns `TIRO_ERROR_OUT_OF_BOUNDS` if the argument index is invalid. 
-
-
-### function tiro_async_frame_closure
-
-```cpp
-void tiro_async_frame_closure(
-    tiro_async_frame_t frame,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Returns the closure value which was specified when the function was created. 
-
-### function tiro_async_frame_return_value
-
-```cpp
-void tiro_async_frame_return_value(
-    tiro_async_frame_t frame,
-    tiro_handle_t value,
-    tiro_error_t * err
-)
-```
-
-Sets the return value for the given function call frame to the given `value`. 
-
-Async function frames must be freed (by calling `tiro_async_frame_free`) after they have been completed. 
-
-
-### function tiro_make_async_function
-
-```cpp
-void tiro_make_async_function(
-    tiro_vm_t vm,
-    tiro_handle_t name,
-    tiro_async_function_t func,
-    size_t argc,
-    tiro_handle_t closure,
-    tiro_handle_t result,
-    tiro_error_t * err
-)
-```
-
-Constructs a new function object with the given name that will invoke the native function `func` when called. 
-
-`argc` is the number of arguments required for calling `func`. `closure` may be an arbitrary value that will be passed to the function on every invocation.
-
-On success, the new function will be stored in `result`. Returns `TIRO_BAD_TYPE` if `name` is not a string. Returns `TIRO_BAD_ARG` if the the requested number of parameters is too large. The current maximum is `1024`. 
-
-
 
 
 
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

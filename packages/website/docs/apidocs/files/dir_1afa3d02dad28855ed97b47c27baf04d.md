@@ -21,6 +21,7 @@ title: tiropp
 | **[tiropp/compiler.hpp](/docs/api/files/compiler_8hpp#file-compiler.hpp)**  |
 | **[tiropp/def.hpp](/docs/api/files/def_8hpp#file-def.hpp)**  |
 | **[tiropp/error.hpp](/docs/api/files/error_8hpp#file-error.hpp)**  |
+| **[tiropp/functions.hpp](/docs/api/files/functions_8hpp#file-functions.hpp)**  |
 | **[tiropp/fwd.hpp](/docs/api/files/fwd_8hpp#file-fwd.hpp)**  |
 | **[tiropp/native_type.hpp](/docs/api/files/native__type_8hpp#file-native-type.hpp)**  |
 | **[tiropp/objects.hpp](/docs/api/files/objects_8hpp#file-objects.hpp)**  |
@@ -34,4 +35,4 @@ title: tiropp
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

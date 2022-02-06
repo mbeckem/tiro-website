@@ -20,6 +20,7 @@ title: tiro
 | class | **[tiro::api_error](/docs/api/classes/classtiro_1_1api__error)** <br>Represents an error thrown by the tiro c library.  |
 | class | **[tiro::array](/docs/api/classes/classtiro_1_1array)** <br>Refers to an array value.  |
 | class | **[tiro::async_frame](/docs/api/classes/classtiro_1_1async__frame)** <br>Represents the call frame of a asynchronous function call.  |
+| class | **[tiro::async_token](/docs/api/classes/classtiro_1_1async__token)** <br>A token that can be used to resume a yielding coroutine.  |
 | class | **[tiro::bad_handle_cast](/docs/api/classes/classtiro_1_1bad__handle__cast)** <br>Thrown when an invalid cast is attempted.  |
 | class | **[tiro::bad_handle_check](/docs/api/classes/classtiro_1_1bad__handle__check)** <br>Thrown when a debug mode handle check failed.  |
 | class | **[tiro::boolean](/docs/api/classes/classtiro_1_1boolean)** <br>Refers to a boolean value (true or false).  |
@@ -42,6 +43,7 @@ title: tiro
 | class | **[tiro::null](/docs/api/classes/classtiro_1_1null)** <br>Refers to a null value.  |
 | class | **[tiro::record](/docs/api/classes/classtiro_1_1record)** <br>Refers to a record value.  |
 | class | **[tiro::result](/docs/api/classes/classtiro_1_1result)** <br>Refers to a result value.  |
+| class | **[tiro::resumable_frame](/docs/api/classes/classtiro_1_1resumable__frame)** <br>Represents the call frame of a resumable function call.  |
 | class | **[tiro::string](/docs/api/classes/classtiro_1_1string)** <br>Refers to a string value.  |
 | class | **[tiro::sync_frame](/docs/api/classes/classtiro_1_1sync__frame)** <br>Represents the call frame of a synchronous function call.  |
 | class | **[tiro::tuple](/docs/api/classes/classtiro_1_1tuple)** <br>Refers to a tuple value.  |
@@ -65,6 +67,9 @@ title: tiro
 | const char * | **[to_string](/docs/api/namespaces/namespacetiro#function-to-string)**([severity](/docs/api/namespaces/namespacetiro#enum-severity) s)<br>Returns the string representation of the given severity value.  |
 | const char * | **[name](/docs/api/namespaces/namespacetiro#function-name)**([api&#95;errc](/docs/api/namespaces/namespacetiro#enum-api-errc) e)<br>Returns the name of the given error code.  |
 | const char * | **[message](/docs/api/namespaces/namespacetiro#function-message)**([api&#95;errc](/docs/api/namespaces/namespacetiro#enum-api-errc) e)<br>Returns the human readable message associated with the error code.  |
+| template <auto Function\> <br>[function](/docs/api/classes/classtiro_1_1function) | **[make_sync_function](/docs/api/namespaces/namespacetiro#function-make-sync-function)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & name, size&#95;t argc, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & closure)<br>Constructs a new function object with the given name that will invoke the native function when called.  |
+| template <auto Function\> <br>[function](/docs/api/classes/classtiro_1_1function) | **[make_async_function](/docs/api/namespaces/namespacetiro#function-make-async-function)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & name, size&#95;t argc, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & closure)<br>Constructs a new function object with the given name that will invoke the native function when called.  |
+| template <auto Function\> <br>[function](/docs/api/classes/classtiro_1_1function) | **[make_resumable_function](/docs/api/namespaces/namespacetiro#function-make-resumable-function)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & name, size&#95;t argc, size&#95;t locals, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & closure)<br>Creates a new resumable function with the given parameters.  |
 | const char * | **[to_string](/docs/api/namespaces/namespacetiro#function-to-string)**([value&#95;kind](/docs/api/namespaces/namespacetiro#enum-value-kind) k)<br>Returns the string representation of the given value kind.  |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[make_copy](/docs/api/namespaces/namespacetiro#function-make-copy)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value)<br>Constructs a new handle as a copy of the given value.  |
 | bool | **[same](/docs/api/namespaces/namespacetiro#function-same)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & a, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & b)<br>Returns true if and only if `a` and `b` refer to the same value.  |
@@ -73,8 +78,6 @@ title: tiro
 | [integer](/docs/api/classes/classtiro_1_1integer) | **[make_integer](/docs/api/namespaces/namespacetiro#function-make-integer)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, int64&#95;t value)<br>Constructs a new integer value.  |
 | [float_](/docs/api/classes/classtiro_1_1float__) | **[make_float](/docs/api/namespaces/namespacetiro#function-make-float)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, double value)<br>Constructs a new float value.  |
 | [string](/docs/api/classes/classtiro_1_1string) | **[make_string](/docs/api/namespaces/namespacetiro#function-make-string)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, std::string&#95;view value)<br>Constructs a new string value.  |
-| template <auto Function\> <br>[function](/docs/api/classes/classtiro_1_1function) | **[make_sync_function](/docs/api/namespaces/namespacetiro#function-make-sync-function)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & name, size&#95;t argc, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & closure)<br>Constructs a new function object with the given name that will invoke the native function when called.  |
-| template <auto Function\> <br>[function](/docs/api/classes/classtiro_1_1function) | **[make_async_function](/docs/api/namespaces/namespacetiro#function-make-async-function)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [string](/docs/api/classes/classtiro&#95;1&#95;1string) & name, size&#95;t argc, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & closure)<br>Constructs a new function object with the given name that will invoke the native function when called.  |
 | [tuple](/docs/api/classes/classtiro_1_1tuple) | **[make_tuple](/docs/api/namespaces/namespacetiro#function-make-tuple)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, size&#95;t size)<br>Constructs a new tuple value with the given size.  |
 | [record](/docs/api/classes/classtiro_1_1record) | **[make_record](/docs/api/namespaces/namespacetiro#function-make-record)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [array](/docs/api/classes/classtiro&#95;1&#95;1array) & keys)<br>Constructs a new record with the given keys.  |
 | [array](/docs/api/classes/classtiro_1_1array) | **[make_array](/docs/api/namespaces/namespacetiro#function-make-array)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, size&#95;t initial_capacity =0)<br>Constructs a new array with the given initial capacity. The array will be empty.  |
@@ -192,6 +195,67 @@ Returns the human readable message associated with the error code.
 The returned string is allocated in static storage. 
 
 
+### function make_sync_function
+
+```cpp
+template <auto Function>
+function make_sync_function(
+    vm & v,
+    const string & name,
+    size_t argc,
+    const handle & closure
+)
+```
+
+Constructs a new function object with the given name that will invoke the native function when called. 
+
+`argc` is the number of arguments required for calling `Function`. `closure` may be an arbitrary value that will be passed to the function on every invocation.
+
+Synchronous functions are appropriate for simple, nonblocking operations. Use asynchronous functions for long running operations (such as network I/O) instead.
+
+`Function` will receive two arguments when invoked:
+
+* A reference to the vm (`vm&`).
+* A reference to the call frame (`[sync_frame](/docs/api/classes/classtiro_1_1sync__frame)&`). Use this reference to access call arguments. Both references may only be used during the function call. The function should return its return value as a handle. 
+
+
+### function make_async_function
+
+```cpp
+template <auto Function>
+function make_async_function(
+    vm & v,
+    const string & name,
+    size_t argc,
+    const handle & closure
+)
+```
+
+Constructs a new function object with the given name that will invoke the native function when called. 
+
+`argc` is the number of arguments required for calling `Function`. `closure` may be an arbitrary value that will be passed to the function on every invocation.
+
+`Function` will receive two arguments when invoked:
+
+* A reference to the vm (`vm&`).
+* A call frame value (`[async_frame](/docs/api/classes/classtiro_1_1async__frame)`). Use this value to access call arguments and to set the return value. 
+
+
+### function make_resumable_function
+
+```cpp
+template <auto Function>
+function make_resumable_function(
+    vm & v,
+    const string & name,
+    size_t argc,
+    size_t locals,
+    const handle & closure
+)
+```
+
+Creates a new resumable function with the given parameters. 
+
 ### function to_string
 
 ```cpp
@@ -281,52 +345,6 @@ inline string make_string(
 ```
 
 Constructs a new string value. 
-
-### function make_sync_function
-
-```cpp
-template <auto Function>
-function make_sync_function(
-    vm & v,
-    const string & name,
-    size_t argc,
-    const handle & closure
-)
-```
-
-Constructs a new function object with the given name that will invoke the native function when called. 
-
-`argc` is the number of arguments required for calling `Function`. `closure` may be an arbitrary value that will be passed to the function on every invocation.
-
-Synchronous functions are appropriate for simple, nonblocking operations. Use asynchronous functions for long running operations (such as network I/O) instead.
-
-`Function` will receive two arguments when invoked:
-
-* A reference to the vm (`vm&`).
-* A reference to the call frame (`[sync_frame](/docs/api/classes/classtiro_1_1sync__frame)&`). Use this reference to access call arguments. Both references may only be used during the function call. The function should return its return value as a handle. 
-
-
-### function make_async_function
-
-```cpp
-template <auto Function>
-function make_async_function(
-    vm & v,
-    const string & name,
-    size_t argc,
-    const handle & closure
-)
-```
-
-Constructs a new function object with the given name that will invoke the native function when called. 
-
-`argc` is the number of arguments required for calling `Function`. `closure` may be an arbitrary value that will be passed to the function on every invocation.
-
-`Function` will receive two arguments when invoked:
-
-* A reference to the vm (`vm&`).
-* A call frame value (`[async_frame](/docs/api/classes/classtiro_1_1async__frame)`). Use this value to access call arguments and to set the return value. 
-
 
 ### function make_tuple
 
@@ -514,4 +532,4 @@ the version the application is currently running against.
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:39 +0100
+Updated on 2022-02-06 at 18:52:25 +0100

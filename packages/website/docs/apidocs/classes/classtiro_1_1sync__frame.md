@@ -11,7 +11,7 @@ summary: Represents the call frame of a synchronous function call.
 Represents the call frame of a synchronous function call.  [More...](#detailed-description)
 
 
-`#include "tiropp/objects.hpp"`
+`#include "tiropp/functions.hpp"`
 
 ## Public Functions
 
@@ -20,7 +20,7 @@ Represents the call frame of a synchronous function call.  [More...](#detailed-d
 | | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync-frame)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) raw_vm, [tiro&#95;sync&#95;frame&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-sync-frame-t) raw_frame) |
 | | **[sync_frame](/docs/api/classes/classtiro_1_1sync__frame#function-sync-frame)**(const [sync&#95;frame](/docs/api/classes/classtiro&#95;1&#95;1sync&#95;&#95;frame) & ) =delete |
 | [sync_frame](/docs/api/classes/classtiro_1_1sync__frame) & | **[operator=](/docs/api/classes/classtiro_1_1sync__frame#function-operator=)**(const [sync&#95;frame](/docs/api/classes/classtiro&#95;1&#95;1sync&#95;&#95;frame) & ) =delete |
-| size_t | **[argc](/docs/api/classes/classtiro_1_1sync__frame#function-argc)**() const<br>Returns the number of arguments passed to this function call.  |
+| size_t | **[arg_count](/docs/api/classes/classtiro_1_1sync__frame#function-arg-count)**() const<br>Returns the number of arguments passed to this function call.  |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[arg](/docs/api/classes/classtiro_1_1sync__frame#function-arg)**(size&#95;t index) const<br>Returns the argument at the given index (`0 <= index < argc`).  |
 | [handle](/docs/api/classes/classtiro_1_1handle) | **[closure](/docs/api/classes/classtiro_1_1sync__frame#function-closure)**() const<br>Returns the closure value referenced by this function (if any).  |
 | [tiro_vm_t](/docs/api/files/def_8h#typedef-tiro-vm-t) | **[raw_vm](/docs/api/classes/classtiro_1_1sync__frame#function-raw-vm)**() const |
@@ -66,10 +66,10 @@ sync_frame & operator=(
 ```
 
 
-### function argc
+### function arg_count
 
 ```cpp
-inline size_t argc() const
+inline size_t arg_count() const
 ```
 
 Returns the number of arguments passed to this function call. 
@@ -108,4 +108,4 @@ inline tiro_sync_frame_t raw_frame() const
 
 -------------------------------
 
-Updated on 2022-01-01 at 12:38:40 +0100
+Updated on 2022-02-06 at 18:52:25 +0100
