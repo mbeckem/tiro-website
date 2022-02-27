@@ -31,6 +31,8 @@ import std;
 
   - [type Tuple](#type-tuple)
   - [type Record](#type-record)
+  - [type RecordSchema](#type-recordschema)
+  - [func schema_of](#func-schema-of)
   - [type Array](#type-array)
   - [type Buffer](#type-buffer)
   - [type Map](#type-map)
@@ -164,6 +166,18 @@ The type of all tuples, e.g. `()`, `(1,)` or `(1, 2)`.
 ### type Record
 
 The type of all records, e.g. `(:)` or `(foo: "bar")`.
+
+### type RecordSchema
+
+The type of all record schemas.
+
+### func schema_of
+
+```
+func schema_of(r: Record): RecordSchema;
+```
+
+Returns the schema associated with the given record.
 
 ### type Array
 
