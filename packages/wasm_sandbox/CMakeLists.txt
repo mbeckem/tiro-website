@@ -70,7 +70,7 @@ endif()
 FetchContent_Declare(
     tiro
     GIT_REPOSITORY  https://github.com/mbeckem/tiro.git
-    GIT_TAG         8f21b87fc4ef55245e87a2b7708119149ba035cf
+    GIT_TAG         73002cde8243dca8a5d458b3ffd0fbf09baf0c7a
     GIT_PROGRESS    TRUE
     GIT_SHALLOW     TRUE
 )
