@@ -46,6 +46,7 @@ title: Classes
     * **class [native_type](/docs/api/classes/classtiro_1_1native__type)** 
     * **class [null](/docs/api/classes/classtiro_1_1null)** <br>Refers to a null value. 
     * **class [record](/docs/api/classes/classtiro_1_1record)** <br>Refers to a record value. 
+    * **class [record_schema](/docs/api/classes/classtiro_1_1record__schema)** <br>Refers to a record schema. 
     * **class [result](/docs/api/classes/classtiro_1_1result)** <br>Refers to a result value. 
     * **class [resumable_frame](/docs/api/classes/classtiro_1_1resumable__frame)** <br>Represents the call frame of a resumable function call. 
     * **class [string](/docs/api/classes/classtiro_1_1string)** <br>Refers to a string value. 
@@ -67,4 +68,4 @@ title: Classes
 
 -------------------------------
 
-Updated on 2022-02-06 at 18:52:25 +0100
+Updated on 2022-02-27 at 21:17:13 +0100

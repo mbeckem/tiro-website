@@ -42,6 +42,7 @@ title: tiro
 | class | **[tiro::native_type](/docs/api/classes/classtiro_1_1native__type)**  |
 | class | **[tiro::null](/docs/api/classes/classtiro_1_1null)** <br>Refers to a null value.  |
 | class | **[tiro::record](/docs/api/classes/classtiro_1_1record)** <br>Refers to a record value.  |
+| class | **[tiro::record_schema](/docs/api/classes/classtiro_1_1record__schema)** <br>Refers to a record schema.  |
 | class | **[tiro::result](/docs/api/classes/classtiro_1_1result)** <br>Refers to a result value.  |
 | class | **[tiro::resumable_frame](/docs/api/classes/classtiro_1_1resumable__frame)** <br>Represents the call frame of a resumable function call.  |
 | class | **[tiro::string](/docs/api/classes/classtiro_1_1string)** <br>Refers to a string value.  |
@@ -58,7 +59,7 @@ title: tiro
 | -------------- | -------------- |
 | enum class int | **[severity](/docs/api/namespaces/namespacetiro#enum-severity)** { warning = TIRO_SEVERITY_WARNING, error = TIRO_SEVERITY_ERROR}<br>Defines the possible values for the severity of diagnostic compiler messages.  |
 | enum class int | **[api_errc](/docs/api/namespaces/namespacetiro#enum-api-errc)** { ok = TIRO_OK, bad_state = TIRO_ERROR_BAD_STATE, bad_arg = TIRO_ERROR_BAD_ARG, bad_source = TIRO_ERROR_BAD_SOURCE, bad_type = TIRO_ERROR_BAD_TYPE, bad_key = TIRO_ERROR_BAD_KEY, module_exists = TIRO_ERROR_MODULE_EXISTS, module_not_found = TIRO_ERROR_MODULE_NOT_FOUND, export_not_found = TIRO_ERROR_EXPORT_NOT_FOUND, out_of_bounds = TIRO_ERROR_OUT_OF_BOUNDS, alloc = TIRO_ERROR_ALLOC, internal = TIRO_ERROR_INTERNAL}<br>Defines all possible error codes.  |
-| enum class int | **[value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind)** { null = TIRO_KIND_NULL, boolean = TIRO_KIND_BOOLEAN, integer = TIRO_KIND_INTEGER, float_ = TIRO_KIND_FLOAT, string = TIRO_KIND_STRING, function = TIRO_KIND_FUNCTION, tuple = TIRO_KIND_TUPLE, record = TIRO_KIND_RECORD, array = TIRO_KIND_ARRAY, result = TIRO_KIND_RESULT, exception = TIRO_KIND_EXCEPTION, coroutine = TIRO_KIND_COROUTINE, module = TIRO_KIND_MODULE, type = TIRO_KIND_TYPE, native = TIRO_KIND_NATIVE, internal = TIRO_KIND_INTERNAL, invalid = TIRO_KIND_INVALID}<br>Represents the kind of a value.  |
+| enum class int | **[value_kind](/docs/api/namespaces/namespacetiro#enum-value-kind)** { null = TIRO_KIND_NULL, boolean = TIRO_KIND_BOOLEAN, integer = TIRO_KIND_INTEGER, float_ = TIRO_KIND_FLOAT, string = TIRO_KIND_STRING, function = TIRO_KIND_FUNCTION, tuple = TIRO_KIND_TUPLE, record = TIRO_KIND_RECORD, record_schema = TIRO_KIND_RECORD_SCHEMA, array = TIRO_KIND_ARRAY, result = TIRO_KIND_RESULT, exception = TIRO_KIND_EXCEPTION, coroutine = TIRO_KIND_COROUTINE, module = TIRO_KIND_MODULE, type = TIRO_KIND_TYPE, native = TIRO_KIND_NATIVE, internal = TIRO_KIND_INTERNAL, invalid = TIRO_KIND_INVALID}<br>Represents the kind of a value.  |
 
 ## Functions
 
@@ -79,7 +80,8 @@ title: tiro
 | [float_](/docs/api/classes/classtiro_1_1float__) | **[make_float](/docs/api/namespaces/namespacetiro#function-make-float)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, double value)<br>Constructs a new float value.  |
 | [string](/docs/api/classes/classtiro_1_1string) | **[make_string](/docs/api/namespaces/namespacetiro#function-make-string)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, std::string&#95;view value)<br>Constructs a new string value.  |
 | [tuple](/docs/api/classes/classtiro_1_1tuple) | **[make_tuple](/docs/api/namespaces/namespacetiro#function-make-tuple)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, size&#95;t size)<br>Constructs a new tuple value with the given size.  |
-| [record](/docs/api/classes/classtiro_1_1record) | **[make_record](/docs/api/namespaces/namespacetiro#function-make-record)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [array](/docs/api/classes/classtiro&#95;1&#95;1array) & keys)<br>Constructs a new record with the given keys.  |
+| [record_schema](/docs/api/classes/classtiro_1_1record__schema) | **[make_record_schema](/docs/api/namespaces/namespacetiro#function-make-record-schema)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [array](/docs/api/classes/classtiro&#95;1&#95;1array) & keys)<br>Creates a new record schema from the given array of keys.  |
+| [record](/docs/api/classes/classtiro_1_1record) | **[make_record](/docs/api/namespaces/namespacetiro#function-make-record)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [record&#95;schema](/docs/api/classes/classtiro&#95;1&#95;1record&#95;&#95;schema) & schema)<br>Constructs a new record with the property names specified by the given schema.  |
 | [array](/docs/api/classes/classtiro_1_1array) | **[make_array](/docs/api/namespaces/namespacetiro#function-make-array)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, size&#95;t initial_capacity =0)<br>Constructs a new array with the given initial capacity. The array will be empty.  |
 | [result](/docs/api/classes/classtiro_1_1result) | **[make_success](/docs/api/namespaces/namespacetiro#function-make-success)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & value)<br>Creates a new successful result with the given value.  |
 | [result](/docs/api/classes/classtiro_1_1result) | **[make_error](/docs/api/namespaces/namespacetiro#function-make-error)**([vm](/docs/api/classes/classtiro&#95;1&#95;1vm) & v, const [handle](/docs/api/classes/classtiro&#95;1&#95;1handle) & err)<br>Creates a new error result with the given error value.  |
@@ -139,6 +141,7 @@ Defines all possible error codes.
 | function | TIRO_KIND_FUNCTION| Value is a function.   |
 | tuple | TIRO_KIND_TUPLE| Value is a tuple.   |
 | record | TIRO_KIND_RECORD| Value is a record.   |
+| record_schema | TIRO_KIND_RECORD_SCHEMA| Value is a record schema.   |
 | array | TIRO_KIND_ARRAY| Value is an array.   |
 | result | TIRO_KIND_RESULT| Value is a result.   |
 | exception | TIRO_KIND_EXCEPTION| Value is an exception.   |
@@ -360,18 +363,32 @@ Constructs a new tuple value with the given size.
 All elements of that tuple will be initialized to null. 
 
 
-### function make_record
+### function make_record_schema
 
 ```cpp
-inline record make_record(
+inline record_schema make_record_schema(
     vm & v,
     const array & keys
 )
 ```
 
-Constructs a new record with the given keys. 
+Creates a new record schema from the given array of keys. 
 
-All keys must be unique strings. All values of the record will be initialized to null. 
+All keys must be strings. 
+
+
+### function make_record
+
+```cpp
+inline record make_record(
+    vm & v,
+    const record_schema & schema
+)
+```
+
+Constructs a new record with the property names specified by the given schema. 
+
+All values of the record will be initialized to null. 
 
 
 ### function make_array
@@ -532,4 +549,4 @@ the version the application is currently running against.
 
 -------------------------------
 
-Updated on 2022-02-06 at 18:52:25 +0100
+Updated on 2022-02-27 at 21:17:13 +0100

@@ -20,4 +20,4 @@ Member [tiro_native_type_t](/docs/api/files/objects_8h#typedef-tiro-native-type-
 
 -------------------------------
 
-Updated on 2022-02-06 at 18:52:25 +0100
+Updated on 2022-02-27 at 21:17:13 +0100

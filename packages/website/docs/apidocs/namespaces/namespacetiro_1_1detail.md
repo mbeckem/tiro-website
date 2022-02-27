@@ -31,6 +31,7 @@ title: tiro::detail
 | | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([function](/docs/api/classes/classtiro&#95;1&#95;1function) ) |
 | | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([tuple](/docs/api/classes/classtiro&#95;1&#95;1tuple) ) |
 | | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([record](/docs/api/classes/classtiro&#95;1&#95;1record) ) |
+| | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([record&#95;schema](/docs/api/classes/classtiro&#95;1&#95;1record&#95;&#95;schema) ) |
 | | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([array](/docs/api/classes/classtiro&#95;1&#95;1array) ) |
 | | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([result](/docs/api/classes/classtiro&#95;1&#95;1result) ) |
 | | **[TIRO_MAP_TYPE](/docs/api/namespaces/namespacetiro_1_1detail#function-tiro-map-type)**([exception](/docs/api/classes/classtiro&#95;1&#95;1exception) ) |
@@ -149,6 +150,15 @@ TIRO_MAP_TYPE(
 
 ```cpp
 TIRO_MAP_TYPE(
+    record_schema 
+)
+```
+
+
+### function TIRO_MAP_TYPE
+
+```cpp
+TIRO_MAP_TYPE(
     array 
 )
 ```
@@ -232,4 +242,4 @@ constexpr value_kind kind_of(
 
 -------------------------------
 
-Updated on 2022-02-06 at 18:52:25 +0100
+Updated on 2022-02-27 at 21:17:13 +0100

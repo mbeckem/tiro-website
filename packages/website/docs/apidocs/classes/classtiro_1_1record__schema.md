@@ -1,14 +1,14 @@
 ---
-title: tiro::null
-summary: Refers to a null value. 
+title: tiro::record_schema
+summary: Refers to a record schema. 
 
 ---
 
-# tiro::null
+# tiro::record_schema
 
 
 
-Refers to a null value. 
+Refers to a record schema. 
 
 
 `#include "tiropp/objects.hpp"`
@@ -19,11 +19,11 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 |                | Name           |
 | -------------- | -------------- |
-| | **[null](/docs/api/classes/classtiro_1_1null#function-null)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) h) |
-| | **[null](/docs/api/classes/classtiro_1_1null#function-null)**(const [null](/docs/api/classes/classtiro&#95;1&#95;1null) & ) =default |
-| | **[null](/docs/api/classes/classtiro_1_1null#function-null)**([null](/docs/api/classes/classtiro&#95;1&#95;1null) && ) =default |
-| [null](/docs/api/classes/classtiro_1_1null) & | **[operator=](/docs/api/classes/classtiro_1_1null#function-operator=)**(const [null](/docs/api/classes/classtiro&#95;1&#95;1null) & ) =default |
-| [null](/docs/api/classes/classtiro_1_1null) & | **[operator=](/docs/api/classes/classtiro_1_1null#function-operator=)**([null](/docs/api/classes/classtiro&#95;1&#95;1null) && ) =default |
+| | **[record_schema](/docs/api/classes/classtiro_1_1record__schema#function-record-schema)**([handle](/docs/api/classes/classtiro&#95;1&#95;1handle) h) |
+| | **[record_schema](/docs/api/classes/classtiro_1_1record__schema#function-record-schema)**(const [record&#95;schema](/docs/api/classes/classtiro&#95;1&#95;1record&#95;&#95;schema) & ) =default |
+| | **[record_schema](/docs/api/classes/classtiro_1_1record__schema#function-record-schema)**([record&#95;schema](/docs/api/classes/classtiro&#95;1&#95;1record&#95;&#95;schema) && ) =default |
+| [record_schema](/docs/api/classes/classtiro_1_1record__schema) & | **[operator=](/docs/api/classes/classtiro_1_1record__schema#function-operator=)**(const [record&#95;schema](/docs/api/classes/classtiro&#95;1&#95;1record&#95;&#95;schema) & ) =default |
+| [record_schema](/docs/api/classes/classtiro_1_1record__schema) & | **[operator=](/docs/api/classes/classtiro_1_1record__schema#function-operator=)**([record&#95;schema](/docs/api/classes/classtiro&#95;1&#95;1record&#95;&#95;schema) && ) =default |
 
 ## Additional inherited members
 
@@ -66,38 +66,29 @@ Inherits from [handle](/docs/api/classes/classtiro_1_1handle)
 
 ## Public Functions Documentation
 
-### function null
+### function record_schema
 
 ```cpp
-inline explicit null(
+inline explicit record_schema(
     handle h
 )
 ```
 
 
-### function null
+### function record_schema
 
 ```cpp
-null(
-    const null & 
+record_schema(
+    const record_schema & 
 ) =default
 ```
 
 
-### function null
+### function record_schema
 
 ```cpp
-null(
-    null && 
-) =default
-```
-
-
-### function operator=
-
-```cpp
-null & operator=(
-    const null & 
+record_schema(
+    record_schema && 
 ) =default
 ```
 
@@ -105,8 +96,17 @@ null & operator=(
 ### function operator=
 
 ```cpp
-null & operator=(
-    null && 
+record_schema & operator=(
+    const record_schema & 
+) =default
+```
+
+
+### function operator=
+
+```cpp
+record_schema & operator=(
+    record_schema && 
 ) =default
 ```
 

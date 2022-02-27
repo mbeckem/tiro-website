@@ -28,6 +28,7 @@ title: tiropp/objects.hpp
 | class | **[tiro::string](/docs/api/classes/classtiro_1_1string)** <br>Refers to a string value.  |
 | class | **[tiro::function](/docs/api/classes/classtiro_1_1function)** <br>Refers to a function value.  |
 | class | **[tiro::tuple](/docs/api/classes/classtiro_1_1tuple)** <br>Refers to a tuple value.  |
+| class | **[tiro::record_schema](/docs/api/classes/classtiro_1_1record__schema)** <br>Refers to a record schema.  |
 | class | **[tiro::record](/docs/api/classes/classtiro_1_1record)** <br>Refers to a record value.  |
 | class | **[tiro::array](/docs/api/classes/classtiro_1_1array)** <br>Refers to an array value.  |
 | class | **[tiro::result](/docs/api/classes/classtiro_1_1result)** <br>Refers to a result value.  |
@@ -65,4 +66,4 @@ title: tiropp/objects.hpp
 
 -------------------------------
 
-Updated on 2022-02-06 at 18:52:25 +0100
+Updated on 2022-02-27 at 21:17:13 +0100

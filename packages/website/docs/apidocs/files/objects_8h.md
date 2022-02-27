@@ -19,7 +19,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 
 |                | Name           |
 | -------------- | -------------- |
-| enum| **[tiro_kind](/docs/api/files/objects_8h#enum-tiro-kind)** { TIRO_KIND_NULL = 0, TIRO_KIND_BOOLEAN, TIRO_KIND_INTEGER, TIRO_KIND_FLOAT, TIRO_KIND_STRING, TIRO_KIND_FUNCTION, TIRO_KIND_TUPLE, TIRO_KIND_RECORD, TIRO_KIND_ARRAY, TIRO_KIND_RESULT, TIRO_KIND_EXCEPTION, TIRO_KIND_COROUTINE, TIRO_KIND_MODULE, TIRO_KIND_TYPE, TIRO_KIND_NATIVE, TIRO_KIND_INTERNAL = 1000, TIRO_KIND_INVALID}<br>Represents the kind of a tiro value.  |
+| enum| **[tiro_kind](/docs/api/files/objects_8h#enum-tiro-kind)** { TIRO_KIND_NULL = 0, TIRO_KIND_BOOLEAN, TIRO_KIND_INTEGER, TIRO_KIND_FLOAT, TIRO_KIND_STRING, TIRO_KIND_FUNCTION, TIRO_KIND_TUPLE, TIRO_KIND_RECORD, TIRO_KIND_RECORD_SCHEMA, TIRO_KIND_ARRAY, TIRO_KIND_RESULT, TIRO_KIND_EXCEPTION, TIRO_KIND_COROUTINE, TIRO_KIND_MODULE, TIRO_KIND_TYPE, TIRO_KIND_NATIVE, TIRO_KIND_INTERNAL = 1000, TIRO_KIND_INVALID}<br>Represents the kind of a tiro value.  |
 | typedef enum [tiro&#95;kind](/docs/api/files/objects&#95;8h#enum-tiro-kind) | **[tiro_kind_t](/docs/api/files/objects_8h#typedef-tiro-kind-t)** <br>Represents the kind of a tiro value.  |
 | typedef void(&#42;)(tiro&#95;vm&#95;t vm, tiro&#95;handle&#95;t coro, void &#42;userdata) | **[tiro_coroutine_callback_t](/docs/api/files/objects_8h#typedef-tiro-coroutine-callback-t)** <br>Represents a coroutine completion callback.  |
 | typedef void(&#42;)(void &#42;userdata) | **[tiro_coroutine_cleanup_t](/docs/api/files/objects_8h#typedef-tiro-coroutine-cleanup-t)** <br>Represents a cleanup function associated with a coroutine callback.  |
@@ -51,7 +51,8 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | size_t | **[tiro_tuple_size](/docs/api/files/objects_8h#function-tiro-tuple-size)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple)<br>Returns the tuple's size, or 0 if the given value is not a tuple (use `tiro_value_kind` to disambiguate between types).  |
 | void | **[tiro_tuple_get](/docs/api/files/objects_8h#function-tiro-tuple-get)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the tuple element at the given `index` from `tuple` and assigns it to `result`, unless an error occurs.  |
 | void | **[tiro_tuple_set](/docs/api/files/objects_8h#function-tiro-tuple-set)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) tuple, size&#95;t index, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the tuple's element at position `index` to `value`.  |
-| void | **[tiro_make_record](/docs/api/files/objects_8h#function-tiro-make-record)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) keys, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new record with the given key names.  |
+| void | **[tiro_make_record_schema](/docs/api/files/objects_8h#function-tiro-make-record-schema)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) keys, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new record schema from the given array of keys.  |
+| void | **[tiro_make_record](/docs/api/files/objects_8h#function-tiro-make-record)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) schema, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Constructs a new record with the properties defined by the given schema.  |
 | void | **[tiro_record_keys](/docs/api/files/objects_8h#function-tiro-record-keys)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) record, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves an array of valid keys for the given record.  |
 | void | **[tiro_record_get](/docs/api/files/objects_8h#function-tiro-record-get)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) record, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) key, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) result, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Retrieves the value associated with the given key on this record.  |
 | void | **[tiro_record_set](/docs/api/files/objects_8h#function-tiro-record-set)**([tiro&#95;vm&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-vm-t) vm, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) record, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) key, [tiro&#95;handle&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-handle-t) value, [tiro&#95;error&#95;t](/docs/api/files/def&#95;8h#typedef-tiro-error-t) &#42; err)<br>Sets the record's value associated with the given `key` to `value`.  |
@@ -98,6 +99,7 @@ Functions and type definitions for working with objects of the tiro virtual mach
 | TIRO_KIND_FUNCTION | | Value is a function.   |
 | TIRO_KIND_TUPLE | | Value is a tuple.   |
 | TIRO_KIND_RECORD | | Value is a record.   |
+| TIRO_KIND_RECORD_SCHEMA | | Value is a record schema.   |
 | TIRO_KIND_ARRAY | | Value is an array.   |
 | TIRO_KIND_RESULT | | Value is a result.   |
 | TIRO_KIND_EXCEPTION | | Value is an exception.   |
@@ -496,10 +498,10 @@ Sets the tuple's element at position `index` to `value`.
 Returns `TIRO_ERROR_BAD_TYPE` if the instance is not a tuple, or `TIRO_ERROR_OUT_OF_BOUNDS` if the index is out of bounds. 
 
 
-### function tiro_make_record
+### function tiro_make_record_schema
 
 ```cpp
-void tiro_make_record(
+void tiro_make_record_schema(
     tiro_vm_t vm,
     tiro_handle_t keys,
     tiro_handle_t result,
@@ -507,11 +509,29 @@ void tiro_make_record(
 )
 ```
 
-Constructs a new record with the given key names. 
+Constructs a new record schema from the given array of keys. 
 
-`keys` must be an array consisting of strings (which mus be unique). The specified keys will be valid property names on the new record. The value associated with each key will be initialized to null.
+The record schema can be used to construct records with the property names specified in `keys`.
 
-Returns `TIRO_ERROR_BAD_TYPE` if `keys` is not an array, or if its contents are not all strings. On success, the constructed record will be assigned to `result`. 
+Returns `TIRO_ERROR_BAD_TYPE` if `keys` is not an array or if its content is not composed entirely of strings. On success, the constructed record schema will be assigned to `result`. 
+
+
+### function tiro_make_record
+
+```cpp
+void tiro_make_record(
+    tiro_vm_t vm,
+    tiro_handle_t schema,
+    tiro_handle_t result,
+    tiro_error_t * err
+)
+```
+
+Constructs a new record with the properties defined by the given schema. 
+
+`schema` must reference a value of type `TIRO_RECORD_SCHEMA`. The values associated with the new record's property names will be initialized to `null`.
+
+Returns `TIRO_ERROR_BAD_TYPE` if `schema` is not a record schema. On success, the constructed record will be assigned to `result`. 
 
 
 ### function tiro_record_keys
@@ -1017,4 +1037,4 @@ Returns 0 on error.
 
 -------------------------------
 
-Updated on 2022-02-06 at 18:52:25 +0100
+Updated on 2022-02-27 at 21:17:13 +0100
